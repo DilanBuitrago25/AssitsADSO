@@ -1,0 +1,64 @@
+--Creación de las tablas
+
+create table Instructor(
+Id_instructor int not null,
+Nombre_instructor varchar (45) not null,
+Apellido_instructor varchar (45) not null, 
+Telefono_instructor int not null,
+Correo_instructor varchar (100) not null,
+Tipo_instructor varchar (45) not null, 
+primary key (Id_instructor))
+
+create table Programa(
+Id_programa int not null,
+Nombre_programa varchar (100) not null,
+Tipo_programa varchar (100) not null,
+Duracion_programa varchar (100) not null
+primary key (Id_programa))
+
+create table Ficha(
+Numero_ficha int not null,
+Jornada_ficha varchar(100) not null,
+Modalidad_ficha varchar(100) not null,
+tipo_ficha varchar (100) not null,
+primary key (Numero_ficha),
+foreign key (Id_programa) references Programa)
+
+create table Competencia(
+Numero_competencia int not null,
+Jornada_competencia varchar(100) not null,
+Modalidad_competencia varchar(100) not null,
+tipo_competencia varchar (100) not null,
+primary key (Numero_competencia),
+foreign key (Id_ficha) references Ficha,
+foreign key (Id_programa) references Programa)
+
+create table Aprendiz(
+Id_aprendiz int not null,
+Nombre_aprendiz varchar (45) not null,
+Apellido_aprendiz varchar (45) not null, 
+Telefono_aprendiz int not null,
+Correo_aprendiz varchar (100) not null,
+Primary Key (Id_aprendiz),
+foreign key (Id_ficha) references Ficha)
+
+create table Asistencia(
+Id_asistencia int not null,
+Tipo_asistencia varchar (45) not null,
+fecha_asistencia varchar (45) not null,
+Hora_asistencia varchar (45) not null,
+Primary Key (Id_registro),
+foreign key (Id_aprendiz) references Aprendiz)
+
+create table Soporte(
+Id_soporte int not null,
+Nombre_soporte varchar (45) not null, 
+primary key (Id_soporte),
+foreign key (Id_Registro) references Registro)
+
+create table Reporte(
+Id_reporte int not null,
+Nombre_reporte varchar (45) not null,
+Tipo_reporte varchar (45) not null,
+primary key (Id_reporte),
+foreign key (Id_Registro) references Registro)
