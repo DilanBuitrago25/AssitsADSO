@@ -1,4 +1,4 @@
---Creación de las tablas
+--Creación de las tablas Actual BD a Aplicar
 
 create table Instructor(
 Id_instructor int not null,
