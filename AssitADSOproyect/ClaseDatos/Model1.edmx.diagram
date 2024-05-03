@@ -4,23 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="eece281c242f49d3bf57a24bcf4dce39" Name="Diagram1">
-        <EntityTypeShape EntityType="BDAssitstsADSOModel.Aprendiz" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssitstsADSOModel.Asistencia" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssitstsADSOModel.Competencia" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssitstsADSOModel.Ficha" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssitstsADSOModel.Instructor" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssitstsADSOModel.Programa_formacion" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssitstsADSOModel.Reporte" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssitstsADSOModel.Soporte" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
-        <AssociationConnector Association="BDAssitstsADSOModel.FK__Aprendiz__Numero__300424B4" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssitstsADSOModel.FK__Asistenci__Id_ap__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssitstsADSOModel.FK__Reporte__Id_asis__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssitstsADSOModel.FK__Soporte__Id_asis__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssitstsADSOModel.FK__Competenc__Id_pr__2D27B809" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssitstsADSOModel.FK__Competenc__Numer__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssitstsADSOModel.FK__Ficha__Id_progra__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssitstsADSOModel.FK__Instructo__Id_fi__29572725" ManuallyRouted="false" />
+      <Diagram DiagramId="17b9758ab692423c84a8013352886d5e" Name="Diagram1">
+        <EntityTypeShape EntityType="BDAssistsADSOModel.Asistencia" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.Competencia" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.Ficha" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.Programa_formacion" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.Reporte" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.Soporte" Width="1.5" PointX="9.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.Usuario" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Asistenci__Id_us__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Reporte__Id_asis__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_asis__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Competenc__Id_pr__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Competenc__Numer__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Ficha__Id_progra__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Usuario__Id_fich__29572725" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

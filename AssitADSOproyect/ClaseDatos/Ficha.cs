@@ -17,9 +17,8 @@ namespace ClaseDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ficha()
         {
-            this.Aprendiz = new HashSet<Aprendiz>();
             this.Competencia = new HashSet<Competencia>();
-            this.Instructor = new HashSet<Instructor>();
+            this.Usuario = new HashSet<Usuario>();
         }
     
         public int Id_ficha { get; set; }
@@ -29,11 +28,9 @@ namespace ClaseDatos
         public Nullable<int> Id_programa { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Aprendiz> Aprendiz { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competencia> Competencia { get; set; }
         public virtual Programa_formacion Programa_formacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Instructor> Instructor { get; set; }
+        public virtual ICollection<Usuario> Usuario { get; set; }
     }
 }

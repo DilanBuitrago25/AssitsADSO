@@ -19,17 +19,29 @@ tipo_ficha varchar (100) not null,
 Id_programa int references Programa_formacion(Id_programa),
 primary key (Id_ficha))
 
-create table Instructor(
-Id_instructor int identity (1,1) not null,
-Documento_instructor int not null,
-Tipo_Documento_instructor varchar (200) not null,
-Nombre_instructor varchar (55) not null,
-Apellido_instructor varchar (55) not null,
-Telefono_instructor int not null,
-Correo_instructor varchar (100) not null,
+create table Usuario(
+Id_usuario int identity (1,1) not null,
+Documento_usuario int not null,
+Tipo_usuario Varchar (100) not null,
+Tipo_Documento_usuario varchar (200) not null,
+Nombre_usuario varchar (55) not null,
+Apellido_usuario varchar (55) not null,
+Telefono_usuario int not null,
+Correo_usuario varchar (100) not null,
 Tipo_instructor varchar (55) not null,
 Id_ficha int references Ficha(Id_ficha),
-primary key (Id_instructor))
+primary key (Id_usuario))
+
+--create table Aprendiz(
+--Id_aprendiz int identity (1,1) not null,
+--Documento_aprendiz int not null,
+--Tipo_Documento_aprendiz varchar (200) not null,
+--Nombre_aprendiz varchar (45) not null,
+--Apellido_aprendiz varchar (45) not null, 
+--Telefono_aprendiz int not null,
+--Correo_aprendiz varchar (100) not null,
+--Numero_ficha int references Ficha(Id_ficha),
+--Primary Key (Id_aprendiz))  No aplica
 
 create table Competencia(
 ID_competencia int identity (10000,1) not null,
@@ -38,23 +50,12 @@ Numero_ficha int references Ficha(Id_ficha),
 Id_programa int references Programa_formacion(Id_programa),
 primary key (ID_competencia))
 
-create table Aprendiz(
-Id_aprendiz int identity (1,1) not null,
-Documento_aprendiz int not null,
-Tipo_Documento_aprendiz varchar (200) not null,
-Nombre_aprendiz varchar (45) not null,
-Apellido_aprendiz varchar (45) not null, 
-Telefono_aprendiz int not null,
-Correo_aprendiz varchar (100) not null,
-Numero_ficha int references Ficha(Id_ficha),
-Primary Key (Id_aprendiz))
-
 create table Asistencia(
 Id_asistencia int identity (100000,1) not null,
 Tipo_asistencia varchar (45) not null,
 fecha_asistencia varchar (45) not null,
 Hora_asistencia varchar (45) not null,
-Id_aprendiz int references Aprendiz(Id_aprendiz),
+Id_usuario int references Usuario(Id_usuario),
 Primary Key (Id_asistencia))
 
 create table Soporte(
