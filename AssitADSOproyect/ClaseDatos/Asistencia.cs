@@ -25,9 +25,9 @@ namespace ClaseDatos
         public string Tipo_asistencia { get; set; }
         public string fecha_asistencia { get; set; }
         public string Hora_asistencia { get; set; }
-        public Nullable<int> Id_aprendiz { get; set; }
+        public Nullable<int> Id_usuario { get; set; }
     
-        public virtual Aprendiz Aprendiz { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reporte> Reporte { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

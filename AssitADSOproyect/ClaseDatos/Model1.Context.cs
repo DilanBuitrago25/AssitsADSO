@@ -13,10 +13,10 @@ namespace ClaseDatos
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BDAssitstsADSOEntities : DbContext
+    public partial class BDAssistsADSOEntities : DbContext
     {
-        public BDAssitstsADSOEntities()
-            : base("name=BDAssitstsADSOEntities")
+        public BDAssistsADSOEntities()
+            : base("name=BDAssistsADSOEntities")
         {
         }
     
@@ -25,13 +25,12 @@ namespace ClaseDatos
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Aprendiz> Aprendiz { get; set; }
         public virtual DbSet<Asistencia> Asistencia { get; set; }
         public virtual DbSet<Competencia> Competencia { get; set; }
         public virtual DbSet<Ficha> Ficha { get; set; }
-        public virtual DbSet<Instructor> Instructor { get; set; }
         public virtual DbSet<Programa_formacion> Programa_formacion { get; set; }
         public virtual DbSet<Reporte> Reporte { get; set; }
         public virtual DbSet<Soporte> Soporte { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
     }
 }

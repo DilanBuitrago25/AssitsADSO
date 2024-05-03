@@ -84,3 +84,10 @@ C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOp
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\obj\Debug\AssitADSOproyect.csproj.CopyComplete
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\obj\Debug\AssitADSOproyect.dll
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\obj\Debug\AssitADSOproyect.pdb
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ClaseDatos.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\EntityFramework.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ClaseDatos.pdb
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ClaseDatos.dll.config
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\EntityFramework.xml
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\EntityFramework.SqlServer.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\EntityFramework.SqlServer.xml

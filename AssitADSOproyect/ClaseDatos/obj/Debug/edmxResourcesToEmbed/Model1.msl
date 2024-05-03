@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BDAssistsADSOModelStoreContainer" CdmEntityContainer="BDAssistsADSOEntities">
+    <EntitySetMapping Name="Asistencia">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.Asistencia">
+        <MappingFragment StoreEntitySet="Asistencia">
+          <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
+          <ScalarProperty Name="Tipo_asistencia" ColumnName="Tipo_asistencia" />
+          <ScalarProperty Name="fecha_asistencia" ColumnName="fecha_asistencia" />
+          <ScalarProperty Name="Hora_asistencia" ColumnName="Hora_asistencia" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Competencia">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.Competencia">
+        <MappingFragment StoreEntitySet="Competencia">
+          <ScalarProperty Name="ID_competencia" ColumnName="ID_competencia" />
+          <ScalarProperty Name="tipo_competencia" ColumnName="tipo_competencia" />
+          <ScalarProperty Name="Numero_ficha" ColumnName="Numero_ficha" />
+          <ScalarProperty Name="Id_programa" ColumnName="Id_programa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ficha">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.Ficha">
+        <MappingFragment StoreEntitySet="Ficha">
+          <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
+          <ScalarProperty Name="Jornada_ficha" ColumnName="Jornada_ficha" />
+          <ScalarProperty Name="Modalidad_ficha" ColumnName="Modalidad_ficha" />
+          <ScalarProperty Name="tipo_ficha" ColumnName="tipo_ficha" />
+          <ScalarProperty Name="Id_programa" ColumnName="Id_programa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Programa_formacion">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.Programa_formacion">
+        <MappingFragment StoreEntitySet="Programa_formacion">
+          <ScalarProperty Name="Id_programa" ColumnName="Id_programa" />
+          <ScalarProperty Name="Nombre_programa" ColumnName="Nombre_programa" />
+          <ScalarProperty Name="Tipo_programa" ColumnName="Tipo_programa" />
+          <ScalarProperty Name="Duracion_programa" ColumnName="Duracion_programa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reporte">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.Reporte">
+        <MappingFragment StoreEntitySet="Reporte">
+          <ScalarProperty Name="Id_reporte" ColumnName="Id_reporte" />
+          <ScalarProperty Name="Nombre_reporte" ColumnName="Nombre_reporte" />
+          <ScalarProperty Name="Descripcion_reporte" ColumnName="Descripcion_reporte" />
+          <ScalarProperty Name="Tipo_reporte" ColumnName="Tipo_reporte" />
+          <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Soporte">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
+        <MappingFragment StoreEntitySet="Soporte">
+          <ScalarProperty Name="Id_soporte" ColumnName="Id_soporte" />
+          <ScalarProperty Name="Nombre_soporte" ColumnName="Nombre_soporte" />
+          <ScalarProperty Name="Descripcion_soporte" ColumnName="Descripcion_soporte" />
+          <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Documento_usuario" ColumnName="Documento_usuario" />
+          <ScalarProperty Name="Tipo_usuario" ColumnName="Tipo_usuario" />
+          <ScalarProperty Name="Tipo_Documento_usuario" ColumnName="Tipo_Documento_usuario" />
+          <ScalarProperty Name="Nombre_usuario" ColumnName="Nombre_usuario" />
+          <ScalarProperty Name="Apellido_usuario" ColumnName="Apellido_usuario" />
+          <ScalarProperty Name="Telefono_usuario" ColumnName="Telefono_usuario" />
+          <ScalarProperty Name="Correo_usuario" ColumnName="Correo_usuario" />
+          <ScalarProperty Name="Tipo_instructor" ColumnName="Tipo_instructor" />
+          <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
