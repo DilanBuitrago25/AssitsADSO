@@ -10,3 +10,15 @@ C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\ClaseDatos
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CopyComplete
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.dll
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.pdb
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.dll.config
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.dll
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.pdb
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.dll
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.xml
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.AssemblyReference.cache
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CopyComplete
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.dll
+C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.pdb

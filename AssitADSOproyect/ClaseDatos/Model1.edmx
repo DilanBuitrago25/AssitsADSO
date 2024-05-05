@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BDAssistsADSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDAssistsADSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asistencia">
           <Key>
             <PropertyRef Name="Id_asistencia" />
@@ -77,7 +77,7 @@
           <Property Name="Tipo_instructor" Type="varchar" MaxLength="55" Nullable="false" />
           <Property Name="Id_ficha" Type="int" />
         </EntityType>
-        <Association Name="FK__Asistenci__Id_us__35BCFE0A">
+        <Association Name="FK__Asistenci__Id_us__4316F928">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -89,7 +89,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Competenc__Id_pr__2D27B809">
+        <Association Name="FK__Competenc__Id_pr__403A8C7D">
           <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="0..1" />
           <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -101,7 +101,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Competenc__Numer__2C3393D0">
+        <Association Name="FK__Competenc__Numer__3F466844">
           <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
           <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -113,7 +113,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ficha__Id_progra__267ABA7A">
+        <Association Name="FK__Ficha__Id_progra__398D8EEE">
           <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="0..1" />
           <End Role="Ficha" Type="Self.Ficha" Multiplicity="*" />
           <ReferentialConstraint>
@@ -125,7 +125,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reporte__Id_asis__3B75D760">
+        <Association Name="FK__Reporte__Id_asis__48CFD27E">
           <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
           <End Role="Reporte" Type="Self.Reporte" Multiplicity="*" />
           <ReferentialConstraint>
@@ -137,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Soporte__Id_asis__38996AB5">
+        <Association Name="FK__Soporte__Id_asis__45F365D3">
           <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
           <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
           <ReferentialConstraint>
@@ -149,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario__Id_fich__29572725">
+        <Association Name="FK__Usuario__Id_fich__3C69FB99">
           <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -169,37 +169,36 @@
           <EntitySet Name="Reporte" EntityType="Self.Reporte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Soporte" EntityType="Self.Soporte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Asistenci__Id_us__35BCFE0A" Association="Self.FK__Asistenci__Id_us__35BCFE0A">
+          <AssociationSet Name="FK__Asistenci__Id_us__4316F928" Association="Self.FK__Asistenci__Id_us__4316F928">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Asistencia" EntitySet="Asistencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Competenc__Id_pr__2D27B809" Association="Self.FK__Competenc__Id_pr__2D27B809">
+          <AssociationSet Name="FK__Competenc__Id_pr__403A8C7D" Association="Self.FK__Competenc__Id_pr__403A8C7D">
             <End Role="Programa_formacion" EntitySet="Programa_formacion" />
             <End Role="Competencia" EntitySet="Competencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Competenc__Numer__2C3393D0" Association="Self.FK__Competenc__Numer__2C3393D0">
+          <AssociationSet Name="FK__Competenc__Numer__3F466844" Association="Self.FK__Competenc__Numer__3F466844">
             <End Role="Ficha" EntitySet="Ficha" />
             <End Role="Competencia" EntitySet="Competencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ficha__Id_progra__267ABA7A" Association="Self.FK__Ficha__Id_progra__267ABA7A">
+          <AssociationSet Name="FK__Ficha__Id_progra__398D8EEE" Association="Self.FK__Ficha__Id_progra__398D8EEE">
             <End Role="Programa_formacion" EntitySet="Programa_formacion" />
             <End Role="Ficha" EntitySet="Ficha" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reporte__Id_asis__3B75D760" Association="Self.FK__Reporte__Id_asis__3B75D760">
+          <AssociationSet Name="FK__Reporte__Id_asis__48CFD27E" Association="Self.FK__Reporte__Id_asis__48CFD27E">
             <End Role="Asistencia" EntitySet="Asistencia" />
             <End Role="Reporte" EntitySet="Reporte" />
           </AssociationSet>
-          <AssociationSet Name="FK__Soporte__Id_asis__38996AB5" Association="Self.FK__Soporte__Id_asis__38996AB5">
+          <AssociationSet Name="FK__Soporte__Id_asis__45F365D3" Association="Self.FK__Soporte__Id_asis__45F365D3">
             <End Role="Asistencia" EntitySet="Asistencia" />
             <End Role="Soporte" EntitySet="Soporte" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario__Id_fich__29572725" Association="Self.FK__Usuario__Id_fich__29572725">
+          <AssociationSet Name="FK__Usuario__Id_fich__3C69FB99" Association="Self.FK__Usuario__Id_fich__3C69FB99">
             <End Role="Ficha" EntitySet="Ficha" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDAssistsADSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
