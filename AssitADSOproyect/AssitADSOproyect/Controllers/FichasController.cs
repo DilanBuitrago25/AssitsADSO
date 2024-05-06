@@ -82,7 +82,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa")] Ficha ficha)
+        public ActionResult Edit([Bind(Include = "Id_ficha,Nombre_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa")] Ficha ficha)
         {
             if (ModelState.IsValid)
             {
