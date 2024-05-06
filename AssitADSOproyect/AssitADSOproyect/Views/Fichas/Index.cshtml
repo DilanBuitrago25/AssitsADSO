@@ -5,22 +5,22 @@
 }
 
 <br />
-    <div class="container-fluid">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3>Gestionar Fichas</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item">Fichas</li>
-                        <li class="breadcrumb-item">General</li>
-                        <li class="breadcrumb-item active">Consultar</li>
-                    </ol>
-                </div>
-                <div class="col-sm-6">
-                    <!-- Bookmark Start-->
-                    <div class="bookmark">
-                        <ul>
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Gestionar Fichas</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Fichas</li>
+                    <li class="breadcrumb-item">General</li>
+                    <li class="breadcrumb-item active">Consultar</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+                <!-- Bookmark Start-->
+                <div class="bookmark">
+                    <ul>
                             <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
                             <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
                             <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
@@ -32,127 +32,120 @@
                                         <input type="text" placeholder="Search..">
                                     </div>
                                 </form>
-                            </li>
+                            </li>  
                         </ul>
-                    </div>
-                    <!-- Bookmark Ends-->
                 </div>
+                <!-- Bookmark Ends-->
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>Registrar Ficha</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <form>
-                                    <div class="mb-3 m-form__group">
-                                        <label class="form-label">Nombre</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">A</span>
-                                            <input class="form-control" type="text" placeholder="Nombre de la ficha...">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 input-group-solid">
-                                        <label class="form-label">Jornada</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">  </span>
-                                            <input class="form-control" type="text" placeholder="...">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 m-form__group">
-                                        <label class="form-label">Modalidad</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">  </span>
-                                            <input class="form-control" type="text" placeholder="...">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 input-group-solid">
-                                        <label class="form-label">Tipo Ficha</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">   </span>
-                                            <input class="form-control" type="text" placeholder="...">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 m-form__group">
-                                        <label class="form-label">Programa de formación</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">   </span>
-                                            <input class="form-control" type="text" placeholder="...">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn btn-primary m-r-15" type="submit">Submit</button>
-                        <button class="btn btn-light" type="submit">Cancel</button>
-                    </div>
-                </div>
+</div>
+<!-- Individual column searching (text inputs) Starts-->
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>Individual column searching (text inputs) </h5><span>The searching functionality provided by DataTables is useful for quickly search through the information in the table - however the search is global, and you may wish to present controls that search on specific columns.</span>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="display" id="row-select-delete">
+                    <thead>
+                    
+                            <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
+                                <th>Jornada</th>
+                                <th>Modalidad</th>
+                                <th>Tipo</th>
+                                <th>Programa de formación</th>
+                            </tr>
+                            
+                        </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Id_ficha))</td>
+                                <td>@Html.DisplayFor(model => item.Nombre_ficha)</td>
+                                <td>@Html.DisplayFor(model => item.Jornada_ficha)</td>
+                                <td>@Html.DisplayFor(model => item.Modalidad_ficha)</td>
+                                <td>@Html.DisplayFor(model => item.tipo_ficha)</td>
+                                <td>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</td>
+                                <td><a data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons">@Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha })<i data-feather="command"></i></a></td>
+                                
+                            </tr>
+                        }
+                        </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Jornada</th>
+                            <th>Modalidad</th>
+                            <th>Tipo</th>
+                            <th>Programa de formación</th>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
-    @*<h2>Index</h2>
+@*<h2>Index</h2>
 
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Id_ficha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nombre_ficha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Jornada_ficha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Modalidad_ficha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.tipo_ficha)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Programa_formacion.Nombre_programa)
-                </th>
-                <th></th>
-            </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_ficha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre_ficha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Jornada_ficha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modalidad_ficha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipo_ficha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Programa_formacion.Nombre_programa)
+            </th>
+            <th></th>
+        </tr>
 
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id_ficha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nombre_ficha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Jornada_ficha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Modalidad_ficha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tipo_ficha)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Programa_formacion.Nombre_programa)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id_ficha }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id_ficha })
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_ficha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre_ficha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Jornada_ficha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modalidad_ficha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo_ficha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Programa_formacion.Nombre_programa)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id_ficha }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id_ficha })
+            </td>
+        </tr>
+    }
 
-        </table>*@
+    </table>*@

@@ -10,112 +10,107 @@ using ClaseDatos;
 
 namespace AssitADSOproyect.Controllers
 {
-    public class FichasController : Controller
+    public class Programa_formacionController : Controller
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
 
-        // GET: Fichas
+        // GET: Programa_formacion
         public ActionResult Index()
         {
-            var ficha = db.Ficha.Include(f => f.Programa_formacion);
-            return View(ficha.ToList());
+            return View(db.Programa_formacion.ToList());
         }
 
-        // GET: Fichas/Details/5
+        // GET: Programa_formacion/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ficha ficha = db.Ficha.Find(id);
-            if (ficha == null)
+            Programa_formacion programa_formacion = db.Programa_formacion.Find(id);
+            if (programa_formacion == null)
             {
                 return HttpNotFound();
             }
-            return View(ficha);
+            return View(programa_formacion);
         }
 
-        // GET: Fichas/Create
+        // GET: Programa_formacion/Create
         public ActionResult Create()
         {
-            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
             return View();
         }
 
-        // POST: Fichas/Create
+        // POST: Programa_formacion/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_ficha,Nombre_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa")] Ficha ficha)
+        public ActionResult Create([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa")] Programa_formacion programa_formacion)
         {
             if (ModelState.IsValid)
             {
-                db.Ficha.Add(ficha);
+                db.Programa_formacion.Add(programa_formacion);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", ficha.Id_programa);
-            return View(ficha);
+            return View(programa_formacion);
         }
 
-        // GET: Fichas/Edit/5
+        // GET: Programa_formacion/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ficha ficha = db.Ficha.Find(id);
-            if (ficha == null)
+            Programa_formacion programa_formacion = db.Programa_formacion.Find(id);
+            if (programa_formacion == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", ficha.Id_programa);
-            return View(ficha);
+            return View(programa_formacion);
         }
 
-        // POST: Fichas/Edit/5
+        // POST: Programa_formacion/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa")] Ficha ficha)
+        public ActionResult Edit([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa")] Programa_formacion programa_formacion)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(ficha).State = EntityState.Modified;
+                db.Entry(programa_formacion).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", ficha.Id_programa);
-            return View(ficha);
+            return View(programa_formacion);
         }
 
-        // GET: Fichas/Delete/5
+        // GET: Programa_formacion/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Ficha ficha = db.Ficha.Find(id);
-            if (ficha == null)
+            Programa_formacion programa_formacion = db.Programa_formacion.Find(id);
+            if (programa_formacion == null)
             {
                 return HttpNotFound();
             }
-            return View(ficha);
+            return View(programa_formacion);
         }
 
-        // POST: Fichas/Delete/5
+        // POST: Programa_formacion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Ficha ficha = db.Ficha.Find(id);
-            db.Ficha.Remove(ficha);
+            Programa_formacion programa_formacion = db.Programa_formacion.Find(id);
+            db.Programa_formacion.Remove(programa_formacion);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

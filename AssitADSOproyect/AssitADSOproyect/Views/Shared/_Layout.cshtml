@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/date-picker.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/prism.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/vector-map.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/datatables.css">  @*añadido posteriormente para las tablas*@
     <!-- Plugins css Ends-->
     <!-- Bootstrap css-->
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css">
@@ -75,13 +76,13 @@
                         <li><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
                         <li class="onhover-dropdown">
                             <div class="bookmark-box"><i data-feather="grid"></i></div>
-                      
+
                         </li>
-                      
+
                         <li>
                             <div class="mode"><i class="fa fa-moon-o"></i></div>
                         </li>
-                 
+
                         <li class="onhover-dropdown p-0">
                             <button class="btn btn-primary-light" type="button"><a href="login_two.html"><i data-feather="log-out"></i>Cerrar Sesión</a></button>
                         </li>
@@ -102,19 +103,19 @@
                     </a>
                     <p class="mb-0 font-roboto">Instructor</p>
                     @*<ul>
-                        <li>
-                            <span><span class="counter">19.8</span>k</span>
-                            <p>Follow</p>
-                        </li>
-                        <li>
-                            <span>2 year</span>
-                            <p>Experince</p>
-                        </li>
-                        <li>
-                            <span><span class="counter">95.2</span>k</span>
-                            <p>Follower </p>
-                        </li>
-                    </ul>*@
+                            <li>
+                                <span><span class="counter">19.8</span>k</span>
+                                <p>Follow</p>
+                            </li>
+                            <li>
+                                <span>2 year</span>
+                                <p>Experince</p>
+                            </li>
+                            <li>
+                                <span><span class="counter">95.2</span>k</span>
+                                <p>Follower </p>
+                            </li>
+                        </ul>*@
                 </div>
                 <nav>
                     <div class="main-navbar">
@@ -130,13 +131,13 @@
                                     </div>
                                 </li>
                                 <li class="dropdown">
-                                    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="home"></i><span>Panel Principal</span></a>
+                                    <a class="nav-link menu-title" href="@Url.Action("Index","Instructor")"><i data-feather="home"></i><span>Panel Principal</span></a>
                                 </li>
                                 <li class="dropdown">
-                                    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="grid"></i><span>Gestionar Fichas</span></a>
+                                    <a class="nav-link menu-title" href="@Url.Action("Index","Fichas")"><i data-feather="grid"></i><span>Gestionar Fichas</span></a>
                                 </li>
                                 <li class="dropdown">
-                                    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="layers"></i><span>Gestionar Competencias</span></a>
+                                    <a class="nav-link menu-title" href="@Url.Action("Index","Competencias")"><i data-feather="layers"></i><span>Gestionar Competencias</span></a>
                                 </li>
                                 <li class="sidebar-main-title">
                                     <div>
@@ -158,13 +159,13 @@
                                     </div>
                                 </li>
                                 <li class="dropdown">
-                                    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="users"></i><span>Gestionar Aprendices                </span></a>
+                                    <a class="nav-link menu-title" href="@Url.Action("Index","Aprendiz")"><i data-feather="users"></i><span>Gestionar Aprendices                </span></a>
                                 </li>
                                 <li class="dropdown">
-                                    <a class="nav-link menu-title" href="javascript:void(0)"><i data-feather="user-check"></i><span>Gestionar Instructores</span></a>
+                                    <a class="nav-link menu-title" href="@Url.Action("Index","Instructor")"><i data-feather="user-check"></i><span>Gestionar Instructores</span></a>
                                 </li>
-                               
-                                
+
+
                 </nav>
             </header>
             <!-- Page Sidebar Ends-->
@@ -225,6 +226,9 @@
     <script src="../assets/js/datepicker/date-picker/datepicker.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.en.js"></script>
     <script src="../assets/js/datepicker/date-picker/datepicker.custom.js"></script>
+    <script src="../assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/js/datatable/datatables/datatable.custom.js"></script>
+    <script src="../assets/js/tooltip-init.js"></script>
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="../assets/js/script.js"></script>

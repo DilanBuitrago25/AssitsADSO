@@ -1,0 +1,42 @@
+﻿@model ClaseDatos.Programa_formacion
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Programa_formacion</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_programa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_programa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo_programa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo_programa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duracion_programa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duracion_programa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_programa }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
