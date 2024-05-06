@@ -8537,16 +8537,16 @@ Sticky Menu
 }
 
 .saas-classic-scrollup {
-  width: 55px;
-  right: 20px;
-  z-index: 5;
-  height: 55px;
-  bottom: 20px;
-  display: none;
-  position: fixed;
-  border-radius: 100%;
-  line-height: 55px;
-  background-image: linear-gradient(-45deg, #e511e6 32%, #6b2c94 100%);
+    width: 55px;
+    right: 20px;
+    z-index: 5;
+    height: 55px;
+    bottom: 20px;
+    display: none;
+    position: fixed;
+    border-radius: 100%;
+    line-height: 55px;
+    background-image: linear-gradient(-45deg, #69938B 32%, #276C5D 100%);
 }
 
 .saas-classic-scrollup i {
@@ -8634,13 +8634,13 @@ Sticky Menu
 .saas_two_banner_section .s2-banner_content .s2-tilte_tag,
 .saas_two_feature_section .s2-feature_text .feature_tag,
 .integration_section .integration_text .feature_tag {
-  color: #951fb3;
-  font-size: 18px;
-  font-weight: 500;
-  padding: 3px 30px;
-  border-radius: 8px;
-  display: inline-block;
-  background-color: #ede0f4;
+    color: #25695c;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 3px 30px;
+    border-radius: 8px;
+    display: inline-block;
+    background-color: #ede0f4;
 }
 
 .saas_two_section_title h2,
@@ -8892,7 +8892,7 @@ Sticky Menu
   float: right;
   line-height: 55px;
   border-radius: 30px;
-  background-color: #73299a;
+  background-color: #25695c;
 }
 
 .saas_two_main_header .saas_sign_up_btn a {
@@ -9042,7 +9042,7 @@ Sticky Menu
   height: 115%;
   position: absolute;
   background-repeat: no-repeat;
-  background-image: url(../img/saas-c/banner/b-shape1.png);
+  background-image: url(../img/saas-c/banner/Main-green.png);
 }
 
 .saas_two_banner_section .s2-banner_content {
@@ -9191,11 +9191,11 @@ Sticky Menu
   right: 0;
 }
 
-.saas_two_service_section .service_content_box .service_icon_box .lower_icon svg {
-  width: 45px;
-  height: 45px;
-  fill: #c4a2fc;
-}
+    .saas_two_service_section .service_content_box .service_icon_box .lower_icon svg {
+        width: 45px;
+        height: 45px;
+        fill: 24695c;
+    }
 
 .saas_two_service_section .service_content_box .service_text_box h3 {
   color: #010101;
@@ -9249,15 +9249,15 @@ Sticky Menu
   padding-top: 35px;
 }
 
-.saas_two_about_section .s2-about_text_icon .s2-about_icon {
-  width: 70px;
-  height: 70px;
-  line-height: 70px;
-  padding-top: 15px;
-  border-radius: 100%;
-  margin-bottom: 16px;
-  background-color: #6c2b95;
-}
+    .saas_two_about_section .s2-about_text_icon .s2-about_icon {
+        width: 70px;
+        height: 70px;
+        line-height: 70px;
+        padding-top: 15px;
+        border-radius: 100%;
+        margin-bottom: 16px;
+        background-color: #25695c;
+    }
 
 .saas_two_about_section .s2-about_text_icon .s2-about_icon svg {
   fill: #fff;
@@ -9529,10 +9529,10 @@ Sticky Menu
   margin-bottom: 5px;
 }
 
-.saas_two_team_section .s2-team_img_text .s2_name_info .s2_mem_contact span i {
-  color: #cc0fda;
-  margin-right: 8px;
-}
+    .saas_two_team_section .s2-team_img_text .s2_name_info .s2_mem_contact span i {
+        color: #F0DE90;
+        margin-right: 8px;
+    }
 
 .saas_two_team_section .s2-team_img_text .s2-mem_social {
   bottom: 30px;
@@ -9562,14 +9562,14 @@ Sticky Menu
   transform: translateX(5px);
 }
 
-.saas_two_team_section .s2-team_img_text .s2-mem_social .s2-share_btn {
-  height: 50px;
-  width: 50px;
-  line-height: 50px;
-  border-radius: 100%;
-  transition: 0.3s all ease-in-out;
-  background-color: #53117f;
-}
+    .saas_two_team_section .s2-team_img_text .s2-mem_social .s2-share_btn {
+        height: 50px;
+        width: 50px;
+        line-height: 50px;
+        border-radius: 100%;
+        transition: 0.3s all ease-in-out;
+        background-color: #F0DE90;
+    }
 
 .saas_two_team_section .s2-team_img_text .s2-mem_social .s2-share_btn i {
   color: #fff;
@@ -10177,7 +10177,7 @@ Sticky Menu
 }
 
 .s2-copyright a {
-  color: #d772fe;
+  color: #25695c;
 }
 
 @keyframes slide {

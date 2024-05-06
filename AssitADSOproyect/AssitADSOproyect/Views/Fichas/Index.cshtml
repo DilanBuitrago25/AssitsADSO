@@ -71,7 +71,9 @@
                                 <td>@Html.DisplayFor(model => item.Modalidad_ficha)</td>
                                 <td>@Html.DisplayFor(model => item.tipo_ficha)</td>
                                 <td>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</td>
-                                <td><a data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons">@Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha })<i data-feather="command"></i></a></td>
+                                <td>
+                                    <li><a data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons href="@Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha })" "><i data-feather="command"></i></a></li>
+                                </td>
                                 
                             </tr>
                         }

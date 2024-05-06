@@ -12,7 +12,7 @@
 .dark-version .saas_two_feature_section,
 .dark-version .saas_two_team_section,
 .dark-version .s2-pricing_section {
-	background-color: #0F0034;
+	background-color: #25695c;
 }
 .dark-version .eight-section-title .eg-title-tag,
 .dark-version .eight-section-title h2 {
@@ -166,14 +166,14 @@
 }
 /*** Dark Home 2 ***/
 .dark-version .saas_two_banner_section {
-	background-color: #1B0234;
+	background-color: #69938B;
 }
 .dark-version .saas_two_main_header,
 .dark-version .saas_two_feature_section .s2-feature_right .s2-feature_list {
 	background-color: #090012;
 }
 .dark-version .saas_two_service_section .service_content_box::after {
-	background-color: #2c0345;
+	background-color: #69938B;
 }
 .dark-version .saas_two_service_section .service_content_box .service_icon_box .upper_icon svg {
 	fill: #acacac;
