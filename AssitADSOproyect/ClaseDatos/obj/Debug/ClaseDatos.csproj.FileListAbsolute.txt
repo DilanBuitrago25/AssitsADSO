@@ -22,3 +22,15 @@ C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDato
 C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CopyComplete
 C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.dll
 C:\Users\LENOVO\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.pdb
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.dll.config
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.dll
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.pdb
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.dll
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.SqlServer.dll
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.xml
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.SqlServer.xml
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.AssemblyReference.cache
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CoreCompileInputs.cache
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CopyComplete
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.dll
+E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.pdb
