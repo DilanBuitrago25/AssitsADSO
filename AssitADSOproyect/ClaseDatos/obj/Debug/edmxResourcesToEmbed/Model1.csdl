@@ -36,6 +36,7 @@
     <NavigationProperty Name="Competencia" Relationship="Self.FK__Competenc__Numer__2C3393D0" FromRole="Ficha" ToRole="Competencia" />
     <NavigationProperty Name="Programa_formacion" Relationship="Self.FK__Ficha__Id_progra__267ABA7A" FromRole="Ficha" ToRole="Programa_formacion" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Id_fich__29572725" FromRole="Ficha" ToRole="Usuario" />
+    <Property Name="Nombre_ficha" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Programa_formacion">
     <Key>
@@ -85,6 +86,8 @@
     <Property Name="Id_ficha" Type="Int32" />
     <NavigationProperty Name="Asistencia" Relationship="Self.FK__Asistenci__Id_us__35BCFE0A" FromRole="Usuario" ToRole="Asistencia" />
     <NavigationProperty Name="Ficha" Relationship="Self.FK__Usuario__Id_fich__29572725" FromRole="Usuario" ToRole="Ficha" />
+    <Property Name="Esinstructormaster_usuario" Type="Boolean" />
+    <Property Name="Contrasena_usuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_us__35BCFE0A">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />

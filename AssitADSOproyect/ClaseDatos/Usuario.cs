@@ -30,6 +30,8 @@ namespace ClaseDatos
         public string Correo_usuario { get; set; }
         public string Tipo_instructor { get; set; }
         public Nullable<int> Id_ficha { get; set; }
+        public Nullable<bool> Esinstructormaster_usuario { get; set; }
+        public string Contrasena_usuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistencia> Asistencia { get; set; }

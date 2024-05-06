@@ -26,6 +26,7 @@ namespace ClaseDatos
         public string Modalidad_ficha { get; set; }
         public string tipo_ficha { get; set; }
         public Nullable<int> Id_programa { get; set; }
+        public string Nombre_ficha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competencia> Competencia { get; set; }

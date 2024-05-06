@@ -13,11 +13,14 @@ primary key (Id_programa))
 
 create table Ficha(
 Id_ficha int identity (100000,1) not null,
+Nombre_ficha varchar (200) not null 
 Jornada_ficha varchar(100) not null,
 Modalidad_ficha varchar(100) not null,
 tipo_ficha varchar (100) not null,
 Id_programa int references Programa_formacion(Id_programa),
 primary key (Id_ficha))
+
+--alter table Ficha add Nombre_ficha varchar (200) not null 
 
 create table Usuario(
 Id_usuario int identity (1,1) not null,
@@ -28,9 +31,13 @@ Nombre_usuario varchar (55) not null,
 Apellido_usuario varchar (55) not null,
 Telefono_usuario int not null,
 Correo_usuario varchar (100) not null,
+Contrasena_usuario varchar (100) not null,
 Tipo_instructor varchar (55) not null,
 Id_ficha int references Ficha(Id_ficha),
+Esinstructormaster_usuario bit default (0),
 primary key (Id_usuario))
+
+--alter table Usuario add Esinstructormaster_usuario bit default (0)
 
 --create table Aprendiz(
 --Id_aprendiz int identity (1,1) not null,

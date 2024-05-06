@@ -1,0 +1,50 @@
+﻿@model ClaseDatos.Ficha
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ficha</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Jornada_ficha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Jornada_ficha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modalidad_ficha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modalidad_ficha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_ficha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_ficha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Programa_formacion.Nombre_programa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Programa_formacion.Nombre_programa)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_ficha }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -127,8 +127,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AprendizController.cs" />
+    <Compile Include="Controllers\FichasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\InstructorController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4275,11 +4278,26 @@
     <Content Include="Views\Shared - Copia\_Layout.cshtml" />
     <Content Include="Views\Shared - Copia\Error.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Usuarios\Create.cshtml" />
-    <Content Include="Views\Usuarios\Delete.cshtml" />
-    <Content Include="Views\Usuarios\Details.cshtml" />
-    <Content Include="Views\Usuarios\Edit.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Login\Create.cshtml" />
+    <Content Include="Views\Login\Delete.cshtml" />
+    <Content Include="Views\Login\Details.cshtml" />
+    <Content Include="Views\Login\Edit.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Aprendiz\Create.cshtml" />
+    <Content Include="Views\Aprendiz\Delete.cshtml" />
+    <Content Include="Views\Aprendiz\Details.cshtml" />
+    <Content Include="Views\Aprendiz\Edit.cshtml" />
+    <Content Include="Views\Aprendiz\Index.cshtml" />
+    <Content Include="Views\Instructor\Create.cshtml" />
+    <Content Include="Views\Instructor\Delete.cshtml" />
+    <Content Include="Views\Instructor\Details.cshtml" />
+    <Content Include="Views\Instructor\Edit.cshtml" />
+    <Content Include="Views\Instructor\Index.cshtml" />
+    <Content Include="Views\Fichas\Create.cshtml" />
+    <Content Include="Views\Fichas\Delete.cshtml" />
+    <Content Include="Views\Fichas\Details.cshtml" />
+    <Content Include="Views\Fichas\Edit.cshtml" />
+    <Content Include="Views\Fichas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

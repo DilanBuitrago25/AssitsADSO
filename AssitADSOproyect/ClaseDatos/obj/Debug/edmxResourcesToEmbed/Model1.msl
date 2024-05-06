@@ -25,6 +25,7 @@
     <EntitySetMapping Name="Ficha">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Ficha">
         <MappingFragment StoreEntitySet="Ficha">
+          <ScalarProperty Name="Nombre_ficha" ColumnName="Nombre_ficha" />
           <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
           <ScalarProperty Name="Jornada_ficha" ColumnName="Jornada_ficha" />
           <ScalarProperty Name="Modalidad_ficha" ColumnName="Modalidad_ficha" />
@@ -67,6 +68,8 @@
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Contrasena_usuario" ColumnName="Contrasena_usuario" />
+          <ScalarProperty Name="Esinstructormaster_usuario" ColumnName="Esinstructormaster_usuario" />
           <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
           <ScalarProperty Name="Documento_usuario" ColumnName="Documento_usuario" />
           <ScalarProperty Name="Tipo_usuario" ColumnName="Tipo_usuario" />
