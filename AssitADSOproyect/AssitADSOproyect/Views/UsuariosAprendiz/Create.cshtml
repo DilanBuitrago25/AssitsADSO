@@ -64,13 +64,7 @@
                                             @Html.ValidationMessageFor(model => model.Documento_usuario, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    <div class="mb-3 m-form__group">
-                                        <label class="form-label"></label>
-                                        <div class="input-group">
-                                            @Html.DisplayFor(model => model.Tipo_usuario, "Aprendiz", new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Tipo_usuario, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
+
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Tipo Documento</label>
                                         <div class="input-group">
@@ -119,13 +113,13 @@
                                             @Html.ValidationMessageFor(model => model.Contrasena_usuario, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    <div class="mb-3 input-group-solid">
-                                        <label class="form-label">Tipo instructor</label>
+                                    @*<div class="mb-3 m-form__group">
+                                        <label class="form-label"></label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Tipo_instructor, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Tipo_instructor, "", new { @class = "text-danger" })
+                                            @Html.DisplayFor(model => model.Tipo_usuario, "Aprendiz", new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Tipo_usuario, "", new { @class = "text-danger" })
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">

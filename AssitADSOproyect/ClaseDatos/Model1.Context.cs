@@ -12,6 +12,8 @@ namespace ClaseDatos
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class BDAssistsADSOEntities : DbContext
     {
@@ -32,5 +34,18 @@ namespace ClaseDatos
         public virtual DbSet<Reporte> Reporte { get; set; }
         public virtual DbSet<Soporte> Soporte { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+    
+        public virtual ObjectResult<string> ValidarUsuarios(string correo, string contraseña)
+        {
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            var contraseñaParameter = contraseña != null ?
+                new ObjectParameter("Contraseña", contraseña) :
+                new ObjectParameter("Contraseña", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ValidarUsuarios", correoParameter, contraseñaParameter);
+        }
     }
 }

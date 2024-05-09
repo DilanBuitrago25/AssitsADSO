@@ -14,10 +14,11 @@ namespace ClaseDatos
     
     public partial class Competencia
     {
-        public int ID_competencia { get; set; }
+        public int Id_competencia { get; set; }
         public string tipo_competencia { get; set; }
         public Nullable<int> Numero_ficha { get; set; }
         public Nullable<int> Id_programa { get; set; }
+        public string Nombre_competencia { get; set; }
     
         public virtual Programa_formacion Programa_formacion { get; set; }
         public virtual Ficha Ficha { get; set; }

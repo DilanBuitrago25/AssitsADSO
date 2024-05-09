@@ -17,6 +17,7 @@ namespace ClaseDatos
         public int Id_soporte { get; set; }
         public string Nombre_soporte { get; set; }
         public string Descripcion_soporte { get; set; }
+        public string Tipo_soporte { get; set; }
         public Nullable<int> Id_asistencia { get; set; }
     
         public virtual Asistencia Asistencia { get; set; }

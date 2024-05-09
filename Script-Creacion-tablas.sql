@@ -83,3 +83,5 @@ Descripcion_reporte varchar (500) not null,
 Tipo_reporte varchar (45) not null,
 Id_asistencia int references Asistencia(Id_asistencia),
 primary key (Id_reporte))
+
+Select * from Usuarios

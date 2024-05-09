@@ -4,7 +4,108 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Gestionar Fichas</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item">Fichas</li>
+                    <li class="breadcrumb-item">General</li>
+                    <li class="breadcrumb-item active">Consultar</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+                <!-- Bookmark Start-->
+                <div class="bookmark">
+                    <ul>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
+                            <form class="form-inline search-form">
+                                <div class="form-group form-control-search">
+                                    <input type="text" placeholder="Search..">
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Bookmark Ends-->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Individual column searching (text inputs) Starts-->
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>Individual column searching (text inputs) </h5><span>The searching functionality provided by DataTables is useful for quickly search through the information in the table - however the search is global, and you may wish to present controls that search on specific columns.</span>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="display" id="row-select-delete">
+                    <thead>
+
+                        <tr>
+                            <th>Id</th>
+                            <th>Documento</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Tipo Instructor</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Id_usuario))
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Tipo_Documento_usuario)
+                                    @Html.DisplayFor(model => item.Documento_usuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Nombre_usuario)
+                                    @Html.DisplayFor(model => item.Apellido_usuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Correo_usuario)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Tipo_instructor)
+                                </td>
+                                <td>
+
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_usuario }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id_usuario })
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Documento</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Tipo Instructor</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -47,47 +148,48 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Documento_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo_Documento_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Apellido_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefono_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Correo_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo_instructor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Esinstructormaster_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contrasena_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ficha.Jornada_ficha)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_usuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_usuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_usuario })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_Documento_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_instructor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Esinstructormaster_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contrasena_usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ficha.Jornada_ficha)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id_usuario }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id_usuario }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id_usuario })
+            </td>
+        </tr>
+    }
 
-</table>
+</table>*@

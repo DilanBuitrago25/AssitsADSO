@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using ClaseDatos;
 
 namespace AssitADSOproyect.Controllers
@@ -13,7 +15,7 @@ namespace AssitADSOproyect.Controllers
     public class LoginController : Controller
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-
+        string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDTIENDAMVC;Integrated Security=True; multipleactiveresultsets=True;";
         // GET: Login
         public ActionResult Index()
         {
@@ -128,5 +130,47 @@ namespace AssitADSOproyect.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public ActionResult Index(Usuario oUsuario)
+        {
+            oUsuario.Contrasena_usuario = oUsuario.Contrasena_usuario;
+            using (SqlConnection cn = new SqlConnection(Conexion))
+            {
+                SqlCommand login = new SqlCommand("ValidarUsuarios", cn);
+                login.Parameters.AddWithValue("Correo", oUsuario.Correo_usuario);
+                login.Parameters.AddWithValue("Contraseña", oUsuario.Contrasena_usuario);
+                login.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+                oUsuario.Tipo_usuario = Convert.ToString(login.ExecuteScalar().ToString());
+
+                if (oUsuario.Tipo_usuario == "Instructor")
+                {
+                    FormsAuthentication.SetAuthCookie(oUsuario.Correo_usuario, false);
+                    TempData["IdUsuarios"] = oUsuario.Documento_usuario;
+                    Session["Instructor"] = oUsuario;
+                    return RedirectToAction("Index", "Instructor");
+                }
+                else if (oUsuario.Tipo_usuario == "Aprendiz")
+                {
+                    FormsAuthentication.SetAuthCookie(oUsuario.Correo_usuario, false);
+                    TempData["IdUsuarios"] = oUsuario.Documento_usuario;
+                    Session["Aprendiz"] = oUsuario.Tipo_usuario = "Aprendiz";
+                    return RedirectToAction("Index", "Aprendiz");
+                }
+                else
+                {
+
+                    ViewData["Mensaje"] = "Usuario no encontrado";
+
+                    return View();
+
+
+                }
+            }
+
+        }
+
     }
 }

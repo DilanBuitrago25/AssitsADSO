@@ -21,17 +21,17 @@ namespace ClaseDatos
         }
     
         public int Id_usuario { get; set; }
-        public int Documento_usuario { get; set; }
-        public string Tipo_usuario { get; set; }
         public string Tipo_Documento_usuario { get; set; }
+        public int Documento_usuario { get; set; }
         public string Nombre_usuario { get; set; }
         public string Apellido_usuario { get; set; }
         public int Telefono_usuario { get; set; }
         public string Correo_usuario { get; set; }
-        public string Tipo_instructor { get; set; }
-        public Nullable<int> Id_ficha { get; set; }
-        public Nullable<bool> Esinstructormaster_usuario { get; set; }
         public string Contrasena_usuario { get; set; }
+        public string Tipo_usuario { get; set; }
+        public string Tipo_instructor { get; set; }
+        public Nullable<bool> Esinstructormaster_usuario { get; set; }
+        public Nullable<int> Id_ficha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistencia> Asistencia { get; set; }

@@ -17,9 +17,10 @@
         </EntityType>
         <EntityType Name="Competencia">
           <Key>
-            <PropertyRef Name="ID_competencia" />
+            <PropertyRef Name="Id_competencia" />
           </Key>
-          <Property Name="ID_competencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_competencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_competencia" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="tipo_competencia" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Numero_ficha" Type="int" />
           <Property Name="Id_programa" Type="int" />
@@ -29,7 +30,6 @@
             <PropertyRef Name="Id_ficha" />
           </Key>
           <Property Name="Id_ficha" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre_ficha" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Jornada_ficha" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Modalidad_ficha" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="tipo_ficha" Type="varchar" MaxLength="100" Nullable="false" />
@@ -61,6 +61,7 @@
           <Property Name="Id_soporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre_soporte" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="Descripcion_soporte" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Tipo_soporte" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Id_asistencia" Type="int" />
         </EntityType>
         <EntityType Name="Usuario">
@@ -68,17 +69,17 @@
             <PropertyRef Name="Id_usuario" />
           </Key>
           <Property Name="Id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Documento_usuario" Type="int" Nullable="false" />
-          <Property Name="Tipo_usuario" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Tipo_Documento_usuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Documento_usuario" Type="int" Nullable="false" />
           <Property Name="Nombre_usuario" Type="varchar" MaxLength="55" Nullable="false" />
           <Property Name="Apellido_usuario" Type="varchar" MaxLength="55" Nullable="false" />
           <Property Name="Telefono_usuario" Type="int" Nullable="false" />
           <Property Name="Correo_usuario" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Contrasena_usuario" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Tipo_instructor" Type="varchar" MaxLength="55" Nullable="false" />
-          <Property Name="Id_ficha" Type="int" />
+          <Property Name="Tipo_usuario" Type="varchar" MaxLength="100" />
+          <Property Name="Tipo_instructor" Type="varchar" MaxLength="55" />
           <Property Name="Esinstructormaster_usuario" Type="bit" />
+          <Property Name="Id_ficha" Type="int" />
         </EntityType>
         <Association Name="FK__Asistenci__Id_us__30F848ED">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -152,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario__Id_fich__29572725">
+        <Association Name="FK__Usuario__Id_fich__2A4B4B5E">
           <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -164,6 +165,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ValidarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="BDAssistsADSOModelStoreContainer">
           <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Competencia" EntityType="Self.Competencia" Schema="dbo" store:Type="Tables" />
@@ -196,7 +201,7 @@
             <End Role="Asistencia" EntitySet="Asistencia" />
             <End Role="Soporte" EntitySet="Soporte" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario__Id_fich__29572725" Association="Self.FK__Usuario__Id_fich__29572725">
+          <AssociationSet Name="FK__Usuario__Id_fich__2A4B4B5E" Association="Self.FK__Usuario__Id_fich__2A4B4B5E">
             <End Role="Ficha" EntitySet="Ficha" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
@@ -220,14 +225,15 @@
         </EntityType>
         <EntityType Name="Competencia">
           <Key>
-            <PropertyRef Name="ID_competencia" />
+            <PropertyRef Name="Id_competencia" />
           </Key>
-          <Property Name="ID_competencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_competencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
           <Property Name="tipo_competencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Numero_ficha" Type="Int32" />
           <Property Name="Id_programa" Type="Int32" />
           <NavigationProperty Name="Programa_formacion" Relationship="Self.FK__Competenc__Id_pr__2D27B809" FromRole="Competencia" ToRole="Programa_formacion" />
           <NavigationProperty Name="Ficha" Relationship="Self.FK__Competenc__Numer__2C3393D0" FromRole="Competencia" ToRole="Ficha" />
+          <Property Name="Nombre_competencia" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Ficha">
           <Key>
@@ -241,7 +247,6 @@
           <NavigationProperty Name="Competencia" Relationship="Self.FK__Competenc__Numer__2C3393D0" FromRole="Ficha" ToRole="Competencia" />
           <NavigationProperty Name="Programa_formacion" Relationship="Self.FK__Ficha__Id_progra__267ABA7A" FromRole="Ficha" ToRole="Programa_formacion" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK__Usuario__Id_fich__29572725" FromRole="Ficha" ToRole="Usuario" />
-          <Property Name="Nombre_ficha" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Programa_formacion">
           <Key>
@@ -272,6 +277,7 @@
           <Property Name="Id_soporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre_soporte" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Descripcion_soporte" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Tipo_soporte" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Id_asistencia" Type="Int32" />
           <NavigationProperty Name="Asistencia" Relationship="Self.FK__Soporte__Id_asis__38996AB5" FromRole="Soporte" ToRole="Asistencia" />
         </EntityType>
@@ -280,19 +286,19 @@
             <PropertyRef Name="Id_usuario" />
           </Key>
           <Property Name="Id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Documento_usuario" Type="Int32" Nullable="false" />
-          <Property Name="Tipo_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Tipo_Documento_usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Documento_usuario" Type="Int32" Nullable="false" />
           <Property Name="Nombre_usuario" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Apellido_usuario" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Telefono_usuario" Type="Int32" Nullable="false" />
           <Property Name="Correo_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Tipo_instructor" Type="String" MaxLength="55" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena_usuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo_usuario" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo_instructor" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="Esinstructormaster_usuario" Type="Boolean" />
           <Property Name="Id_ficha" Type="Int32" />
           <NavigationProperty Name="Asistencia" Relationship="Self.FK__Asistenci__Id_us__35BCFE0A" FromRole="Usuario" ToRole="Asistencia" />
           <NavigationProperty Name="Ficha" Relationship="Self.FK__Usuario__Id_fich__29572725" FromRole="Usuario" ToRole="Ficha" />
-          <Property Name="Esinstructormaster_usuario" Type="Boolean" />
-          <Property Name="Contrasena_usuario" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Asistenci__Id_us__35BCFE0A">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -414,6 +420,10 @@
             <End Role="Ficha" EntitySet="Ficha" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <FunctionImport Name="ValidarUsuarios" ReturnType="Collection(String)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -435,7 +445,8 @@
           <EntitySetMapping Name="Competencia">
             <EntityTypeMapping TypeName="BDAssistsADSOModel.Competencia">
               <MappingFragment StoreEntitySet="Competencia">
-                <ScalarProperty Name="ID_competencia" ColumnName="ID_competencia" />
+                <ScalarProperty Name="Nombre_competencia" ColumnName="Nombre_competencia" />
+                <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />
                 <ScalarProperty Name="tipo_competencia" ColumnName="tipo_competencia" />
                 <ScalarProperty Name="Numero_ficha" ColumnName="Numero_ficha" />
                 <ScalarProperty Name="Id_programa" ColumnName="Id_programa" />
@@ -445,7 +456,6 @@
           <EntitySetMapping Name="Ficha">
             <EntityTypeMapping TypeName="BDAssistsADSOModel.Ficha">
               <MappingFragment StoreEntitySet="Ficha">
-                <ScalarProperty Name="Nombre_ficha" ColumnName="Nombre_ficha" />
                 <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
                 <ScalarProperty Name="Jornada_ficha" ColumnName="Jornada_ficha" />
                 <ScalarProperty Name="Modalidad_ficha" ColumnName="Modalidad_ficha" />
@@ -478,6 +488,7 @@
           <EntitySetMapping Name="Soporte">
             <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
               <MappingFragment StoreEntitySet="Soporte">
+                <ScalarProperty Name="Tipo_soporte" ColumnName="Tipo_soporte" />
                 <ScalarProperty Name="Id_soporte" ColumnName="Id_soporte" />
                 <ScalarProperty Name="Nombre_soporte" ColumnName="Nombre_soporte" />
                 <ScalarProperty Name="Descripcion_soporte" ColumnName="Descripcion_soporte" />
@@ -503,6 +514,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ValidarUsuarios" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

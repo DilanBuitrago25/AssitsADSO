@@ -38,7 +38,7 @@
     <!-- Section I -->
     <div class="se-i">
         <!-- user-form -->
-        <form class="user-form" action="#" method="POST" id="loginForm">
+        <form class="user-form" action="@Url.Action("Index","Login")" method="post" id="loginForm" >
             <!-- logo -->
             <a href="index.html" class="logo">
                 <img data-src="../assets/images/Logo-remove.png" class="lazy lt-img img-fluid" alt="HostX">
@@ -49,14 +49,14 @@
             <!-- form-label -->
             <label class="form-label" for="email">
                 <!-- form-input -->
-                <input class="form-input" type="email" name="email" id="email" placeholder="Correo Electronico" required>
+                <input class="form-input" type="email" name="CorreoUsuario" id="email" placeholder="Correo Electronico" required>
                 <!-- state -->
                 <span class="state"></span>
             </label>
             <!-- form-label -->
             <label class="form-label" for="password">
                 <!-- form-input -->
-                <input class="form-input" type="password" name="password" id="password" placeholder="Contraseña" required>
+                <input class="form-input" type="password" name="ContrasenaUsuario" id="password" placeholder="Contraseña" required>
                 <!-- state -->
                 <span class="state"></span>
             </label>

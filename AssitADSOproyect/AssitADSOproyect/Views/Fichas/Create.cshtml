@@ -55,14 +55,14 @@
 
                                 @Html.AntiForgeryToken()
                                 <form>
-                                    <div class="mb-3 m-form__group">
+                                    @*<div class="mb-3 m-form__group">
                                         <label class="form-label">Nombre</label>
                                         <div class="input-group">
                                             <span class="input-group-text">A</span>
                                             @Html.EditorFor(model => model.Nombre_ficha, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Jornada</label>
                                         <div class="input-group">

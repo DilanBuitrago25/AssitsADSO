@@ -15,7 +15,8 @@
     <EntitySetMapping Name="Competencia">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Competencia">
         <MappingFragment StoreEntitySet="Competencia">
-          <ScalarProperty Name="ID_competencia" ColumnName="ID_competencia" />
+          <ScalarProperty Name="Nombre_competencia" ColumnName="Nombre_competencia" />
+          <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />
           <ScalarProperty Name="tipo_competencia" ColumnName="tipo_competencia" />
           <ScalarProperty Name="Numero_ficha" ColumnName="Numero_ficha" />
           <ScalarProperty Name="Id_programa" ColumnName="Id_programa" />
@@ -25,7 +26,6 @@
     <EntitySetMapping Name="Ficha">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Ficha">
         <MappingFragment StoreEntitySet="Ficha">
-          <ScalarProperty Name="Nombre_ficha" ColumnName="Nombre_ficha" />
           <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
           <ScalarProperty Name="Jornada_ficha" ColumnName="Jornada_ficha" />
           <ScalarProperty Name="Modalidad_ficha" ColumnName="Modalidad_ficha" />
@@ -58,6 +58,7 @@
     <EntitySetMapping Name="Soporte">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
         <MappingFragment StoreEntitySet="Soporte">
+          <ScalarProperty Name="Tipo_soporte" ColumnName="Tipo_soporte" />
           <ScalarProperty Name="Id_soporte" ColumnName="Id_soporte" />
           <ScalarProperty Name="Nombre_soporte" ColumnName="Nombre_soporte" />
           <ScalarProperty Name="Descripcion_soporte" ColumnName="Descripcion_soporte" />
@@ -83,5 +84,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ValidarUsuarios" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
   </EntityContainerMapping>
 </Mapping>
