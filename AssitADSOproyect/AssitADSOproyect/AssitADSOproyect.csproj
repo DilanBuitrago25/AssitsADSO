@@ -124,6 +124,8 @@
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Programa_formacionController.cs" />
+    <Compile Include="Controllers\UsuariosAprendizController.cs" />
+    <Compile Include="Controllers\UsuariosInstructorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -5906,6 +5908,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include=".vs\AssitADSOproyect.csproj.dtbcache.json" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -5959,6 +5962,16 @@
     <Content Include="Views\Programa_formacion\Details.cshtml" />
     <Content Include="Views\Programa_formacion\Edit.cshtml" />
     <Content Include="Views\Programa_formacion\Index.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Create.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Delete.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Details.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Edit.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Index.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Create.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Delete.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Details.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Edit.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

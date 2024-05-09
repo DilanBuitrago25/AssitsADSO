@@ -2,6 +2,7 @@
 
 --Creación de las tablas
 
+--Base de datos se modifico y se tiene que verificar que los datos impuestos en el modelo y en el controlador esten de la misma secuencia
 
 
 create table Programa_formacion(
@@ -13,7 +14,6 @@ primary key (Id_programa))
 
 create table Ficha(
 Id_ficha int identity (100000,1) not null,
-Nombre_ficha varchar (200) not null 
 Jornada_ficha varchar(100) not null,
 Modalidad_ficha varchar(100) not null,
 tipo_ficha varchar (100) not null,
@@ -24,18 +24,20 @@ primary key (Id_ficha))
 
 create table Usuario(
 Id_usuario int identity (1,1) not null,
-Documento_usuario int not null,
-Tipo_usuario Varchar (100) not null,
 Tipo_Documento_usuario varchar (200) not null,
+Documento_usuario int not null,
 Nombre_usuario varchar (55) not null,
 Apellido_usuario varchar (55) not null,
 Telefono_usuario int not null,
 Correo_usuario varchar (100) not null,
 Contrasena_usuario varchar (100) not null,
-Tipo_instructor varchar (55) not null,
-Id_ficha int references Ficha(Id_ficha),
+Tipo_usuario Varchar (100),
+Tipo_instructor varchar (55),  --quitado el not null
 Esinstructormaster_usuario bit default (0),
+Id_ficha int references Ficha(Id_ficha),
 primary key (Id_usuario))
+
+
 
 --alter table Usuario add Esinstructormaster_usuario bit default (0)
 
@@ -51,7 +53,8 @@ primary key (Id_usuario))
 --Primary Key (Id_aprendiz))  No aplica
 
 create table Competencia(
-ID_competencia int identity (10000,1) not null,
+Id_competencia int identity (10000,1) not null,
+Nombre_competencia varchar (500) not null,
 tipo_competencia varchar (100) not null,
 Numero_ficha int references Ficha(Id_ficha),
 Id_programa int references Programa_formacion(Id_programa),
@@ -69,6 +72,7 @@ create table Soporte(
 Id_soporte int identity (1000000,1) not null,
 Nombre_soporte varchar (45) not null,
 Descripcion_soporte varchar (500) not null,
+Tipo_soporte varchar (100) not null,
 Id_asistencia int references Asistencia(Id_asistencia),
 primary key (Id_soporte))
 
