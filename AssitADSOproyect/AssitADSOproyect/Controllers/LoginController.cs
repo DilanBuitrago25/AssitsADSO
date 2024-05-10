@@ -15,7 +15,7 @@ namespace AssitADSOproyect.Controllers
     public class LoginController : Controller
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-        string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDTIENDAMVC;Integrated Security=True; multipleactiveresultsets=True;";
+        string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDAssistsADSO;Integrated Security=True; multipleactiveresultsets=True;";
         // GET: Login
         public ActionResult Index()
         {
