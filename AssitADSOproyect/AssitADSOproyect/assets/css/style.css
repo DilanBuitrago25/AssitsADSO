@@ -126,6 +126,11 @@ a {
   a:hover {
     text-decoration: none; }
 
+#buttonedit {
+    color: #e6edef;
+    text-decoration: none;
+}
+
 .btn-link {
   text-decoration: none; }
 
