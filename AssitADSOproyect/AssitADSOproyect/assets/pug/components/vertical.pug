@@ -13,7 +13,7 @@
           |  Dashboard
         ul
           li
-            a(href='index.html') Default
+            a(href='@Url.Action("Index","Instructor")') Default
           li
             a(href='dashboard-crm') Crm
           li
@@ -455,7 +455,7 @@
             a.sidebar-header(href='to-do.html')
               span To-Do
           li
-            a.sidebar-header(href='../index.html')
+            a.sidebar-header(href='../@Url.Action("Index","Instructor")')
               span Landing page
           li
             a.sidebar-header(href='javascript:void(0)')

@@ -40,7 +40,7 @@
         <!-- user-form -->
         <form class="user-form" action="@Url.Action("Index","Login")" method="post" id="loginForm" >
             <!-- logo -->
-            <a href="index.html" class="logo">
+            <a href="@Url.Action("Index","Instructor")" class="logo">
                 <img data-src="../assets/images/Logo-remove.png" class="lazy lt-img img-fluid" alt="HostX">
                 <img data-src="../assets/images/theme/logo-d.png" class="lazy dt-img img-fluid" alt="HostX">
             </a>
@@ -49,14 +49,14 @@
             <!-- form-label -->
             <label class="form-label" for="email">
                 <!-- form-input -->
-                <input class="form-input" type="email" name="CorreoUsuario" id="email" placeholder="Correo Electronico" required>
+                <input class="form-input" type="email" name="CorreoUsuario" id="Correo" placeholder="Correo Electronico" required>
                 <!-- state -->
                 <span class="state"></span>
             </label>
             <!-- form-label -->
             <label class="form-label" for="password">
                 <!-- form-input -->
-                <input class="form-input" type="password" name="ContrasenaUsuario" id="password" placeholder="Contraseña" required>
+                <input class="form-input" type="password" name="ContrasenaUsuario" id="Contraseña" placeholder="Contraseña" required>
                 <!-- state -->
                 <span class="state"></span>
             </label>
@@ -93,7 +93,7 @@
         <!--<div class="text">-->
         <!-- links -->
         <!--<div class="links d-flex align-items-center justify-content-lg-start justify-content-center">
-            <a href="index.html" class="d-inline-flex">Home</a>
+            <a href="@Url.Action("Index","Instructor")" class="d-inline-flex">Home</a>
             <a href="kb-2.html" class="d-inline-flex">Help Center</a>
             <a href="terms.html" class="d-inline-flex">Privacy Policy</a>
         </div>-->

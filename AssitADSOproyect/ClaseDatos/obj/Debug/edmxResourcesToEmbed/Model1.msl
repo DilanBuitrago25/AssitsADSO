@@ -84,6 +84,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="ValidarUsuarios" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
+    <FunctionImportMapping FunctionImportName="ValidarUsuarios1" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
   </EntityContainerMapping>
 </Mapping>

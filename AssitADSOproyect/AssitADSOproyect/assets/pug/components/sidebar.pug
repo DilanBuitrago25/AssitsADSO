@@ -43,7 +43,7 @@ header.main-nav
               span Dashboard
             ul.nav-submenu.menu-content
               li
-                a(href='index.html')
+                a(href='@Url.Action("Index","Instructor")')
                   | Default
               li
                 a(href='dashboard-02.html') Ecommerce
@@ -508,7 +508,7 @@ header.main-nav
               i(data-feather='aperture')
               span Internationalization
           li.dropdown
-            a.nav-link.menu-title.link-nav(href='../starter-kit/index.html')
+            a.nav-link.menu-title.link-nav(href='../starter-kit/@Url.Action("Index","Instructor")')
               i(data-feather='anchor')
               span Starter kit   
           li.mega-menu

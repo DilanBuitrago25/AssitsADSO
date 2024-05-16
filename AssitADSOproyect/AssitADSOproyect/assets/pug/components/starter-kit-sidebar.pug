@@ -9,7 +9,7 @@ header.main-nav
               span Back
               i.fa.fa-angle-right.ps-2(aria-hidden='true')
           li.dropdown
-            a.nav-link.menu-title(href='../theme/index.html', target='_blank')
+            a.nav-link.menu-title(href='../theme/@Url.Action("Index","Instructor")', target='_blank')
               i(data-feather='home')
               span Dashboard
           li.dropdown
@@ -24,7 +24,7 @@ header.main-nav
                     i.fa.fa-chevron-right
                 ul.nav-sub-childmenu.submenu-content
                   li
-                    a(href='index.html') Layout Light
+                    a(href='@Url.Action("Index","Instructor")') Layout Light
                   li
                     a(href='layout-dark.html') Layout Dark
               li      

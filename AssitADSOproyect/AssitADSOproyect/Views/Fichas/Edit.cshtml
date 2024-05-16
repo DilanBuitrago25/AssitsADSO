@@ -10,10 +10,10 @@
             <div class="col-sm-6">
                 <h3>Gestionar Fichas</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
                     <li class="breadcrumb-item">Fichas</li>
                     <li class="breadcrumb-item">General</li>
-                    <li class="breadcrumb-item active">Consultar</li>
+                    <li class="breadcrumb-item active">Editar</li>
                 </ol>
             </div>
             <div class="col-sm-6">
@@ -47,14 +47,14 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>Registrar Ficha</h5>
+                        <h5>Editar Ficha</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
                                 <form>
                                     <div class="mb-3 m-form__group">
-                                        <label class="form-label">Nombre</label>
+                                        <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Id_ficha, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })

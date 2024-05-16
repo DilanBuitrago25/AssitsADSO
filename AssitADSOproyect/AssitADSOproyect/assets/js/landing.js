@@ -109,7 +109,7 @@ $('.demo-imgs .hover-link .html').on('click', function () {
             break;
         }
     } 
-    window.open('http://admin.pixelstrap.com/viho/theme/index.html', '_blank');
+    window.open('http://admin.pixelstrap.com/viho/theme/@Url.Action("Index","Instructor")', '_blank');
 });
 
 
