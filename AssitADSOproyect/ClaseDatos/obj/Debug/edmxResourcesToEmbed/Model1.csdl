@@ -215,8 +215,8 @@
       <Parameter Name="Contraseña" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="ValidarUsuarios1" ReturnType="Collection(String)">
-      <Parameter Name="Correo" Mode="In" Type="String" />
-      <Parameter Name="Contraseña" Mode="In" Type="String" />
+      <Parameter Name="Correo_usuario" Mode="In" Type="String" />
+      <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
 </Schema>

@@ -48,17 +48,17 @@ namespace ClaseDatos
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ValidarUsuarios", correoParameter, contraseñaParameter);
         }
     
-        public virtual ObjectResult<string> ValidarUsuarios1(string correo, string contraseña)
+        public virtual ObjectResult<string> ValidarUsuarios1(string correo_usuario, string contrasena_usuario)
         {
-            var correoParameter = correo != null ?
-                new ObjectParameter("Correo", correo) :
-                new ObjectParameter("Correo", typeof(string));
+            var correo_usuarioParameter = correo_usuario != null ?
+                new ObjectParameter("Correo_usuario", correo_usuario) :
+                new ObjectParameter("Correo_usuario", typeof(string));
     
-            var contraseñaParameter = contraseña != null ?
-                new ObjectParameter("Contraseña", contraseña) :
-                new ObjectParameter("Contraseña", typeof(string));
+            var contrasena_usuarioParameter = contrasena_usuario != null ?
+                new ObjectParameter("Contrasena_usuario", contrasena_usuario) :
+                new ObjectParameter("Contrasena_usuario", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ValidarUsuarios1", correoParameter, contraseñaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ValidarUsuarios1", correo_usuarioParameter, contrasena_usuarioParameter);
         }
     }
 }

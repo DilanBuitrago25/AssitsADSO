@@ -14,19 +14,20 @@
 
 /* user-form */
 .se-i .user-form {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  bottom: 20px;
-  width: 380px;
-  padding: 30px 40px 100px 40px;
-  background-color: var(--dark);
-  background-image: url(../../images/pages/user/web.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 28px;
-  overflow-x: hidden;
-  overflow-y: auto;
+    position: fixed;
+    top: 100px;
+    left: 750px;
+   
+    width: 380px;
+    padding: 30px 40px 100px 40px;
+    background-color: var(--dark);
+    background-image: url(../../images/pages/user/web.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 28px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    
 }
 .light-theme .se-i .user-form {
   background-color: #f9fafe;
@@ -346,3 +347,8 @@
   margin-right: 15px;
 }
 /* ----------------------------------- */
+p{
+    color: red; 
+    text-align:  center; 
+    margin-top: 15px; 
+}

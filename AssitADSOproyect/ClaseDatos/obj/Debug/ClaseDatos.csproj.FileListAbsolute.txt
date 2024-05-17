@@ -34,3 +34,15 @@ E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.cspro
 E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CopyComplete
 E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.dll
 E:\Por si algo\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.pdb
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.dll.config
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ClaseDatos.pdb
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.xml
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.AssemblyReference.cache
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.CopyComplete
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.pdb

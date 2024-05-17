@@ -166,8 +166,8 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="ValidarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Correo" Type="varchar" Mode="In" />
-          <Parameter Name="Contraseña" Type="varchar" Mode="In" />
+          <Parameter Name="Correo_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena_usuario" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="BDAssistsADSOModelStoreContainer">
           <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
@@ -425,8 +425,8 @@
             <Parameter Name="Contraseña" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ValidarUsuarios1" ReturnType="Collection(String)">
-            <Parameter Name="Correo" Mode="In" Type="String" />
-            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="Correo_usuario" Mode="In" Type="String" />
+            <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
       </Schema>
