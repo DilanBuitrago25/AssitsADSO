@@ -38,7 +38,7 @@
     <!-- Section I -->
     <div class="se-i">
         <!-- user-form -->
-        <form class="user-form" action="@Url.Action("Index","Login")" method="post" id="loginForm" >
+        <form class="user-form" action="@Url.Action("ValidarUsuario","Login")" method="post" id="loginForm">
             <!-- logo -->
             <a href="@Url.Action("Index","Instructor")" class="logo">
                 <img data-src="../assets/images/Logo-remove.png" class="lazy lt-img img-fluid" alt="HostX">
@@ -47,16 +47,16 @@
             <!-- title-1 -->
             <h1 class="title-1"><img data-src="../assets/images/pages/user/waving-hand.png" class="lazy img-fluid" alt="Icon">Bienvenido!<br></h1>
             <!-- form-label -->
-            <label class="form-label" for="email">
+            <label class="form-label" for="Correo_usuario">
                 <!-- form-input -->
-                <input class="form-input" type="email" name="CorreoUsuario" id="Correo" placeholder="Correo Electronico" required>
+                <input class="form-input" type="email" name="Correo_usuario" id="Correo" placeholder="Correo Electronico" required>
                 <!-- state -->
                 <span class="state"></span>
             </label>
             <!-- form-label -->
-            <label class="form-label" for="password">
+            <label class="form-label" for="Contrasena_usuario">
                 <!-- form-input -->
-                <input class="form-input" type="password" name="ContrasenaUsuario" id="Contraseña" placeholder="Contraseña" required>
+                <input class="form-input" type="password" name="Contrasena_usuario" id="Contraseña" placeholder="Contraseña" required>
                 <!-- state -->
                 <span class="state"></span>
             </label>
@@ -69,37 +69,11 @@
             <div class="buttons mt-2">
                 <button type="submit" class="btn btn-sm btn-fill-success shadow-off text-uppercase w-100">Iniciar Sesión</button>
             </div>
-            <!-- or -->
-            <!--<div class="or mt-3 mb-3 text-center"><span>or</span></div>-->
-            <!-- social-links -->
-            <!--<div class="social-links d-flex align-items-center justify-content-center">-->
-            <!-- social-link -->
-            <!--<a href="#" class="social-link">
-                <img data-src="assets/images/pages/user/facebook.svg" class="lazy img-fluid" alt="HostX">
-            </a>-->
-            <!-- social-link -->
-            <!--<a href="#" class="social-link">
-                <img data-src="assets/images/pages/user/google.svg" class="lazy img-fluid" alt="HostX">
-            </a>-->
-            <!-- social-link -->
-            <!--<a href="#" class="social-link">
-                    <img data-src="assets/images/pages/user/twitter.svg" class="lazy img-fluid" alt="HostX">
-                </a>
-            </div>-->
-            <!-- comment -->
-            <!--<p class="comment text-center">New to Hostx? <a href="register.html">Sign up</a></p>-->
+            @if (ViewData["Mensaje"] != null)
+            {
+                <p>@ViewData["Mensaje"]</p>
+            }
         </form>
-        <!-- text -->
-        <!--<div class="text">-->
-        <!-- links -->
-        <!--<div class="links d-flex align-items-center justify-content-lg-start justify-content-center">
-            <a href="@Url.Action("Index","Instructor")" class="d-inline-flex">Home</a>
-            <a href="kb-2.html" class="d-inline-flex">Help Center</a>
-            <a href="terms.html" class="d-inline-flex">Privacy Policy</a>
-        </div>-->
-        <!-- para-3 -->
-        <!--<p class="para-3">Use of this Site is subject to express terms of use.<br>By using this site, you signify that you agree to be bound by these <a href="terms.html">Universal Terms of Service</a>.</p>
-        </div>-->
     </div>
 
     <!-- jquery-3.3.1.min.js -->
