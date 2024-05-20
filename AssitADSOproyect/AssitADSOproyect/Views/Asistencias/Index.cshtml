@@ -1,0 +1,237 @@
+﻿@model IEnumerable<ClaseDatos.Asistencia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3>Asistencias</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item">Asistencias</li>
+                        <li class="breadcrumb-item active">Consultar</li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div>
+                <div class="col-sm-6">
+                    <!-- Bookmark Start-->
+                    <div class="bookmark">
+                        <ul>
+                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
+                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
+                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
+                            <li>
+                                <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
+                                <form class="form-inline search-form">
+                                    <div class="form-group form-control-search">
+                                        <input type="text" placeholder="Search..">
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Bookmark Ends-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+
+    <div class="container-fluid">
+        <div class="row project-cards">
+            <div class="col-md-12 project-list">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6 p-0">
+                            <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
+                                <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true"><i data-feather="target"></i>All</a></li>
+                                <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="false"><i data-feather="info"></i>A Tiempo</a></li>
+                                <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="check-circle"></i>Por Empezar</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 p-0">
+                            <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="projectcreate.html"> <i data-feather="plus-square"> </i>Crear Nueva Asistencia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content" id="top-tabContent">
+                            <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                                <div class="row">
+                                    <div class="col-xxl-4 col-lg-6">
+                                        <div class="project-box">
+                                            <span class="badge badge-primary">A Tiempo</span> <!-- Aqui se aplicara basado en una tabla en la bd de asistencia -->
+                                            <h6>Asistencia 20/05/2024</h6>
+                                            <div class="media">
+                                                <!-- <img class="img-20 me-2 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""> -->
+                                                <div class="media-body">
+                                                    <p>Ficha - 2693606</p>
+                                                </div>
+                                            </div>
+                                            <p>Competencia - Ingles.</p>
+                                            <div class="row details">
+                                                <div class="col-6"><span>Asistieron </span></div>
+                                                <div class="col-6 font-primary">12 </div>
+                                                <div class="col-6"> <span>No Asistieron</span></div>
+                                                <div class="col-6 font-primary">5</div>
+                                                <div class="col-6"> <span>Justificaron Inasistencia</span></div>
+                                                <div class="col-6 font-primary">7</div>
+                                            </div>
+                                            <div class="customers">
+                                                <!-- <ul>
+                                                  <li class="d-inline-block"><img class="img-30 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
+                                                  <li class="d-inline-block"><img class="img-30 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
+                                                  <li class="d-inline-block"><img class="img-30 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
+                                                  <li class="d-inline-block ms-2">
+                                                    <p class="f-12">+10 More</p>
+                                                  </li>
+                                                </ul> -->
+                                            </div>
+                                            <div class="project-status mt-4">
+                                                <div class="media mb-0">
+                                                    <p>70% </p>
+                                                    <div class="media-body text-end"><span></span></div>
+                                                </div>
+                                                <div class="progress" style="height: 5px">
+                                                    <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: 70%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-4 col-lg-6">
+                                        <div class="project-box">
+                                            <span class="badge badge-secondary">Por Empezar</span>
+                                            <h6>Asistencia 19/05/2024</h6>
+                                            <div class="media">
+
+                                                <div class="media-body">
+                                                    <p>Ficha - 2693607</p>
+                                                </div>
+                                            </div>
+                                            <p>Competencia - ASP.NET.</p>
+                                            <div class="row details">
+                                                <div class="col-6"><span>Asistieron </span></div>
+                                                <div class="col-6 font-secondary">24</div>
+                                                <div class="col-6"> <span>No Asistieron</span></div>
+                                                <div class="col-6 font-secondary">24</div>
+                                                <div class="col-6"> <span>Justificaron Inasistencia</span></div>
+                                                <div class="col-6 font-secondary">40</div>
+                                            </div>
+                                            <div class="customers">
+                                                <ul>
+                                                    <!--
+                                                                                      <li class="d-inline-block ms-2">
+                                                                                        <p class="f-12">+3 More</p>
+                                                                                      </li> -->
+                                                </ul>
+                                            </div>
+                                            <div class="project-status mt-4">
+                                                <div class="media mb-0">
+                                                    <p>100% </p>
+                                                    <div class="media-body text-end"><span></span></div>
+                                                </div>
+                                                <div class="progress" style="height: 5px">
+                                                    <div class="progress-bar-animated bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-4 col-lg-6">
+                                        <div class="project-box">
+                                            <span class="badge badge-danger">Finalizado</span>
+                                            <h6>Asistencias 17/04/2023</h6>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <p>Ficha - 269606</p>
+                                                </div>
+                                            </div>
+                                            <p>Competencia - Contruccion de vistas con Bootstrap.</p>
+                                            <div class="row details">
+                                                <div class="col-6"><span>Asistieron </span></div>
+                                                <div class="col-6 font-danger">24</div>
+                                                <div class="col-6"> <span>No Asistieron</span></div>
+                                                <div class="col-6 font-danger">24</div>
+                                                <div class="col-6"> <span>Justificaron Inasistencia</span></div>
+                                                <div class="col-6 font-danger">40</div>
+                                            </div>
+                                            <div class="customers">
+                                                <ul>
+                                                    <!--
+                                                                                      <li class="d-inline-block ms-2">
+                                                                                        <p class="f-12">+3 More</p>
+                                                                                      </li> -->
+                                                </ul>
+                                            </div>
+                                            <div class="project-status mt-4">
+                                                <div class="media mb-0">
+                                                    <p>100% </p>
+                                                    <div class="media-body text-end"><span></span></div>
+                                                </div>
+                                                <div class="progress" style="height: 5px">
+                                                    <div class="progress-bar-animated bg-danger" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo_asistencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_asistencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hora_asistencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario.Tipo_Documento_usuario)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo_asistencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_asistencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hora_asistencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Tipo_Documento_usuario)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id_asistencia }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id_asistencia }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id_asistencia })
+            </td>
+        </tr>
+    }
+
+    </table>*@

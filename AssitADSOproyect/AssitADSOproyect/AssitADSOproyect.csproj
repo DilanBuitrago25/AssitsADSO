@@ -119,6 +119,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AprendizController.cs" />
+    <Compile Include="Controllers\AsistenciasController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\FichasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -6049,6 +6050,11 @@
     <Content Include="Views\Competencias\Details.cshtml" />
     <Content Include="Views\Competencias\Edit.cshtml" />
     <Content Include="Views\Competencias\Index.cshtml" />
+    <Content Include="Views\Asistencias\Create.cshtml" />
+    <Content Include="Views\Asistencias\Delete.cshtml" />
+    <Content Include="Views\Asistencias\Details.cshtml" />
+    <Content Include="Views\Asistencias\Edit.cshtml" />
+    <Content Include="Views\Asistencias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
