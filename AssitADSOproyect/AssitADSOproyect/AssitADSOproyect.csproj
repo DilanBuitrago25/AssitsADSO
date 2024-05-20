@@ -124,6 +124,7 @@
     <Compile Include="Controllers\FichasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
+    <Compile Include="Controllers\JustificacionInasistenciaController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Programa_formacionController.cs" />
     <Compile Include="Controllers\UsuariosAprendizController.cs" />
@@ -898,6 +899,7 @@
     <Content Include="assets\images\email\1.jpg" />
     <Content Include="assets\images\email\2.jpg" />
     <Content Include="assets\images\email\3.jpg" />
+    <Content Include="assets\images\email\PdfIcon.png" />
     <Content Include="assets\images\faq\1.jpg" />
     <Content Include="assets\images\faq\2.jpg" />
     <Content Include="assets\images\faq\3.jpg" />
@@ -6055,6 +6057,11 @@
     <Content Include="Views\Asistencias\Details.cshtml" />
     <Content Include="Views\Asistencias\Edit.cshtml" />
     <Content Include="Views\Asistencias\Index.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\Create.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\Delete.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\Details.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\Edit.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
