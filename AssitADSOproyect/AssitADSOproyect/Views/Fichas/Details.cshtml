@@ -14,11 +14,11 @@
                     <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
                     <li class="breadcrumb-item">Fichas</li>
                     <li class="breadcrumb-item">General</li>
-                    <li class="breadcrumb-item active">Consultar</li>
+                    <li class="breadcrumb-item active">Detalles</li>
                 </ol>
             </div>
             <div class="col-sm-6">
-                <!-- Bookmark Start-->
+                
                 <div class="bookmark">
                     <ul>
                         <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
@@ -35,7 +35,7 @@
                         </li>
                     </ul>
                 </div>
-                <!-- Bookmark Ends-->
+              
             </div>
         </div>
     </div>
@@ -47,7 +47,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>Registrar Ficha</h5>
+                        <h5>Detalles Ficha</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -55,14 +55,6 @@
 
                                 @Html.AntiForgeryToken()
                                 <form>
-                                    @*<div class="mb-3 m-form__group">
-            <label class="form-label">Nombre</label>
-            <div class="input-group">
-                <span class="input-group-text">A</span>
-                @Html.EditorFor(model => model.Nombre_ficha, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">

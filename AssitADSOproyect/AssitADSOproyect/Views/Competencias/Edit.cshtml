@@ -4,58 +4,168 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
+
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Gestionar Competencias</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Competencia</li>
+                    <li class="breadcrumb-item">General</li>
+                    <li class="breadcrumb-item active">Consultar</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+                <!-- Bookmark Start-->
+                <div class="bookmark">
+                    <ul>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
+                            <form class="form-inline search-form">
+                                <div class="form-group form-control-search">
+                                    <input type="text" placeholder="Search..">
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Bookmark Ends-->
+            </div>
+        </div>
+    </div>
+</div>
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Competencia</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id_competencia)
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h5>Registrar Competencia</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.tipo_competencia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tipo_competencia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tipo_competencia, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                                @Html.AntiForgeryToken()
+                                <form>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Id</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Id_competencia, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Tipo Competencia</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.tipo_competencia, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "", Value = "" },
+                                                     new SelectListItem { Text = "Tecnica", Value = "Tecnica" },
+                                                     new SelectListItem { Text = "Transversal", Value = "Transversal" },
+                                                }, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.tipo_competencia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Nombre</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Nombre_competencia, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Nombre_competencia, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Codigo Ficha</label>
+                                        <div class="input-group">
+                                            @Html.DropDownList("Numero_ficha", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Numero_ficha, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Programa de formación</label>
+                                        <div class="input-group">
+                                            @Html.DropDownList("Id_programa", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Numero_ficha, "Numero_ficha", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Numero_ficha", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Numero_ficha, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Id_programa, "Id_programa", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Id_programa", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nombre_competencia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre_competencia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre_competencia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary m-r-15" type="submit">Submit</button>
+                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","Competencias")">Cancelar</a></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+@*<h2>Edit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Competencia</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id_competencia)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.tipo_competencia, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.tipo_competencia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.tipo_competencia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Numero_ficha, "Numero_ficha", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Numero_ficha", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Numero_ficha, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Id_programa, "Id_programa", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Id_programa", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nombre_competencia, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nombre_competencia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Nombre_competencia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

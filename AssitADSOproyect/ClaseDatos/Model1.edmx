@@ -165,6 +165,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="RegistrarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Tipo_Documento_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Documento_usuario" Type="int" Mode="In" />
+          <Parameter Name="Nombre_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Apellido_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono_usuario" Type="int" Mode="In" />
+          <Parameter Name="Correo_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Tipo_usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Tipo_instructor" Type="varchar" Mode="In" />
+          <Parameter Name="Registrado" Type="bit" Mode="InOut" />
+          <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="ValidarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contraseña" Type="varchar" Mode="In" />
@@ -428,6 +441,19 @@
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contraseña" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="RegistrarUsuario">
+            <Parameter Name="Tipo_Documento_usuario" Mode="In" Type="String" />
+            <Parameter Name="Documento_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre_usuario" Mode="In" Type="String" />
+            <Parameter Name="Apellido_usuario" Mode="In" Type="String" />
+            <Parameter Name="Telefono_usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Correo_usuario" Mode="In" Type="String" />
+            <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
+            <Parameter Name="Tipo_usuario" Mode="In" Type="String" />
+            <Parameter Name="Tipo_instructor" Mode="In" Type="String" />
+            <Parameter Name="Registrado" Mode="InOut" Type="Boolean" />
+            <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -519,6 +545,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ValidarUsuarios1" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
+          <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="BDAssistsADSOModel.Store.RegistrarUsuario" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

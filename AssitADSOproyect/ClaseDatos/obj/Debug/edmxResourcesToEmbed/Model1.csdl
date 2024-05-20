@@ -218,5 +218,18 @@
       <Parameter Name="Correo" Mode="In" Type="String" />
       <Parameter Name="Contraseña" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="RegistrarUsuario">
+      <Parameter Name="Tipo_Documento_usuario" Mode="In" Type="String" />
+      <Parameter Name="Documento_usuario" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre_usuario" Mode="In" Type="String" />
+      <Parameter Name="Apellido_usuario" Mode="In" Type="String" />
+      <Parameter Name="Telefono_usuario" Mode="In" Type="Int32" />
+      <Parameter Name="Correo_usuario" Mode="In" Type="String" />
+      <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
+      <Parameter Name="Tipo_usuario" Mode="In" Type="String" />
+      <Parameter Name="Tipo_instructor" Mode="In" Type="String" />
+      <Parameter Name="Registrado" Mode="InOut" Type="Boolean" />
+      <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

@@ -160,6 +160,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="RegistrarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tipo_Documento_usuario" Type="varchar" Mode="In" />
+    <Parameter Name="Documento_usuario" Type="int" Mode="In" />
+    <Parameter Name="Nombre_usuario" Type="varchar" Mode="In" />
+    <Parameter Name="Apellido_usuario" Type="varchar" Mode="In" />
+    <Parameter Name="Telefono_usuario" Type="int" Mode="In" />
+    <Parameter Name="Correo_usuario" Type="varchar" Mode="In" />
+    <Parameter Name="Contrasena_usuario" Type="varchar" Mode="In" />
+    <Parameter Name="Tipo_usuario" Type="varchar" Mode="In" />
+    <Parameter Name="Tipo_instructor" Type="varchar" Mode="In" />
+    <Parameter Name="Registrado" Type="bit" Mode="InOut" />
+    <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
+  </Function>
   <Function Name="ValidarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Correo" Type="varchar" Mode="In" />
     <Parameter Name="Contraseña" Type="varchar" Mode="In" />

@@ -66,21 +66,39 @@
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Jornada</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Jornada_ficha, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Modalidad_ficha, "", new { @class = "text-danger" })
+                                            @Html.DropDownListFor(model => model.Jornada_ficha, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "", Value = "" },
+                                                     new SelectListItem { Text = "Diurna", Value = "Diurna" },
+                                                     new SelectListItem { Text = "Tarde", Value = "Tarde" },
+                                                     new SelectListItem { Text = "Nocturna", Value = "Nocturna" },
+                                                     new SelectListItem { Text = "Mixta", Value = "Mixta" }
+                                                }, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Modalidad</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Modalidad_ficha, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.tipo_ficha, "", new { @class = "text-danger" })
+                                            @Html.DropDownListFor(model => model.Modalidad_ficha, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "", Value = "" },
+                                                     new SelectListItem { Text = "Presencial", Value = "Presencial" },
+                                                     new SelectListItem { Text = "Virtual", Value = "Virtual" },
+                                                     new SelectListItem { Text = "Distancia", Value = "Distancia" },
+                                                }, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Modalidad_ficha, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Tipo Ficha</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.tipo_ficha, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.DropDownListFor(model => model.tipo_ficha, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "", Value = "" },
+                                                     new SelectListItem { Text = "Cerrada", Value = "Cerrada" },
+                                                     new SelectListItem { Text = "Abierta", Value = "Abierta" },
+                                                }, new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.tipo_ficha, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -98,7 +116,7 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-primary m-r-15" type="submit">Submit</button>
-                        <button class="btn btn-light" type="submit">Cancel</button>
+                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","Fichas")">Cancelar</a></button>
                     </div>
                 </div>
             </div>

@@ -14,163 +14,115 @@ namespace AssitADSOproyect.Controllers
 {
     public class LoginController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-        string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSO;Integrated Security=True; multipleactiveresultsets=True;";
+        static string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSO;Integrated Security=True;MultipleActiveResultSets=True;";
+
         // GET: Login
-        public ActionResult Index()
+        public ActionResult Index()   // Hago el metodo 
         {
-            var usuario = db.Usuario.Include(u => u.Ficha);
-            return View(usuario.ToList());
-        }
-
-        // GET: Login/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        // GET: Login/Create
-        public ActionResult Create()
-        {
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha");
             return View();
         }
 
-        // POST: Login/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_usuario,Documento_usuario,Tipo_usuario,Tipo_Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Tipo_instructor,Id_ficha,Esinstructormaster_usuario,Contrasena_usuario")] Usuario usuario)
+        public ActionResult reg(Usuario usuario)
         {
-            if (ModelState.IsValid)
-            {
-                db.Usuario.Add(usuario);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            usuario.Contrasena_usuario = (usuario.Contrasena_usuario);
+            bool registrado = false;
+            string mensaje = string.Empty;
 
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
-            return View(usuario);
-        }
-
-        // GET: Login/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
-            return View(usuario);
-        }
-
-        // POST: Login/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_usuario,Documento_usuario,Tipo_usuario,Tipo_Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Tipo_instructor,Id_ficha,Esinstructormaster_usuario,Contrasena_usuario")] Usuario usuario)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
-            return View(usuario);
-        }
-
-        // GET: Login/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        // POST: Login/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        [HttpPost]
-        public ActionResult Index(Usuario oUsuario)
-        {
-            oUsuario.Contrasena_usuario = oUsuario.Contrasena_usuario;
             using (SqlConnection cn = new SqlConnection(Conexion))
             {
-                SqlCommand login = new SqlCommand("ValidarUsuarios", cn);
-                login.Parameters.AddWithValue("Correo", oUsuario.Correo_usuario);
-                login.Parameters.AddWithValue("Contraseña", oUsuario.Contrasena_usuario);
-                login.CommandType = CommandType.StoredProcedure;
-
-                cn.Open();
-                oUsuario.Tipo_usuario = Convert.ToString(login.ExecuteScalar().ToString());
-
-                if (oUsuario.Tipo_usuario == "Instructor")
+                try
                 {
-                    FormsAuthentication.SetAuthCookie(oUsuario.Correo_usuario, false);
-                    TempData["IdUsuarios"] = oUsuario.Documento_usuario;
-                    Session["Instructor"] = oUsuario;
-                    return RedirectToAction("Index", "Instructor");
+                    SqlCommand cmd = new SqlCommand("RegistrarUsuario", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@Tipo_Documento_usuario", usuario.Tipo_Documento_usuario);
+                    cmd.Parameters.AddWithValue("@Documento_usuario", usuario.Documento_usuario);
+                    cmd.Parameters.AddWithValue("@Nombre_usuario", usuario.Nombre_usuario);
+                    cmd.Parameters.AddWithValue("@Apellido_usuario", usuario.Apellido_usuario);
+                    cmd.Parameters.AddWithValue("@Telefono_usuario", usuario.Telefono_usuario);
+                    cmd.Parameters.AddWithValue("@Correo_usuario", usuario.Correo_usuario);
+                    cmd.Parameters.AddWithValue("@Contrasena_usuario", usuario.Contrasena_usuario);
+                    cmd.Parameters.AddWithValue("@Tipo_usuario", usuario.Tipo_usuario);
+                    cmd.Parameters.AddWithValue("@Tipo_instructor", usuario.Tipo_instructor);
+
+                    SqlParameter outputRegistrado = new SqlParameter("@Registrado", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(outputRegistrado);
+
+                    SqlParameter outputMensaje = new SqlParameter("@Mensaje", SqlDbType.VarChar, 200)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(outputMensaje);
+
+                    cn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    registrado = (bool)outputRegistrado.Value;
+                    mensaje = outputMensaje.Value.ToString();
                 }
-                else if (oUsuario.Tipo_usuario == "Aprendiz")
+                catch (Exception ex)
                 {
-                    FormsAuthentication.SetAuthCookie(oUsuario.Correo_usuario, false);
-                    TempData["IdUsuarios"] = oUsuario.Documento_usuario;
-                    Session["Aprendiz"] = oUsuario.Tipo_usuario = "Aprendiz";
-                    return RedirectToAction("Index", "Aprendiz");
-                }
-                else
-                {
-
-                    ViewData["Mensaje"] = "Usuario no encontrado";
-
-                    return View();
-
-
+                    ViewBag.Error = "Ocurrió un error: " + ex.Message;
+                    return View("Index");
                 }
             }
 
+            ViewData["Mensaje"] = mensaje;
+            if (registrado)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ViewBag.Error = mensaje;
+                return View("");
+            }
         }
 
+        //[HttpPost]
+        //public ActionResult ValidarUsuario(string Correo_usuario, string Contrasena_usuario)
+        //{
+        //    string tipoUsuario = "0";
+
+        //    using (SqlConnection cn = new SqlConnection(Conexion))
+        //    {
+        //        try
+        //        {
+        //            SqlCommand cmd = new SqlCommand("ValidarUsuarios", cn);
+        //            cmd.CommandType = CommandType.StoredProcedure;
+
+        //            cmd.Parameters.AddWithValue("@Correo_usuario", Correo_usuario);
+        //            cmd.Parameters.AddWithValue("@Contrasena_usuario", Contrasena_usuario);
+
+        //            cn.Open();
+        //            tipoUsuario = cmd.ExecuteScalar().ToString();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ViewBag.Error = "Ocurrió un error: " + ex.Message;
+
+        //        }
+        //    }
+
+        //    if (tipoUsuario != "0")
+        //    {
+
+        //        if (tipoUsuario == "Instructor") { return RedirectToAction("Index", "Instructor"); }
+        //        FormsAuthentication.SetAuthCookie(Correo_usuario, false);
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+        //        ViewData["Mensaje"] = "Correo o contraseña incorrectos";
+
+        ////    }
+        //}
+
     }
+
 }
+
