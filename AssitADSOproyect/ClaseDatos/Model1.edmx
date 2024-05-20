@@ -81,7 +81,7 @@
           <Property Name="Esinstructormaster_usuario" Type="bit" />
           <Property Name="Id_ficha" Type="int" />
         </EntityType>
-        <Association Name="FK__Asistenci__Id_us__440B1D61">
+        <Association Name="FK__Asistenci__Id_us__30F848ED">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -93,7 +93,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Competenc__Id_pr__412EB0B6">
+        <Association Name="FK__Competenc__Id_pr__2E1BDC42">
           <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="0..1" />
           <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -105,7 +105,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Competenc__Numer__403A8C7D">
+        <Association Name="FK__Competenc__Numer__2D27B809">
           <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
           <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -117,7 +117,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Ficha__Id_progra__398D8EEE">
+        <Association Name="FK__Ficha__Id_progra__267ABA7A">
           <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="0..1" />
           <End Role="Ficha" Type="Self.Ficha" Multiplicity="*" />
           <ReferentialConstraint>
@@ -129,7 +129,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Reporte__Id_asis__49C3F6B7">
+        <Association Name="FK__Reporte__Id_asis__36B12243">
           <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
           <End Role="Reporte" Type="Self.Reporte" Multiplicity="*" />
           <ReferentialConstraint>
@@ -141,7 +141,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Soporte__Id_asis__46E78A0C">
+        <Association Name="FK__Soporte__Id_asis__33D4B598">
           <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
           <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
           <ReferentialConstraint>
@@ -153,7 +153,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario__Id_fich__3D5E1FD2">
+        <Association Name="FK__Usuario__Id_fich__2A4B4B5E">
           <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -165,6 +165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="RegistrarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Tipo_Documento_usuario" Type="varchar" Mode="In" />
           <Parameter Name="Documento_usuario" Type="int" Mode="In" />
@@ -178,6 +179,36 @@
           <Parameter Name="Registrado" Type="bit" Mode="InOut" />
           <Parameter Name="Mensaje" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="ValidarUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contraseña" Type="varchar" Mode="In" />
@@ -190,31 +221,31 @@
           <EntitySet Name="Reporte" EntityType="Self.Reporte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Soporte" EntityType="Self.Soporte" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Asistenci__Id_us__440B1D61" Association="Self.FK__Asistenci__Id_us__440B1D61">
+          <AssociationSet Name="FK__Asistenci__Id_us__30F848ED" Association="Self.FK__Asistenci__Id_us__30F848ED">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Asistencia" EntitySet="Asistencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Competenc__Id_pr__412EB0B6" Association="Self.FK__Competenc__Id_pr__412EB0B6">
+          <AssociationSet Name="FK__Competenc__Id_pr__2E1BDC42" Association="Self.FK__Competenc__Id_pr__2E1BDC42">
             <End Role="Programa_formacion" EntitySet="Programa_formacion" />
             <End Role="Competencia" EntitySet="Competencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Competenc__Numer__403A8C7D" Association="Self.FK__Competenc__Numer__403A8C7D">
+          <AssociationSet Name="FK__Competenc__Numer__2D27B809" Association="Self.FK__Competenc__Numer__2D27B809">
             <End Role="Ficha" EntitySet="Ficha" />
             <End Role="Competencia" EntitySet="Competencia" />
           </AssociationSet>
-          <AssociationSet Name="FK__Ficha__Id_progra__398D8EEE" Association="Self.FK__Ficha__Id_progra__398D8EEE">
+          <AssociationSet Name="FK__Ficha__Id_progra__267ABA7A" Association="Self.FK__Ficha__Id_progra__267ABA7A">
             <End Role="Programa_formacion" EntitySet="Programa_formacion" />
             <End Role="Ficha" EntitySet="Ficha" />
           </AssociationSet>
-          <AssociationSet Name="FK__Reporte__Id_asis__49C3F6B7" Association="Self.FK__Reporte__Id_asis__49C3F6B7">
+          <AssociationSet Name="FK__Reporte__Id_asis__36B12243" Association="Self.FK__Reporte__Id_asis__36B12243">
             <End Role="Asistencia" EntitySet="Asistencia" />
             <End Role="Reporte" EntitySet="Reporte" />
           </AssociationSet>
-          <AssociationSet Name="FK__Soporte__Id_asis__46E78A0C" Association="Self.FK__Soporte__Id_asis__46E78A0C">
+          <AssociationSet Name="FK__Soporte__Id_asis__33D4B598" Association="Self.FK__Soporte__Id_asis__33D4B598">
             <End Role="Asistencia" EntitySet="Asistencia" />
             <End Role="Soporte" EntitySet="Soporte" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario__Id_fich__3D5E1FD2" Association="Self.FK__Usuario__Id_fich__3D5E1FD2">
+          <AssociationSet Name="FK__Usuario__Id_fich__2A4B4B5E" Association="Self.FK__Usuario__Id_fich__2A4B4B5E">
             <End Role="Ficha" EntitySet="Ficha" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
@@ -454,7 +485,48 @@
             <Parameter Name="Registrado" Mode="InOut" Type="Boolean" />
             <Parameter Name="Mensaje" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BDAssistsADSOModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BDAssistsADSOModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -546,6 +618,30 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ValidarUsuarios1" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
           <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="BDAssistsADSOModel.Store.RegistrarUsuario" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BDAssistsADSOModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BDAssistsADSOModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BDAssistsADSOModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BDAssistsADSOModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDAssistsADSOModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BDAssistsADSOModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BDAssistsADSOModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BDAssistsADSOModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BDAssistsADSOModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -56,7 +56,7 @@ exec RegistrarUsuario 'Cedula',12,'Sara', 'Angarita',33,'S.angaritab27@gmail.com
 select @Registrado
 select @Mensaje
 
-exec ValidarUsuarios 'S.angaritab27@gmail.com', 'Sara12345'
+exec ValidarUsuarios 'juliobuitrago@gmail.com', 'Julio12345'
 
 select * from Usuario
 
