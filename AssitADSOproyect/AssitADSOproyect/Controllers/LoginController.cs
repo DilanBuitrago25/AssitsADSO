@@ -15,8 +15,9 @@ namespace AssitADSOproyect.Controllers
     public class LoginController : Controller
     {
         static string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDAssistsADSO;Integrated Security=True;MultipleActiveResultSets=True;";
+
         // GET: Login
-        public ActionResult Index()   // Hago el metodo
+        public ActionResult Index()   // Hago el metodo 
         {
             return View();
         }
@@ -82,45 +83,47 @@ namespace AssitADSOproyect.Controllers
             }
         }
 
-        //[HttpPost]
-        //public ActionResult ValidarUsuario(string Correo_usuario, string Contrasena_usuario)
-        //{
-        //    string tipoUsuario = "0";
+        [HttpPost]
+        public ActionResult ValidarUsuario(string Correo_usuario, string Contrasena_usuario)
+        {
+            string tipoUsuario = "0";
 
-        //    using (SqlConnection cn = new SqlConnection(Conexion))
-        //    {
-        //        try
-        //        {
-        //            SqlCommand cmd = new SqlCommand("ValidarUsuarios", cn);
-        //            cmd.CommandType = CommandType.StoredProcedure;
+            using (SqlConnection cn = new SqlConnection(Conexion))
+            {
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("ValidarUsuarios", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-        //            cmd.Parameters.AddWithValue("@Correo_usuario", Correo_usuario);
-        //            cmd.Parameters.AddWithValue("@Contrasena_usuario", Contrasena_usuario);
+                    cmd.Parameters.AddWithValue("@Correo_usuario", Correo_usuario);
+                    cmd.Parameters.AddWithValue("@Contrasena_usuario", Contrasena_usuario);
 
-        //            cn.Open();
-        //            tipoUsuario = cmd.ExecuteScalar().ToString();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ViewBag.Error = "Ocurrió un error: " + ex.Message;
+                    cn.Open();
+                    tipoUsuario = cmd.ExecuteScalar().ToString();
 
-        //        }
-        //    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Error = "Ocurrió un error: " + ex.Message;
+                    return View("Index");
+                }
+            }
 
-        //    if (tipoUsuario != "0")
-        //    {
+            if (tipoUsuario != "0")
+            {
 
-        //        if (tipoUsuario == "Instructor") { return RedirectToAction("Index", "Instructor"); }
-        //        FormsAuthentication.SetAuthCookie(Correo_usuario, false);
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else
-        //    {
-        //        ViewData["Mensaje"] = "Correo o contraseña incorrectos";
+                if (tipoUsuario == "Instructor") { return RedirectToAction("Index", "Instructor"); }
+                FormsAuthentication.SetAuthCookie(Correo_usuario, false);
+                return RedirectToAction("Index", "Home");
 
-        //    }
-        //}
+
+            }
+            else
+            {
+                ViewData["Mensaje"] = "Correo o contraseña incorrectos";
+                return View("Index");
+            }
+        }
 
     }
 }
-
