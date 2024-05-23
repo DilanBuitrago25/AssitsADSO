@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 using ClaseDatos;
+using System.Web.Security;
 
 namespace AssitADSOproyect.Controllers
 {
     public class LoginController : Controller
     {
-        static string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDAssistsADSO;Integrated Security=True;MultipleActiveResultSets=True;";
+        static string Conexion = "Data Source=DESKTOP-020021\\SQLEXPRESS;Initial Catalog=BDAssistsADSO;Integrated Security=True;MultipleActiveResultSets=True;";
 
         // GET: Login
         public ActionResult Index()   // Hago el metodo 
@@ -112,9 +107,9 @@ namespace AssitADSOproyect.Controllers
             if (tipoUsuario != "0")
             {
 
-                if (tipoUsuario == "Instructor") { return RedirectToAction("Index", "Instructor"); }
+                if (tipoUsuario == "Instructor") { return RedirectToAction("Index", "Home"); }
                 FormsAuthentication.SetAuthCookie(Correo_usuario, false);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Login");
 
 
             }
