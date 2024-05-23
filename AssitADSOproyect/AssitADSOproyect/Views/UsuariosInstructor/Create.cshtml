@@ -68,7 +68,13 @@
                                         <label class="form-label">Tipo Documento</label>
                                         <div class="input-group">
                                             <span class="input-group-text">A</span>
-                                             
+                                            @Html.DropDownListFor(model => model.Tipo_Documento_usuario, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "Cedula de Ciudadania", Value = "C.C" },
+                                                     new SelectListItem { Text = "Tarjeta de Identidad", Value = "T.I" },
+                                                     new SelectListItem { Text = "Cedula de Extranjeria", Value = "C.E" }
+                                                }, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Tipo_Documento_usuario, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="mb-3 input-group-solid">
@@ -125,7 +131,7 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-primary m-r-15" type="submit">Submit</button>
-                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","UsuariosAprendiz")">Cancelar</a></button>
+                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","UsuariosInstructor")">Cancelar</a></button>
                     </div>
                 </div>
             </div>

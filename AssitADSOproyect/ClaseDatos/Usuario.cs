@@ -18,6 +18,9 @@ namespace ClaseDatos
         public Usuario()
         {
             this.Asistencia = new HashSet<Asistencia>();
+            this.RegistroAsistencia = new HashSet<RegistroAsistencia>();
+            this.Reporte = new HashSet<Reporte>();
+            this.Soporte = new HashSet<Soporte>();
         }
     
         public int Id_usuario { get; set; }
@@ -25,7 +28,7 @@ namespace ClaseDatos
         public int Documento_usuario { get; set; }
         public string Nombre_usuario { get; set; }
         public string Apellido_usuario { get; set; }
-        public int Telefono_usuario { get; set; }
+        public Nullable<long> Telefono_usuario { get; set; }
         public string Correo_usuario { get; set; }
         public string Contrasena_usuario { get; set; }
         public string Tipo_usuario { get; set; }
@@ -36,5 +39,11 @@ namespace ClaseDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistencia> Asistencia { get; set; }
         public virtual Ficha Ficha { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistroAsistencia> RegistroAsistencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Reporte> Reporte { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Soporte> Soporte { get; set; }
     }
 }

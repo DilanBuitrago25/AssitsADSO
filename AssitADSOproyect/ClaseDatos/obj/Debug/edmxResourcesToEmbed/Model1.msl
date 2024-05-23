@@ -4,10 +4,14 @@
     <EntitySetMapping Name="Asistencia">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Asistencia">
         <MappingFragment StoreEntitySet="Asistencia">
+          <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />
+          <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
+          <ScalarProperty Name="Detalles_asistencia" ColumnName="Detalles_asistencia" />
+          <ScalarProperty Name="Hora_fin_asistencia" ColumnName="Hora_fin_asistencia" />
+          <ScalarProperty Name="Hora_inicio_asistencia" ColumnName="Hora_inicio_asistencia" />
+          <ScalarProperty Name="Fecha_fin_asistencia" ColumnName="Fecha_fin_asistencia" />
+          <ScalarProperty Name="Fecha_inicio_asistencia" ColumnName="Fecha_inicio_asistencia" />
           <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
-          <ScalarProperty Name="Tipo_asistencia" ColumnName="Tipo_asistencia" />
-          <ScalarProperty Name="fecha_asistencia" ColumnName="fecha_asistencia" />
-          <ScalarProperty Name="Hora_asistencia" ColumnName="Hora_asistencia" />
           <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -26,6 +30,9 @@
     <EntitySetMapping Name="Ficha">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Ficha">
         <MappingFragment StoreEntitySet="Ficha">
+          <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
+          <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
+          <ScalarProperty Name="Codigo_ficha" ColumnName="Codigo_ficha" />
           <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
           <ScalarProperty Name="Jornada_ficha" ColumnName="Jornada_ficha" />
           <ScalarProperty Name="Modalidad_ficha" ColumnName="Modalidad_ficha" />
@@ -47,6 +54,7 @@
     <EntitySetMapping Name="Reporte">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Reporte">
         <MappingFragment StoreEntitySet="Reporte">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
           <ScalarProperty Name="Id_reporte" ColumnName="Id_reporte" />
           <ScalarProperty Name="Nombre_reporte" ColumnName="Nombre_reporte" />
           <ScalarProperty Name="Descripcion_reporte" ColumnName="Descripcion_reporte" />
@@ -58,6 +66,7 @@
     <EntitySetMapping Name="Soporte">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
         <MappingFragment StoreEntitySet="Soporte">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
           <ScalarProperty Name="Tipo_soporte" ColumnName="Tipo_soporte" />
           <ScalarProperty Name="Id_soporte" ColumnName="Id_soporte" />
           <ScalarProperty Name="Nombre_soporte" ColumnName="Nombre_soporte" />
@@ -84,8 +93,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="ValidarUsuarios1" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
-    <FunctionImportMapping FunctionImportName="RegistrarUsuario" FunctionName="BDAssistsADSOModel.Store.RegistrarUsuario" />
     <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="BDAssistsADSOModel.Store.sp_alterdiagram" />
     <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="BDAssistsADSOModel.Store.sp_creatediagram" />
     <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BDAssistsADSOModel.Store.sp_dropdiagram" />
@@ -110,5 +117,29 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="BDAssistsADSOModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="BDAssistsADSOModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="RegistroAsistencia">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.RegistroAsistencia">
+        <MappingFragment StoreEntitySet="RegistroAsistencia">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
+          <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
+          <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
+          <ScalarProperty Name="Id_Registroasistencia" ColumnName="Id_Registroasistencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="RegistrarUsuario1" FunctionName="BDAssistsADSOModel.Store.RegistrarUsuario" />
+    <FunctionImportMapping FunctionImportName="ValidarUsuarios2" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
   </EntityContainerMapping>
 </Mapping>

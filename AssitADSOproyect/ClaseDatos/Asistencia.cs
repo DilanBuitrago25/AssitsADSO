@@ -19,18 +19,27 @@ namespace ClaseDatos
         {
             this.Reporte = new HashSet<Reporte>();
             this.Soporte = new HashSet<Soporte>();
+            this.RegistroAsistencia = new HashSet<RegistroAsistencia>();
         }
     
         public int Id_asistencia { get; set; }
-        public string Tipo_asistencia { get; set; }
-        public string fecha_asistencia { get; set; }
-        public string Hora_asistencia { get; set; }
+        public string Fecha_inicio_asistencia { get; set; }
+        public string Fecha_fin_asistencia { get; set; }
+        public string Hora_inicio_asistencia { get; set; }
+        public string Hora_fin_asistencia { get; set; }
+        public string Detalles_asistencia { get; set; }
         public Nullable<int> Id_usuario { get; set; }
+        public Nullable<int> Id_ficha { get; set; }
+        public Nullable<int> Id_competencia { get; set; }
     
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reporte> Reporte { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Soporte> Soporte { get; set; }
+        public virtual Competencia Competencia { get; set; }
+        public virtual Ficha Ficha { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistroAsistencia> RegistroAsistencia { get; set; }
     }
 }

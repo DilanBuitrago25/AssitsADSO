@@ -34,6 +34,8 @@ namespace ClaseDatos
         public virtual DbSet<Reporte> Reporte { get; set; }
         public virtual DbSet<Soporte> Soporte { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<RegistroAsistencia> RegistroAsistencia { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     
         public virtual ObjectResult<string> ValidarUsuarios(string correo, string contraseña)
         {
@@ -203,6 +205,60 @@ namespace ClaseDatos
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int RegistrarUsuario1(string tipo_Documento_usuario, Nullable<int> documento_usuario, string nombre_usuario, string apellido_usuario, Nullable<int> telefono_usuario, string correo_usuario, string contrasena_usuario, string tipo_usuario, string tipo_instructor, ObjectParameter registrado, ObjectParameter mensaje)
+        {
+            var tipo_Documento_usuarioParameter = tipo_Documento_usuario != null ?
+                new ObjectParameter("Tipo_Documento_usuario", tipo_Documento_usuario) :
+                new ObjectParameter("Tipo_Documento_usuario", typeof(string));
+    
+            var documento_usuarioParameter = documento_usuario.HasValue ?
+                new ObjectParameter("Documento_usuario", documento_usuario) :
+                new ObjectParameter("Documento_usuario", typeof(int));
+    
+            var nombre_usuarioParameter = nombre_usuario != null ?
+                new ObjectParameter("Nombre_usuario", nombre_usuario) :
+                new ObjectParameter("Nombre_usuario", typeof(string));
+    
+            var apellido_usuarioParameter = apellido_usuario != null ?
+                new ObjectParameter("Apellido_usuario", apellido_usuario) :
+                new ObjectParameter("Apellido_usuario", typeof(string));
+    
+            var telefono_usuarioParameter = telefono_usuario.HasValue ?
+                new ObjectParameter("Telefono_usuario", telefono_usuario) :
+                new ObjectParameter("Telefono_usuario", typeof(int));
+    
+            var correo_usuarioParameter = correo_usuario != null ?
+                new ObjectParameter("Correo_usuario", correo_usuario) :
+                new ObjectParameter("Correo_usuario", typeof(string));
+    
+            var contrasena_usuarioParameter = contrasena_usuario != null ?
+                new ObjectParameter("Contrasena_usuario", contrasena_usuario) :
+                new ObjectParameter("Contrasena_usuario", typeof(string));
+    
+            var tipo_usuarioParameter = tipo_usuario != null ?
+                new ObjectParameter("Tipo_usuario", tipo_usuario) :
+                new ObjectParameter("Tipo_usuario", typeof(string));
+    
+            var tipo_instructorParameter = tipo_instructor != null ?
+                new ObjectParameter("Tipo_instructor", tipo_instructor) :
+                new ObjectParameter("Tipo_instructor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistrarUsuario1", tipo_Documento_usuarioParameter, documento_usuarioParameter, nombre_usuarioParameter, apellido_usuarioParameter, telefono_usuarioParameter, correo_usuarioParameter, contrasena_usuarioParameter, tipo_usuarioParameter, tipo_instructorParameter, registrado, mensaje);
+        }
+    
+        public virtual ObjectResult<string> ValidarUsuarios2(string correo_usuario, string contrasena_usuario)
+        {
+            var correo_usuarioParameter = correo_usuario != null ?
+                new ObjectParameter("Correo_usuario", correo_usuario) :
+                new ObjectParameter("Correo_usuario", typeof(string));
+    
+            var contrasena_usuarioParameter = contrasena_usuario != null ?
+                new ObjectParameter("Contrasena_usuario", contrasena_usuario) :
+                new ObjectParameter("Contrasena_usuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("ValidarUsuarios2", correo_usuarioParameter, contrasena_usuarioParameter);
         }
     }
 }

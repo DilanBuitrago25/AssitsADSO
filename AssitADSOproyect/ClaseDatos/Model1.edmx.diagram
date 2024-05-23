@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="17b9758ab692423c84a8013352886d5e" Name="Diagram1">
+      <Diagram DiagramId="17b9758ab692423c84a8013352886d5e" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="BDAssistsADSOModel.Asistencia" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDAssistsADSOModel.Competencia" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="BDAssistsADSOModel.Ficha" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
@@ -19,6 +19,14 @@
         <AssociationConnector Association="BDAssistsADSOModel.FK__Competenc__Numer__2C3393D0" ManuallyRouted="false" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Ficha__Id_progra__267ABA7A" ManuallyRouted="false" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Usuario__Id_fich__29572725" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.RegistroAsistencia" Width="1.5" PointX="13.375" PointY="7" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.sysdiagrams" Width="1.5" PointX="0.875" PointY="0.5" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Asistenci__Id_fi__31EC6D26" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Reporte__Id_usua__3D5E1FD2" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
