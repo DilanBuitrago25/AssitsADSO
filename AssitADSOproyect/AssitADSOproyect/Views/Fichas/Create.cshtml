@@ -56,13 +56,20 @@
                                 @Html.AntiForgeryToken()
                                 <form>
                                     @*<div class="mb-3 m-form__group">
-                                        <label class="form-label">Nombre</label>
+            <label class="form-label">Nombre</label>
+            <div class="input-group">
+                <span class="input-group-text">A</span>
+                @Html.EditorFor(model => model.Nombre_ficha, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">
-                                            <span class="input-group-text">A</span>
-                                            @Html.EditorFor(model => model.Nombre_ficha, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Codigo_ficha, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Codigo_ficha, "", new { @class = "text-danger" })
                                         </div>
-                                    </div>*@
+                                    </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Jornada</label>
                                         <div class="input-group">
@@ -109,7 +116,21 @@
                                             @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Fecha inicio</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Fecha_inicio, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
+                                            @Html.ValidationMessageFor(model => model.Fecha_inicio, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Fecha fin</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Fecha_fin, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
+                                            @Html.ValidationMessageFor(model => model.Fecha_fin, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>

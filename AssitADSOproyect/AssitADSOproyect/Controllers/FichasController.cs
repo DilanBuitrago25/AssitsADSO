@@ -14,14 +14,14 @@ namespace AssitADSOproyect.Controllers
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
 
-        // GET: Fichas
+        // GET: Fichas1
         public ActionResult Index()
         {
             var ficha = db.Ficha.Include(f => f.Programa_formacion);
             return View(ficha.ToList());
         }
 
-        // GET: Fichas/Details/5
+        // GET: Fichas1/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,19 +36,19 @@ namespace AssitADSOproyect.Controllers
             return View(ficha);
         }
 
-        // GET: Fichas/Create
+        // GET: Fichas1/Create
         public ActionResult Create()
         {
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
             return View();
         }
 
-        // POST: Fichas/Create
+        // POST: Fichas1/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_ficha,Nombre_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa")] Ficha ficha)
+        public ActionResult Create([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin")] Ficha ficha)
         {
             if (ModelState.IsValid)
             {
@@ -61,7 +61,7 @@ namespace AssitADSOproyect.Controllers
             return View(ficha);
         }
 
-        // GET: Fichas/Edit/5
+        // GET: Fichas1/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,12 +77,12 @@ namespace AssitADSOproyect.Controllers
             return View(ficha);
         }
 
-        // POST: Fichas/Edit/5
+        // POST: Fichas1/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_ficha,Nombre_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa")] Ficha ficha)
+        public ActionResult Edit([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin")] Ficha ficha)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace AssitADSOproyect.Controllers
             return View(ficha);
         }
 
-        // GET: Fichas/Delete/5
+        // GET: Fichas1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +109,7 @@ namespace AssitADSOproyect.Controllers
             return View(ficha);
         }
 
-        // POST: Fichas/Delete/5
+        // POST: Fichas1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

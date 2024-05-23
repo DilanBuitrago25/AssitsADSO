@@ -121,6 +121,7 @@
     <Compile Include="Controllers\AprendizController.cs" />
     <Compile Include="Controllers\AsistenciasController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
+    <Compile Include="Controllers\Fichas1Controller.cs" />
     <Compile Include="Controllers\FichasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
@@ -6062,6 +6063,11 @@
     <Content Include="Views\JustificacionInasistencia\Details.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Edit.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Index.cshtml" />
+    <Content Include="Views\Fichas1\Create.cshtml" />
+    <Content Include="Views\Fichas1\Delete.cshtml" />
+    <Content Include="Views\Fichas1\Details.cshtml" />
+    <Content Include="Views\Fichas1\Edit.cshtml" />
+    <Content Include="Views\Fichas1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

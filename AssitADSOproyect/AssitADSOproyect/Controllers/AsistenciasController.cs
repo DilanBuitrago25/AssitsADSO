@@ -40,8 +40,11 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Create()
         {
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario");
+            ViewBag.Codigo_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
+            ViewBag.Nombre_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia");
             return View();
         }
+
 
         // POST: Asistencias/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 

@@ -1,7 +1,7 @@
 --Nombre de la BD (BDAssistsADSO)
 
 --Creación de las tablas
-
+go
 --Base de datos se modifico y se tiene que verificar que los datos impuestos en el modelo y en el controlador esten de la misma secuencia
 Create database BDAssistsADSO
 
@@ -66,7 +66,7 @@ create table Competencia(
 Id_competencia int identity (10000,1) not null,
 Nombre_competencia varchar (500) not null,
 tipo_competencia varchar (100) not null,
-Numero_ficha int references Ficha(Id_ficha),
+Id_ficha int references Ficha(Id_ficha),
 Id_programa int references Programa_formacion(Id_programa),
 primary key (ID_competencia))
 
