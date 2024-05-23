@@ -32,6 +32,8 @@
     <NavigationProperty Name="Programa_formacion" Relationship="Self.FK__Competenc__Id_pr__2D27B809" FromRole="Competencia" ToRole="Programa_formacion" />
     <NavigationProperty Name="Ficha" Relationship="Self.FK__Competenc__Numer__2C3393D0" FromRole="Competencia" ToRole="Ficha" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F" FromRole="Competencia" ToRole="Asistencia" />
+    <Property Name="Id_ficha" Type="Int32" />
+    <NavigationProperty Name="Ficha1" Relationship="BDAssistsADSOModel.FK__Competenc__Id_fi__403A8C7D" FromRole="Competencia" ToRole="Ficha" />
   </EntityType>
   <EntityType Name="Ficha">
     <Key>
@@ -49,6 +51,7 @@
     <Property Name="Fecha_fin" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Id_programa" Type="Int32" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_fi__31EC6D26" FromRole="Ficha" ToRole="Asistencia" />
+    <NavigationProperty Name="Competencia1" Relationship="BDAssistsADSOModel.FK__Competenc__Id_fi__403A8C7D" FromRole="Ficha" ToRole="Competencia" />
   </EntityType>
   <EntityType Name="Programa_formacion">
     <Key>
@@ -281,7 +284,6 @@
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
     <EntitySet Name="RegistroAsistencia" EntityType="BDAssistsADSOModel.RegistroAsistencia" />
-    <EntitySet Name="sysdiagrams" EntityType="BDAssistsADSOModel.sysdiagrams" />
     <AssociationSet Name="FK__Asistenci__Id_co__32E0915F" Association="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F">
       <End Role="Competencia" EntitySet="Competencia" />
       <End Role="Asistencia" EntitySet="Asistencia" />
@@ -323,6 +325,10 @@
       <Parameter Name="Correo_usuario" Mode="In" Type="String" />
       <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
     </FunctionImport>
+    <AssociationSet Name="FK__Competenc__Id_fi__403A8C7D" Association="BDAssistsADSOModel.FK__Competenc__Id_fi__403A8C7D">
+      <End Role="Ficha" EntitySet="Ficha" />
+      <End Role="Competencia" EntitySet="Competencia" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -346,16 +352,6 @@
     <Property Name="Id_usuario" Type="Int32" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" FromRole="RegistroAsistencia" ToRole="Asistencia" />
     <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" FromRole="RegistroAsistencia" ToRole="Usuario" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_co__32E0915F">
     <End Type="BDAssistsADSOModel.Competencia" Role="Competencia" Multiplicity="0..1" />
@@ -426,6 +422,18 @@
       </Principal>
       <Dependent Role="Soporte">
         <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Competenc__Id_fi__403A8C7D">
+    <End Type="BDAssistsADSOModel.Ficha" Role="Ficha" Multiplicity="0..1" />
+    <End Type="BDAssistsADSOModel.Competencia" Role="Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ficha">
+        <PropertyRef Name="Id_ficha" />
+      </Principal>
+      <Dependent Role="Competencia">
+        <PropertyRef Name="Id_ficha" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
