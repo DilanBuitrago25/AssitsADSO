@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Details";
 }
-
 <h2>Details</h2>
 
 <div>
@@ -11,27 +10,43 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Tipo_asistencia)
+            @Html.DisplayNameFor(model => model.Fecha_inicio_asistencia)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Tipo_asistencia)
+            @Html.DisplayFor(model => model.Fecha_inicio_asistencia)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fecha_asistencia)
+            @Html.DisplayNameFor(model => model.Fecha_fin_asistencia)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.fecha_asistencia)
+            @Html.DisplayFor(model => model.Fecha_fin_asistencia)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Hora_asistencia)
+            @Html.DisplayNameFor(model => model.Hora_inicio_asistencia)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Hora_asistencia)
+            @Html.DisplayFor(model => model.Hora_inicio_asistencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hora_fin_asistencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hora_fin_asistencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Detalles_asistencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Detalles_asistencia)
         </dd>
 
         <dt>
@@ -40,6 +55,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.Usuario.Tipo_Documento_usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Competencia.Nombre_competencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competencia.Nombre_competencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ficha.Jornada_ficha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ficha.Jornada_ficha)
         </dd>
 
     </dl>
