@@ -3,7 +3,13 @@
 --Creación de las tablas
 
 --Base de datos se modifico y se tiene que verificar que los datos impuestos en el modelo y en el controlador esten de la misma secuencia
+Create database BDAssistsADSO
 
+go
+
+use BDAssistsADSO
+
+go
 
 create table Programa_formacion(
 Id_programa int identity (1000,1)not null,
@@ -12,11 +18,15 @@ Tipo_programa varchar (100) not null,
 Duracion_programa varchar (100) not null
 primary key (Id_programa))
 
+
 create table Ficha(
 Id_ficha int identity (100000,1) not null,
+Codigo_ficha int not null,
 Jornada_ficha varchar(100) not null,
 Modalidad_ficha varchar(100) not null,
 tipo_ficha varchar (100) not null,
+Fecha_inicio varchar (200) not null,
+Fecha_fin varchar (200) not null,
 Id_programa int references Programa_formacion(Id_programa),
 primary key (Id_ficha))
 
@@ -28,7 +38,7 @@ Tipo_Documento_usuario varchar (200) not null,
 Documento_usuario int not null,
 Nombre_usuario varchar (55) not null,
 Apellido_usuario varchar (55) not null,
-Telefono_usuario int not null,
+Telefono_usuario int,
 Correo_usuario varchar (100) not null,
 Contrasena_usuario varchar (100) not null,
 Tipo_usuario Varchar (100),
@@ -62,17 +72,31 @@ primary key (ID_competencia))
 
 create table Asistencia(
 Id_asistencia int identity (100000,1) not null,
-Tipo_asistencia varchar (45) not null,
-fecha_asistencia varchar (45) not null,
-Hora_asistencia varchar (45) not null,
+--Tipo_asistencia varchar (45) not null,
+Fecha_inicio_asistencia varchar(200) not null,
+Fecha_fin_asistencia varchar(200) not null,
+Hora_inicio_asistencia varchar(200) not null,
+Hora_fin_asistencia varchar(200) not null,
+Detalles_asistencia varchar (500) not null,
 Id_usuario int references Usuario(Id_usuario),
+Id_ficha int references Ficha(Id_ficha),
+Id_competencia int references Competencia(Id_competencia),
 Primary Key (Id_asistencia))
+
+create table RegistroAsistencia(
+Id_Registroasistencia int identity (10000000,1) not null,
+Fecha_registro varchar(200) not null,
+Hora_registro varchar(200) not null,
+Id_asistencia int references Asistencia(Id_asistencia),
+Id_usuario int references Usuario(Id_usuario),
+Primary Key (Id_Registroasistencia))
 
 create table Soporte(
 Id_soporte int identity (1000000,1) not null,
 Nombre_soporte varchar (45) not null,
 Descripcion_soporte varchar (500) not null,
-Tipo_soporte varchar (100) not null,
+Tipo_soporte varchar (100),
+Id_usuario int references Usuario(Id_usuario),
 Id_asistencia int references Asistencia(Id_asistencia),
 primary key (Id_soporte))
 
@@ -80,7 +104,8 @@ create table Reporte(
 Id_reporte int identity (10000000,1)not null,
 Nombre_reporte varchar (45) not null,
 Descripcion_reporte varchar (500) not null,
-Tipo_reporte varchar (45) not null,
+Tipo_reporte varchar (45),
+Id_usuario int references Usuario(Id_usuario),
 Id_asistencia int references Asistencia(Id_asistencia),
 primary key (Id_reporte))
 
