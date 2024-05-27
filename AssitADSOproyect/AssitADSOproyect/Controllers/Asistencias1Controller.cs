@@ -41,7 +41,7 @@ namespace AssitADSOproyect.Controllers
         {
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario");
             ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia");
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha");
+            ViewBag.Codigo_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace AssitADSOproyect.Controllers
 
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", asistencia.Id_usuario);
             ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", asistencia.Id_ficha);
+            ViewBag.Codigo_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);
         }
 
@@ -79,7 +79,7 @@ namespace AssitADSOproyect.Controllers
             }
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", asistencia.Id_usuario);
             ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", asistencia.Id_ficha);
+            ViewBag.Codigo_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);
         }
 
@@ -98,7 +98,7 @@ namespace AssitADSOproyect.Controllers
             }
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", asistencia.Id_usuario);
             ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", asistencia.Id_ficha);
+            ViewBag.Codigo_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);
         }
 

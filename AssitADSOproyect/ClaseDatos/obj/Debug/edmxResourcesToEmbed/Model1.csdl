@@ -281,7 +281,6 @@
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
     <EntitySet Name="RegistroAsistencia" EntityType="BDAssistsADSOModel.RegistroAsistencia" />
-    <EntitySet Name="sysdiagrams" EntityType="BDAssistsADSOModel.sysdiagrams" />
     <AssociationSet Name="FK__Asistenci__Id_co__32E0915F" Association="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F">
       <End Role="Competencia" EntitySet="Competencia" />
       <End Role="Asistencia" EntitySet="Asistencia" />
@@ -346,16 +345,6 @@
     <Property Name="Id_usuario" Type="Int32" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" FromRole="RegistroAsistencia" ToRole="Asistencia" />
     <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" FromRole="RegistroAsistencia" ToRole="Usuario" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_co__32E0915F">
     <End Type="BDAssistsADSOModel.Competencia" Role="Competencia" Multiplicity="0..1" />

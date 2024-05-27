@@ -40,7 +40,7 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Create()
         {
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha");
+            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace AssitADSOproyect.Controllers
             }
 
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", competencia.Numero_ficha);
+            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Numero_ficha);
             return View(competencia);
         }
 
@@ -76,7 +76,7 @@ namespace AssitADSOproyect.Controllers
                 return HttpNotFound();
             }
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", competencia.Numero_ficha);
+            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Numero_ficha);
             return View(competencia);
         }
 
@@ -94,7 +94,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", competencia.Numero_ficha);
+            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Numero_ficha);
             return View(competencia);
         }
 

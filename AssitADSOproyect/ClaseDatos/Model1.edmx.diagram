@@ -20,7 +20,6 @@
         <AssociationConnector Association="BDAssistsADSOModel.FK__Ficha__Id_progra__267ABA7A" ManuallyRouted="false" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Usuario__Id_fich__29572725" ManuallyRouted="false" />
         <EntityTypeShape EntityType="BDAssistsADSOModel.RegistroAsistencia" Width="1.5" PointX="13.375" PointY="7" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.sysdiagrams" Width="1.5" PointX="0.875" PointY="0.5" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Asistenci__Id_fi__31EC6D26" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" />
