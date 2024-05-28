@@ -24,7 +24,7 @@ namespace AssitADSOproyect.Controllers
         // GET: JustificacionInasistencia/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
+            if (id == null) 
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -43,12 +43,33 @@ namespace AssitADSOproyect.Controllers
             return View();
         }
 
+        public ActionResult CreateAprendiz()
+        {
+            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia");
+            return View();
+        }
+
         // POST: JustificacionInasistencia/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia")] Soporte soporte)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Soporte.Add(soporte);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
+            return View(soporte);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAprendiz([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia")] Soporte soporte)
         {
             if (ModelState.IsValid)
             {

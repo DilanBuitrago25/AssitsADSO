@@ -322,6 +322,54 @@
       <Parameter Name="Correo_usuario" Mode="In" Type="String" />
       <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="sysdiagrams" EntityType="BDAssistsADSOModel.sysdiagrams" />
+    <FunctionImport Name="RegistrarUsuario2">
+      <Parameter Name="Tipo_Documento_usuario" Mode="In" Type="String" />
+      <Parameter Name="Documento_usuario" Mode="In" Type="Int32" />
+      <Parameter Name="Nombre_usuario" Mode="In" Type="String" />
+      <Parameter Name="Apellido_usuario" Mode="In" Type="String" />
+      <Parameter Name="Telefono_usuario" Mode="In" Type="Int32" />
+      <Parameter Name="Correo_usuario" Mode="In" Type="String" />
+      <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
+      <Parameter Name="Tipo_usuario" Mode="In" Type="String" />
+      <Parameter Name="Tipo_instructor" Mode="In" Type="String" />
+      <Parameter Name="Registrado" Mode="InOut" Type="Boolean" />
+      <Parameter Name="Mensaje" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram1">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram1">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram1">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition1" ReturnType="Collection(BDAssistsADSOModel.sp_helpdiagramdefinition1_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams1" ReturnType="Collection(BDAssistsADSOModel.sp_helpdiagrams1_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram1">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams1" />
+    <FunctionImport Name="ValidarUsuarios3" ReturnType="Collection(String)">
+      <Parameter Name="Correo_usuario" Mode="In" Type="String" />
+      <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -345,6 +393,7 @@
     <Property Name="Id_usuario" Type="Int32" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" FromRole="RegistroAsistencia" ToRole="Asistencia" />
     <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" FromRole="RegistroAsistencia" ToRole="Usuario" />
+    <Property Name="Asistio_registro" Type="Boolean" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_co__32E0915F">
     <End Type="BDAssistsADSOModel.Competencia" Role="Competencia" Multiplicity="0..1" />
@@ -418,4 +467,25 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <ComplexType Name="sp_helpdiagramdefinition1_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams1_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

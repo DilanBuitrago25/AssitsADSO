@@ -125,6 +125,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AprendizController.cs" />
+    <Compile Include="Controllers\AprendizsController.cs" />
     <Compile Include="Controllers\Asistencias1Controller.cs" />
     <Compile Include="Controllers\AsistenciasController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Controllers\JustificacionInasistenciaController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Programa_formacionController.cs" />
+    <Compile Include="Controllers\RegistroAsistenciasController.cs" />
     <Compile Include="Controllers\UsuariosAprendizController.cs" />
     <Compile Include="Controllers\UsuariosInstructorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -6017,8 +6019,8 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared - Copia\_Layout.cshtml" />
-    <Content Include="Views\Shared - Copia\Error.cshtml" />
+    <Content Include="Views\Shared-Aprendiz\_Layout.cshtml" />
+    <Content Include="Views\Shared-Aprendiz\Error.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Login\Create.cshtml" />
     <Content Include="Views\Login\Delete.cshtml" />
@@ -6080,6 +6082,18 @@
     <Content Include="Views\Asistencias1\Details.cshtml" />
     <Content Include="Views\Asistencias1\Edit.cshtml" />
     <Content Include="Views\Asistencias1\Index.cshtml" />
+    <Content Include="Views\Aprendizs\Create.cshtml" />
+    <Content Include="Views\Aprendizs\Delete.cshtml" />
+    <Content Include="Views\Aprendizs\Details.cshtml" />
+    <Content Include="Views\Aprendizs\Edit.cshtml" />
+    <Content Include="Views\Aprendizs\Index.cshtml" />
+    <Content Include="Views\RegistroAsistencias\Create.cshtml" />
+    <Content Include="Views\RegistroAsistencias\Delete.cshtml" />
+    <Content Include="Views\RegistroAsistencias\Details.cshtml" />
+    <Content Include="Views\RegistroAsistencias\Edit.cshtml" />
+    <Content Include="Views\RegistroAsistencias\Index.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\CreateAprendiz.cshtml" />
+    <Content Include="Views\Crear_justificación.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

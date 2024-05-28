@@ -87,9 +87,13 @@ create table RegistroAsistencia(
 Id_Registroasistencia int identity (10000000,1) not null,
 Fecha_registro varchar(200) not null,
 Hora_registro varchar(200) not null,
+Asistio_registro bit default (0),
 Id_asistencia int references Asistencia(Id_asistencia),
 Id_usuario int references Usuario(Id_usuario),
 Primary Key (Id_Registroasistencia))
+
+ALTER TABLE RegistroAsistencia 
+ADD Asistio_registro bit default (0) ;
 
 create table Soporte(
 Id_soporte int identity (1000000,1) not null,
