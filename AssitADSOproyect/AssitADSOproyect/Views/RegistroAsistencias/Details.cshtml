@@ -5,47 +5,170 @@
     Layout = "~/Views/Shared-Aprendiz/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>RegistroAsistencia</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Fecha_registro)
-        </dt>
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Gestionar Fichas</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Fichas</li>
+                    <li class="breadcrumb-item">General</li>
+                    <li class="breadcrumb-item active">Detalles</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
 
-        <dd>
-            @Html.DisplayFor(model => model.Fecha_registro)
-        </dd>
+                <div class="bookmark">
+                    <ul>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
+                            <form class="form-inline search-form">
+                                <div class="form-group form-control-search">
+                                    <input type="text" placeholder="Search..">
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Hora_registro)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hora_registro)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Asistencia.Fecha_inicio_asistencia)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Asistencia.Fecha_inicio_asistencia)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Usuario.Tipo_Documento_usuario)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Usuario.Tipo_Documento_usuario)
-        </dd>
-
-    </dl>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Registroasistencia }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@using (Html.BeginForm())
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h5>Detalles Ficha</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+
+                                @Html.AntiForgeryToken()
+                                <form>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Codigo Ficha</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Asistencia.Ficha.Codigo_ficha)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Fecha Asistencia</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Asistencia.Fecha_inicio_asistencia)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Fecha Fin Asistencia</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Asistencia.Fecha_fin_asistencia)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Instructor</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Usuario.Nombre_usuario)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Estado de la Asistencia</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Asistio_registro)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Fecha de Registro de Asistencia</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Fecha_registro)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Hora de Asistencia</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Hora_registro)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","RegistroAsistencias")">Cancelar</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@*<h2>Details</h2>
+
+    <div>
+        <h4>RegistroAsistencia</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Fecha_registro)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Fecha_registro)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Hora_registro)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Hora_registro)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Asistencia.Fecha_inicio_asistencia)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Asistencia.Fecha_inicio_asistencia)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Usuario.Tipo_Documento_usuario)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Usuario.Tipo_Documento_usuario)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id_Registroasistencia }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

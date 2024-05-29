@@ -63,7 +63,12 @@ namespace AssitADSOproyect
                         "~/assets/js/height-equal.js",
                         "~/assets/js/tooltip-init.js",
                         "~/assets/js/script.js",
-                        "~/assets/js/theme-customizer/customizer.js"
+                        "~/assets/js/theme-customizer/customizer.js",
+                        "~/assets/js/editor/ckeditor/ckeditor.js",
+                        "~/assets/js/editor/ckeditor/adapters/jquery.js",
+                        "~/assets/js/dropzone/dropzone.js",
+                        "~/assets/js/dropzone/dropzone-script.js",
+                        "~/assets/js/email-app.js"
                         ));
 
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información sobre los formularios.  De esta manera estará
@@ -90,7 +95,9 @@ namespace AssitADSOproyect
                       "~/assets/css/bootstrap.css",
                       "~/assets/css/style.css",
                       "~/assets/css/color-1.css",
-                      "~/assets/css/responsive.css"
+                      "~/assets/css/responsive.css",
+                      "~/assets/css/themify.css",
+                      "~/assets/css/dropzone.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

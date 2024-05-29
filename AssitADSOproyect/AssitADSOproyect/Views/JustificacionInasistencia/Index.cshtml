@@ -105,6 +105,8 @@
                                     </div>
                                 </div>
                                 <div class="inbox">
+                                    @foreach (var item in Model)
+                                    {
                                         <div class="media">
                                             <div class="media-size-email">
                                                 <label class="d-block mb-0" for="chk-ani">
@@ -112,10 +114,11 @@
                                                 </label><i class="like" data-feather="star"></i><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
                                             </div>
                                             <div class="media-body">
-                                                <h6><a href="@Url.Action("Create","JustificacionInasistencia")">Sara Angarita</a> </h6>
-                                                <p>Falte a clases del jueves por motivo de cita medica.</p><span>11:59 PM</span>
+                                                <h6><a href="@Html.ActionLink("Edit", "Edit", new { id=item.Id_soporte })">@Html.DisplayFor(model => item.Usuario.Nombre_usuario)</a> </h6>
+                                                <p>@Html.DisplayFor(model => item.Nombre_soporte)</p><span>@Html.DisplayFor(model => item.Hora_registro)</span>
                                             </div>
                                         </div>
+                                    }
                                         <div class="media">
                                             <div class="media-size-email">
                                                 <label class="d-block mb-0" for="chk-ani">

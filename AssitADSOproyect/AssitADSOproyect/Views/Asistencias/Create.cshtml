@@ -103,7 +103,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="mb-3">
-                                        <label>Fecha Inicio</label>
+                                        <label>Fecha Fin</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
                                             @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="mb-3">
-                                        <label>Hora Inicio</label>
+                                        <label>Hora Fin</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Hora_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
                                             @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })

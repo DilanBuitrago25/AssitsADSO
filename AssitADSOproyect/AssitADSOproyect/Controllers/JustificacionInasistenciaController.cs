@@ -40,6 +40,9 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Create()
         {
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia");
+            ViewBag.Id_Usuario = new SelectList(db.Usuario, "Id_Usuario", "Nombre_Usuario");
+            ViewBag.Fecha_Asistencia = new SelectList(db.Asistencia, "Id_Asistencia", "Fecha_inicio_asistencia");
+            ViewBag.Id_Competencia = new SelectList(db.Competencia, "Id_Competencia", "Nombre_Competencia");
             return View();
         }
 
@@ -64,6 +67,7 @@ namespace AssitADSOproyect.Controllers
             }
 
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
+            ViewBag.Id_Usuario = new SelectList(db.Asistencia, "Id_Usuario", "Nombre_Usuario", soporte.Usuario.Nombre_usuario);
             return View(soporte);
         }
 

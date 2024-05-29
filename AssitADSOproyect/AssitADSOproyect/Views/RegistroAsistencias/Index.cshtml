@@ -11,17 +11,17 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Gestionar Programas</h3>
+                <h3>Asistencias Aprendiz</h3>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
-                    <li class="breadcrumb-item">Programa Formación</li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Aprendizs")">Home</a></li>
+                    <li class="breadcrumb-item">Asistencias</li>
                     <li class="breadcrumb-item">General</li>
                     <li class="breadcrumb-item active">Consultar</li>
                 </ol>
             </div>
             <div class="col-sm-6">
                 <!-- Bookmark Start-->
-                <div class="bookmark">
+                @*<div class="bookmark">
                     <ul>
                         <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
                         <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
@@ -36,7 +36,7 @@
                             </form>
                         </li>
                     </ul>
-                </div>
+                </div>*@
                 <!-- Bookmark Ends-->
             </div>
         </div>
@@ -46,9 +46,9 @@
 <div class="col-sm-12">
     <div class="card">
         <div class="card-header">
-            <h5>Tabla de datos - Programas de Formación</h5>
-            <br />
-            <button class="btn btn-light"><a href="@Url.Action("Create","Programa_formacion")">Crear</a></button>
+            <h5>Tabla de Asistencias</h5>
+            @*<br />
+            <button class="btn btn-light"><a href="@Url.Action("Create","Programa_formacion")">Crear</a></button>*@
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -74,7 +74,6 @@
                                 <td>@Html.DisplayFor(model => item.Asistencia.Usuario.Nombre_usuario)</td>
                                 <td>@Html.DisplayFor(model => item.Asistio_registro)</td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_Registroasistencia }) |
                                     @Html.ActionLink("Details", "Details", new { id = item.Id_Registroasistencia })
                                 </td>
 
@@ -83,10 +82,11 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Duracion</th>
+                            <th>Codigo Ficha</th>
+                            <th>Fecha Inicio</th>
+                            <th>Fecha Fin</th>
+                            <th>Instructor</th>
+                            <th>Asistió</th>
                         </tr>
                     </tfoot>
                 </table>

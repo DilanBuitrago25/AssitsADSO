@@ -60,7 +60,7 @@ namespace AssitADSOproyect.Controllers
             {
                 db.Asistencia.Add(asistencia);
                 db.SaveChanges();
-                var editUrl = Url.Action("Edit", "Asistencias", new { id = asistencia.Id_asistencia }, Request.Url.Scheme); // Asegurar esquema (http/https)
+                var editUrl = Url.Action("Create", "RegistroAsistencias", new { id = asistencia.Id_asistencia }, Request.Url.Scheme); // Asegurar esquema (http/https)
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(editUrl, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrCode = new QRCode(qrCodeData);

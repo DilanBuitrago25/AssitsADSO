@@ -100,9 +100,14 @@ Id_soporte int identity (1000000,1) not null,
 Nombre_soporte varchar (45) not null,
 Descripcion_soporte varchar (500) not null,
 Tipo_soporte varchar (100),
+Fecha_registro varchar(200) not null,
+Hora_registro varchar(200) not null,
 Id_usuario int references Usuario(Id_usuario),
 Id_asistencia int references Asistencia(Id_asistencia),
 primary key (Id_soporte))
+
+ALTER TABLE RegistroAsistencia 
+ADD Asistio_registro bit default (0) ;
 
 create table Reporte(
 Id_reporte int identity (10000000,1)not null,
@@ -112,5 +117,9 @@ Tipo_reporte varchar (45),
 Id_usuario int references Usuario(Id_usuario),
 Id_asistencia int references Asistencia(Id_asistencia),
 primary key (Id_reporte))
+
+ALTER TABLE Soporte 
+ADD Fecha_registro varchar(200) not null,
+Hora_registro varchar(200) not null ;
 
 --Select * from Usuarios
