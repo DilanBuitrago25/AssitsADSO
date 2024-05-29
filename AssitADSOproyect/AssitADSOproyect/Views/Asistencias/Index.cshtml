@@ -82,12 +82,9 @@
                                                 <span class="badge badge-primary">A Tiempo</span> <!-- Aqui se aplicara basado en una tabla en la bd de asistencia -->
                                                 <h6>Asistencia @Html.DisplayFor(model => item.Fecha_inicio_asistencia)</h6>
                                                 <div class="media">
-                                                    <!-- <img class="img-20 me-2 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""> -->
                                                     <div class="media-body">
                                                         <p>Ficha - @Html.DisplayFor(model => item.Ficha.Codigo_ficha)</p>
                                                     </div>
-                                                    
-                                                        @*<button class="badge-light btn-block btn-mail" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">*@
                                                 <a class="badge-light btn-block btn-mail" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" href="@Url.Content("~/QRCodes/" + item.Id_asistencia + ".png")" target="_blank">
                                                     <i class="me-2" data-feather="check-circle"></i>Ver Qr
                                                     <div class="modal fade modal-bookmark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -124,30 +121,10 @@
                                                     <div class="col-6 font-primary">7</div>
                                                 </div>
                                                 <div class="customers">
-                                                    <!-- <ul>
-                      <li class="d-inline-block"><img class="img-30 rounded-circle" src="../assets/images/user/3.jpg" alt="" data-original-title="" title=""></li>
-                      <li class="d-inline-block"><img class="img-30 rounded-circle" src="../assets/images/user/5.jpg" alt="" data-original-title="" title=""></li>
-                      <li class="d-inline-block"><img class="img-30 rounded-circle" src="../assets/images/user/1.jpg" alt="" data-original-title="" title=""></li>
-                      <li class="d-inline-block ms-2">
-                        <p class="f-12">+10 More</p>
-                      </li>
-                    </ul> -->
-                                                </div>
-                                                <div class="project-status mt-4">
-                                                    <div class="media mb-0">
-                                                        <p>70% </p>
-                                                        <div class="media-body text-end"><span></span></div>
-                                                    </div>
-                                                    <div class="progress" style="height: 5px">
-                                                        <div class="progress-bar-animated bg-primary progress-bar-striped" role="progressbar" style="width: 70%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
-                                        <!--<a href="@Url.Content("~/QRCodes/" + item.Id_asistencia + ".png")" target="_blank">-->
-                                        @*<img src="@Url.Content("~/QRCodes/" + item.Id_asistencia + ".png")" alt="QR para editar asistencia" />*@
-                                        <!--</a>-->
-                                        @*@Html.ActionLink("Ver Qr", "Edit", new { id = item.Id_asistencia })*@
                                     }
 
                                     <div class="col-xxl-4 col-lg-6">
@@ -170,12 +147,7 @@
                                                 <div class="col-6 font-secondary">40</div>
                                             </div>
                                             <div class="customers">
-                                                <ul>
-                                                    <!--
-                    <li class="d-inline-block ms-2">
-                      <p class="f-12">+3 More</p>
-                    </li> -->
-                                                </ul>
+                                               
                                             </div>
                                             <div class="project-status mt-4">
                                                 <div class="media mb-0">
