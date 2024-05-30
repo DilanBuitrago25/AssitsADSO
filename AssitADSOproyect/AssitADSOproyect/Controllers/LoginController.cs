@@ -29,6 +29,7 @@ namespace AssitADSOproyect.Controllers
             {
                 Session["Idusuario"] = usuario.Id_usuario; // Almacenar el ID en sesión
                 Session["TipoUsuario"] = usuario.Tipo_usuario;
+                Session["NombreUsuario"] = usuario.Nombre_usuario + " " + usuario.Apellido_usuario;
 
                 if (usuario.Tipo_usuario == "Aprendiz")
                 {
@@ -48,7 +49,7 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Logout()
         {
             Session.Abandon(); // Cerrar sesión
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
 
 

@@ -6022,20 +6022,12 @@
     <Content Include="Views\Shared-Aprendiz\_Layout.cshtml" />
     <Content Include="Views\Shared-Aprendiz\Error.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
-    <Content Include="Views\Login\Create.cshtml" />
-    <Content Include="Views\Login\Delete.cshtml" />
-    <Content Include="Views\Login\Details.cshtml" />
-    <Content Include="Views\Login\Edit.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Aprendiz\Create.cshtml" />
     <Content Include="Views\Aprendiz\Delete.cshtml" />
     <Content Include="Views\Aprendiz\Details.cshtml" />
     <Content Include="Views\Aprendiz\Edit.cshtml" />
     <Content Include="Views\Aprendiz\Index.cshtml" />
-    <Content Include="Views\Instructor\Create.cshtml" />
-    <Content Include="Views\Instructor\Delete.cshtml" />
-    <Content Include="Views\Instructor\Details.cshtml" />
-    <Content Include="Views\Instructor\Edit.cshtml" />
     <Content Include="Views\Instructor\Index.cshtml" />
     <Content Include="Views\Fichas\Create.cshtml" />
     <Content Include="Views\Fichas\Delete.cshtml" />
@@ -6087,7 +6079,6 @@
     <Content Include="Views\RegistroAsistencias\Details.cshtml" />
     <Content Include="Views\RegistroAsistencias\Edit.cshtml" />
     <Content Include="Views\RegistroAsistencias\Index.cshtml" />
-    <Content Include="Views\JustificacionInasistencia\CreateAprendiz.cshtml" />
     <Content Include="Views\Crear_justificación.cshtml" />
   </ItemGroup>
   <ItemGroup>
