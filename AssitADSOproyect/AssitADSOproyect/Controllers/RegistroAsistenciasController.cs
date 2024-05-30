@@ -37,8 +37,19 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: RegistroAsistencias/Create
-        public ActionResult Create()
+        public ActionResult Create(int? Id_Asistencia)
         {
+            if (Id_Asistencia == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var asistencia = db.Asistencia.Find(Id_Asistencia); // Obtener la asistencia completa
+            if (asistencia == null)
+            {
+                return HttpNotFound();
+            }
+            var registroAsistencia = new RegistroAsistencia { Id_asistencia = Id_Asistencia.Value };
+            ViewBag.CodigoFicha = asistencia.Ficha.Codigo_ficha; // Pasar el código de ficha a la vista
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia");
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario");
             return View();

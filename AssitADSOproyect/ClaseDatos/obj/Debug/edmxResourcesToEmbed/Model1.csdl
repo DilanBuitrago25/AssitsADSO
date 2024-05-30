@@ -371,7 +371,6 @@
       <Parameter Name="Correo_usuario" Mode="In" Type="String" />
       <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="sysdiagrams" EntityType="BDAssistsADSOModel.sysdiagrams" />
     <FunctionImport Name="RegistrarUsuario3">
       <Parameter Name="Tipo_Documento_usuario" Mode="In" Type="String" />
       <Parameter Name="Documento_usuario" Mode="In" Type="Int32" />
@@ -527,16 +526,6 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
   <ComplexType Name="sp_helpdiagramdefinition2_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
     <Property Type="Binary" Name="definition" Nullable="true" />

@@ -61,6 +61,10 @@
                                 </div>*@
 
                             <form>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Id_asistencia)
+                                    @Html.HiddenFor(model => model.Id_asistencia)
+                                </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
@@ -73,7 +77,7 @@
                                     <div class="col">
                                         <div class="mb-3">
                                             <label class="form-label">Codigo Ficha</label>
-                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Asistencia.Ficha.Codigo_ficha)">
+                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" value="@ViewBag.CodigoFicha" />
                                         </div>
                                     </div>
                                 </div>
@@ -88,59 +92,80 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label">Fecha de registro</label>
-                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Fecha_registro)">
+                                            <label>Fecha de Registro</label>
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(model => model.Fecha_registro, new
+                                                {
+                                                    @class = "form-control digits",
+                                                    @readonly = "readonly",
+                                                    @Value = DateTime.Now.ToString("MM/dd/yyyy")  
+                                                })
+
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Fecha_registro, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label class="form-label">Hora de registro</label>
-                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Hora_registro)">
+                                            <label>Hora de Registro</label>
+                                            <div class="input-group" data-placement="left" data-align="top" data-autoclose="true">
+                                                @Html.TextBoxFor(model => model.Hora_registro, new
+                                                {
+                                                    @class = "form-control digits",
+                                                    @readonly = "readonly",
+                                                    @Value = DateTime.Now.ToString("HH:mm")  
+                                                })
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-time"></span>
+                                                </span>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.Hora_registro, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
-                                @*<div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="mb-3">
-                                            <label>Fecha Inicio</label>
-                                            <div class="input-group">
-                                                @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
-                                                @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="mb-3">
-                                            <label>Hora Inicio</label>
-                                            <div class="input-group">
-                                                @Html.EditorFor(model => model.Hora_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
-                                                @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>*@
-                                    @*<div class="col-sm-4">
-                <div class="mb-3">
-                    <label>Ending date</label>
-                    <input class="datepicker-here form-control" type="text" data-language="en">
+
+                                    @*<div class="row">
+        <div class="col-sm-4">
+            <div class="mb-3">
+                <label>Fecha Inicio</label>
+                <div class="input-group">
+                    @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
+                    @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
                 </div>
-            </div>*@
-                                @*</div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="mb-3">
+                <label>Hora Inicio</label>
+                <div class="input-group">
+                    @Html.EditorFor(model => model.Hora_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
+                    @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
+                                    @*<div class="col-sm-4">
+            <div class="mb-3">
+                <label>Ending date</label>
+                <input class="datepicker-here form-control" type="text" data-language="en">
+            </div>
+        </div>*@
+                                    @*</div>
 
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea4">Enter some Details</label>
-                                            <div class="input-group">
-                                                @Html.TextAreaFor(model => model.Detalles_asistencia, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3" })
-                                                @Html.ValidationMessageFor(model => model.Detalles_asistencia, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea4">Enter some Details</label>
+                    <div class="input-group">
+                        @Html.TextAreaFor(model => model.Detalles_asistencia, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3" })
+                        @Html.ValidationMessageFor(model => model.Detalles_asistencia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>*@
 
-                                @*<div class="row">
+                                    @*<div class="row">
             <div class="col">
                 <div class="mb-3">
                     <label>Upload project file</label>
@@ -153,23 +178,23 @@
                 </div>
             </div>
         </div>*@
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="text-end">
-                                           
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="text-end">
+
                                                 <button class="btn btn-success me-3" type="submit">Confirmar Asistencia</button>
-                                               
+
                                                 <button class="btn btn-danger" type="button">
                                                     <a href="@Url.Action("Index", "Asistencias")">Cancelar</a>
                                                 </button>
                                             </div>
                                         </div>
+                                    </div>
+
+
+
+
                                 </div>
-
-
-
-
-</div>
                     </div>
                 </div>
             </div>

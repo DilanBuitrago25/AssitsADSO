@@ -6077,11 +6077,6 @@
     <Content Include="Views\Fichas1\Details.cshtml" />
     <Content Include="Views\Fichas1\Edit.cshtml" />
     <Content Include="Views\Fichas1\Index.cshtml" />
-    <Content Include="Views\Asistencias1\Create.cshtml" />
-    <Content Include="Views\Asistencias1\Delete.cshtml" />
-    <Content Include="Views\Asistencias1\Details.cshtml" />
-    <Content Include="Views\Asistencias1\Edit.cshtml" />
-    <Content Include="Views\Asistencias1\Index.cshtml" />
     <Content Include="Views\Aprendizs\Create.cshtml" />
     <Content Include="Views\Aprendizs\Delete.cshtml" />
     <Content Include="Views\Aprendizs\Details.cshtml" />

@@ -60,16 +60,17 @@ namespace AssitADSOproyect.Controllers
             {
                 db.Asistencia.Add(asistencia);
                 db.SaveChanges();
-                var editUrl = Url.Action("Create", "RegistroAsistencias", new { id = asistencia.Id_asistencia }, Request.Url.Scheme); // Asegurar esquema (http/https)
+                var createRegistroUrl = Url.Action("Create", "RegistroAsistencias", new { id_Asistencia = asistencia.Id_asistencia }, Request.Url.Scheme);
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(editUrl, QRCodeGenerator.ECCLevel.Q);
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(createRegistroUrl, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrCode = new QRCode(qrCodeData);
 
                 var qrCodePath = Path.Combine(Server.MapPath("~/QRCodes"), $"{asistencia.Id_asistencia}.png");
-                using (var bitmap = qrCode.GetGraphic(20)) // Ajusta la escala según necesites
+                using (var bitmap = qrCode.GetGraphic(20))
                 {
                     bitmap.Save(qrCodePath, ImageFormat.Png);
                 }
+
                 return RedirectToAction("Index");
             }
 

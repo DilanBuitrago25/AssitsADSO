@@ -68,7 +68,10 @@ namespace AssitADSOproyect
                         "~/assets/js/editor/ckeditor/adapters/jquery.js",
                         "~/assets/js/dropzone/dropzone.js",
                         "~/assets/js/dropzone/dropzone-script.js",
-                        "~/assets/js/email-app.js"
+                        "~/assets/js/email-app.js",
+                        "~/assets/js/time-picker/jquery-clockpicker.min.js",
+                        "~/assets/js/time-picker/highlight.min.js",
+                        "~/assets/js/time-picker/clockpicker.js"
                         ));
 
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información sobre los formularios.  De esta manera estará
@@ -97,7 +100,8 @@ namespace AssitADSOproyect
                       "~/assets/css/color-1.css",
                       "~/assets/css/responsive.css",
                       "~/assets/css/themify.css",
-                      "~/assets/css/dropzone.css"
+                      "~/assets/css/dropzone.css",
+                      "~/assets/css/timepicker.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
