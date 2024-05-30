@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -15,6 +16,7 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
 
         // GET: Aprendizs
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Index()
         {
             var usuario = db.Usuario.Include(u => u.Ficha);

@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -16,10 +17,11 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
 
         // GET: Instructor
+        [AutorizarTipoUsuario("Instructor")]
         public ActionResult Index()
         {
             int Total_Aprendices;
-            string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
+            string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
             using (SqlConnection connection = new SqlConnection(Conexion))
             {
                 string query = "(select count(*) from Usuario where Tipo_usuario = 'Aprendiz')";

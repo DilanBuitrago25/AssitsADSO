@@ -4,121 +4,174 @@ using System.Data.SqlClient;
 using System.Web.Mvc;
 using ClaseDatos;
 using System.Web.Security;
+using System.Linq;
+using System.Web;
 
 namespace AssitADSOproyect.Controllers
 {
     public class LoginController : Controller
     {
-        static string Conexion = "Data Source=DESKTOP-020021\\SQLEXPRESS;Initial Catalog=BDAssistsADSO;Integrated Security=True;MultipleActiveResultSets=True;";
-
+        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
         // GET: Login
         public ActionResult Index()   // Hago el metodo 
         {
             return View();
         }
 
+        // POST: Auth/Login
         [HttpPost]
-        public ActionResult reg(Usuario usuario)
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(string correo, string contrasena)
         {
-            usuario.Contrasena_usuario = (usuario.Contrasena_usuario);
-            bool registrado = false;
-            string mensaje = string.Empty;
+            var usuario = db.Usuario.FirstOrDefault(u => u.Correo_usuario == correo && u.Contrasena_usuario == contrasena); // Verificar contraseña (considera hashing)
 
-            using (SqlConnection cn = new SqlConnection(Conexion))
+            if (usuario != null)
             {
-                try
+                Session["Idusuario"] = usuario.Id_usuario; // Almacenar el ID en sesión
+                Session["TipoUsuario"] = usuario.Tipo_usuario;
+
+                if (usuario.Tipo_usuario == "Aprendiz")
                 {
-                    SqlCommand cmd = new SqlCommand("RegistrarUsuario", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@Tipo_Documento_usuario", usuario.Tipo_Documento_usuario);
-                    cmd.Parameters.AddWithValue("@Documento_usuario", usuario.Documento_usuario);
-                    cmd.Parameters.AddWithValue("@Nombre_usuario", usuario.Nombre_usuario);
-                    cmd.Parameters.AddWithValue("@Apellido_usuario", usuario.Apellido_usuario);
-                    cmd.Parameters.AddWithValue("@Telefono_usuario", usuario.Telefono_usuario);
-                    cmd.Parameters.AddWithValue("@Correo_usuario", usuario.Correo_usuario);
-                    cmd.Parameters.AddWithValue("@Contrasena_usuario", usuario.Contrasena_usuario);
-                    cmd.Parameters.AddWithValue("@Tipo_usuario", usuario.Tipo_usuario);
-                    cmd.Parameters.AddWithValue("@Tipo_instructor", usuario.Tipo_instructor);
-
-                    SqlParameter outputRegistrado = new SqlParameter("@Registrado", SqlDbType.Bit)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    cmd.Parameters.Add(outputRegistrado);
-
-                    SqlParameter outputMensaje = new SqlParameter("@Mensaje", SqlDbType.VarChar, 200)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    cmd.Parameters.Add(outputMensaje);
-
-                    cn.Open();
-                    cmd.ExecuteNonQuery();
-
-                    registrado = (bool)outputRegistrado.Value;
-                    mensaje = outputMensaje.Value.ToString();
+                    return RedirectToAction("Index", "Aprendizs"); // Vista para aprendices
                 }
-                catch (Exception ex)
+                else if (usuario.Tipo_usuario == "Instructor")
                 {
-                    ViewBag.Error = "Ocurrió un error: " + ex.Message;
-                    return View("Index");
+                    return RedirectToAction("Index", "Instructor"); // Vista para instructores
                 }
             }
 
-            ViewData["Mensaje"] = mensaje;
-            if (registrado)
+            ModelState.AddModelError("", "Credenciales inválidas.");
+            return View();
+        }
+
+        // GET: Auth/Logout
+        public ActionResult Logout()
+        {
+            Session.Abandon(); // Cerrar sesión
+            return RedirectToAction("Login");
+        }
+
+
+        public class AutorizarTipoUsuarioAttribute : AuthorizeAttribute
+        {
+            private readonly string[] _tiposPermitidos;
+
+            public AutorizarTipoUsuarioAttribute(params string[] tiposPermitidos)
             {
-                return RedirectToAction("Index", "Home");
+                _tiposPermitidos = tiposPermitidos;
             }
-            else
+
+            protected override bool AuthorizeCore(HttpContextBase httpContext)
             {
-                ViewBag.Error = mensaje;
-                return View("Index");
+                var tipoUsuario = httpContext.Session["TipoUsuario"] as string;
+                return tipoUsuario != null && _tiposPermitidos.Contains(tipoUsuario);
             }
         }
 
-        [HttpPost]
-        public ActionResult ValidarUsuario(string Correo_usuario, string Contrasena_usuario)
-        {
-            string tipoUsuario = "0";
-
-            using (SqlConnection cn = new SqlConnection(Conexion))
-            {
-                try
-                {
-                    SqlCommand cmd = new SqlCommand("ValidarUsuarios", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@Correo_usuario", Correo_usuario);
-                    cmd.Parameters.AddWithValue("@Contrasena_usuario", Contrasena_usuario);
-
-                    cn.Open();
-                    tipoUsuario = cmd.ExecuteScalar().ToString();
-
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Error = "Ocurrió un error: " + ex.Message;
-                    return View("Index");
-                }
-            }
-
-            if (tipoUsuario != "0")
-            {
-
-                if (tipoUsuario == "Instructor") { return RedirectToAction("Index", "Home"); }
-                FormsAuthentication.SetAuthCookie(Correo_usuario, false);
-                return RedirectToAction("Index", "Login");
 
 
-            }
-            else
-            {
-                ViewData["Mensaje"] = "Correo o contraseña incorrectos";
-                return View("Index");
-            }
-        }
+        //[HttpPost]
+        //public ActionResult reg(Usuario usuario)
+        //{
+        //    usuario.Contrasena_usuario = (usuario.Contrasena_usuario);
+        //    bool registrado = false;
+        //    string mensaje = string.Empty;
+
+        //    using (SqlConnection cn = new SqlConnection(Conexion))
+        //    {
+        //        try
+        //        {
+        //            SqlCommand cmd = new SqlCommand("RegistrarUsuario", cn);
+        //            cmd.CommandType = CommandType.StoredProcedure;
+
+        //            cmd.Parameters.AddWithValue("@Tipo_Documento_usuario", usuario.Tipo_Documento_usuario);
+        //            cmd.Parameters.AddWithValue("@Documento_usuario", usuario.Documento_usuario);
+        //            cmd.Parameters.AddWithValue("@Nombre_usuario", usuario.Nombre_usuario);
+        //            cmd.Parameters.AddWithValue("@Apellido_usuario", usuario.Apellido_usuario);
+        //            cmd.Parameters.AddWithValue("@Telefono_usuario", usuario.Telefono_usuario);
+        //            cmd.Parameters.AddWithValue("@Correo_usuario", usuario.Correo_usuario);
+        //            cmd.Parameters.AddWithValue("@Contrasena_usuario", usuario.Contrasena_usuario);
+        //            cmd.Parameters.AddWithValue("@Tipo_usuario", usuario.Tipo_usuario);
+        //            cmd.Parameters.AddWithValue("@Tipo_instructor", usuario.Tipo_instructor);
+
+        //            SqlParameter outputRegistrado = new SqlParameter("@Registrado", SqlDbType.Bit)
+        //            {
+        //                Direction = ParameterDirection.Output
+        //            };
+        //            cmd.Parameters.Add(outputRegistrado);
+
+        //            SqlParameter outputMensaje = new SqlParameter("@Mensaje", SqlDbType.VarChar, 200)
+        //            {
+        //                Direction = ParameterDirection.Output
+        //            };
+        //            cmd.Parameters.Add(outputMensaje);
+
+        //            cn.Open();
+        //            cmd.ExecuteNonQuery();
+
+        //            registrado = (bool)outputRegistrado.Value;
+        //            mensaje = outputMensaje.Value.ToString();
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ViewBag.Error = "Ocurrió un error: " + ex.Message;
+        //            return View("Index");
+        //        }
+        //    }
+
+        //    ViewData["Mensaje"] = mensaje;
+        //    if (registrado)
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Error = mensaje;
+        //        return View("Index");
+        //    }
+        //}
+
+        //[HttpPost]
+        //public ActionResult ValidarUsuario(string Correo_usuario, string Contrasena_usuario)
+        //{
+        //    string tipoUsuario = "0";
+
+        //    using (SqlConnection cn = new SqlConnection(Conexion))
+        //    {
+        //        try
+        //        {
+        //            SqlCommand cmd = new SqlCommand("ValidarUsuarios", cn);
+        //            cmd.CommandType = CommandType.StoredProcedure;
+
+        //            cmd.Parameters.AddWithValue("@Correo_usuario", Correo_usuario);
+        //            cmd.Parameters.AddWithValue("@Contrasena_usuario", Contrasena_usuario);
+
+        //            cn.Open();
+        //            tipoUsuario = cmd.ExecuteScalar().ToString();
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ViewBag.Error = "Ocurrió un error: " + ex.Message;
+        //            return View("Index");
+        //        }
+        //    }
+
+        //    if (tipoUsuario != "0")
+        //    {
+
+        //        if (tipoUsuario == "Instructor") { return RedirectToAction("Index", "Home"); }
+        //        FormsAuthentication.SetAuthCookie(Correo_usuario, false);
+        //        return RedirectToAction("Index", "Login");
+
+
+        //    }
+        //    else
+        //    {
+        //        ViewData["Mensaje"] = "Correo o contraseña incorrectos";
+        //        return View("Index");
+        //    }
+        //}
 
     }
 }

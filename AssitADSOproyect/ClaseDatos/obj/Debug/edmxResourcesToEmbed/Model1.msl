@@ -107,5 +107,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="RegistrarUsuario4" FunctionName="BDAssistsADSOModel.Store.RegistrarUsuario" />
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram3" FunctionName="BDAssistsADSOModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram3" FunctionName="BDAssistsADSOModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram3" FunctionName="BDAssistsADSOModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition3" FunctionName="BDAssistsADSOModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDAssistsADSOModel.sp_helpdiagramdefinition3_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams3" FunctionName="BDAssistsADSOModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="BDAssistsADSOModel.sp_helpdiagrams3_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram3" FunctionName="BDAssistsADSOModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams3" FunctionName="BDAssistsADSOModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="ValidarUsuarios5" FunctionName="BDAssistsADSOModel.Store.ValidarUsuarios" />
   </EntityContainerMapping>
 </Mapping>
