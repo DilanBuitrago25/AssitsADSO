@@ -39,6 +39,10 @@ namespace AssitADSOproyect.Controllers
         // GET: RegistroAsistencias/Create
         public ActionResult Create(int? Id_Asistencia)
         {
+            if (Session["IdUsuario"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (Id_Asistencia == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -48,13 +52,16 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
-            var registroAsistencia = new RegistroAsistencia { Id_asistencia = Id_Asistencia.Value };
+            var registroAsistencia = new RegistroAsistencia { 
+                Id_asistencia = Id_Asistencia.Value,
+                Id_usuario = (int)Session["IdUsuario"]
+            };
             ViewBag.CodigoFicha = asistencia.Ficha.Codigo_ficha; // Pasar el código de ficha a la vista
             ViewBag.Nombre_competencia = asistencia.Competencia.Nombre_competencia; // Pasar el nombre de la competencia a la vista
             ViewBag.Nombre_Aprendiz = asistencia.Usuario.Nombre_usuario; 
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia");
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario");
-            return View();
+            return View(registroAsistencia);
         }
 
         // POST: RegistroAsistencias/Create
@@ -62,7 +69,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_Registroasistencia,Fecha_registro,Hora_registro,Id_asistencia,Id_usuario")] RegistroAsistencia registroAsistencia)
+        public ActionResult Create([Bind(Include = "Id_Registroasistencia,Fecha_registro,Hora_registro,Id_asistencia,Id_usuario,Asistio_registro")] RegistroAsistencia registroAsistencia)
         {
             if (ModelState.IsValid)
             {

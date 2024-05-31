@@ -63,7 +63,6 @@ namespace AssitADSOproyect
                         "~/assets/js/height-equal.js",
                         "~/assets/js/tooltip-init.js",
                         "~/assets/js/script.js",
-                        "~/assets/js/theme-customizer/customizer.js",
                         "~/assets/js/editor/ckeditor/ckeditor.js",
                         "~/assets/js/editor/ckeditor/adapters/jquery.js",
                         "~/assets/js/dropzone/dropzone.js",
