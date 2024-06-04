@@ -17,8 +17,14 @@ namespace AssitADSOproyect.Controllers
         // GET: Fichas1
         public ActionResult Index()
         {
-            var ficha = db.Ficha.Include(f => f.Programa_formacion);
-            return View(ficha.ToList());
+            //var ficha = db.Ficha.Include(f => f.Programa_formacion);
+
+            string idUsuarioSesion = Session["Idusuario"].ToString();
+
+            // Filtrar las fichas por Id_Usuario
+            var fichasFiltradas = db.Ficha.Where(f => f.Id_Usuario.ToString() == idUsuarioSesion);
+            //return View(ficha.ToList());
+            return View(fichasFiltradas);
         }
 
         // GET: Fichas1/Details/5
@@ -48,7 +54,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin")] Ficha ficha)
+        public ActionResult Create([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin,Id_usuario")] Ficha ficha)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +88,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin")] Ficha ficha)
+        public ActionResult Edit([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin,Id_usuario")] Ficha ficha)
         {
             if (ModelState.IsValid)
             {

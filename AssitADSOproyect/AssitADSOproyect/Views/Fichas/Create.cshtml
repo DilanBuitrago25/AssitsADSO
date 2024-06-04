@@ -130,7 +130,7 @@
                                             @Html.ValidationMessageFor(model => model.Fecha_fin, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-
+                                    @Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })
                                 </form>
                             </div>
                         </div>

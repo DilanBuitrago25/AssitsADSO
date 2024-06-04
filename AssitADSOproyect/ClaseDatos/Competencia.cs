@@ -25,10 +25,12 @@ namespace ClaseDatos
         public string tipo_competencia { get; set; }
         public Nullable<int> Numero_ficha { get; set; }
         public Nullable<int> Id_programa { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
         public virtual Programa_formacion Programa_formacion { get; set; }
         public virtual Ficha Ficha { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistencia> Asistencia { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

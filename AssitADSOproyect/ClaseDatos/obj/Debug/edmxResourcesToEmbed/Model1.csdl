@@ -32,6 +32,8 @@
     <NavigationProperty Name="Programa_formacion" Relationship="Self.FK__Competenc__Id_pr__2D27B809" FromRole="Competencia" ToRole="Programa_formacion" />
     <NavigationProperty Name="Ficha" Relationship="Self.FK__Competenc__Numer__2C3393D0" FromRole="Competencia" ToRole="Ficha" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F" FromRole="Competencia" ToRole="Asistencia" />
+    <Property Name="Id_Usuario" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2" FromRole="Competencia" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Ficha">
     <Key>
@@ -49,6 +51,7 @@
     <Property Name="Fecha_fin" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Id_programa" Type="Int32" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_fi__31EC6D26" FromRole="Ficha" ToRole="Asistencia" />
+    <Property Name="Id_Usuario" Type="Int32" />
   </EntityType>
   <EntityType Name="Programa_formacion">
     <Key>
@@ -60,6 +63,8 @@
     <Property Name="Duracion_programa" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Competencia" Relationship="Self.FK__Competenc__Id_pr__2D27B809" FromRole="Programa_formacion" ToRole="Competencia" />
     <NavigationProperty Name="Ficha" Relationship="Self.FK__Ficha__Id_progra__267ABA7A" FromRole="Programa_formacion" ToRole="Ficha" />
+    <Property Name="Id_Usuario" Type="Int32" />
+    <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64" FromRole="Programa_formacion" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Reporte">
     <Key>
@@ -110,6 +115,8 @@
     <NavigationProperty Name="RegistroAsistencia" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" FromRole="Usuario" ToRole="RegistroAsistencia" />
     <NavigationProperty Name="Reporte" Relationship="BDAssistsADSOModel.FK__Reporte__Id_usua__3D5E1FD2" FromRole="Usuario" ToRole="Reporte" />
     <NavigationProperty Name="Soporte" Relationship="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE" FromRole="Usuario" ToRole="Soporte" />
+    <NavigationProperty Name="Competencia" Relationship="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2" FromRole="Usuario" ToRole="Competencia" />
+    <NavigationProperty Name="Programa_formacion" Relationship="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64" FromRole="Usuario" ToRole="Programa_formacion" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_us__35BCFE0A">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -465,6 +472,18 @@
       <Parameter Name="Correo_usuario" Mode="In" Type="String" />
       <Parameter Name="Contrasena_usuario" Mode="In" Type="String" />
     </FunctionImport>
+    <AssociationSet Name="FK__Competenc__Id_Us__5BE2A6F2" Association="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Competencia" EntitySet="Competencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ficha__Id_Usuari__5CD6CB2B" Association="BDAssistsADSOModel.FK__Ficha__Id_Usuari__5CD6CB2B">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Ficha" EntitySet="Ficha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Programa___Id_Us__5DCAEF64" Association="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Programa_formacion" EntitySet="Programa_formacion" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -595,4 +614,40 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <Association Name="FK__Competenc__Id_Us__5BE2A6F2">
+    <End Type="BDAssistsADSOModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="BDAssistsADSOModel.Competencia" Role="Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Competencia">
+        <PropertyRef Name="Id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ficha__Id_Usuari__5CD6CB2B">
+    <End Type="BDAssistsADSOModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="BDAssistsADSOModel.Ficha" Role="Ficha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Ficha">
+        <PropertyRef Name="Id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Programa___Id_Us__5DCAEF64">
+    <End Type="BDAssistsADSOModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="BDAssistsADSOModel.Programa_formacion" Role="Programa_formacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Programa_formacion">
+        <PropertyRef Name="Id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -17,8 +17,14 @@ namespace AssitADSOproyect.Controllers
         // GET: Competencias
         public ActionResult Index()
         {
-            var competencia = db.Competencia.Include(c => c.Programa_formacion).Include(c => c.Ficha);
-            return View(competencia.ToList());
+            //var competencia = db.Competencia.Include(c => c.Programa_formacion).Include(c => c.Ficha);
+            //return View(competencia.ToList());
+
+            string idUsuarioSesion = Session["Idusuario"].ToString();
+
+            // Filtrar las fichas por Id_Usuario
+            var CompetenciasFiltradas = db.Competencia.Where(f => f.Id_Usuario.ToString() == idUsuarioSesion);
+            return View(CompetenciasFiltradas);
         }
 
         // GET: Competencias/Details/5
@@ -49,7 +55,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia")] Competencia competencia)
+        public ActionResult Create([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia,Id_usuario")] Competencia competencia)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +91,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia")] Competencia competencia)
+        public ActionResult Edit([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia,Id_usuario")] Competencia competencia)
         {
             if (ModelState.IsValid)
             {

@@ -17,8 +17,13 @@ namespace AssitADSOproyect.Controllers
         // GET: RegistroAsistencias
         public ActionResult Index()
         {
-            var registroAsistencia = db.RegistroAsistencia.Include(r => r.Asistencia).Include(r => r.Usuario);
-            return View(registroAsistencia.ToList());
+            //var registroAsistencia = db.RegistroAsistencia.Include(r => r.Asistencia).Include(r => r.Usuario);
+            //return View(registroAsistencia.ToList());
+            string idUsuarioSesion = Session["Idusuario"].ToString();
+
+            // Filtrar las fichas por Id_Usuario
+            var RegistrosFiltrados = db.RegistroAsistencia.Where(f => f.Id_usuario.ToString() == idUsuarioSesion);
+            return View(RegistrosFiltrados);
         }
 
         // GET: RegistroAsistencias/Details/5

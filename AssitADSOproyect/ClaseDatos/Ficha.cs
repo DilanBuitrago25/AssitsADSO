@@ -30,6 +30,7 @@ namespace ClaseDatos
         public string Fecha_inicio { get; set; }
         public string Fecha_fin { get; set; }
         public Nullable<int> Id_programa { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competencia> Competencia { get; set; }

@@ -17,7 +17,12 @@ namespace AssitADSOproyect.Controllers
         // GET: Programa_formacion
         public ActionResult Index()
         {
-            return View(db.Programa_formacion.ToList());
+            //return View(db.Programa_formacion.ToList());
+            string idUsuarioSesion = Session["Idusuario"].ToString();
+
+            // Filtrar las fichas por Id_Usuario
+            var ProgramasFiltrados = db.Programa_formacion.Where(f => f.Id_Usuario.ToString() == idUsuarioSesion);
+            return View(ProgramasFiltrados);
         }
 
         // GET: Programa_formacion/Details/5
@@ -46,7 +51,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa")] Programa_formacion programa_formacion)
+        public ActionResult Create([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa,Id_usuario")] Programa_formacion programa_formacion)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +83,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa")] Programa_formacion programa_formacion)
+        public ActionResult Edit([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa")] Programa_formacion programa_formacion) /* posibilidad de implementar el id usaurio con el session*/
         {
             if (ModelState.IsValid)
             {

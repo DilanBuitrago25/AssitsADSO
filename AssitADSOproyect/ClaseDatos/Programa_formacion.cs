@@ -25,10 +25,12 @@ namespace ClaseDatos
         public string Nombre_programa { get; set; }
         public string Tipo_programa { get; set; }
         public string Duracion_programa { get; set; }
+        public Nullable<int> Id_Usuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competencia> Competencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ficha> Ficha { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

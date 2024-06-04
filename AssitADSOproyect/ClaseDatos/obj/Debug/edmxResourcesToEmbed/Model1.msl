@@ -19,6 +19,7 @@
     <EntitySetMapping Name="Competencia">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Competencia">
         <MappingFragment StoreEntitySet="Competencia">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Nombre_competencia" ColumnName="Nombre_competencia" />
           <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />
           <ScalarProperty Name="tipo_competencia" ColumnName="tipo_competencia" />
@@ -30,6 +31,7 @@
     <EntitySetMapping Name="Ficha">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Ficha">
         <MappingFragment StoreEntitySet="Ficha">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
           <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
           <ScalarProperty Name="Codigo_ficha" ColumnName="Codigo_ficha" />
@@ -44,6 +46,7 @@
     <EntitySetMapping Name="Programa_formacion">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Programa_formacion">
         <MappingFragment StoreEntitySet="Programa_formacion">
+          <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Id_programa" ColumnName="Id_programa" />
           <ScalarProperty Name="Nombre_programa" ColumnName="Nombre_programa" />
           <ScalarProperty Name="Tipo_programa" ColumnName="Tipo_programa" />

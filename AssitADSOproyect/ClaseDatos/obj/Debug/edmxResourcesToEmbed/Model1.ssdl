@@ -23,6 +23,7 @@
     <Property Name="tipo_competencia" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Numero_ficha" Type="int" />
     <Property Name="Id_programa" Type="int" />
+    <Property Name="Id_Usuario" Type="int" />
   </EntityType>
   <EntityType Name="Ficha">
     <Key>
@@ -36,6 +37,7 @@
     <Property Name="Fecha_inicio" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Fecha_fin" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Id_programa" Type="int" />
+    <Property Name="Id_Usuario" Type="int" />
   </EntityType>
   <EntityType Name="Programa_formacion">
     <Key>
@@ -45,6 +47,7 @@
     <Property Name="Nombre_programa" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Tipo_programa" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Duracion_programa" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Id_Usuario" Type="int" />
   </EntityType>
   <EntityType Name="RegistroAsistencia">
     <Key>
@@ -158,6 +161,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Competenc__Id_Us__5BE2A6F2">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Competencia">
+        <PropertyRef Name="Id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Ficha__Id_progra__398D8EEE">
     <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="0..1" />
     <End Role="Ficha" Type="Self.Ficha" Multiplicity="*" />
@@ -167,6 +182,30 @@
       </Principal>
       <Dependent Role="Ficha">
         <PropertyRef Name="Id_programa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ficha__Id_Usuari__5CD6CB2B">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Ficha" Type="Self.Ficha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Ficha">
+        <PropertyRef Name="Id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Programa___Id_Us__5DCAEF64">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Programa_formacion">
+        <PropertyRef Name="Id_Usuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -283,9 +322,21 @@
       <End Role="Programa_formacion" EntitySet="Programa_formacion" />
       <End Role="Competencia" EntitySet="Competencia" />
     </AssociationSet>
+    <AssociationSet Name="FK__Competenc__Id_Us__5BE2A6F2" Association="Self.FK__Competenc__Id_Us__5BE2A6F2">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Competencia" EntitySet="Competencia" />
+    </AssociationSet>
     <AssociationSet Name="FK__Ficha__Id_progra__398D8EEE" Association="Self.FK__Ficha__Id_progra__398D8EEE">
       <End Role="Programa_formacion" EntitySet="Programa_formacion" />
       <End Role="Ficha" EntitySet="Ficha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ficha__Id_Usuari__5CD6CB2B" Association="Self.FK__Ficha__Id_Usuari__5CD6CB2B">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Ficha" EntitySet="Ficha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Programa___Id_Us__5DCAEF64" Association="Self.FK__Programa___Id_Us__5DCAEF64">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Programa_formacion" EntitySet="Programa_formacion" />
     </AssociationSet>
     <AssociationSet Name="FK__RegistroA__Id_as__48CFD27E" Association="Self.FK__RegistroA__Id_as__48CFD27E">
       <End Role="Asistencia" EntitySet="Asistencia" />

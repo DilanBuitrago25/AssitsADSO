@@ -20,8 +20,13 @@ namespace AssitADSOproyect.Controllers
         // GET: Asistencias
         public ActionResult Index()
         {
-            var asistencia = db.Asistencia.Include(a => a.Usuario);
-            return View(asistencia.ToList());
+            //var asistencia = db.Asistencia.Include(a => a.Usuario);
+            //return View(asistencia.ToList());
+            string idUsuarioSesion = Session["Idusuario"].ToString();
+
+            // Filtrar las fichas por Id_Usuario
+            var AsistenciasFiltradas = db.Asistencia.Where(f => f.Id_usuario.ToString() == idUsuarioSesion);
+            return View(AsistenciasFiltradas);
         }
 
         // GET: Asistencias/Details/5

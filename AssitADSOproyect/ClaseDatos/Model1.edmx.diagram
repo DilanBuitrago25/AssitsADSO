@@ -26,6 +26,9 @@
         <AssociationConnector Association="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Reporte__Id_usua__3D5E1FD2" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Ficha__Id_Usuari__5CD6CB2B" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
