@@ -85,7 +85,7 @@
                                     <div class="mb-3">
                                         <label>Fecha Inicio</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new{ htmlAttributes = new { @class = "datepicker-here form-control digits",@type = "text", lang = "en"} })
+                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new{ htmlAttributes = new { @class = "datepicker-here form-control digits",@type = "text", lang = "es"} })
                                             @Html.ValidationMessageFor(model => model.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -119,12 +119,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })
                                 @*<div class="col-sm-4">
-                <div class="mb-3">
-                    <label>Ending date</label>
-                    <input class="datepicker-here form-control" type="text" data-language="en">
-                </div>
-            </div>*@
+            <div class="mb-3">
+                <label>Ending date</label>
+                <input class="datepicker-here form-control" type="text" data-language="en">
+            </div>
+        </div>*@
                             </div>
 
                             <div class="row">
@@ -173,6 +174,14 @@
         </div>
     </div>
 }
+
+<script>
+    $('#miDatepicker').datepicker({
+        language: 'es' // Para Bootstrap Datepicker
+    // o
+    regional: "es" // Para jQuery UI Datepicker
+    });
+</script>
 
 @*<h2>Create</h2>
 

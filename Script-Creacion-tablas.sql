@@ -15,7 +15,8 @@ create table Programa_formacion(
 Id_programa int identity (1000,1)not null,
 Nombre_programa varchar (100) not null,
 Tipo_programa varchar (100) not null,
-Duracion_programa varchar (100) not null
+Duracion_programa varchar (100) not null,
+Id_Usuario int references Usuario(Id_Usuario),
 primary key (Id_programa))
 
 
@@ -28,9 +29,10 @@ tipo_ficha varchar (100) not null,
 Fecha_inicio varchar (200) not null,
 Fecha_fin varchar (200) not null,
 Id_programa int references Programa_formacion(Id_programa),
+Id_Usuario int references Usuario(Id_Usuario),
 primary key (Id_ficha))
 
---alter table Ficha add Nombre_ficha varchar (200) not null 
+alter table Programa_formacion add Id_Usuario int references Usuario
 
 create table Usuario(
 Id_usuario int identity (1,1) not null,
@@ -68,6 +70,7 @@ Nombre_competencia varchar (500) not null,
 tipo_competencia varchar (100) not null,
 Id_ficha int references Ficha(Id_ficha),
 Id_programa int references Programa_formacion(Id_programa),
+Id_Usuario int references Usuario(Id_Usuario),
 primary key (ID_competencia))
 
 create table Asistencia(

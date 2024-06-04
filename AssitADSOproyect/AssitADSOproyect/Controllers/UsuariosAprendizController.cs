@@ -39,7 +39,7 @@ namespace AssitADSOproyect.Controllers
         // GET: UsuariosAprendiz/Create
         public ActionResult Create()
         {
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha","Id_ficha" /*"Jornada_ficha"*/);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha","Codigo_ficha" /*"Jornada_ficha"*/);
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Id_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
             return View(usuario);
         }
 
@@ -73,7 +73,7 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Id_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
             return View(usuario);
         }
 
@@ -90,7 +90,7 @@ namespace AssitADSOproyect.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Id_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
             return View(usuario);
         }
 

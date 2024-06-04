@@ -12,7 +12,7 @@
                 <h3>Gestionar Fichas</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
-                    <li class="breadcrumb-item">Fichas</li>
+                    <li class="breadcrumb-item">Aprendiz</li>
                     <li class="breadcrumb-item">General</li>
                     <li class="breadcrumb-item active">Detalles</li>
                 </ol>
@@ -48,7 +48,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>Detalles Ficha</h5>
+                        <h5>Detalles Aprendiz</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -60,7 +60,7 @@
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label class="form-label">Documento</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Id_usuario)">
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Documento_usuario)">
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label class="form-label">Codigo Ficha</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Ficha.Id_ficha)">
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Ficha.Codigo_ficha)">
                                             </div>
                                         </div>
                                     </div>
