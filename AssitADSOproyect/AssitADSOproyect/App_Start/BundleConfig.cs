@@ -70,7 +70,10 @@ namespace AssitADSOproyect
                         "~/assets/js/email-app.js",
                         "~/assets/js/time-picker/jquery-clockpicker.min.js",
                         "~/assets/js/time-picker/highlight.min.js",
-                        "~/assets/js/time-picker/clockpicker.js"
+                        "~/assets/js/time-picker/clockpicker.js",
+                        "~/assets/js/datepicker/date-time-picker/moment.min.js",
+                        "~/assets/js/datepicker/date-time-picker/tempusdominus-bootstrap-4.min.js",
+                        "~/assets/js/datepicker/date-time-picker/datetimepicker.custom.js"
                         ));
 
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información sobre los formularios.  De esta manera estará

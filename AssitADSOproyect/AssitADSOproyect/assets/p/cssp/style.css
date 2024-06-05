@@ -9455,6 +9455,7 @@ Sticky Menu
   padding: 70px 15px 20px;
   transition: 0.4s all ease-in-out;
   box-shadow: 0px 12px 43px 0px rgba(0, 0, 0, 0.13);
+  background-color:#212529; 
 }
 
 .saas_two_team_section .s2-team_img_text:hover {
@@ -9530,7 +9531,7 @@ Sticky Menu
 }
 
     .saas_two_team_section .s2-team_img_text .s2_name_info .s2_mem_contact span i {
-        color: #F0DE90;
+        color: #25695c;
         margin-right: 8px;
     }
 

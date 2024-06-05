@@ -113,6 +113,12 @@
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label>Hora Fin</label>
+                                        <div class="input-group date" id="dt-time" data-target-input="nearest">
+                                            <input class="form-control datetimepicker-input digits" type="text" data-target="#dt-time">
+                                            <div class="input-group-text" data-target="#dt-time" data-toggle="datetimepicker"><i class="fa fa-clock-o"></i></div>
+                                        </div>
+                                        <br />
+                                        
                                         <div class="input-group clockpicker">
                                             @Html.EditorFor(model => model.Hora_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits glyphicon glyphicon-time", @type = "text" } })
                                             @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
