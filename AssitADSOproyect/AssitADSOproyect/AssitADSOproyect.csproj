@@ -6086,6 +6086,7 @@
     <Content Include="Views\Usuariosprueba\Details.cshtml" />
     <Content Include="Views\Usuariosprueba\Edit.cshtml" />
     <Content Include="Views\Usuariosprueba\Index.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\IndexAprendiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

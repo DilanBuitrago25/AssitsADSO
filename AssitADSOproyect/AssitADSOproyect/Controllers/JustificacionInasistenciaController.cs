@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -16,6 +17,12 @@ namespace AssitADSOproyect.Controllers
 
         // GET: JustificacionInasistencia
         public ActionResult Index()
+        {
+            var soporte = db.Soporte.Include(s => s.Asistencia);
+            return View(soporte.ToList());
+        }
+        
+        public ActionResult IndexAprendiz()
         {
             var soporte = db.Soporte.Include(s => s.Asistencia);
             return View(soporte.ToList());
@@ -152,6 +159,41 @@ namespace AssitADSOproyect.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Upload()
+        {
+            if (Request.Files.Count > 0)
+            {
+                var file = Request.Files[0];
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    // Validación del tipo de archivo
+                    if (file.ContentType != "application/pdf")
+                    {
+                        return Json(new { error = "Solo se permiten archivos PDF" });
+                    }
+
+                    // Generar un nombre de archivo único y seguro
+                    var fileName = Guid.NewGuid().ToString() + ".pdf";
+                    var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
+
+                    // Guardar el archivo
+                    file.SaveAs(path);
+
+                    // Actualizar la base de datos usando Entity Framework
+                    
+                        var soporte = new Soporte { Tipo_soporte = "~/uploads/" + fileName }; // Ruta relativa
+                        db.Soporte.Add(soporte);
+                        db.SaveChanges();
+                    
+
+                    return Json(new { success = true, filePath = "~/uploads/" + fileName });
+                }
+            }
+
+            return Json(new { error = "No se seleccionó ningún archivo" });
         }
     }
 }
