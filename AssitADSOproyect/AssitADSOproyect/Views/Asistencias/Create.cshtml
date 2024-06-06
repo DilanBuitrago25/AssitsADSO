@@ -91,7 +91,8 @@
                                                 {
                                                     @class = "datepicker-here form-control digits",
                                                     @type = "text",
-                                                    data_language = "en" // Note the change from lang to data_language
+                                                    data_language = "en",
+                                                    autocomplete = "off"  // Agrega el atributo autocomplete="off"
                                                 }
                                             })
                                             @Html.ValidationMessageFor(model => model.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
@@ -130,7 +131,8 @@
                                                 {
                                                     @class = "datepicker-here form-control digits",
                                                     @type = "text",
-                                                    data_language = "en" 
+                                                    data_language = "en" ,
+                                                    autocomplete = "off"
                                                 }
                                             })
                                             @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
