@@ -57,10 +57,10 @@
 
                                 @Html.AntiForgeryToken()
                                 <form>
-                                    <div class="mb-3 input-group-solid">
+                                    <div class="">
                                         <label class="form-label">Documento</label>
                                         <div class="input-group">
-                                            <input type="text"
+                                            <input type="number"x
                                                    class="form-control"
                                                    @*id="@Html.IdFor(model => model.Documento_usuario)"
                                                    name="@Html.NameFor(model => model.Documento_usuario)"
@@ -145,6 +145,19 @@
     </div>
 }
 
+
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Nombre_usuario)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
 
 @*<h2>Create</h2>
 

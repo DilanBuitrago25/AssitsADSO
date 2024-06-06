@@ -42,8 +42,12 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: RegistroAsistencias/Create
-        public ActionResult Create(int? Id_Asistencia)
+        public ActionResult Create(int? Id_Asistencia, string fechaFin)
         {
+           
+
+
+
             if (Session["IdUsuario"] == null)
             {
                 return RedirectToAction("Index", "Login");
@@ -52,7 +56,7 @@ namespace AssitADSOproyect.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var asistencia = db.Asistencia.Find(Id_Asistencia); // Obtener la asistencia completa
+            var asistencia = db.Asistencia.Find(Id_Asistencia);// Obtener la asistencia completa
             if (asistencia == null)
             {
                 return HttpNotFound();

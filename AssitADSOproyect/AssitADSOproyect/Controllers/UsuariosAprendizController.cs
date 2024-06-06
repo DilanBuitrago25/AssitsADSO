@@ -80,9 +80,22 @@ namespace AssitADSOproyect.Controllers
         // POST: UsuariosAprendiz/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id_usuario,Documento_usuario,Tipo_usuario,Tipo_Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Id_ficha")] Usuario usuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(usuario).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
+        //    return View(usuario);
+        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_UsuarioDocumento_usuario,Tipo_Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Id_ficha")] Usuario usuario)
+        public ActionResult Edit([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Tipo_usuario,Tipo_instructor,Esinstructormaster_usuario,Id_ficha")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +103,7 @@ namespace AssitADSOproyect.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", usuario.Id_ficha);
             return View(usuario);
         }
 

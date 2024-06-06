@@ -139,6 +139,7 @@
     <Compile Include="Controllers\RegistroAsistenciasController.cs" />
     <Compile Include="Controllers\UsuariosAprendizController.cs" />
     <Compile Include="Controllers\UsuariosInstructorController.cs" />
+    <Compile Include="Controllers\UsuariospruebaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -6080,6 +6081,11 @@
     <Content Include="Views\RegistroAsistencias\Edit.cshtml" />
     <Content Include="Views\RegistroAsistencias\Index.cshtml" />
     <Content Include="Views\Crear_justificación.cshtml" />
+    <Content Include="Views\Usuariosprueba\Create.cshtml" />
+    <Content Include="Views\Usuariosprueba\Delete.cshtml" />
+    <Content Include="Views\Usuariosprueba\Details.cshtml" />
+    <Content Include="Views\Usuariosprueba\Edit.cshtml" />
+    <Content Include="Views\Usuariosprueba\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
