@@ -63,6 +63,7 @@ namespace AssitADSOproyect.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.Asistencia.Add(asistencia);
                 db.SaveChanges();
                 var createRegistroUrl = Url.Action("Create", "RegistroAsistencias", new { id_Asistencia = asistencia.Id_asistencia }, Request.Url.Scheme);
@@ -74,6 +75,20 @@ namespace AssitADSOproyect.Controllers
                 using (var bitmap = qrCode.GetGraphic(20))
                 {
                     bitmap.Save(qrCodePath, ImageFormat.Png);
+                }
+
+                // Obtener usuarios asociados a la ficha
+                var usuariosFicha = db.Usuario.Where(u => u.Id_ficha == asistencia.Id_ficha).ToList();
+
+                foreach (var usuario in usuariosFicha)
+                {
+                    var registroAsistencia = new RegistroAsistencia
+                    {
+                        Id_asistencia = asistencia.Id_asistencia,
+                        Id_usuario = usuario.Id_usuario
+                        // ... otros campos del registro de asistencia ...
+                    };
+                    db.RegistroAsistencia.Add(registroAsistencia);
                 }
 
                 return RedirectToAction("Index");

@@ -5,6 +5,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.WebControls;
 using Microsoft.Ajax.Utilities;
 using System.Data.Entity.Infrastructure;
+using System.Xml.Linq;
 
 namespace AssitADSOproyect
 {
@@ -23,6 +24,8 @@ namespace AssitADSOproyect
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/assets").Include(
+                "~/assets/js/editor/ckeditor/ckeditor.js",
+                        "~/assets/js/editor/ckeditor/adapters/jquery.js",
                         "~/assets/js/jquery-3.5.1.min.js",
                         "~/assets/js/icons/feather-icon/feather.min.js",
                         "~/assets/js/icons/feather-icon/feather-icon.js",
@@ -56,15 +59,13 @@ namespace AssitADSOproyect
                         "~/assets/js/datepicker/date-picker/datepicker.js",
                         "~/assets/js/datepicker/date-picker/datepicker.en.js",
                         "~/assets/js/datepicker/date-picker/datepicker.custom.js",
-                        "~/assets/js/datatable/datatables/jquery.dataTables.min.js",
-                        "~/assets/js/datatable/datatables/datatable.custom.js",
+                        
                         "~/assets/js/owlcarousel/owl.carousel.js",
                         "~/assets/js/general-widget.js",
                         "~/assets/js/height-equal.js",
                         "~/assets/js/tooltip-init.js",
                         "~/assets/js/script.js",
-                        "~/assets/js/editor/ckeditor/ckeditor.js",
-                        "~/assets/js/editor/ckeditor/adapters/jquery.js",
+                        
                         "~/assets/js/dropzone/dropzone.js",
                         "~/assets/js/dropzone/dropzone-script.js",
                         "~/assets/js/email-app.js",
@@ -73,7 +74,9 @@ namespace AssitADSOproyect
                         "~/assets/js/time-picker/clockpicker.js",
                         "~/assets/js/datepicker/date-time-picker/moment.min.js",
                         "~/assets/js/datepicker/date-time-picker/tempusdominus-bootstrap-4.min.js",
-                        "~/assets/js/datepicker/date-time-picker/datetimepicker.custom.js"
+                        "~/assets/js/datepicker/date-time-picker/datetimepicker.custom.js",
+                        "~/assets/js/datatable/datatables/jquery.dataTables.min.js",
+                        "~/assets/js/datatable/datatables/datatable.custom.js"
                         ));
 
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información sobre los formularios.  De esta manera estará
