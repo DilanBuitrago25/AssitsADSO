@@ -178,7 +178,18 @@ Dropzone.options.singleFileUpload = {
             }
         });
     }
-};
+    };
+
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Nombre_soporte)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
 </script>
 <!-- Container-fluid Ends-->
 @*<h2>Create</h2>
