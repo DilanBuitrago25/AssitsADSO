@@ -8,12 +8,27 @@ using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
 using static AssitADSOproyect.Controllers.LoginController;
+using System.Web.Services;
 
 namespace AssitADSOproyect.Controllers
 {
     public class AprendizsController : Controller
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
+
+
+        //[WebService(Namespace = "http://tempuri.org/")]
+        //[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+        //public class ServicioQR : System.Web.Services.WebService
+        //{
+        //    [WebMethod]
+        //    public string EscanearQR(string qrData)
+        //    {
+        //        // Aquí procesas la información del código QR (qrData)
+        //        // ... (lógica de tu aplicación)
+        //        return "QR escaneado: " + qrData; // Ejemplo de respuesta
+        //    }
+        //}
 
         // GET: Aprendizs
         [AutorizarTipoUsuario("Aprendiz")]
