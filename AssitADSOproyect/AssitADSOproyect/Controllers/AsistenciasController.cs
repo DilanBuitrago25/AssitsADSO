@@ -78,18 +78,18 @@ namespace AssitADSOproyect.Controllers
                 }
 
                 // Obtener usuarios asociados a la ficha
-                var usuariosFicha = db.Usuario.Where(u => u.Id_ficha == asistencia.Id_ficha).ToList();
+                //var usuariosFicha = db.Usuario.Where(u => u.Id_ficha == asistencia.Id_ficha).ToList();
 
-                foreach (var usuario in usuariosFicha)
-                {
-                    var registroAsistencia = new RegistroAsistencia
-                    {
-                        Id_asistencia = asistencia.Id_asistencia,
-                        Id_usuario = usuario.Id_usuario
-                        // ... otros campos del registro de asistencia ...
-                    };
-                    db.RegistroAsistencia.Add(registroAsistencia);
-                }
+                //foreach (var usuario in usuariosFicha)
+                //{
+                //    var registroAsistencia = new RegistroAsistencia
+                //    {
+                //        Id_asistencia = asistencia.Id_asistencia,
+                //        Id_usuario = usuario.Id_usuario
+                //        // ... otros campos del registro de asistencia ...
+                //    };
+                //    db.RegistroAsistencia.Add(registroAsistencia);
+                //}
 
                 return RedirectToAction("Index");
             }

@@ -85,15 +85,7 @@
                                     <div class="mb-3">
                                         <label>Fecha Inicio</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new
-                                            {
-                                                htmlAttributes = new
-                                                {
-                                                    @class = "datepicker-here form-control digits",
-                                                    @type = "text",
-                                                    data_language = "en" // Note the change from lang to data_language
-                                                }
-                                            })
+                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
                                             @Html.ValidationMessageFor(model => model.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -101,20 +93,9 @@
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label>Hora Inicio</label>
-                                        <div class="input-group date" id="dt-time" data-target-input="nearest">
-                                            @Html.EditorFor(model => model.Hora_inicio_asistencia, new
-                                            {
-                                                htmlAttributes = new
-                                                {
-                                                    @class = "form-control datetimepicker-input digits",
-                                                    @type = "text",
-                                                    @data_target = "#dt-time"
-                                                }
-                                            })
-                                            <div class="input-group-text" data-target="#dt-time" data-toggle="datetimepicker">
-                                                <i class="fa fa-clock-o"></i>
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Hora_inicio_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
+                                            @Html.ValidationMessageFor(model => model.Hora_inicio_asistencia, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                 </div>
@@ -124,15 +105,7 @@
                                     <div class="mb-3">
                                         <label>Fecha Fin</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new
-                                            {
-                                                htmlAttributes = new
-                                                {
-                                                    @class = "datepicker-here form-control digits",
-                                                    @type = "text",
-                                                    data_language = "en" 
-                                                }
-                                            })
+                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
                                             @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -140,19 +113,8 @@
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label>Hora Fin</label>
-                                        <div class="input-group date" id="dt-time" data-target-input="nearest">
-                                            @Html.EditorFor(model => model.Hora_fin_asistencia, new
-                                            {
-                                                htmlAttributes = new
-                                                {
-                                                    @class = "form-control datetimepicker-input digits",
-                                                    @type = "text",
-                                                    @data_target = "#dt-time"
-                                                }
-                                            })
-                                            <div class="input-group-text" data-target="#dt-time" data-toggle="datetimepicker">
-                                                <i class="fa fa-clock-o"></i>
-                                            </div>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Hora_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
                                             @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
                                         </div>
                                        
