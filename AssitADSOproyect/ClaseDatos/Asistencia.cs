@@ -11,7 +11,8 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Asistencia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,10 +24,15 @@ namespace ClaseDatos
         }
     
         public int Id_asistencia { get; set; }
+        [Required(ErrorMessage = "Por favor de colocar la fecha de inicio de la asistencia")]
         public string Fecha_inicio_asistencia { get; set; }
+        [Required(ErrorMessage = "Por favor de colocar la fecha de fin de la asistencia")]
         public string Fecha_fin_asistencia { get; set; }
+        [Required(ErrorMessage = "Por favor de colocar la hora de inicio de la asistencia")]
         public string Hora_inicio_asistencia { get; set; }
+        [Required(ErrorMessage = "Por favor de colocar la hora de fin de la asistencia")]
         public string Hora_fin_asistencia { get; set; }
+        [StringLength(500, ErrorMessage = "El nombre no puede exceder los 500 caracteres")]
         public string Detalles_asistencia { get; set; }
         public Nullable<int> Id_usuario { get; set; }
         public Nullable<int> Id_ficha { get; set; }

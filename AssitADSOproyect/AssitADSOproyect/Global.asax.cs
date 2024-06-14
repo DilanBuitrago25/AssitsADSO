@@ -21,7 +21,7 @@ namespace AssitADSOproyect
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            System.Timers.Timer timer = new System.Timers.Timer(36); // 1 hora en milisegundos
+            System.Timers.Timer timer = new System.Timers.Timer(360000); // 1 hora en milisegundos
             timer.Elapsed += (sender, e) => GenerarRegistrosAsistencia();
             timer.Enabled = true;
         }

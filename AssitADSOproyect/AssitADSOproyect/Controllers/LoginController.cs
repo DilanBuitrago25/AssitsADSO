@@ -41,8 +41,13 @@ namespace AssitADSOproyect.Controllers
                 }
             }
 
+             
+            ViewData["Mensaje"] = "Correo o contraseña incorrectos";
             ModelState.AddModelError("", "Credenciales inválidas.");
             return View();
+
+            
+            
         }
 
         // GET: Auth/Logout

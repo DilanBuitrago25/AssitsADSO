@@ -83,6 +83,7 @@
     <Property Name="Id_asistencia" Type="int" />
     <Property Name="Fecha_registro" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Hora_registro" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Id_Instructor" Type="int" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -269,6 +270,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__Soporte__Id_Inst__6E01572D">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Soporte">
+        <PropertyRef Name="Id_Instructor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Soporte__Id_usua__4D94879B">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
@@ -356,6 +369,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__Soporte__Id_asis__4E88ABD4" Association="Self.FK__Soporte__Id_asis__4E88ABD4">
       <End Role="Asistencia" EntitySet="Asistencia" />
+      <End Role="Soporte" EntitySet="Soporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Soporte__Id_Inst__6E01572D" Association="Self.FK__Soporte__Id_Inst__6E01572D">
+      <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
     <AssociationSet Name="FK__Soporte__Id_usua__4D94879B" Association="Self.FK__Soporte__Id_usua__4D94879B">

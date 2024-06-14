@@ -69,6 +69,7 @@
     <EntitySetMapping Name="Soporte">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
         <MappingFragment StoreEntitySet="Soporte">
+          <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
           <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
           <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
           <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />

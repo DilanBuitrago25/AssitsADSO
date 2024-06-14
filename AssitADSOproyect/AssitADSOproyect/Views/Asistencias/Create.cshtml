@@ -135,8 +135,10 @@
                                         <label for="exampleFormControlTextarea4">Enter some Details</label>
                                         <div class="input-group">
                                             @Html.TextAreaFor(model => model.Detalles_asistencia, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3" })
-                                            @Html.ValidationMessageFor(model => model.Detalles_asistencia, "", new { @class = "text-danger" })
+                                          
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Detalles_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
