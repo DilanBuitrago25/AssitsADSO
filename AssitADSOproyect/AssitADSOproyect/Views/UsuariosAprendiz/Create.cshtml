@@ -60,7 +60,7 @@
                                     <div class="">
                                         <label class="form-label">Documento</label>
                                         <div class="input-group">
-                                            <input type="number"x
+                                            <input type="number" x
                                                    class="form-control"
                                                    @*id="@Html.IdFor(model => model.Documento_usuario)"
                                                    name="@Html.NameFor(model => model.Documento_usuario)"
@@ -82,43 +82,49 @@
                                                      new SelectListItem { Text = "Tarjeta de Identidad", Value = "T.I" },
                                                      new SelectListItem { Text = "Cedula de Extranjeria", Value = "C.E" }
                                                 }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Tipo_Documento_usuario, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Tipo_Documento_usuario, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Nombre(s)</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Nombre_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Nombre_usuario, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Nombre_usuario, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Apellidos</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Apellido_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Apellido_usuario, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Apellido_usuario, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Telefono</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Telefono_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Telefono_usuario, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Telefono_usuario, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Correo</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Correo_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Correo_usuario, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Correo_usuario, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Contraseña</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Contrasena_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Contrasena_usuario, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Contrasena_usuario, "", new { @class = "text-danger" })
                                     </div>
 
                                     @Html.HiddenFor(model => model.Tipo_usuario, new { Value = "Aprendiz" })
@@ -126,9 +132,9 @@
                                     <label class="form-label">Codigo Ficha</label>
                                     <div class="input-group">
                                         @Html.DropDownList("Id_ficha", null, htmlAttributes: new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
-                                    </div>
 
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
                                 </form>
                             </div>
                         </div>

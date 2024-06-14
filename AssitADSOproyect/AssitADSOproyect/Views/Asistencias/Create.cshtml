@@ -64,8 +64,9 @@
                                         <label>Ficha</label>
                                         <div class="input-group">
                                             @Html.DropDownList("Id_ficha", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -75,8 +76,9 @@
                                         <label>Competencia</label>
                                         <div class="input-group">
                                             @Html.DropDownList("Id_competencia", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -86,8 +88,9 @@
                                         <label>Fecha Inicio</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Fecha_inicio_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
-                                            @Html.ValidationMessageFor(model => model.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -95,8 +98,9 @@
                                         <label>Hora Inicio</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Hora_inicio_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
-                                            @Html.ValidationMessageFor(model => model.Hora_inicio_asistencia, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Hora_inicio_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
@@ -106,8 +110,9 @@
                                         <label>Fecha Fin</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
-                                            @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -115,9 +120,10 @@
                                         <label>Hora Fin</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Hora_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
-                                            @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
+                                           
                                         </div>
-                                       
+                                        @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
+
                                     </div>
                                 </div>
                                 @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })

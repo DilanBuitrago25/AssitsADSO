@@ -40,14 +40,18 @@ namespace AssitADSOproyect.Controllers
                     return RedirectToAction("Index", "Instructor"); // Vista para instructores
                 }
             }
+            else {
+                 
+                ViewData["Mensaje"] = "Correo o contraseña incorrectos";
+            }
 
-             
-            ViewData["Mensaje"] = "Correo o contraseña incorrectos";
+
             ModelState.AddModelError("", "Credenciales inválidas.");
             return View();
 
-            
-            
+
+
+
         }
 
         // GET: Auth/Logout

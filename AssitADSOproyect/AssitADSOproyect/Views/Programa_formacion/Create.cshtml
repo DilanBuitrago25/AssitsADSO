@@ -61,8 +61,9 @@
                                     <label class="form-label">Nombre Programa</label>
                                     <div class="input-group">
                                         @Html.EditorFor(model => model.Nombre_programa, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Nombre_programa, "", new { @class = "text-danger" })
+
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Nombre_programa, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="mb-3">
@@ -77,16 +78,18 @@
                                             new SelectListItem { Text = "Curso corto", Value = "Curso corto" },
                                             new SelectListItem { Text = "Curso Complementario", Value = "Curso Complementario" }
                                         }, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.Tipo_programa, "", new { @class = "text-danger" })
+
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Tipo_programa, "", new { @class = "text-danger" })
                                 </div>
 
                                 <div class="mb-3">
                                     <label class="form-label">Duración Programa</label>
                                     <div class="input-group">
                                         @Html.EditorFor(model => model.Duracion_programa, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Duracion_programa, "", new { @class = "text-danger" })
+
                                     </div>
+                                    @Html.ValidationMessageFor(model => model.Duracion_programa, "", new { @class = "text-danger" })
                                 </div>
                                 @Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })
                             </div>
