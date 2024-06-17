@@ -102,11 +102,11 @@ create table Soporte(
 Id_soporte int identity (1000000,1) not null,
 Nombre_soporte varchar (45) not null,
 Descripcion_soporte varchar (500) not null,
-Tipo_soporte varchar (100),
 Fecha_registro varchar(200) not null,
 Hora_registro varchar(200) not null,
 Id_usuario int references Usuario(Id_usuario),
 Id_asistencia int references Asistencia(Id_asistencia),
+Tipo_soporte VARBINARY(MAX),
 primary key (Id_soporte))
 
 ALTER TABLE RegistroAsistencia 
@@ -128,4 +128,4 @@ Hora_registro varchar(200) not null ;
 --Select * from Usuarios
 
 ALTER TABLE Soporte
-ALTER COLUMN Tipo_soporte VARBINARY(MAX); 
+add Tipo_soporte VARBINARY(MAX); 

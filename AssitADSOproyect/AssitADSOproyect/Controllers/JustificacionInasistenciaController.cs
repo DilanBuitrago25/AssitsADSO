@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using Ganss.Xss;
 using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
@@ -65,40 +66,46 @@ namespace AssitADSOproyect.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AutorizarTipoUsuario("Aprendiz")]
-        public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia")] Soporte soporte)
-        {
+[ValidateAntiForgeryToken]
+[AutorizarTipoUsuario("Aprendiz")]
+public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia")] Soporte soporte, HttpPostedFileBase archivoPDF)
+{
             if (ModelState.IsValid)
             {
-                //if (soporte.Tipo_soporte != null && soporte.Tipo_soporte.ContentLength > 0)
+                var sanitizer = new HtmlSanitizer();
+                soporte.Descripcion_soporte = sanitizer.Sanitize(soporte.Descripcion_soporte);
+                //if (Path.GetExtension(soporte.Tipo_soporte).ToLower() == ".pdf")
                 //{
-                //    // Verificar si el archivo es PDF
-                //    if (soporte.Tipo_soporte.ContentType != "application/pdf")
-                //    {
-                //        ModelState.AddModelError("Tipo_soporte", "Solo se permiten archivos PDF.");
-                //        return View(soporte); // Mostrar la vista con el mensaje de error
-                //    }
+                //archivoPDF = soporte.Tipo_soporte;
 
-                //    // Leer los datos del archivo
-                //    byte[] datosArchivo;
-                //    using (var reader = new BinaryReader(soporte.Tipo_soporte.InputStream))
-                //    {
-                //        datosArchivo = reader.ReadBytes(soporte.Tipo_soporte.ContentLength);
-                //    }
+                    // Guardar el archivo y obtener la ruta
+                    var rutaCarpeta = Server.MapPath("~/ArchivosSoportes/");
+                    var nombreArchivo = Path.GetFileName(archivoPDF.FileName);
+                    var rutaCompleta = Path.Combine(rutaCarpeta, nombreArchivo);
+                    archivoPDF.SaveAs(rutaCompleta);
 
-                //        db.Soporte.Add(soporte);
-                //        db.SaveChanges();
-                    
+                    // Asignar la ruta al modelo (usando la propiedad correcta)
+                    soporte.Tipo_soporte = "~/ArchivosSoportes/" + nombreArchivo; // Ruta relativa
+
+
+                    db.Soporte.Add(soporte);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 //}
-
-                return RedirectToAction("Index");
+                //else
+                //{
+                //    ModelState.AddModelError("Tipo_soporte", "Solo se permiten archivos PDF.");
+                //}
             }
-
-            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
-            ViewBag.Id_Usuario = new SelectList(db.Asistencia, "Id_Usuario", "Nombre_Usuario", soporte.Usuario.Nombre_usuario);
+            ViewBag.Fecha_Asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", soporte.Id_asistencia);
+            ViewBag.Id_Usuario = new SelectList(db.Usuario, "Id_Usuario", "Nombre_Usuario", soporte.Id_Instructor);
             return View(soporte);
+
+
+
+
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

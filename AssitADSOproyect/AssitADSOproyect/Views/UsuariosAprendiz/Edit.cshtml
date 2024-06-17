@@ -114,10 +114,10 @@
                                         </div>
                                     </div>
                                     @*@Html.DropDownListFor(model => model.Tipo_usuario, new List<SelectListItem>
-                                    {
-                                         new SelectListItem { Text = "", Value = "Aprendiz" },
-                                    }, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Tipo_usuario, "", new { @class = "text-danger" })*@
+        {
+             new SelectListItem { Text = "", Value = "Aprendiz" },
+        }, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Tipo_usuario, "", new { @class = "text-danger" })*@
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">
@@ -125,7 +125,17 @@
                                             @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Estado Usuario</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.Estado_Usuario, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "Activo", Value = "True" },
+                                                     new SelectListItem { Text = "No Activo", Value = "False" },
+                                                }, new { @class = "form-control" })
 
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>

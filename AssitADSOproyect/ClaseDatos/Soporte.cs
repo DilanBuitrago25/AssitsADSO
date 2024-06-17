@@ -23,6 +23,8 @@ namespace ClaseDatos
         public string Hora_registro { get; set; }
         public Nullable<int> Id_Instructor { get; set; }
         public Nullable<bool> Estado_Soporte { get; set; }
+
+        public string Tipo_soporte { get; set; }
     
         public virtual Asistencia Asistencia { get; set; }
         public virtual Usuario Usuario { get; set; }

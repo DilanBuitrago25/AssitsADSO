@@ -47,127 +47,132 @@
     <div class="email-wrap">
         <div class="row">
             @*<div class="col-xl-3 col-md-6 xl-30">
-                <div class="email-sidebar">
-                    <a class="btn btn-primary email-aside-toggle" href="javascript:void(0)">email filter</a>
-                    <div class="email-left-aside">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="email-app-sidebar">
-                                    <div class="media">
-                                        <div class="media-size-email"><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt=""></div>
-                                        <div class="media-body">
-                                            <h6 class="f-w-600">MARKJENCO</h6>
-                                            <p>Markjecno@gmail.com</p>
-                                        </div>
+            <div class="email-sidebar">
+                <a class="btn btn-primary email-aside-toggle" href="javascript:void(0)">email filter</a>
+                <div class="email-left-aside">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="email-app-sidebar">
+                                <div class="media">
+                                    <div class="media-size-email"><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt=""></div>
+                                    <div class="media-body">
+                                        <h6 class="f-w-600">MARKJENCO</h6>
+                                        <p>Markjecno@gmail.com</p>
                                     </div>
-                                    <ul class="nav main-menu" role="tablist">
-                                        <li class="nav-item"><a class="btn-primary btn-block btn-mail" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome"><i class="icofont icofont-envelope me-2"></i> NEW MAIL</a></li>
-                                        <li class="nav-item"><a class="show" id="pills-darkprofile-tab" data-bs-toggle="pill" href="email_inbox.html"><span class="title"><i class="icon-import"></i> Inbox</span><span class="badge pull-right">(236)</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-folder"></i> All mail</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-new-window"></i> Sent</span><span class="badge pull-right">(69)</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-pencil-alt"></i> DRAFT</span><span class="badge pull-right">(59)</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-trash"></i> TRASH</span><span class="badge pull-right">(99)</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-info-alt"></i> IMPORTANT</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-star"></i> Starred</span></a></li>
-                                        <li>
-                                            <hr>
-                                        </li>
-                                        <li><a href="#"><span class="title"><i class="icon-email"></i> UNREAD</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-export"></i> SPAM</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-share"></i> OUTBOX</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-file"></i> UPDATE</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-bell"></i> ALERT</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-notepad"></i> NOTES</span><span class="badge pull-right">(20)</span></a></li>
-                                    </ul>
                                 </div>
+                                <ul class="nav main-menu" role="tablist">
+                                    <li class="nav-item"><a class="btn-primary btn-block btn-mail" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome"><i class="icofont icofont-envelope me-2"></i> NEW MAIL</a></li>
+                                    <li class="nav-item"><a class="show" id="pills-darkprofile-tab" data-bs-toggle="pill" href="email_inbox.html"><span class="title"><i class="icon-import"></i> Inbox</span><span class="badge pull-right">(236)</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-folder"></i> All mail</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-new-window"></i> Sent</span><span class="badge pull-right">(69)</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-pencil-alt"></i> DRAFT</span><span class="badge pull-right">(59)</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-trash"></i> TRASH</span><span class="badge pull-right">(99)</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-info-alt"></i> IMPORTANT</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-star"></i> Starred</span></a></li>
+                                    <li>
+                                        <hr>
+                                    </li>
+                                    <li><a href="#"><span class="title"><i class="icon-email"></i> UNREAD</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-export"></i> SPAM</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-share"></i> OUTBOX</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-file"></i> UPDATE</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-bell"></i> ALERT</span></a></li>
+                                    <li><a href="#"><span class="title"><i class="icon-notepad"></i> NOTES</span><span class="badge pull-right">(20)</span></a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>*@
-            <div >
-                <div class="email-right-aside">
-                    <div class="card email-body">
-                        <div class="email-profile">
-                            <div class="email-body">
-                                <div class="email-compose">
-                                    <div class="email-top compose-border">
-                                        @*<div class="compose-header">
+            </div>
+        </div>*@
+            @using (Html.BeginForm("Create", "JustificacionInasistencia", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div>
+                    <div class="email-right-aside">
+                        <div class="card email-body">
+                            <div class="email-profile">
+                                <div class="email-body">
+                                    <div class="email-compose">
+                                        <div class="email-top compose-border">
+                                            @*<div class="compose-header">
                                             <h4 class="mb-0"></h4>
                                             <button class="btn btn-primary" type="button"><i class="fa fa-file me-2"></i> save</button>
                                         </div>*@
-                                    </div>
-                                    <div class="email-wrapper">
-                                        <form class="theme-form">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Para</label>
-                                                @Html.DropDownList("Id_Usuario", null, htmlAttributes: new { @class = "form-control" })
+                                        </div>
+                                        <div class="email-wrapper">
+                                            <form class="theme-form">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Para</label>
+                                                    @Html.DropDownList("Id_Usuario", null, htmlAttributes: new { @class = "form-control" })
 
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Usuario.Nombre_usuario, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Competencia</label>
-                                                @Html.DropDownList("Id_Competencia", null, htmlAttributes: new { @class = "form-control" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Id_Instructor, "", new { @class = "text-danger" })
+                                                @*<div class="form-group">
+                                                    <label for="exampleInputPassword1">Competencia</label>
+                                                    @Html.DropDownList("Id_Competencia", null, htmlAttributes: new { @class = "form-control" })
 
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Asistencia.Competencia.Nombre_competencia, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Fecha Inasistencia</label>
-                                                @Html.DropDownList("Fecha_Asistencia", null, htmlAttributes: new { @class = "form-control" })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Asistencia.Competencia.Nombre_competencia, "", new { @class = "text-danger" })*@
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Fecha Inasistencia</label>
+                                                    @Html.DropDownList("Fecha_Asistencia", null, htmlAttributes: new { @class = "form-control" })
 
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Asistencia.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Asunto</label>
-                                                @Html.EditorFor(model => model.Nombre_soporte, new { htmlAttributes = new { @class = "form-control digits", @type = "text" } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Asunto</label>
+                                                    @Html.EditorFor(model => model.Nombre_soporte, new { htmlAttributes = new { @class = "form-control digits", @type = "text" } })
 
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Nombre_soporte, "", new { @class = "text-danger" })
-                                            
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Nombre_soporte, "", new { @class = "text-danger" })
+
                                                 @*@Html.HiddenFor(model => model.Tipo_soporte, new { id = "tipo_soporte" })*@
-                                               <label class="col-sm-3 col-form-label">Subir Archivo (solo PDF)</label>
-                                               <div class="col-sm-12">
-                                                   @Html.EditorFor(model => model.Tipo_soporte, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                                               </div>
-                                            <br />
+                                                <label class="col-sm-3 col-form-label">Subir Archivo (solo PDF)</label>
+                                                <div class="col-sm-12">
+                                                    @Html.EditorFor(model => model.Tipo_soporte, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                                </div>
+                                                <br />
 
-                                            <div class="form-group">
-                                                <label>Mensaje</label>
-                                                @*<textarea id="text-box" name="text-box" cols="10" rows="2">                                                            </textarea>*@
-                                                @Html.TextAreaFor(model => model.Descripcion_soporte, new { @class = "form-control", @id = "text-box", @rows = "2", @cols = "10" })
+                                                <div class="form-group">
+                                                    <label>Mensaje</label>
+                                                    @*<textarea id="text-box" name="text-box" cols="10" rows="2">                                                            </textarea>*@
+                                                    @Html.TextAreaFor(model => model.Descripcion_soporte, new { @class = "form-control" })
 
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Descripcion_soporte, "", new { @class = "text-danger" })
-                                            @*<div class="form-group">
-            <div class="dropzone digits text-center" id="singleFileUpload" action="/upload.php">
-                <div class="dz-message needsclick">
-                    <i class="icon-cloud-up"></i>
-                    <h6>Drop files here or click to upload.</h6><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                </div>
-            </div>
-        </div>*@
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Descripcion_soporte, "", new { @class = "text-danger" })
+                                                @*<div class="form-group">
+                                                <div class="dropzone digits text-center" id="singleFileUpload" action="/upload.php">
+                                                    <div class="dz-message needsclick">
+                                                        <i class="icon-cloud-up"></i>
+                                                        <h6>Drop files here or click to upload.</h6><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                                                    </div>
+                                                </div>
+                                            </div>*@
 
-                                            @*<div class="form-group">
-            @Html.HiddenFor(model => model.Tipo_soporte, new { id = "tipo_soporte" })
-            <div class="dropzone digits text-center" id="singleFileUpload" action="/upload.php">
-                <div class="dz-message needsclick">
-                    <i class="icon-cloud-up"></i>
-                    <h6>Arrastra archivos aquí o haz clic para cargar.</h6>
-                    <span class="note needsclick">(Solo se permiten archivos PDF.)</span>
-                </div>
-            </div>
-        </div>*@
+                                                @*<div class="form-group">
+                                                @Html.HiddenFor(model => model.Tipo_soporte, new { id = "tipo_soporte" })
+                                                <div class="dropzone digits text-center" id="singleFileUpload" action="/upload.php">
+                                                    <div class="dz-message needsclick">
+                                                        <i class="icon-cloud-up"></i>
+                                                        <h6>Arrastra archivos aquí o haz clic para cargar.</h6>
+                                                        <span class="note needsclick">(Solo se permiten archivos PDF.)</span>
+                                                    </div>
+                                                </div>
+                                            </div>*@
 
 
 
-                                        </form>
-                                        <div class="action-wrapper">
-                                            <input type="submit" value="Create" class="btn btn-default" />
-                                            @*<ul class="actions">
+                                            </form>
+                                            <div class="action-wrapper">
+                                                <input type="submit" value="Create" class="btn btn-default" />
+                                                @*<ul class="actions">
                                                 <input type="submit" value="Create" class="btn btn-default" />
                                                 <li><a class="btn btn-secondary" href="javascript:void(0)"><i class="fa fa-paper-plane me-2"></i>send                                                   </a></li>
                                                 <li><a class="btn btn-danger" href="javascript:void(0)">                                                      <i class="fa fa-times me-2"></i>cancel</a></li>
                                             </ul>*@
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -175,8 +180,8 @@
                         </div>
                     </div>
                 </div>
+            }
             </div>
-        </div>
     </div>
 </div>
 <script>
