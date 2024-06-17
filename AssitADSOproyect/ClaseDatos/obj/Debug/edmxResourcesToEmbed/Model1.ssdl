@@ -13,6 +13,7 @@
     <Property Name="Id_usuario" Type="int" />
     <Property Name="Id_ficha" Type="int" />
     <Property Name="Id_competencia" Type="int" />
+    <Property Name="Estado_Asistencia" Type="bit" />
   </EntityType>
   <EntityType Name="Competencia">
     <Key>
@@ -24,6 +25,7 @@
     <Property Name="Numero_ficha" Type="int" />
     <Property Name="Id_programa" Type="int" />
     <Property Name="Id_Usuario" Type="int" />
+    <Property Name="Estado_Competencia" Type="bit" />
   </EntityType>
   <EntityType Name="Ficha">
     <Key>
@@ -38,6 +40,7 @@
     <Property Name="Fecha_fin" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Id_programa" Type="int" />
     <Property Name="Id_Usuario" Type="int" />
+    <Property Name="Estado_Ficha" Type="bit" />
   </EntityType>
   <EntityType Name="Programa_formacion">
     <Key>
@@ -48,6 +51,7 @@
     <Property Name="Tipo_programa" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Duracion_programa" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Id_Usuario" Type="int" />
+    <Property Name="Estado_Programa_formacion" Type="bit" />
   </EntityType>
   <EntityType Name="RegistroAsistencia">
     <Key>
@@ -59,6 +63,7 @@
     <Property Name="Id_asistencia" Type="int" />
     <Property Name="Id_usuario" Type="int" />
     <Property Name="Asistio_registro" Type="bit" />
+    <Property Name="Estado_RegistroAsitencia" Type="bit" />
   </EntityType>
   <EntityType Name="Reporte">
     <Key>
@@ -78,12 +83,13 @@
     <Property Name="Id_soporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre_soporte" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="Descripcion_soporte" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Tipo_soporte" Type="varchar" MaxLength="100" />
     <Property Name="Id_usuario" Type="int" />
     <Property Name="Id_asistencia" Type="int" />
     <Property Name="Fecha_registro" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Hora_registro" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Id_Instructor" Type="int" />
+    <Property Name="Estado_Soporte" Type="bit" />
+    <Property Name="Tipo_soporte" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -101,6 +107,7 @@
     <Property Name="Tipo_instructor" Type="varchar" MaxLength="55" />
     <Property Name="Esinstructormaster_usuario" Type="bit" />
     <Property Name="Id_ficha" Type="int" />
+    <Property Name="Estado_Usuario" Type="bit" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_co__45F365D3">
     <End Role="Competencia" Type="Self.Competencia" Multiplicity="0..1" />

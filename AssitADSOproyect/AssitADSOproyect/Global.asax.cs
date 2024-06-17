@@ -15,13 +15,26 @@ namespace AssitADSOproyect
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Exception ex = Server.GetLastError();
+            HttpException httpEx = ex as HttpException;
+
+            if (httpEx != null && httpEx.GetHttpCode() == 401)
+            {
+                // Lógica personalizada antes de redirigir (opcional)
+                Server.ClearError(); // Limpia el error para evitar la página de error genérica
+                Response.Redirect("~/Views/Home/Error401.cshtml");
+            }
+        }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            System.Timers.Timer timer = new System.Timers.Timer(360000); // 1 hora en milisegundos
+            System.Timers.Timer timer = new System.Timers.Timer(36000000); // 1 hora en milisegundos
             timer.Elapsed += (sender, e) => GenerarRegistrosAsistencia();
             timer.Enabled = true;
         }

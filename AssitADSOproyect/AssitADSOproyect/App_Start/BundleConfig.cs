@@ -85,6 +85,10 @@ namespace AssitADSOproyect
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new Bundle("~/bundles/errors").Include(
+                      "~/Content/erro401.css"
+                      ));
+
             bundles.Add(new StyleBundle("~/Content/assets").Include(
                       "~/assets/css/fontawesome.css",
                       "~/assets/css/icofont.css",

@@ -65,6 +65,7 @@ namespace AssitADSOproyect.Controllers
         public class AutorizarTipoUsuarioAttribute : AuthorizeAttribute
         {
             private readonly string[] _tiposPermitidos;
+            private readonly string _vistaNoAutorizado = "~/Views/Home/Error401.cshtml"; 
 
             public AutorizarTipoUsuarioAttribute(params string[] tiposPermitidos)
             {
@@ -75,6 +76,16 @@ namespace AssitADSOproyect.Controllers
             {
                 var tipoUsuario = httpContext.Session["TipoUsuario"] as string;
                 return tipoUsuario != null && _tiposPermitidos.Contains(tipoUsuario);
+            }
+
+            protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+            {
+                // Construir la URL del ActionLink
+                var urlHelper = new UrlHelper(filterContext.RequestContext);
+                var url = urlHelper.Action("Error401", "Home"); // Asumiendo que tienes un controlador "Error" con una acción "Unauthorized"
+
+                // Redirigir a la URL del ActionLink
+                filterContext.Result = new RedirectResult(url);
             }
         }
 

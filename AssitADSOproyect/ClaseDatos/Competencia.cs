@@ -11,8 +11,7 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Competencia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,13 +21,12 @@ namespace ClaseDatos
         }
     
         public int Id_competencia { get; set; }
-        [Required(ErrorMessage = "Por favor ingresar el Nombre de la competencia")]
         public string Nombre_competencia { get; set; }
-        [Required(ErrorMessage = "Por favor ingresar el Tipo de  competencia")]
         public string tipo_competencia { get; set; }
         public Nullable<int> Numero_ficha { get; set; }
         public Nullable<int> Id_programa { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
+        public Nullable<bool> Estado_Competencia { get; set; }
     
         public virtual Programa_formacion Programa_formacion { get; set; }
         public virtual Ficha Ficha { get; set; }

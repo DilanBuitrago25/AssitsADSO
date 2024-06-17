@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -44,6 +45,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: JustificacionInasistencia/Create
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Create()
         {
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia");
@@ -64,12 +66,32 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia")] Soporte soporte)
         {
             if (ModelState.IsValid)
             {
-                db.Soporte.Add(soporte);
-                db.SaveChanges();
+                //if (soporte.Tipo_soporte != null && soporte.Tipo_soporte.ContentLength > 0)
+                //{
+                //    // Verificar si el archivo es PDF
+                //    if (soporte.Tipo_soporte.ContentType != "application/pdf")
+                //    {
+                //        ModelState.AddModelError("Tipo_soporte", "Solo se permiten archivos PDF.");
+                //        return View(soporte); // Mostrar la vista con el mensaje de error
+                //    }
+
+                //    // Leer los datos del archivo
+                //    byte[] datosArchivo;
+                //    using (var reader = new BinaryReader(soporte.Tipo_soporte.InputStream))
+                //    {
+                //        datosArchivo = reader.ReadBytes(soporte.Tipo_soporte.ContentLength);
+                //    }
+
+                //        db.Soporte.Add(soporte);
+                //        db.SaveChanges();
+                    
+                //}
+
                 return RedirectToAction("Index");
             }
 
@@ -184,9 +206,9 @@ namespace AssitADSOproyect.Controllers
 
                     // Actualizar la base de datos usando Entity Framework
                     
-                        var soporte = new Soporte { Tipo_soporte = "~/uploads/" + fileName }; // Ruta relativa
-                        db.Soporte.Add(soporte);
-                        db.SaveChanges();
+                        //var soporte = new Soporte { Tipo_soporte = "~/uploads/" + fileName }; // Ruta relativa
+                        //db.Soporte.Add(soporte);
+                        //db.SaveChanges();
                     
 
                     return Json(new { success = true, filePath = "~/uploads/" + fileName });

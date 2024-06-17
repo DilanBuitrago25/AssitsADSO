@@ -7,13 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
 {
     public class Programa_formacionController : Controller
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-
+        [AutorizarTipoUsuario("Instructor")]
         // GET: Programa_formacion
         public ActionResult Index()
         {

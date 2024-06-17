@@ -54,7 +54,7 @@
                     <thead>
 
                         <tr>
-                            <th>Id</th>
+                            <th>Codigo</th>
                             <th>Jornada</th>
                             <th>Modalidad</th>
                             <th>Tipo</th>
@@ -67,7 +67,7 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Id_ficha)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Codigo_ficha)</td>
                                 @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
                                 <td>@Html.DisplayFor(model => item.Jornada_ficha)</td>
                                 <td>@Html.DisplayFor(model => item.Modalidad_ficha)</td>
@@ -83,7 +83,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Id</th>
+                            <th>Codigo</th>
                             <th>Jornada</th>
                             <th>Modalidad</th>
                             <th>Tipo</th>

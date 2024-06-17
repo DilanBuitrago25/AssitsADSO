@@ -7,18 +7,22 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
 {
     public class UsuariosInstructorController : Controller
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-
+        [AutorizarTipoUsuario("Instructor")]
         // GET: UsuariosInstructor
         public ActionResult Index()
         {
-            var usuario = db.Usuario.Include(u => u.Ficha);
-            return View(usuario.ToList());
+            var InstructorFiltro = db.Usuario
+            .Where(u => u.Tipo_usuario == "Instructor" && u.Estado_Usuario == true)
+            .ToList();
+
+            return View(InstructorFiltro);
         }
 
         // GET: UsuariosInstructor/Details/5

@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Asistencia">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Asistencia">
         <MappingFragment StoreEntitySet="Asistencia">
+          <ScalarProperty Name="Estado_Asistencia" ColumnName="Estado_Asistencia" />
           <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />
           <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
           <ScalarProperty Name="Detalles_asistencia" ColumnName="Detalles_asistencia" />
@@ -19,6 +20,7 @@
     <EntitySetMapping Name="Competencia">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Competencia">
         <MappingFragment StoreEntitySet="Competencia">
+          <ScalarProperty Name="Estado_Competencia" ColumnName="Estado_Competencia" />
           <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Nombre_competencia" ColumnName="Nombre_competencia" />
           <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />
@@ -31,6 +33,7 @@
     <EntitySetMapping Name="Ficha">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Ficha">
         <MappingFragment StoreEntitySet="Ficha">
+          <ScalarProperty Name="Estado_Ficha" ColumnName="Estado_Ficha" />
           <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
           <ScalarProperty Name="Fecha_inicio" ColumnName="Fecha_inicio" />
@@ -46,6 +49,7 @@
     <EntitySetMapping Name="Programa_formacion">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Programa_formacion">
         <MappingFragment StoreEntitySet="Programa_formacion">
+          <ScalarProperty Name="Estado_Programa_formacion" ColumnName="Estado_Programa_formacion" />
           <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
           <ScalarProperty Name="Id_programa" ColumnName="Id_programa" />
           <ScalarProperty Name="Nombre_programa" ColumnName="Nombre_programa" />
@@ -69,11 +73,11 @@
     <EntitySetMapping Name="Soporte">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
         <MappingFragment StoreEntitySet="Soporte">
+          <ScalarProperty Name="Estado_Soporte" ColumnName="Estado_Soporte" />
           <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
           <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
           <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
           <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
-          <ScalarProperty Name="Tipo_soporte" ColumnName="Tipo_soporte" />
           <ScalarProperty Name="Id_soporte" ColumnName="Id_soporte" />
           <ScalarProperty Name="Nombre_soporte" ColumnName="Nombre_soporte" />
           <ScalarProperty Name="Descripcion_soporte" ColumnName="Descripcion_soporte" />
@@ -84,6 +88,7 @@
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Estado_Usuario" ColumnName="Estado_Usuario" />
           <ScalarProperty Name="Contrasena_usuario" ColumnName="Contrasena_usuario" />
           <ScalarProperty Name="Esinstructormaster_usuario" ColumnName="Esinstructormaster_usuario" />
           <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
@@ -102,6 +107,7 @@
     <EntitySetMapping Name="RegistroAsistencia">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.RegistroAsistencia">
         <MappingFragment StoreEntitySet="RegistroAsistencia">
+          <ScalarProperty Name="Estado_RegistroAsitencia" ColumnName="Estado_RegistroAsitencia" />
           <ScalarProperty Name="Asistio_registro" ColumnName="Asistio_registro" />
           <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
           <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />

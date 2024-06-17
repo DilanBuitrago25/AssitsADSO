@@ -4866,6 +4866,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\erro401.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -6087,6 +6088,8 @@
     <Content Include="Views\Usuariosprueba\Edit.cshtml" />
     <Content Include="Views\Usuariosprueba\Index.cshtml" />
     <Content Include="Views\JustificacionInasistencia\IndexAprendiz.cshtml" />
+    <Content Include="Views\Home\Error401.cshtml" />
+    <Content Include="Views\Shared\Error401.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

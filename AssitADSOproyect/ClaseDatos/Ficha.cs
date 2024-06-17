@@ -11,8 +11,7 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Ficha
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,20 +23,15 @@ namespace ClaseDatos
         }
     
         public int Id_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor ingresar el Codigo de la ficha")]
         public int Codigo_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor ingresar la Jornada de la ficha")]
         public string Jornada_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor ingresar la Modalidad de la ficha")]
         public string Modalidad_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor ingresar el Tipo de ficha")]
         public string tipo_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor ingresar la Fecha de Inicio de la ficha")]
         public string Fecha_inicio { get; set; }
-        [Required(ErrorMessage = "Por favor ingresar la Fecha Final de la ficha")]
         public string Fecha_fin { get; set; }
         public Nullable<int> Id_programa { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
+        public Nullable<bool> Estado_Ficha { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competencia> Competencia { get; set; }

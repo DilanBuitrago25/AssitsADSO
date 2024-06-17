@@ -10,13 +10,14 @@ using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
 using QRCoder;
+using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
 {
     public class AsistenciasController : Controller
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-
+        [AutorizarTipoUsuario("Instructor")]
         // GET: Asistencias
         public ActionResult Index()
         {

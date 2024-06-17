@@ -19,6 +19,7 @@
     <NavigationProperty Name="Competencia" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F" FromRole="Asistencia" ToRole="Competencia" />
     <NavigationProperty Name="Ficha" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_fi__31EC6D26" FromRole="Asistencia" ToRole="Ficha" />
     <NavigationProperty Name="RegistroAsistencia" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" FromRole="Asistencia" ToRole="RegistroAsistencia" />
+    <Property Name="Estado_Asistencia" Type="Boolean" />
   </EntityType>
   <EntityType Name="Competencia">
     <Key>
@@ -34,6 +35,7 @@
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F" FromRole="Competencia" ToRole="Asistencia" />
     <Property Name="Id_Usuario" Type="Int32" />
     <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2" FromRole="Competencia" ToRole="Usuario" />
+    <Property Name="Estado_Competencia" Type="Boolean" />
   </EntityType>
   <EntityType Name="Ficha">
     <Key>
@@ -52,6 +54,7 @@
     <Property Name="Id_programa" Type="Int32" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_fi__31EC6D26" FromRole="Ficha" ToRole="Asistencia" />
     <Property Name="Id_Usuario" Type="Int32" />
+    <Property Name="Estado_Ficha" Type="Boolean" />
   </EntityType>
   <EntityType Name="Programa_formacion">
     <Key>
@@ -65,6 +68,7 @@
     <NavigationProperty Name="Ficha" Relationship="Self.FK__Ficha__Id_progra__267ABA7A" FromRole="Programa_formacion" ToRole="Ficha" />
     <Property Name="Id_Usuario" Type="Int32" />
     <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64" FromRole="Programa_formacion" ToRole="Usuario" />
+    <Property Name="Estado_Programa_formacion" Type="Boolean" />
   </EntityType>
   <EntityType Name="Reporte">
     <Key>
@@ -86,7 +90,6 @@
     <Property Name="Id_soporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre_soporte" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Descripcion_soporte" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Tipo_soporte" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Id_asistencia" Type="Int32" />
     <NavigationProperty Name="Asistencia" Relationship="Self.FK__Soporte__Id_asis__38996AB5" FromRole="Soporte" ToRole="Asistencia" />
     <Property Name="Id_usuario" Type="Int32" />
@@ -94,6 +97,7 @@
     <Property Name="Fecha_registro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Hora_registro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Id_Instructor" Type="Int32" />
+    <Property Name="Estado_Soporte" Type="Boolean" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -118,6 +122,7 @@
     <NavigationProperty Name="Soporte" Relationship="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE" FromRole="Usuario" ToRole="Soporte" />
     <NavigationProperty Name="Competencia" Relationship="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2" FromRole="Usuario" ToRole="Competencia" />
     <NavigationProperty Name="Programa_formacion" Relationship="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64" FromRole="Usuario" ToRole="Programa_formacion" />
+    <Property Name="Estado_Usuario" Type="Boolean" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_us__35BCFE0A">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -513,6 +518,7 @@
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" FromRole="RegistroAsistencia" ToRole="Asistencia" />
     <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" FromRole="RegistroAsistencia" ToRole="Usuario" />
     <Property Name="Asistio_registro" Type="Boolean" />
+    <Property Name="Estado_RegistroAsitencia" Type="Boolean" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_co__32E0915F">
     <End Type="BDAssistsADSOModel.Competencia" Role="Competencia" Multiplicity="0..1" />

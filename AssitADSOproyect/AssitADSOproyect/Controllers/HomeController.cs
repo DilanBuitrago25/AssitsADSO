@@ -14,6 +14,11 @@ namespace AssitADSOproyect.Controllers
             return View();
         }
 
+        public ActionResult Error401()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

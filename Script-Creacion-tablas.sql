@@ -126,3 +126,6 @@ ADD Fecha_registro varchar(200) not null,
 Hora_registro varchar(200) not null ;
 
 --Select * from Usuarios
+
+ALTER TABLE Soporte
+ALTER COLUMN Tipo_soporte VARBINARY(MAX); 
