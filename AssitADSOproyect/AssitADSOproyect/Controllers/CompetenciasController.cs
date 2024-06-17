@@ -18,15 +18,16 @@ namespace AssitADSOproyect.Controllers
         // GET: Competencias
         public ActionResult Index()
         {
-            //var competencia = db.Competencia.Include(c => c.Programa_formacion).Include(c => c.Ficha);
-            //return View(competencia.ToList());
-
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
-            // Filtrar las fichas por Id_Usuario
-            var CompetenciasFiltradas = db.Competencia.Where(f => f.Id_Usuario.ToString() == idUsuarioSesion);
+            // Filtrar por Id_Usuario y estado_competencia (verdadero)
+            var CompetenciasFiltradas = db.Competencia
+                                         .Where(c => c.Id_Usuario.ToString() == idUsuarioSesion &&
+                                                     c.Estado_Competencia == true);
+
             return View(CompetenciasFiltradas);
         }
+
 
         // GET: Competencias/Details/5
         public ActionResult Details(int? id)

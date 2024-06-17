@@ -22,7 +22,8 @@ namespace AssitADSOproyect.Controllers
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
             // Filtrar las fichas por Id_Usuario
-            var ProgramasFiltrados = db.Programa_formacion.Where(f => f.Id_Usuario.ToString() == idUsuarioSesion);
+            var ProgramasFiltrados = db.Programa_formacion.Where(f => f.Id_Usuario.ToString() == idUsuarioSesion &&
+                                                     f.Estado_Programa_formacion == true);
             return View(ProgramasFiltrados);
         }
 

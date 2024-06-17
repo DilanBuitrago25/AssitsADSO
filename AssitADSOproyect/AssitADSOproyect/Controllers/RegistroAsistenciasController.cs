@@ -23,7 +23,8 @@ namespace AssitADSOproyect.Controllers
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
             // Filtrar las fichas por Id_Usuario
-            var RegistrosFiltrados = db.RegistroAsistencia.Where(f => f.Id_usuario.ToString() == idUsuarioSesion);
+            var RegistrosFiltrados = db.RegistroAsistencia.Where(f => f.Id_usuario.ToString() == idUsuarioSesion &&
+                                                     f.Estado_RegistroAsitencia == true);
             return View(RegistrosFiltrados);
         }
 

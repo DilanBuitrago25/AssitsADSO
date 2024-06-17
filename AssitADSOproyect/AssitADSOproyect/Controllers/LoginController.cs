@@ -13,7 +13,7 @@ namespace AssitADSOproyect.Controllers
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
         // GET: Login
-        public ActionResult Index()   // Hago el metodo 
+        public ActionResult Index() 
         {
             return View();
         }
@@ -23,7 +23,7 @@ namespace AssitADSOproyect.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(string correo, string contrasena)
         {
-            var usuario = db.Usuario.FirstOrDefault(u => u.Correo_usuario == correo && u.Contrasena_usuario == contrasena); // Verificar contraseña (considera hashing)
+            var usuario = db.Usuario.FirstOrDefault(u => u.Correo_usuario == correo && u.Contrasena_usuario == contrasena);
 
             if (usuario != null)
             {
@@ -31,19 +31,28 @@ namespace AssitADSOproyect.Controllers
                 Session["TipoUsuario"] = usuario.Tipo_usuario;
                 Session["NombreUsuario"] = usuario.Nombre_usuario + " " + usuario.Apellido_usuario;
 
-                if (usuario.Tipo_usuario == "Aprendiz")
+                if (usuario.Tipo_usuario == "Aprendiz" && usuario.Estado_Usuario == true)
                 {
                     return RedirectToAction("Index", "Aprendizs"); // Vista para aprendices
                 }
-                else if (usuario.Tipo_usuario == "Instructor")
+                else if (usuario.Tipo_usuario == "Instructor" && usuario.Estado_Usuario == true)
                 {
                     return RedirectToAction("Index", "Instructor"); // Vista para instructores
                 }
             }
-            else {
-                 
+            else
+            {
                 ViewData["Mensaje"] = "Correo o contraseña incorrectos";
             }
+            //if (usuario.Estado_Usuario == false && usuario == null)
+            //{
+            //    ViewData["Mensaje"] = "Usuario no Activo";
+            //}
+            //else if (usuario.Estado_Usuario == false) ;
+            //{
+            //    ViewData["Mensaje"] = "Usuario no Activo";
+            //}
+            
 
 
             ModelState.AddModelError("", "Credenciales inválidas.");
