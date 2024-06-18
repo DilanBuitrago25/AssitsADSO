@@ -7,7 +7,6 @@
     <Property Name="Id_asistencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Asistenci__Id_us__35BCFE0A" FromRole="Asistencia" ToRole="Usuario" />
     <NavigationProperty Name="Reporte" Relationship="Self.FK__Reporte__Id_asis__3B75D760" FromRole="Asistencia" ToRole="Reporte" />
-    <NavigationProperty Name="Soporte" Relationship="Self.FK__Soporte__Id_asis__38996AB5" FromRole="Asistencia" ToRole="Soporte" />
     <Property Name="Fecha_inicio_asistencia" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Fecha_fin_asistencia" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Hora_inicio_asistencia" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -20,6 +19,7 @@
     <NavigationProperty Name="Ficha" Relationship="BDAssistsADSOModel.FK__Asistenci__Id_fi__31EC6D26" FromRole="Asistencia" ToRole="Ficha" />
     <NavigationProperty Name="RegistroAsistencia" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" FromRole="Asistencia" ToRole="RegistroAsistencia" />
     <Property Name="Estado_Asistencia" Type="Boolean" />
+    <NavigationProperty Name="Soporte" Relationship="BDAssistsADSOModel.FK__Soporte__Id_asis__03F0984C" FromRole="Asistencia" ToRole="Soporte" />
   </EntityType>
   <EntityType Name="Competencia">
     <Key>
@@ -83,22 +83,6 @@
     <Property Name="Id_usuario" Type="Int32" />
     <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__Reporte__Id_usua__3D5E1FD2" FromRole="Reporte" ToRole="Usuario" />
   </EntityType>
-  <EntityType Name="Soporte">
-    <Key>
-      <PropertyRef Name="Id_soporte" />
-    </Key>
-    <Property Name="Id_soporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Nombre_soporte" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Descripcion_soporte" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Id_asistencia" Type="Int32" />
-    <NavigationProperty Name="Asistencia" Relationship="Self.FK__Soporte__Id_asis__38996AB5" FromRole="Soporte" ToRole="Asistencia" />
-    <Property Name="Id_usuario" Type="Int32" />
-    <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE" FromRole="Soporte" ToRole="Usuario" />
-    <Property Name="Fecha_registro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Hora_registro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Id_Instructor" Type="Int32" />
-    <Property Name="Estado_Soporte" Type="Boolean" />
-  </EntityType>
   <EntityType Name="Usuario">
     <Key>
       <PropertyRef Name="Id_usuario" />
@@ -119,10 +103,10 @@
     <NavigationProperty Name="Ficha" Relationship="Self.FK__Usuario__Id_fich__29572725" FromRole="Usuario" ToRole="Ficha" />
     <NavigationProperty Name="RegistroAsistencia" Relationship="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" FromRole="Usuario" ToRole="RegistroAsistencia" />
     <NavigationProperty Name="Reporte" Relationship="BDAssistsADSOModel.FK__Reporte__Id_usua__3D5E1FD2" FromRole="Usuario" ToRole="Reporte" />
-    <NavigationProperty Name="Soporte" Relationship="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE" FromRole="Usuario" ToRole="Soporte" />
     <NavigationProperty Name="Competencia" Relationship="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2" FromRole="Usuario" ToRole="Competencia" />
     <NavigationProperty Name="Programa_formacion" Relationship="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64" FromRole="Usuario" ToRole="Programa_formacion" />
     <Property Name="Estado_Usuario" Type="Boolean" />
+    <NavigationProperty Name="Soporte" Relationship="BDAssistsADSOModel.FK__Soporte__Id_Inst__04E4BC85" FromRole="Usuario" ToRole="Soporte" />
   </EntityType>
   <Association Name="FK__Asistenci__Id_us__35BCFE0A">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -144,18 +128,6 @@
         <PropertyRef Name="Id_asistencia" />
       </Principal>
       <Dependent Role="Reporte">
-        <PropertyRef Name="Id_asistencia" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Soporte__Id_asis__38996AB5">
-    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
-    <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Asistencia">
-        <PropertyRef Name="Id_asistencia" />
-      </Principal>
-      <Dependent Role="Soporte">
         <PropertyRef Name="Id_asistencia" />
       </Dependent>
     </ReferentialConstraint>
@@ -214,7 +186,6 @@
     <EntitySet Name="Ficha" EntityType="Self.Ficha" />
     <EntitySet Name="Programa_formacion" EntityType="Self.Programa_formacion" />
     <EntitySet Name="Reporte" EntityType="Self.Reporte" />
-    <EntitySet Name="Soporte" EntityType="Self.Soporte" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" />
     <AssociationSet Name="FK__Asistenci__Id_us__35BCFE0A" Association="Self.FK__Asistenci__Id_us__35BCFE0A">
       <End Role="Usuario" EntitySet="Usuario" />
@@ -223,10 +194,6 @@
     <AssociationSet Name="FK__Reporte__Id_asis__3B75D760" Association="Self.FK__Reporte__Id_asis__3B75D760">
       <End Role="Asistencia" EntitySet="Asistencia" />
       <End Role="Reporte" EntitySet="Reporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_asis__38996AB5" Association="Self.FK__Soporte__Id_asis__38996AB5">
-      <End Role="Asistencia" EntitySet="Asistencia" />
-      <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
     <AssociationSet Name="FK__Competenc__Id_pr__2D27B809" Association="Self.FK__Competenc__Id_pr__2D27B809">
       <End Role="Programa_formacion" EntitySet="Programa_formacion" />
@@ -315,10 +282,6 @@
     <AssociationSet Name="FK__Reporte__Id_usua__3D5E1FD2" Association="BDAssistsADSOModel.FK__Reporte__Id_usua__3D5E1FD2">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Reporte" EntitySet="Reporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_usua__398D8EEE" Association="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
     <FunctionImport Name="RegistrarUsuario1">
       <Parameter Name="Tipo_Documento_usuario" Mode="In" Type="String" />
@@ -490,7 +453,16 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Programa_formacion" EntitySet="Programa_formacion" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_Inst__6E01572D" Association="BDAssistsADSOModel.FK__Soporte__Id_Inst__6E01572D">
+    <EntitySet Name="Soporte" EntityType="BDAssistsADSOModel.Soporte" />
+    <AssociationSet Name="FK__Soporte__Id_asis__03F0984C" Association="BDAssistsADSOModel.FK__Soporte__Id_asis__03F0984C">
+      <End Role="Asistencia" EntitySet="Asistencia" />
+      <End Role="Soporte" EntitySet="Soporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Soporte__Id_Inst__04E4BC85" Association="BDAssistsADSOModel.FK__Soporte__Id_Inst__04E4BC85">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Soporte" EntitySet="Soporte" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Soporte__Id_usua__02FC7413" Association="BDAssistsADSOModel.FK__Soporte__Id_usua__02FC7413">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
@@ -580,18 +552,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__Id_usua__398D8EEE">
-    <End Type="BDAssistsADSOModel.Usuario" Role="Usuario" Multiplicity="0..1" />
-    <End Type="BDAssistsADSOModel.Soporte" Role="Soporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="Id_usuario" />
-      </Principal>
-      <Dependent Role="Soporte">
-        <PropertyRef Name="Id_usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <ComplexType Name="sp_helpdiagramdefinition1_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
     <Property Type="Binary" Name="definition" Nullable="true" />
@@ -661,7 +621,35 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__Id_Inst__6E01572D">
+  <EntityType Name="Soporte">
+    <Key>
+      <PropertyRef Name="Id_soporte" />
+    </Key>
+    <Property Name="Id_soporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre_soporte" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion_soporte" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Fecha_registro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Hora_registro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Id_usuario" Type="Int32" />
+    <Property Name="Id_asistencia" Type="Int32" />
+    <Property Name="Tipo_soporte" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Id_Instructor" Type="Int32" />
+    <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__Soporte__Id_asis__03F0984C" FromRole="Soporte" ToRole="Asistencia" />
+    <NavigationProperty Name="Usuario" Relationship="BDAssistsADSOModel.FK__Soporte__Id_Inst__04E4BC85" FromRole="Soporte" ToRole="Usuario" />
+  </EntityType>
+  <Association Name="FK__Soporte__Id_asis__03F0984C">
+    <End Type="BDAssistsADSOModel.Asistencia" Role="Asistencia" Multiplicity="0..1" />
+    <End Type="BDAssistsADSOModel.Soporte" Role="Soporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asistencia">
+        <PropertyRef Name="Id_asistencia" />
+      </Principal>
+      <Dependent Role="Soporte">
+        <PropertyRef Name="Id_asistencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Soporte__Id_Inst__04E4BC85">
     <End Type="BDAssistsADSOModel.Usuario" Role="Usuario" Multiplicity="0..1" />
     <End Type="BDAssistsADSOModel.Soporte" Role="Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -670,6 +658,18 @@
       </Principal>
       <Dependent Role="Soporte">
         <PropertyRef Name="Id_Instructor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Soporte__Id_usua__02FC7413">
+    <End Type="BDAssistsADSOModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="BDAssistsADSOModel.Soporte" Role="Soporte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Soporte">
+        <PropertyRef Name="Id_usuario" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

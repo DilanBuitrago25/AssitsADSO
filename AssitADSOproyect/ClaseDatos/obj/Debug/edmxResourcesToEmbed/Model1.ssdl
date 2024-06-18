@@ -83,13 +83,12 @@
     <Property Name="Id_soporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre_soporte" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="Descripcion_soporte" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Id_usuario" Type="int" />
-    <Property Name="Id_asistencia" Type="int" />
     <Property Name="Fecha_registro" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Hora_registro" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Id_usuario" Type="int" />
+    <Property Name="Id_asistencia" Type="int" />
+    <Property Name="Tipo_soporte" Type="varchar(max)" />
     <Property Name="Id_Instructor" Type="int" />
-    <Property Name="Estado_Soporte" Type="bit" />
-    <Property Name="Tipo_soporte" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -265,7 +264,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__Id_asis__4E88ABD4">
+  <Association Name="FK__Soporte__Id_asis__03F0984C">
     <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -277,7 +276,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__Id_Inst__6E01572D">
+  <Association Name="FK__Soporte__Id_Inst__04E4BC85">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -289,7 +288,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__Id_usua__4D94879B">
+  <Association Name="FK__Soporte__Id_usua__02FC7413">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -374,15 +373,15 @@
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Reporte" EntitySet="Reporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_asis__4E88ABD4" Association="Self.FK__Soporte__Id_asis__4E88ABD4">
+    <AssociationSet Name="FK__Soporte__Id_asis__03F0984C" Association="Self.FK__Soporte__Id_asis__03F0984C">
       <End Role="Asistencia" EntitySet="Asistencia" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_Inst__6E01572D" Association="Self.FK__Soporte__Id_Inst__6E01572D">
+    <AssociationSet Name="FK__Soporte__Id_Inst__04E4BC85" Association="Self.FK__Soporte__Id_Inst__04E4BC85">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_usua__4D94879B" Association="Self.FK__Soporte__Id_usua__4D94879B">
+    <AssociationSet Name="FK__Soporte__Id_usua__02FC7413" Association="Self.FK__Soporte__Id_usua__02FC7413">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>

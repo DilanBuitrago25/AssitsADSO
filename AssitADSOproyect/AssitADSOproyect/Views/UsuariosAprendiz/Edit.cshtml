@@ -56,7 +56,7 @@
 
                                 @Html.AntiForgeryToken()
                                 <form>
-
+                                    @Html.HiddenFor(model => model.Id_usuario)
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Documento</label>
                                         <div class="input-group">
@@ -113,11 +113,7 @@
                                             @Html.ValidationMessageFor(model => model.Contrasena_usuario, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    @*@Html.DropDownListFor(model => model.Tipo_usuario, new List<SelectListItem>
-        {
-             new SelectListItem { Text = "", Value = "Aprendiz" },
-        }, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.Tipo_usuario, "", new { @class = "text-danger" })*@
+                                    @Html.HiddenFor(model => model.Tipo_usuario, new { Value = "Aprendiz" })
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">

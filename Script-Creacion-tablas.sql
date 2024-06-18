@@ -105,8 +105,9 @@ Descripcion_soporte varchar (500) not null,
 Fecha_registro varchar(200) not null,
 Hora_registro varchar(200) not null,
 Id_usuario int references Usuario(Id_usuario),
+Id_Instructor int references Usuario(Id_usuario),
 Id_asistencia int references Asistencia(Id_asistencia),
-Tipo_soporte VARBINARY(MAX),
+Tipo_soporte varchar(MAX),
 primary key (Id_soporte))
 
 ALTER TABLE RegistroAsistencia 

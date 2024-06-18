@@ -70,21 +70,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Soporte">
-      <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
-        <MappingFragment StoreEntitySet="Soporte">
-          <ScalarProperty Name="Estado_Soporte" ColumnName="Estado_Soporte" />
-          <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
-          <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
-          <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
-          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
-          <ScalarProperty Name="Id_soporte" ColumnName="Id_soporte" />
-          <ScalarProperty Name="Nombre_soporte" ColumnName="Nombre_soporte" />
-          <ScalarProperty Name="Descripcion_soporte" ColumnName="Descripcion_soporte" />
-          <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Usuario">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Usuario">
         <MappingFragment StoreEntitySet="Usuario">
@@ -114,6 +99,21 @@
           <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
           <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
           <ScalarProperty Name="Id_Registroasistencia" ColumnName="Id_Registroasistencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Soporte">
+      <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
+        <MappingFragment StoreEntitySet="Soporte">
+          <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
+          <ScalarProperty Name="Tipo_soporte" ColumnName="Tipo_soporte" />
+          <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
+          <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
+          <ScalarProperty Name="Descripcion_soporte" ColumnName="Descripcion_soporte" />
+          <ScalarProperty Name="Nombre_soporte" ColumnName="Nombre_soporte" />
+          <ScalarProperty Name="Id_soporte" ColumnName="Id_soporte" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

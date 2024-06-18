@@ -20,9 +20,9 @@ namespace ClaseDatos
             this.Asistencia = new HashSet<Asistencia>();
             this.RegistroAsistencia = new HashSet<RegistroAsistencia>();
             this.Reporte = new HashSet<Reporte>();
-            this.Soporte = new HashSet<Soporte>();
             this.Competencia = new HashSet<Competencia>();
             this.Programa_formacion = new HashSet<Programa_formacion>();
+            this.Soporte = new HashSet<Soporte>();
         }
     
         public int Id_usuario { get; set; }
@@ -47,10 +47,10 @@ namespace ClaseDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reporte> Reporte { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Soporte> Soporte { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Competencia> Competencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Programa_formacion> Programa_formacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Soporte> Soporte { get; set; }
     }
 }

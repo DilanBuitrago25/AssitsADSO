@@ -18,8 +18,8 @@ namespace ClaseDatos
         public Asistencia()
         {
             this.Reporte = new HashSet<Reporte>();
-            this.Soporte = new HashSet<Soporte>();
             this.RegistroAsistencia = new HashSet<RegistroAsistencia>();
+            this.Soporte = new HashSet<Soporte>();
         }
     
         public int Id_asistencia { get; set; }
@@ -36,11 +36,11 @@ namespace ClaseDatos
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reporte> Reporte { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Soporte> Soporte { get; set; }
         public virtual Competencia Competencia { get; set; }
         public virtual Ficha Ficha { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistroAsistencia> RegistroAsistencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Soporte> Soporte { get; set; }
     }
 }

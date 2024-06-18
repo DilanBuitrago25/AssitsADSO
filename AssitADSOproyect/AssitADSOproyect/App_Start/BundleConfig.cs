@@ -22,6 +22,10 @@ namespace AssitADSOproyect
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/datatables").Include(
+                        "~/assets/js/datatable/datatables/jquery.dataTables.min.js",
+                        "~/assets/js/datatable/datatables/datatable.custom.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/assets").Include(
                 "~/assets/js/editor/ckeditor/ckeditor.js",
@@ -73,7 +77,7 @@ namespace AssitADSOproyect
                         "~/assets/js/datepicker/date-time-picker/moment.min.js",
                         "~/assets/js/datepicker/date-time-picker/tempusdominus-bootstrap-4.min.js",
                         "~/assets/js/datepicker/date-time-picker/datetimepicker.custom.js",
-                        "~/assets/js/datatable/datatables/jquery.dataTables.min.js",
+                         "~/assets/js/datatable/datatables/jquery.dataTables.min.js",
                         "~/assets/js/datatable/datatables/datatable.custom.js"
                         ));
 
@@ -88,6 +92,8 @@ namespace AssitADSOproyect
             bundles.Add(new Bundle("~/bundles/errors").Include(
                       "~/Content/erro401.css"
                       ));
+            
+           
 
             bundles.Add(new StyleBundle("~/Content/assets").Include(
                       "~/assets/css/fontawesome.css",
@@ -99,7 +105,6 @@ namespace AssitADSOproyect
                       "~/assets/css/date-picker.css",
                       "~/assets/css/prism.css",
                       "~/assets/css/vector-map.css",
-                      "~/assets/css/datatables.css",
                       "~/assets/css/owlcarousel.css",
                       "~/assets/css/whether-icon.css",
                       "~/assets/css/bootstrap.css",
@@ -108,12 +113,16 @@ namespace AssitADSOproyect
                       "~/assets/css/responsive.css",
                       "~/assets/css/themify.css",
                       "~/assets/css/dropzone.css",
-                      "~/assets/css/timepicker.css"
+                      "~/assets/css/timepicker.css",
+                      "~/assets/css/datatables.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            
+            bundles.Add(new StyleBundle("~/Content/datatables").Include(
+                                            "~/assets/css/datatables.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

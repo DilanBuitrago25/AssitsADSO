@@ -6,9 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Configuration.Internal;
 using System.Web.Mvc;
 using ClaseDatos;
 using Ganss.Xss;
+using System.Web.Hosting;
 using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
@@ -62,40 +64,35 @@ namespace AssitADSOproyect.Controllers
             return View();
         }
 
+        
+
         // POST: JustificacionInasistencia/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
 [ValidateAntiForgeryToken]
 [AutorizarTipoUsuario("Aprendiz")]
-public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia")] Soporte soporte, HttpPostedFileBase archivoPDF)
+public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia,Id_Instructor,Id_usuario")] Soporte soporte, HttpPostedFileBase archivo)
 {
             if (ModelState.IsValid)
             {
-                var sanitizer = new HtmlSanitizer();
-                soporte.Descripcion_soporte = sanitizer.Sanitize(soporte.Descripcion_soporte);
-                //if (Path.GetExtension(soporte.Tipo_soporte).ToLower() == ".pdf")
-                //{
-                //archivoPDF = soporte.Tipo_soporte;
 
-                    // Guardar el archivo y obtener la ruta
-                    var rutaCarpeta = Server.MapPath("~/ArchivosSoportes/");
-                    var nombreArchivo = Path.GetFileName(archivoPDF.FileName);
-                    var rutaCompleta = Path.Combine(rutaCarpeta, nombreArchivo);
-                    archivoPDF.SaveAs(rutaCompleta);
+                // 1. Generar nombre de archivo único (para evitar conflictos)
+                string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(archivo.FileName);
 
-                    // Asignar la ruta al modelo (usando la propiedad correcta)
-                    soporte.Tipo_soporte = "~/ArchivosSoportes/" + nombreArchivo; // Ruta relativa
+                // 2. Ruta completa para guardar el archivo
+                string rutaArchivo = Path.Combine(Server.MapPath("~/ArchivosSoportes"), nombreArchivo);
 
+                // 3. Guardar el archivo en la carpeta
+                archivo.SaveAs(rutaArchivo);
 
-                    db.Soporte.Add(soporte);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                //}
-                //else
-                //{
-                //    ModelState.AddModelError("Tipo_soporte", "Solo se permiten archivos PDF.");
-                //}
+                // 4. Almacenar la ruta en la base de datos
+                soporte.Tipo_soporte = "~/ArchivosSoportes/" + nombreArchivo; // Ruta relativa
+
+                db.Soporte.Add(soporte);
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
             ViewBag.Fecha_Asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", soporte.Id_asistencia);
             ViewBag.Id_Usuario = new SelectList(db.Usuario, "Id_Usuario", "Nombre_Usuario", soporte.Id_Instructor);
