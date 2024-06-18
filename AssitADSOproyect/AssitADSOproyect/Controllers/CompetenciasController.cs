@@ -16,17 +16,28 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
         [AutorizarTipoUsuario("Instructor")]
         // GET: Competencias
-        public ActionResult Index()
+        public ActionResult Index(string estadoFiltro = "")
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
-            // Filtrar por Id_Usuario y estado_competencia (verdadero)
             var CompetenciasFiltradas = db.Competencia
-                                         .Where(c => c.Id_Usuario.ToString() == idUsuarioSesion &&
-                                                     c.Estado_Competencia == true);
+                                         .Where(c => c.Id_Usuario.ToString() == idUsuarioSesion);
+
+            if (estadoFiltro == "true")
+            {
+                CompetenciasFiltradas = CompetenciasFiltradas.Where(c => c.Estado_Competencia == true);
+            }
+            else if (estadoFiltro == "false")
+            {
+                CompetenciasFiltradas = CompetenciasFiltradas.Where(c => c.Estado_Competencia == false);
+            }
+
+            ViewBag.EstadoFiltro = estadoFiltro; 
 
             return View(CompetenciasFiltradas);
         }
+
+
 
 
         // GET: Competencias/Details/5
@@ -93,7 +104,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia,Id_usuario")] Competencia competencia)
+        public ActionResult Edit([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia,Id_usuario,Estado_competencia")] Competencia competencia)
         {
             if (ModelState.IsValid)
             {

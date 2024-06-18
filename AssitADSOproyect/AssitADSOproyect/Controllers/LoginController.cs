@@ -40,9 +40,13 @@ namespace AssitADSOproyect.Controllers
                     return RedirectToAction("Index", "Instructor"); // Vista para instructores
                 }
             }
-            else
+            if (usuario == null) 
             {
                 ViewData["Mensaje"] = "Correo o contraseña incorrectos";
+            }
+            else
+            {
+                ViewData["Mensaje"] = "Usuario no Activo";
             }
             //if (usuario.Estado_Usuario == false && usuario == null)
             //{
