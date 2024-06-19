@@ -26,10 +26,10 @@
         <AssociationConnector Association="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Ficha__Id_Usuari__5CD6CB2B" />
         <AssociationConnector Association="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.Soporte" Width="1.5" PointX="9.75" PointY="9.25" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_asis__03F0984C" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_Inst__04E4BC85" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_usua__02FC7413" />
+        <EntityTypeShape EntityType="BDAssistsADSOModel.Soporte" Width="1.5" PointX="9.75" PointY="9.125" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_asis__3A81B327" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_Inst__1AD3FDA4" />
+        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

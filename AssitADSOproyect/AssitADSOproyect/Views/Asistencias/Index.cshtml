@@ -68,6 +68,16 @@
                     </div>
                 </div>
             </div>
+            @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
+            {
+                <label for="estadoFiltro">Estado:</label>
+                <select id="estadoFiltro" name="estadoFiltro">
+                    <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                    <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                    <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+                </select>
+                <input type="submit" value="Filtrar" />
+            }
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
@@ -86,30 +96,30 @@
                                                     <div class="media-body">
                                                         <p>Ficha - @Html.DisplayFor(model => item.Ficha.Codigo_ficha)</p>
                                                     </div>
-                                                <a class="badge-light btn-block btn-mail" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" href="@Url.Content("~/QRCodes/" + item.Id_asistencia + ".png")" target="_blank">
-                                                    <i class="me-2" data-feather="check-circle"></i>Ver Qr
-                                                    <div class="modal fade modal-bookmark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Codigo Qr de la Asistencia</h5>
-                                                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close">                                                 </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form class="form-bookmark needs-validation" id="bookmark-form" novalidate="">
+                                                    <a class="badge-light btn-block btn-mail" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" href="@Url.Content("~/QRCodes/" + item.Id_asistencia + ".png")" target="_blank">
+                                                        <i class="me-2" data-feather="check-circle"></i>Ver Qr
+                                                        <div class="modal fade modal-bookmark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Codigo Qr de la Asistencia</h5>
+                                                                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close">                                                 </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form class="form-bookmark needs-validation" id="bookmark-form" novalidate="">
 
-                                                                        <a href="@Url.Content("~/Asistencias/Edit/" + asistenciaidQr)" >
-                                                                            <img class="qr-image" src="@Url.Content("~/QRCodes/" + asistenciaidQr + ".png")" alt="QR para editar asistencia" />
-                                                                        </a>
+                                                                            <a href="@Url.Content("~/Asistencias/Edit/" + asistenciaidQr)">
+                                                                                <img class="qr-image" src="@Url.Content("~/QRCodes/" + asistenciaidQr + ".png")" alt="QR para editar asistencia" />
+                                                                            </a>
 
-                                                                        <input id="index_var" type="hidden" value="6">
-                                                                        <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                                                                    </form>
+                                                                            <input id="index_var" type="hidden" value="6">
+                                                                            <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                                                        </form>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </a>
+                                                    </a>
                                                 </div>
                                                 <p>Competencia - @Html.DisplayFor(model => item.Competencia.Nombre_competencia).</p>
 
@@ -122,7 +132,7 @@
                                                     <div class="col-6 font-primary">7</div>
                                                 </div>
                                                 <div class="customers">
-                                                    
+
                                                 </div>
                                             </div>
                                         </div>
@@ -148,7 +158,7 @@
                                                 <div class="col-6 font-secondary">40</div>
                                             </div>
                                             <div class="customers">
-                                               
+
                                             </div>
                                             <div class="project-status mt-4">
                                                 <div class="media mb-0">
@@ -182,9 +192,9 @@
                                             <div class="customers">
                                                 <ul>
                                                     <!--
-                    <li class="d-inline-block ms-2">
-                      <p class="f-12">+3 More</p>
-                    </li> -->
+                                            <li class="d-inline-block ms-2">
+                                              <p class="f-12">+3 More</p>
+                                            </li> -->
                                                 </ul>
                                             </div>
                                             <div class="project-status mt-4">
@@ -199,54 +209,54 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-@*<h2>Index</h2>
+            @*<h2>Index</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo_asistencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fecha_asistencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hora_asistencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario.Tipo_Documento_usuario)
-            </th>
-            <th></th>
-        </tr>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Tipo_asistencia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.fecha_asistencia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Hora_asistencia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Usuario.Tipo_Documento_usuario)
+                </th>
+                <th></th>
+            </tr>
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo_asistencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fecha_asistencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hora_asistencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Tipo_Documento_usuario)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id_asistencia }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id_asistencia }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id_asistencia })
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo_asistencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_asistencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hora_asistencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Tipo_Documento_usuario)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id_asistencia }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id_asistencia }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id_asistencia })
+                </td>
+            </tr>
+        }
 
-    </table>*@
+        </table>*@

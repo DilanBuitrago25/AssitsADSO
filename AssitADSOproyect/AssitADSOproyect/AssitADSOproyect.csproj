@@ -156,12 +156,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AprendizController.cs" />
     <Compile Include="Controllers\AprendizsController.cs" />
-    <Compile Include="Controllers\Asistencias1Controller.cs" />
     <Compile Include="Controllers\AsistenciasController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
-    <Compile Include="Controllers\Fichas1Controller.cs" />
     <Compile Include="Controllers\FichasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
@@ -171,7 +168,6 @@
     <Compile Include="Controllers\RegistroAsistenciasController.cs" />
     <Compile Include="Controllers\UsuariosAprendizController.cs" />
     <Compile Include="Controllers\UsuariosInstructorController.cs" />
-    <Compile Include="Controllers\UsuariospruebaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -6114,11 +6110,6 @@
     <Content Include="Views\RegistroAsistencias\Edit.cshtml" />
     <Content Include="Views\RegistroAsistencias\Index.cshtml" />
     <Content Include="Views\Crear_justificación.cshtml" />
-    <Content Include="Views\Usuariosprueba\Create.cshtml" />
-    <Content Include="Views\Usuariosprueba\Delete.cshtml" />
-    <Content Include="Views\Usuariosprueba\Details.cshtml" />
-    <Content Include="Views\Usuariosprueba\Edit.cshtml" />
-    <Content Include="Views\Usuariosprueba\Index.cshtml" />
     <Content Include="Views\JustificacionInasistencia\IndexAprendiz.cshtml" />
     <Content Include="Views\Home\Error401.cshtml" />
     <Content Include="Views\Shared\Error401.cshtml" />

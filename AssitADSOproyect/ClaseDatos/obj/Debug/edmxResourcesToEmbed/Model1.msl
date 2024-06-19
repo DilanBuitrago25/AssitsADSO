@@ -107,10 +107,11 @@
         <MappingFragment StoreEntitySet="Soporte">
           <ScalarProperty Name="Formato_soporte" ColumnName="Formato_soporte" />
           <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
-          <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
-          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Estado_Soporte" ColumnName="Estado_Soporte" />
           <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
           <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
+          <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
           <ScalarProperty Name="Descripcion_soporte" ColumnName="Descripcion_soporte" />
           <ScalarProperty Name="Nombre_soporte" ColumnName="Nombre_soporte" />
           <ScalarProperty Name="Id_soporte" ColumnName="Id_soporte" />

@@ -19,13 +19,24 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
         [AutorizarTipoUsuario("Instructor")]
         // GET: Asistencias
-        public ActionResult Index()
+        public ActionResult Index(string estadoFiltro = "")
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
-            // Filtrar las fichas por Id_Usuario
-            var AsistenciasFiltradas = db.Asistencia.Where(f => f.Id_usuario.ToString() == idUsuarioSesion &&
-                                                     f.Estado_Asistencia == true);
+            var AsistenciasFiltradas = db.Asistencia
+                                         .Where(f => f.Id_usuario.ToString() == idUsuarioSesion);
+
+            if (estadoFiltro == "true")
+            {
+                AsistenciasFiltradas = AsistenciasFiltradas.Where(f => f.Estado_Asistencia == true);
+            }
+            else if (estadoFiltro == "false")
+            {
+                AsistenciasFiltradas = AsistenciasFiltradas.Where(f => f.Estado_Asistencia == false);
+            }
+
+            ViewBag.EstadoFiltro = estadoFiltro;
+
             return View(AsistenciasFiltradas);
         }
 
