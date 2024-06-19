@@ -23,6 +23,7 @@ namespace ClaseDatos
             this.Competencia = new HashSet<Competencia>();
             this.Programa_formacion = new HashSet<Programa_formacion>();
             this.Soporte = new HashSet<Soporte>();
+            this.Soporte1 = new HashSet<Soporte>();
         }
     
         public int Id_usuario { get; set; }
@@ -52,5 +53,7 @@ namespace ClaseDatos
         public virtual ICollection<Programa_formacion> Programa_formacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Soporte> Soporte { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Soporte> Soporte1 { get; set; }
     }
 }

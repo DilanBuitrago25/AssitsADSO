@@ -87,8 +87,8 @@
     <Property Name="Hora_registro" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Id_usuario" Type="int" />
     <Property Name="Id_asistencia" Type="int" />
-    <Property Name="Tipo_soporte" Type="varchar(max)" />
     <Property Name="Id_Instructor" Type="int" />
+    <Property Name="Formato_soporte" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>

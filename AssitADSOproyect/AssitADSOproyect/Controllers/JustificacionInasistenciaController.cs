@@ -47,55 +47,70 @@ namespace AssitADSOproyect.Controllers
             return View(soporte);
         }
 
+        [HttpGet]
+        public JsonResult GetAsistenciasPorInstructor(int instructorId)
+        {
+            var asistencias = db.Asistencia
+                .Where(a => a.Id_usuario == instructorId)
+                .Select(a => new { a.Id_asistencia, a.Fecha_inicio_asistencia }) // O el campo que desees mostrar
+                .ToList();
+
+            return Json(asistencias, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         // GET: JustificacionInasistencia/Create
         [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Create()
         {
-            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia");
-            ViewBag.Id_Usuario = new SelectList(db.Usuario, "Id_Usuario", "Nombre_Usuario");
-            ViewBag.Fecha_Asistencia = new SelectList(db.Asistencia, "Id_Asistencia", "Fecha_inicio_asistencia");
+            ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor"), "Id_Usuario", "Nombre_Usuario");
+            ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_Asistencia", "Fecha_inicio_asistencia");
             ViewBag.Id_Competencia = new SelectList(db.Competencia, "Id_Competencia", "Nombre_Competencia");
             return View();
         }
 
-        public ActionResult CreateAprendiz()
-        {
-            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia");
-            return View();
-        }
 
-        
+    
 
         // POST: JustificacionInasistencia/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
 [ValidateAntiForgeryToken]
 [AutorizarTipoUsuario("Aprendiz")]
-public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia,Id_Instructor,Id_usuario")] Soporte soporte, HttpPostedFileBase archivo)
+public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Fecha_registro,Hora_registro,Id_usuario,Id_asistencia,Id_Instructor,Formato_soporte")] Soporte soporte, HttpPostedFileBase archivo)
 {
             if (ModelState.IsValid)
             {
+                if (archivo != null && archivo.ContentLength > 0)
+                {
+                    // 1. Generar nombre de archivo único (para evitar conflictos)
+                    string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(archivo.FileName);
 
-                // 1. Generar nombre de archivo único (para evitar conflictos)
-                string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(archivo.FileName);
+                    // 2. Ruta completa para guardar el archivo
+                    string rutaArchivo = Path.Combine(Server.MapPath("~/ArchivosSoportes"), nombreArchivo);
 
-                // 2. Ruta completa para guardar el archivo
-                string rutaArchivo = Path.Combine(Server.MapPath("~/ArchivosSoportes"), nombreArchivo);
+                    // 3. Guardar el archivo en la carpeta
+                    archivo.SaveAs(rutaArchivo);
 
-                // 3. Guardar el archivo en la carpeta
-                archivo.SaveAs(rutaArchivo);
+                    // 4. Almacenar la ruta relativa en la base de datos
+                    soporte.Formato_soporte = "~/ArchivosSoportes/" + nombreArchivo;
+                }
+                else
+                {
+                    ModelState.AddModelError("archivo", "Debe seleccionar un archivo.");
+                }
 
-                // 4. Almacenar la ruta en la base de datos
-                soporte.Tipo_soporte = "~/ArchivosSoportes/" + nombreArchivo; // Ruta relativa
+                if (ModelState.IsValid)
+                {
+                    db.Soporte.Add(soporte);
+                    db.SaveChanges();
 
-                db.Soporte.Add(soporte);
-                db.SaveChanges();
-
-                return RedirectToAction("Index");
-            }
-            ViewBag.Fecha_Asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", soporte.Id_asistencia);
-            ViewBag.Id_Usuario = new SelectList(db.Usuario, "Id_Usuario", "Nombre_Usuario", soporte.Id_Instructor);
+                    return RedirectToAction("Index");
+                }
+                }
+                ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", soporte.Id_asistencia);
+            ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor"), "Id_Usuario", "Nombre_Usuario", soporte.Id_usuario);
+            
             return View(soporte);
 
 

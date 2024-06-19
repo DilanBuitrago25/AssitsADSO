@@ -29,68 +29,86 @@
 <div class="container-fluid">
     <div class="email-wrap">
         <div class="row">
-          
+
             @using (Html.BeginForm("Create", "JustificacionInasistencia", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
-            @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
 
-            <div>
-                <div class="email-right-aside">
-                    <div class="card email-body">
-                        <div class="email-profile">
-                            <div class="email-body">
-                                <div class="email-compose">
-                                    <div class="email-top compose-border">
-                                        
-                                    </div>
-                                    <div class="email-wrapper">
-                                        <form class="theme-form">
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Para</label>
-                                                @Html.DropDownList("Id_Usuario", null, htmlAttributes: new { @class = "form-control" })
+                <div>
+                    <div class="email-right-aside">
+                        <div class="card email-body">
+                            <div class="email-profile">
+                                <div class="email-body">
+                                    <div class="email-compose">
+                                        <div class="email-top compose-border">
 
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Id_Instructor, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="email-wrapper">
+                                            <form class="theme-form">
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Para</label>
+                                                    @Html.DropDownList("Id_Instructor", null, htmlAttributes: new { @class = "form-control" })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Id_Instructor, "", new { @class = "text-danger" })
 
 
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Fecha Inasistencia</label>
-                                                @Html.DropDownList("Fecha_Asistencia", null, htmlAttributes: new { @class = "form-control" })
+                                                @*@Html.DropDownList("Fecha_asistencia", null, htmlAttributes: new { @class = "form-control" })*@
+                                                @Html.HiddenFor(model => model.Id_asistencia, new
+                                                   {
+                                                       Value = 103003
+                                                        })
+                                            </div>
+                                                @*@Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })*@
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Asunto</label>
+                                                    @Html.EditorFor(model => model.Nombre_soporte, new { htmlAttributes = new { @class = "form-control digits", @type = "text" } })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Nombre_soporte, "", new { @class = "text-danger" })
+
+                                                @*@Html.HiddenFor(model => model.Archivo_soporte, new { id = "Archivo_soporte" })*@
+                                                <label class="col-sm-3 col-form-label">Subir Archivo (solo PDF)</label>
+                                                <div class="col-sm-12">
+
+                                                    @*@using System.Web;
+            <input type="file" name="Archivo_soporte" id="Archivo_soporte" class="form-control" />*@
+                                                    <input type="file" name="archivo" class="form-control" />
+
+                                                    @*@Html.TextBox("archivo", null, new { @class = "form-control", @type = "file" })*@
+
+                                                    
+
+                                                </div>
+                                                <br />
+
+                                                <div class="form-group">
+                                                    <label>Mensaje</label>
+                                                    @*<textarea id="text-box" name="text-box" cols="10" rows="2">                                                            </textarea>*@
+                                                    @Html.TextAreaFor(model => model.Descripcion_soporte, new { @class = "form-control" })
+
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.Descripcion_soporte, "", new { @class = "text-danger" })
+
+                                                @Html.HiddenFor(model => model.Fecha_registro, new
+                                                {
+                                                    @Value = DateTime.Now.ToString("MM/dd/yyyy")
+                                                })
+
+                                                @Html.HiddenFor(model => model.Hora_registro, new
+                                               {
+                                                   Value = DateTime.Now.ToString("HH:mm")
+                                               })
+
+                                                @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })
+
+                                            </form>
+                                            <div class="action-wrapper">
+                                                <input type="submit" value="Create" class="btn btn-default" />
 
                                             </div>
-                                            @Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Asunto</label>
-                                                @Html.EditorFor(model => model.Nombre_soporte, new { htmlAttributes = new { @class = "form-control digits", @type = "text" } })
-
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Nombre_soporte, "", new { @class = "text-danger" })
-
-                                            @*@Html.HiddenFor(model => model.Tipo_soporte, new { id = "tipo_soporte" })*@
-                                            <label class="col-sm-3 col-form-label">Subir Archivo (solo PDF)</label>
-                                            <div class="col-sm-12">
-                                                @Html.TextBox("archivo", null, new { @class = "form-control", @type = "file" })
-
-                                                @*@Html.ValidationMessageFor(model => model.Tipo_soporte, "", new { @class = "text-danger" })*@
-                                            </div>
-                                            <br />
-
-                                            <div class="form-group">
-                                                <label>Mensaje</label>
-                                                @*<textarea id="text-box" name="text-box" cols="10" rows="2">                                                            </textarea>*@
-                                                @Html.TextAreaFor(model => model.Descripcion_soporte, new { @class = "form-control" })
-
-                                            </div>
-                                            @Html.ValidationMessageFor(model => model.Descripcion_soporte, "", new { @class = "text-danger" })
-                                                                          
-                                            
-
-                                            @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })
-
-                                        </form>
-                                        <div class="action-wrapper">
-                                            <input type="submit" value="Create" class="btn btn-default" />
-                                           
                                         </div>
                                     </div>
                                 </div>
@@ -98,25 +116,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
             }
         </div>
     </div>
 </div>
 <script>
-Dropzone.options.singleFileUpload = {
-    url: '@Url.Action("Upload")', // Ruta al método del controlador
-    // ... (resto de la configuración de Dropzone)
-    init: function() {
-        this.on("success", function(file, response) {
-            if (response.success) {
-                $("#tipo_soporte").val(response.filePath);
-            } else {
-                alert(response.error);
-            }
-        });
-    }
-    };
+
 
     // Elimina el atributo 'readonly' al cargar la página
     document.addEventListener('DOMContentLoaded', function() {
@@ -157,10 +162,10 @@ Dropzone.options.singleFileUpload = {
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Tipo_soporte, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Archivo_soporte, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tipo_soporte, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tipo_soporte, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Archivo_soporte, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Archivo_soporte, "", new { @class = "text-danger" })
                 </div>
             </div>
 

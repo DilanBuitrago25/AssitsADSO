@@ -11,8 +11,7 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Soporte
     {
         public int Id_soporte { get; set; }
@@ -22,11 +21,11 @@ namespace ClaseDatos
         public string Hora_registro { get; set; }
         public Nullable<int> Id_usuario { get; set; }
         public Nullable<int> Id_asistencia { get; set; }
-        [Required(ErrorMessage ="Cargar el archivo")]
-        public string Tipo_soporte { get; set; }
         public Nullable<int> Id_Instructor { get; set; }
+        public string Formato_soporte { get; set; }
     
         public virtual Asistencia Asistencia { get; set; }
         public virtual Usuario Usuario { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }

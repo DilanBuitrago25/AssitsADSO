@@ -107,7 +107,8 @@ Hora_registro varchar(200) not null,
 Id_usuario int references Usuario(Id_usuario),
 Id_Instructor int references Usuario(Id_usuario),
 Id_asistencia int references Asistencia(Id_asistencia),
-Tipo_soporte varchar(MAX),
+archivo_soporte VARBINARY(MAX), 
+Formato_soporte varchar(50),
 primary key (Id_soporte))
 
 ALTER TABLE RegistroAsistencia 
@@ -129,4 +130,4 @@ Hora_registro varchar(200) not null ;
 --Select * from Usuarios
 
 ALTER TABLE Soporte
-add Tipo_soporte VARBINARY(MAX); 
+add Formato_soporte varchar(50); 
