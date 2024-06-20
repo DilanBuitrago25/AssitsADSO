@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
@@ -23,6 +26,94 @@ namespace AssitADSOproyect.Controllers
             .ToList();
 
             return View(AprendizFiltro);
+        }
+
+        public ActionResult GenerarReportePDF()
+        {
+            var AprendizFiltro = db.Usuario
+            .Where(u => u.Tipo_usuario == "Aprendiz")
+            .ToList();
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 50, 50, 80, 50);
+                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png"));
+
+                document.Open();
+
+                // Título
+                Paragraph titulo = new Paragraph("Reporte de Aprendices", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+                titulo.Alignment = Element.ALIGN_CENTER;
+                document.Add(titulo);
+
+                document.Add(Chunk.NEWLINE);
+
+
+                PdfPTable table = new PdfPTable(8);
+                table.WidthPercentage = 100;
+
+                // Encabezados de la tabla
+                Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                table.AddCell(new Phrase("Tipo Documento", headerFont));
+                table.AddCell(new Phrase("Documento"));
+                table.AddCell(new Phrase("Nombre"));
+                table.AddCell(new Phrase("Apellido"));
+                table.AddCell(new Phrase("Telefono"));
+                table.AddCell(new Phrase("Correo"));
+                table.AddCell(new Phrase("Codigo Ficha"));
+                table.AddCell(new Phrase("Estado Aprendiz"));
+
+
+
+
+                Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                foreach (var aprendiz in AprendizFiltro)
+                {
+                    table.AddCell(new Phrase(aprendiz.Tipo_Documento_usuario));
+                    table.AddCell(new Phrase(aprendiz.Documento_usuario.ToString()));
+                    table.AddCell(new Phrase(aprendiz.Nombre_usuario));
+                    table.AddCell(new Phrase(aprendiz.Apellido_usuario));
+                    table.AddCell(new Phrase(aprendiz.Telefono_usuario.ToString()));
+                    table.AddCell(new Phrase(aprendiz.Correo_usuario));
+                    table.AddCell(new Phrase(aprendiz.Ficha.Codigo_ficha.ToString()));
+                    table.AddCell(new Phrase(aprendiz.Estado_Usuario.ToString()));
+
+                }
+
+                document.Add(table);
+                document.Close();
+
+
+                return File(memoryStream.ToArray(), "application/pdf", "ReporteAprendices.pdf");
+            }
+        }
+
+        class HeaderFooterEvent : PdfPageEventHelper
+        {
+            private readonly Image _logo;
+
+            public HeaderFooterEvent(string imagePath)
+            {
+                _logo = Image.GetInstance(imagePath);
+                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+            }
+
+            public override void OnEndPage(PdfWriter writer, Document document)
+            {
+                // Encabezado (imagen alineada a la izquierda)
+                _logo.SetAbsolutePosition(document.LeftMargin, document.PageSize.Height - document.TopMargin - _logo.ScaledHeight);
+                document.Add(_logo);
+
+                // Pie de página (texto centrado)
+                Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssisdsdsstADSO. Todos los derechos reservados.", footerFont);
+                float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
+                float xPosition = (document.PageSize.Width - textWidth) / 2;
+
+                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, footerText, xPosition, document.BottomMargin, 0);
+            }
         }
 
         // GET: UsuariosAprendiz/Details/5

@@ -56,10 +56,10 @@
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Fecha Inasistencia</label>
                                                     @Html.DropDownList("Fecha_asistencia", null, htmlAttributes: new { @class = "form-control" })
-                                                    @Html.HiddenFor(model => model.Id_asistencia, new
+                                                    @*@Html.HiddenFor(model => model.Id_asistencia, new
                                                {
                                                    Value = 100013
-                                               })
+                                               })*@
                                                 </div>
                                                 @*@Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })*@
                                                 <div class="form-group">
@@ -104,7 +104,7 @@
 
                                                 @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })
 
-                                                @Html.HiddenFor(model => model.Estado_Soporte, new { Value = true })
+                                                @*@Html.HiddenFor(model => model.Estado_Soporte, new { Value = true })*@
 
                                             </form>
                                             <div class="action-wrapper">

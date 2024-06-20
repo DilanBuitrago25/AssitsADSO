@@ -24,6 +24,7 @@ namespace AssitADSOproyect.Controllers
         {
             var soporte = db.Soporte.Include(s => s.Asistencia);
             return View(soporte.ToList());
+            
         }
         
         public ActionResult IndexAprendiz()
@@ -77,23 +78,26 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
 [ValidateAntiForgeryToken]
 [AutorizarTipoUsuario("Aprendiz")]
-public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Fecha_registro,Hora_registro,Id_usuario,Id_asistencia,Id_Instructor,Formato_soporte,Estado_soporte")] Soporte soporte, HttpPostedFileBase archivo)
+public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Fecha_registro,Hora_registro,Id_usuario,Id_asistencia,Id_Instructor,Formato_soporte")] Soporte soporte, HttpPostedFileBase archivo)
 {
             if (ModelState.IsValid)
             {
                 if (archivo != null && archivo.ContentLength > 0)
                 {
-                    // 1. Generar nombre de archivo único (para evitar conflictos)
-                    string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(archivo.FileName);
+                    if (!archivo.FileName.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+                    {
+                        // 1. Generar nombre de archivo único (para evitar conflictos)
+                        string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(archivo.FileName);
 
-                    // 2. Ruta completa para guardar el archivo
-                    string rutaArchivo = Path.Combine(Server.MapPath("~/ArchivosSoportes"), nombreArchivo);
+                        // 2. Ruta completa para guardar el archivo
+                        string rutaArchivo = Path.Combine(Server.MapPath("~/ArchivosSoportes"), nombreArchivo);
 
-                    // 3. Guardar el archivo en la carpeta
-                    archivo.SaveAs(rutaArchivo);
+                        // 3. Guardar el archivo en la carpeta
+                        archivo.SaveAs(rutaArchivo);
 
-                    // 4. Almacenar la ruta relativa en la base de datos
-                    soporte.Formato_soporte = "~/ArchivosSoportes/" + nombreArchivo;
+                        // 4. Almacenar la ruta relativa en la base de datos
+                        soporte.Formato_soporte = "~/ArchivosSoportes/" + nombreArchivo;
+                    }
                 }
                 else
                 {
@@ -147,6 +151,7 @@ public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcio
                 return HttpNotFound();
             }
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
+            ViewBag.RutaArchivo = soporte.Formato_soporte;
             return View(soporte);
         }
 

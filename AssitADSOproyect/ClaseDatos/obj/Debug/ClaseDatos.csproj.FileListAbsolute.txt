@@ -110,3 +110,17 @@ C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Text.Encoding.CodePages.xml
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\Rotativa.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.Helpers.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.Mvc.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.Razor.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.WebPages.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.Helpers.xml
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.Mvc.xml
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.Razor.xml
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.WebPages.xml
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\System.Web.WebPages.Razor.xml

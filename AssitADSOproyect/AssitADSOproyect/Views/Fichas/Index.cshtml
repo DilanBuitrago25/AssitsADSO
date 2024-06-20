@@ -58,52 +58,55 @@
             </select>
             <input type="submit" value="Filtrar" />
         }
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="display" id="row-select-delete">
-                    <thead>
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Fichas")'">
+            Generar Reporte PDF
+        </button>
+        <div class="table-responsive">
+            <table class="display" id="row-select-delete">
+                <thead>
 
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Jornada</th>
+                        <th>Modalidad</th>
+                        <th>Tipo</th>
+                        <th>Programa de formación</th>
+                        <th> </th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th>Codigo</th>
-                            <th>Jornada</th>
-                            <th>Modalidad</th>
-                            <th>Tipo</th>
-                            <th>Programa de formación</th>
-                            <th> </th>
-                        </tr>
+                            <td>@Html.DisplayFor(modelItem => item.Codigo_ficha)</td>
+                            @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
+                            <td>@Html.DisplayFor(model => item.Jornada_ficha)</td>
+                            <td>@Html.DisplayFor(model => item.Modalidad_ficha)</td>
+                            <td>@Html.DisplayFor(model => item.tipo_ficha)</td>
+                            <td>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_ficha })
+                            </td>
 
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Codigo_ficha)</td>
-                                @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
-                                <td>@Html.DisplayFor(model => item.Jornada_ficha)</td>
-                                <td>@Html.DisplayFor(model => item.Modalidad_ficha)</td>
-                                <td>@Html.DisplayFor(model => item.tipo_ficha)</td>
-                                <td>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id_ficha })
-                                </td>
-
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Codigo</th>
-                            <th>Jornada</th>
-                            <th>Modalidad</th>
-                            <th>Tipo</th>
-                            <th>Programa de formación</th>
-                            <th> </th>
                         </tr>
-                    </tfoot>
-                </table>
-            </div>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Jornada</th>
+                        <th>Modalidad</th>
+                        <th>Tipo</th>
+                        <th>Programa de formación</th>
+                        <th> </th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
+    </div>
     </div>
 </div>
 

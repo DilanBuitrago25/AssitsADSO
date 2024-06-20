@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using static AssitADSOproyect.Controllers.LoginController;
 
 namespace AssitADSOproyect.Controllers
@@ -37,6 +40,86 @@ namespace AssitADSOproyect.Controllers
             return View(CompetenciasFiltradas);
         }
 
+        public ActionResult GenerarReportePDF()
+        {
+            var Competencias = db.Competencia.ToList(); 
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 50, 50, 80, 50);
+                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); 
+
+                document.Open();
+
+                // Título
+                Paragraph titulo = new Paragraph("Reporte de Competencias", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+                titulo.Alignment = Element.ALIGN_CENTER;
+                document.Add(titulo);
+
+                document.Add(Chunk.NEWLINE);
+
+                
+                PdfPTable table = new PdfPTable(6); 
+                table.WidthPercentage = 100;
+
+                // Encabezados de la tabla
+                Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                table.AddCell(new Phrase("Id de Competencia", headerFont));
+                table.AddCell(new Phrase("Nombre Competencia"));
+                table.AddCell(new Phrase("Tipo Competencia"));
+                table.AddCell(new Phrase("Codigo Ficha"));
+                table.AddCell(new Phrase("Programa Formacion"));
+                table.AddCell(new Phrase("Estado Competencia"));
+                
+
+               
+                Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                foreach (var competencia in Competencias)
+                {
+                    table.AddCell(new Phrase(competencia.Id_competencia.ToString()));
+                    table.AddCell(new Phrase(competencia.Nombre_competencia));
+                    table.AddCell(new Phrase(competencia.tipo_competencia));
+                    table.AddCell(new Phrase(competencia.Ficha.Codigo_ficha.ToString()));
+                    table.AddCell(new Phrase(competencia.Programa_formacion.Nombre_programa));
+                    table.AddCell(new Phrase(competencia.Estado_Competencia.ToString()));
+                    
+                }
+
+                document.Add(table);
+                document.Close();
+
+               
+                return File(memoryStream.ToArray(), "application/pdf", "ReporteCompetencias.pdf");
+            }
+        }
+
+        class HeaderFooterEvent : PdfPageEventHelper
+        {
+            private readonly Image _logo;
+
+            public HeaderFooterEvent(string imagePath)
+            {
+                _logo = Image.GetInstance(imagePath);
+                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+            }
+
+            public override void OnEndPage(PdfWriter writer, Document document)
+            {
+                // Encabezado (imagen alineada a la izquierda)
+                _logo.SetAbsolutePosition(document.LeftMargin, document.PageSize.Height - document.TopMargin - _logo.ScaledHeight);
+                document.Add(_logo);
+
+                // Pie de página (texto centrado)
+                Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssisdsdsstADSO. Todos los derechos reservados.", footerFont);
+                float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
+                float xPosition = (document.PageSize.Width - textWidth) / 2;
+
+                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, footerText, xPosition, document.BottomMargin, 0);
+            }
+        }
 
 
 

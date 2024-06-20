@@ -9,6 +9,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClaseDatos;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using QRCoder;
 using static AssitADSOproyect.Controllers.LoginController;
 
@@ -38,6 +40,93 @@ namespace AssitADSOproyect.Controllers
             ViewBag.EstadoFiltro = estadoFiltro;
 
             return View(AsistenciasFiltradas);
+        }
+
+        public ActionResult GenerarReportePDF()
+        {
+            var asistencias = db.Asistencia.ToList();
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 50, 50, 80, 50);
+                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png"));
+
+                document.Open();
+
+                // Título
+                Paragraph titulo = new Paragraph("Reporte de Asistencias", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+                titulo.Alignment = Element.ALIGN_CENTER;
+                document.Add(titulo);
+
+                document.Add(Chunk.NEWLINE);
+
+
+                PdfPTable table = new PdfPTable(9);
+                table.WidthPercentage = 100;
+
+                // Encabezados de la tabla
+                Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                table.AddCell(new Phrase("Id de Asistencia", headerFont));
+                table.AddCell(new Phrase("Fecha Inicio"));
+                table.AddCell(new Phrase("Hora Inicio"));
+                table.AddCell(new Phrase("Fecha Fin"));
+                table.AddCell(new Phrase("Hora Fin"));
+                table.AddCell(new Phrase("Detalles Asistencia"));
+                table.AddCell(new Phrase("Codigo Ficha"));
+                table.AddCell(new Phrase("Competencia"));
+                table.AddCell(new Phrase("Estado Asistencia"));
+
+
+
+                Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                foreach (var asistencia in asistencias)
+                {
+                    table.AddCell(new Phrase(asistencia.Id_asistencia.ToString()));
+                    table.AddCell(new Phrase(asistencia.Fecha_inicio_asistencia));
+                    table.AddCell(new Phrase(asistencia.Hora_inicio_asistencia));
+                    table.AddCell(new Phrase(asistencia.Fecha_fin_asistencia));
+                    table.AddCell(new Phrase(asistencia.Hora_fin_asistencia));
+                    table.AddCell(new Phrase(asistencia.Detalles_asistencia));
+                    table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha.ToString()));
+                    table.AddCell(new Phrase(asistencia.Competencia.Nombre_competencia));
+                    table.AddCell(new Phrase(asistencia.Estado_Asistencia.ToString()));
+
+                }
+
+                document.Add(table);
+                document.Close();
+
+
+                return File(memoryStream.ToArray(), "application/pdf", "ReporteAsistencias.pdf");
+            }
+        }
+
+        class HeaderFooterEvent : PdfPageEventHelper
+        {
+            private readonly Image _logo;
+
+            public HeaderFooterEvent(string imagePath)
+            {
+                _logo = Image.GetInstance(imagePath);
+                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+            }
+
+            public override void OnEndPage(PdfWriter writer, Document document)
+            {
+                // Encabezado (imagen alineada a la izquierda)
+                _logo.SetAbsolutePosition(document.LeftMargin, document.PageSize.Height - document.TopMargin - _logo.ScaledHeight);
+                document.Add(_logo);
+
+                // Pie de página (texto centrado)
+                Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssisdsdsstADSO. Todos los derechos reservados.", footerFont);
+                float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
+                float xPosition = (document.PageSize.Width - textWidth) / 2;
+
+                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, footerText, xPosition, document.BottomMargin, 0);
+            }
         }
 
         // GET: Asistencias/Details/5

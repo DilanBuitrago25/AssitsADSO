@@ -428,3 +428,7 @@ C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\System.Memory.xml
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\System.Text.Encoding.CodePages.xml
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\BouncyCastle.Cryptography.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\itextsharp.dll
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\BouncyCastle.Cryptography.xml
+C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\itextsharp.xml

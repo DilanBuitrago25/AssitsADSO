@@ -58,46 +58,49 @@
             </select>
             <input type="submit" value="Filtrar" />
         }
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="display" id="row-select-delete">
-                    <thead>
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'">
+            Generar Reporte PDF
+        </button>
+        <div class="table-responsive">
+            <table class="display" id="row-select-delete">
+                <thead>
 
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Duracion</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Duracion</th>
-                        </tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Nombre_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Tipo_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Duracion_programa)</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id_programa }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_programa })
+                            </td>
 
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Id_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Nombre_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Tipo_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Duracion_programa)</td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_programa }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id_programa })
-                                </td>
-
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Duracion</th>
                         </tr>
-                    </tfoot>
-                </table>
-            </div>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Duracion</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
+    </div>
     </div>
 </div>
 

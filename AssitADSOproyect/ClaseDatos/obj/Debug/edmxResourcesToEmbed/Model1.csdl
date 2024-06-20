@@ -633,7 +633,6 @@
     <Property Name="Id_asistencia" Type="Int32" />
     <Property Name="Fecha_registro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Hora_registro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="Estado_Soporte" Type="Boolean" />
     <Property Name="Id_Instructor" Type="Int32" />
     <Property Name="Formato_soporte" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOModel.FK__Soporte__Id_asis__3A81B327" FromRole="Soporte" ToRole="Asistencia" />

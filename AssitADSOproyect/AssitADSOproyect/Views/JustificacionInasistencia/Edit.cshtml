@@ -96,8 +96,8 @@
                                                 <div class="media">
                                                     <img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
                                                     <div class="media-body">
-                                                        <h6 class="d-block">Sara Angarita                                                             </h6>
-                                                        <p>Ficha - 2693606.</p>
+                                                        <h6 class="d-block">@Html.DisplayFor(model => model.Usuario1.Nombre_usuario)        @Html.DisplayFor(model => model.Usuario1.Apellido_usuario)                                                       </h6>
+                                                        <p>Ficha - @Html.DisplayFor(model => model.Usuario1.Ficha.Codigo_ficha).</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,25 +110,9 @@
                                                 <p>Instructor Buenas Tardes,</p>
                                             </div>
                                             <div class="read-group">
-                                                <h5>Falte a clases del jueves por motivo de cita medica.</h5>
-                                                <p>
-                                                    Me encuentro en reposo absoluto bajo tratamiento médico con pronostico de recuperación favorable.
-                                                    <br />
-                                                    He adjuntado certificado médico y la incapacidad como comprobante de mi condición.
-                                                    <br />
-                                                    <br />
-                                                    Me disculpo por cualquier inconveniente que mi ausencia pueda ocasionar. He tomado las medidas necesarias para que mis tareas sean cubiertas durante mi ausencia y me pondré al día con cualquier trabajo pendiente a mi regreso.
-                                                </p>
-                                                <br />
-                                                <br />
-                                                <p class="m-t-10">
-                                                    Agradezco su comprensión y espero reincorporarme a mis labores a la brevedad posible.
-                                                    @Html.TextAreaFor(model => model.Descripcion_soporte, new { @class = "form-control", @id = "text-box", @rows = "2", @cols = "10" })  @*usarlo al descripcion soporte*@
-                                                    <br />
-                                                    Atentamente,
-                                                    <br />
-                                                    Sara Angarita
-                                                </p>
+                                                <h5> @Html.DisplayFor(model => model.Nombre_soporte).</h5>
+                                                <p> @Html.DisplayFor(model => model.Descripcion_soporte)</p>
+                                               
                                             </div>
                                         </div>
                                         <div class="emailread-group">
@@ -136,8 +120,8 @@
                                             <div class="clearfix"></div>
                                             <div class="attachment">
                                                 <ul>
-                                                    <li><img class="img-fluid" src="../assets/images/email/PdfIcon.png" alt=""></li>
-                                                    <li><img class="img-fluid" src="../assets/images/email/PdfIcon.png" alt=""></li>
+                                                    <li> <a href="@Url.Content(ViewBag.RutaArchivo)" download><img class="img-fluid" src="~/assets/images/email/PdfIcon.png" alt="Archivo Soporte"></a> </li>
+                                                  
                                                 </ul>
                                             </div>
                                         </div>
