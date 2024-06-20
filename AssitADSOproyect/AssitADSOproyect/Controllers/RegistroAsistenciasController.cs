@@ -24,7 +24,7 @@ namespace AssitADSOproyect.Controllers
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
             var RegistrosFiltrados = db.RegistroAsistencia
-                                         .Where(c => c.Id_usuario.ToString() == idUsuarioSesion);
+                                         .Where(r => r.Id_usuario.ToString() == idUsuarioSesion);
 
             if (estadoFiltro == "true")
             {
@@ -44,9 +44,8 @@ namespace AssitADSOproyect.Controllers
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
-            // Filtrar las fichas por Id_Usuario
-            var RegistrosFiltrados = db.RegistroAsistencia.Where(f => f.Id_usuario.ToString() == idUsuarioSesion &&
-                                                     f.Estado_RegistroAsitencia == true);
+            var RegistrosFiltrados = db.RegistroAsistencia
+                                         .Where(r => r.Id_usuario.ToString() == idUsuarioSesion);
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -109,7 +108,7 @@ namespace AssitADSOproyect.Controllers
             public HeaderFooterEvent(string imagePath)
             {
                 _logo = Image.GetInstance(imagePath);
-                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+                _logo.ScaleToFit(80f, 50f); // Ajustar tamaño de la imagen
             }
 
             public override void OnEndPage(PdfWriter writer, Document document)
@@ -144,11 +143,9 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: RegistroAsistencias/Create
+
         public ActionResult Create(int? Id_Asistencia, string fechaFin)
         {
-           
-
-
 
             if (Session["IdUsuario"] == null)
             {
@@ -180,10 +177,41 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Create([Bind(Include = "Id_Registroasistencia,Fecha_registro,Hora_registro,Id_asistencia,Id_usuario,Asistio_registro")] RegistroAsistencia registroAsistencia)
         {
             if (ModelState.IsValid)
             {
+                // Obtener la asistencia correspondiente al Id_asistencia
+                var asistencia = db.Asistencia.Find(registroAsistencia.Id_asistencia);
+
+                if (asistencia != null)
+                {
+                    // Parsear las fechas y horas (asumiendo que están en formato "yyyy-MM-dd" y "HH:mm")
+                    if (DateTime.TryParse(asistencia.Fecha_fin_asistencia, out DateTime fechaFin) &&
+                        DateTime.TryParse(asistencia.Hora_fin_asistencia, out DateTime horaFin))
+                    {
+                        // Combinar la fecha y hora de fin de la asistencia
+                        DateTime fechaHoraFinAsistencia = fechaFin.Date + horaFin.TimeOfDay;
+
+                        // Verificar si la fecha y hora de fin ya pasaron
+                        if (fechaHoraFinAsistencia < DateTime.Now)
+                        {
+                            ModelState.AddModelError("Id_asistencia", "La asistencia seleccionada ya ha finalizado. No se puede registrar.");
+
+                            // Recargar el ViewBag para el dropdown list de asistencias
+                            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
+
+                            return View(registroAsistencia); // Volver a la vista con el mensaje de error
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Error al analizar la fecha y hora de fin de la asistencia.");
+                        return View(registroAsistencia);
+                    }
+                }
+
                 db.RegistroAsistencia.Add(registroAsistencia);
                 db.SaveChanges();
                 return RedirectToAction("Index");

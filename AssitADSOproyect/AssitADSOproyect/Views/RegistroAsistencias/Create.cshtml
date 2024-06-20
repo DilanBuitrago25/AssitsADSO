@@ -114,7 +114,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label>Hora de Registro</label>
+                                            <label>Hora de dasdRegistro</label>
                                             <div class="input-group" data-placement="left" data-align="top" data-autoclose="true">
                                                 @Html.TextBoxFor(model => model.Hora_registro, new
                                                 {
@@ -128,6 +128,7 @@
                                             </div>
                                             @Html.ValidationMessageFor(model => model.Hora_registro, "", new { @class = "text-danger" })
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 @Html.HiddenFor(model => model.Asistio_registro, new { Value = true })
