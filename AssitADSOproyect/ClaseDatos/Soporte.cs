@@ -11,31 +11,28 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Soporte
     {
         public int Id_soporte { get; set; }
+        [Required(ErrorMessage = "Por favor ingresar el Asunto de la justificación")]
+        [StringLength(45, ErrorMessage = "El Asunto no puede exceder los 45 caracteres")]
         public string Nombre_soporte { get; set; }
+        [Required(ErrorMessage = "Por favor ingresar el Mensaje de la justificación")]
+        [StringLength(500, ErrorMessage = "La descripcion no puede exceder los 500 caracteres")]
         public string Descripcion_soporte { get; set; }
+        [Required(ErrorMessage = "Por favor insertar los Archivos de la justificacion Tipo PDF solamente")]
         public Nullable<int> Id_usuario { get; set; }
         public Nullable<int> Id_asistencia { get; set; }
         public string Fecha_registro { get; set; }
         public string Hora_registro { get; set; }
         public Nullable<int> Id_Instructor { get; set; }
-        [PdfFile(ErrorMessage = "Solo se permiten archivos PDF.")]
         public string Formato_soporte { get; set; }
+        public Nullable<bool> Estado_Soporte { get; set; }
     
         public virtual Asistencia Asistencia { get; set; }
-        [ForeignKey("Id_Instructor")]
         public virtual Usuario Usuario { get; set; }
-        [ForeignKey("Id_usuario")]
         public virtual Usuario Usuario1 { get; set; }
-
-        //[ForeignKey("Id_Instructor")] // Clave externa para el instructor
-        //public virtual Usuario Instructor { get; set; }
-
-        //[ForeignKey("Id_usuario")] // Nueva clave externa para el usuario
-        //public virtual Usuario UsuarioAprendiz { get; set; }
     }
 }

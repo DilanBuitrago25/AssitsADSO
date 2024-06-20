@@ -105,6 +105,7 @@
     <EntitySetMapping Name="Soporte">
       <EntityTypeMapping TypeName="BDAssistsADSOModel.Soporte">
         <MappingFragment StoreEntitySet="Soporte">
+          <ScalarProperty Name="Estado_Soporte" ColumnName="Estado_Soporte" />
           <ScalarProperty Name="Formato_soporte" ColumnName="Formato_soporte" />
           <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
           <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />

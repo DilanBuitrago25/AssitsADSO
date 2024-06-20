@@ -112,7 +112,7 @@
                                                                         <form class="form-bookmark needs-validation" id="bookmark-form" novalidate="">
 
                                                                             <a href="@Url.Content("~/Asistencias/Edit/" + asistenciaidQr)">
-                                                                                <img class="qr-image" src="@Url.Content("~/QRCodes/" + asistenciaidQr + ".png")" alt="QR para editar asistencia" />
+                                                                                <img class="qr-image" src="@Url.Content("~/QRCodes/" + 101019 + ".png")" alt="QR para editar asistencia" />
                                                                             </a>
 
                                                                             <input id="index_var" type="hidden" value="6">
@@ -141,47 +141,41 @@
                                         </div>
                                     }
 
-                                    <div class="col-xxl-4 col-lg-6">
-                                        <div class="project-box">
-                                            <span class="badge badge-secondary">Por Empezar</span>
-                                            <h6>Asistencia 19/05/2024</h6>
-                                            <div class="media">
 
-                                                <div class="media-body">
-                                                    <p>Ficha - 2693607</p>
-                                                </div>
-                                            </div>
-                                            <p>Competencia - ASP.NET.</p>
-                                            <div class="row details">
-                                                <div class="col-6"><span>Asistieron </span></div>
-                                                <div class="col-6 font-secondary">24</div>
-                                                <div class="col-6"> <span>No Asistieron</span></div>
-                                                <div class="col-6 font-secondary">24</div>
-                                                <div class="col-6"> <span>Justificaron Inasistencia</span></div>
-                                                <div class="col-6 font-secondary">40</div>
-                                            </div>
-                                            <div class="customers">
 
-                                            </div>
-                                            <div class="project-status mt-4">
-                                                <div class="media mb-0">
-                                                    <p>100% </p>
-                                                    <div class="media-body text-end"><span></span></div>
-                                                </div>
-                                                <div class="progress" style="height: 5px">
-                                                    <div class="progress-bar-animated bg-secondary" role="progressbar" style="width: 100%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-xxl-4 col-lg-6">
                                         <div class="project-box">
                                             <span class="badge badge-danger">Finalizado</span>
-                                            <h6>Asistencias 17/04/2023</h6>
+                                            <h6>Asistencias 13/06/2023</h6>
                                             <div class="media">
                                                 <div class="media-body">
                                                     <p>Ficha - 269606</p>
                                                 </div>
+                                                <a class="badge-light btn-block btn-mail" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" " target="_blank">
+                                                    <i class="me-2" data-feather="check-circle"></i>Ver Qr
+                                                    <div class="modal fade modal-bookmark" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Codigo Qr de la Asistencia</h5>
+                                                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close">                                                 </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form class="form-bookmark needs-validation" id="bookmark-form" novalidate="">
+
+                                                                        <a href="@Url.Content("~/Asistencias/Edit/" + 101020)">
+                                                                            <img class="qr-image" src="@Url.Content("~/QRCodes/" + 101020 + ".png")" alt="QR para editar asistencia" />
+                                                                        </a>
+
+                                                                        <input id="index_var" type="hidden" value="6">
+                                                                        <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                             <p>Competencia - Contruccion de vistas con Bootstrap.</p>
                                             <div class="row details">

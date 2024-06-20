@@ -432,3 +432,7 @@ C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOp
 C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\itextsharp.dll
 C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\BouncyCastle.Cryptography.xml
 C:\Users\Kutzo\OneDrive\Documentos\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\itextsharp.xml
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\BouncyCastle.Cryptography.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\itextsharp.dll
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\BouncyCastle.Cryptography.xml
+C:\Users\User\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\itextsharp.xml
