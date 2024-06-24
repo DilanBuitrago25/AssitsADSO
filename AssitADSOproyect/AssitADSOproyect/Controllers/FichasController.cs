@@ -18,8 +18,9 @@ namespace AssitADSOproyect.Controllers
     public class FichasController : Controller
     {
         private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-        [AutorizarTipoUsuario("Instructor")]
+
         // GET: Fichas1
+        [AutorizarTipoUsuario("Instructor")]
         public ActionResult Index(string estadoFiltro = "")
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
@@ -147,6 +148,7 @@ public ActionResult GenerarReportePDF()
         }
 
         // GET: Fichas1/Create
+        [AutorizarTipoUsuario("Instructor")]
         public ActionResult Create()
         {
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
