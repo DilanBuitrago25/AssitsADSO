@@ -18,20 +18,26 @@ namespace ClaseDatos
         public Competencia()
         {
             this.Asistencia = new HashSet<Asistencia>();
+            this.Ficha1 = new HashSet<Ficha>();
+            this.Programa_formacion1 = new HashSet<Programa_formacion>();
         }
     
         public int Id_competencia { get; set; }
         public string Nombre_competencia { get; set; }
         public string tipo_competencia { get; set; }
-        public Nullable<int> Numero_ficha { get; set; }
+        public Nullable<int> Id_ficha { get; set; }
         public Nullable<int> Id_programa { get; set; }
         public Nullable<int> Id_Usuario { get; set; }
         public Nullable<bool> Estado_Competencia { get; set; }
     
-        public virtual Programa_formacion Programa_formacion { get; set; }
-        public virtual Ficha Ficha { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistencia> Asistencia { get; set; }
+        public virtual Ficha Ficha { get; set; }
+        public virtual Programa_formacion Programa_formacion { get; set; }
         public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ficha> Ficha1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Programa_formacion> Programa_formacion1 { get; set; }
     }
 }

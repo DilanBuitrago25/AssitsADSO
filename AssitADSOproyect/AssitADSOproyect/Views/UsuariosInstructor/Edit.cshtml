@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared-Instructor-admin/_Layout.cshtml";
 }
 
 
@@ -114,11 +115,11 @@
                                             @Html.ValidationMessageFor(model => model.Contrasena_usuario, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    <div class="mb-3 m-form__group">
+                                    @*<div class="mb-3 m-form__group">
                                         <label class="form-label">Tipo Instructor</label>
                                         <div class="input-group">
                                             <span class="input-group-text">A</span>
-                                            @Html.DropDownListFor(model => model.Tipo_instructor, new List<SelectListItem>
+                                            @Html.DropDownListFor(model => model.Tipo_usuario, new List<SelectListItem>
                                                 {
                                                      new SelectListItem { Text = "", Value = "False" },
                                                      new SelectListItem { Text = "Aplica", Value = "True" },
@@ -128,7 +129,7 @@
                                                 }, new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.Tipo_instructor, "", new { @class = "text-danger" })
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Estado Usuario</label>
                                         <div class="input-group">

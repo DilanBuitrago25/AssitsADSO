@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared-Instructor-admin/_Layout.cshtml";
 }
 
 
@@ -95,7 +96,7 @@
                                 @Html.DisplayFor(model => item.Correo_usuario)
                             </td>
                             <td>
-                                @Html.DisplayFor(model => item.Ficha.Codigo_ficha)
+                                @Html.DisplayFor(model => item.Id_ficha)
                             </td>
                             <td>
 

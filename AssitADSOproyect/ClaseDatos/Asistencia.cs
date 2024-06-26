@@ -17,7 +17,6 @@ namespace ClaseDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Asistencia()
         {
-            this.Reporte = new HashSet<Reporte>();
             this.RegistroAsistencia = new HashSet<RegistroAsistencia>();
             this.Soporte = new HashSet<Soporte>();
         }
@@ -32,12 +31,11 @@ namespace ClaseDatos
         public Nullable<int> Id_ficha { get; set; }
         public Nullable<int> Id_competencia { get; set; }
         public Nullable<bool> Estado_Asistencia { get; set; }
+        public string QrCode { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reporte> Reporte { get; set; }
         public virtual Competencia Competencia { get; set; }
         public virtual Ficha Ficha { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistroAsistencia> RegistroAsistencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

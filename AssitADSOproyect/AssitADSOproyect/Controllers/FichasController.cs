@@ -17,24 +17,24 @@ namespace AssitADSOproyect.Controllers
 {
     public class FichasController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
 
         // GET: Fichas1
-        [AutorizarTipoUsuario("Instructor")]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "")
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
             var FichasFiltradas = db.Ficha
-                                         .Where(f => f.Id_Usuario.ToString() == idUsuarioSesion);
+                                         .Where(f => f.Id_Instructor.ToString() == idUsuarioSesion);
 
             if (estadoFiltro == "true")
             {
-                FichasFiltradas = FichasFiltradas.Where(f => f.Estado_Ficha == true);
+                FichasFiltradas = FichasFiltradas.Where(f => f.Estado_ficha == true);
             }
             else if (estadoFiltro == "false")
             {
-                FichasFiltradas = FichasFiltradas.Where(f => f.Estado_Ficha == false);
+                FichasFiltradas = FichasFiltradas.Where(f => f.Estado_ficha == false);
             }
 
             ViewBag.EstadoFiltro = estadoFiltro;
@@ -94,7 +94,7 @@ public ActionResult GenerarReportePDF()
                     table.AddCell(new Phrase(ficha.Fecha_inicio));
                     table.AddCell(new Phrase(ficha.Fecha_fin));
                     table.AddCell(new Phrase(ficha.Programa_formacion.Nombre_programa));
-                    table.AddCell(new Phrase(ficha.Estado_Ficha.ToString()));// Ajusta según tus relaciones
+                    table.AddCell(new Phrase(ficha.Estado_ficha.ToString()));// Ajusta según tus relaciones
                                                                                         // ... (agrega más datos de las fichas)
                 }
 
@@ -148,7 +148,7 @@ public ActionResult GenerarReportePDF()
         }
 
         // GET: Fichas1/Create
-        [AutorizarTipoUsuario("Instructor")]
+   
         public ActionResult Create()
         {
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");

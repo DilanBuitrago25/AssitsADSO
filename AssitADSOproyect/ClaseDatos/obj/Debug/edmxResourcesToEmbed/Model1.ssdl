@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="BDAssistsADSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="BDAssistsADSOv2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Asistencia">
     <Key>
       <PropertyRef Name="Id_asistencia" />
@@ -14,6 +14,7 @@
     <Property Name="Id_ficha" Type="int" />
     <Property Name="Id_competencia" Type="int" />
     <Property Name="Estado_Asistencia" Type="bit" />
+    <Property Name="QrCode" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Competencia">
     <Key>
@@ -22,7 +23,7 @@
     <Property Name="Id_competencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre_competencia" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="tipo_competencia" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Numero_ficha" Type="int" />
+    <Property Name="Id_ficha" Type="int" />
     <Property Name="Id_programa" Type="int" />
     <Property Name="Id_Usuario" Type="int" />
     <Property Name="Estado_Competencia" Type="bit" />
@@ -38,9 +39,34 @@
     <Property Name="tipo_ficha" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Fecha_inicio" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Fecha_fin" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Estado_ficha" Type="bit" />
     <Property Name="Id_programa" Type="int" />
-    <Property Name="Id_Usuario" Type="int" />
-    <Property Name="Estado_Ficha" Type="bit" />
+    <Property Name="Id_Aprendiz" Type="int" />
+    <Property Name="Id_Instructor" Type="int" />
+  </EntityType>
+  <EntityType Name="Ficha_has_Competencia">
+    <Key>
+      <PropertyRef Name="Id_ficha" />
+      <PropertyRef Name="Id_competencia" />
+    </Key>
+    <Property Name="Id_ficha" Type="int" Nullable="false" />
+    <Property Name="Id_competencia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ficha_has_Usuario">
+    <Key>
+      <PropertyRef Name="Id_ficha" />
+      <PropertyRef Name="Id_usuario" />
+    </Key>
+    <Property Name="Id_ficha" Type="int" Nullable="false" />
+    <Property Name="Id_usuario" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fichas_has_Programa_Formacion">
+    <Key>
+      <PropertyRef Name="Id_ficha" />
+      <PropertyRef Name="Id_programa" />
+    </Key>
+    <Property Name="Id_ficha" Type="int" Nullable="false" />
+    <Property Name="Id_programa" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Programa_formacion">
     <Key>
@@ -50,8 +76,16 @@
     <Property Name="Nombre_programa" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Tipo_programa" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Duracion_programa" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="Id_Usuario" Type="int" />
     <Property Name="Estado_Programa_formacion" Type="bit" />
+    <Property Name="Id_Usuario" Type="int" />
+  </EntityType>
+  <EntityType Name="Programas_has_Competencia">
+    <Key>
+      <PropertyRef Name="Id_programa" />
+      <PropertyRef Name="Id_competencia" />
+    </Key>
+    <Property Name="Id_programa" Type="int" Nullable="false" />
+    <Property Name="Id_competencia" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="RegistroAsistencia">
     <Key>
@@ -60,36 +94,25 @@
     <Property Name="Id_Registroasistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Fecha_registro" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Hora_registro" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Id_asistencia" Type="int" />
-    <Property Name="Id_usuario" Type="int" />
     <Property Name="Asistio_registro" Type="bit" />
-    <Property Name="Estado_RegistroAsitencia" Type="bit" />
-  </EntityType>
-  <EntityType Name="Reporte">
-    <Key>
-      <PropertyRef Name="Id_reporte" />
-    </Key>
-    <Property Name="Id_reporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre_reporte" Type="varchar" MaxLength="45" Nullable="false" />
-    <Property Name="Descripcion_reporte" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Tipo_reporte" Type="varchar" MaxLength="45" />
-    <Property Name="Id_usuario" Type="int" />
     <Property Name="Id_asistencia" Type="int" />
+    <Property Name="Id_usuario" Type="int" />
+    <Property Name="Estado_RegistroAsitencia" Type="bit" />
   </EntityType>
   <EntityType Name="Soporte">
     <Key>
       <PropertyRef Name="Id_soporte" />
     </Key>
     <Property Name="Id_soporte" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Nombre_soporte" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="Nombre_soporte" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Descripcion_soporte" Type="varchar" MaxLength="500" Nullable="false" />
-    <Property Name="Id_usuario" Type="int" />
-    <Property Name="Id_asistencia" Type="int" />
     <Property Name="Fecha_registro" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Hora_registro" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Estado_Soporte" Type="bit" />
+    <Property Name="Id_usuario" Type="int" />
     <Property Name="Id_Instructor" Type="int" />
-    <Property Name="Formato_soporte" Type="varchar(max)" />
+    <Property Name="Id_asistencia" Type="int" />
+    <Property Name="Archivo_soporte" Type="varchar(max)" />
+    <Property Name="Estado_Soporte" Type="bit" />
   </EntityType>
   <EntityType Name="Usuario">
     <Key>
@@ -104,12 +127,10 @@
     <Property Name="Correo_usuario" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Contrasena_usuario" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Tipo_usuario" Type="varchar" MaxLength="100" />
-    <Property Name="Tipo_instructor" Type="varchar" MaxLength="55" />
-    <Property Name="Esinstructormaster_usuario" Type="bit" />
     <Property Name="Id_ficha" Type="int" />
     <Property Name="Estado_Usuario" Type="bit" />
   </EntityType>
-  <Association Name="FK__Asistenci__Id_co__32E0915F">
+  <Association Name="FK__Asistenci__Id_co__5BE2A6F2">
     <End Role="Competencia" Type="Self.Competencia" Multiplicity="0..1" />
     <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -121,7 +142,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Asistenci__Id_fi__31EC6D26">
+  <Association Name="FK__Asistenci__Id_fi__5AEE82B9">
     <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
     <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -133,7 +154,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Asistenci__Id_us__30F848ED">
+  <Association Name="FK__Asistenci__Id_us__59FA5E80">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -145,31 +166,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Competenc__Id_pr__2E1BDC42">
-    <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="0..1" />
-    <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Programa_formacion">
-        <PropertyRef Name="Id_programa" />
-      </Principal>
-      <Dependent Role="Competencia">
-        <PropertyRef Name="Id_programa" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Competenc__Id_Us__6FE99F9F">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-    <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="Id_usuario" />
-      </Principal>
-      <Dependent Role="Competencia">
-        <PropertyRef Name="Id_Usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Competenc__Numer__2D27B809">
+  <Association Name="FK__Competenc__Id_fi__48CFD27E">
     <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
     <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -177,11 +174,59 @@
         <PropertyRef Name="Id_ficha" />
       </Principal>
       <Dependent Role="Competencia">
-        <PropertyRef Name="Numero_ficha" />
+        <PropertyRef Name="Id_ficha" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Ficha__Id_progra__267ABA7A">
+  <Association Name="FK__Competenc__Id_pr__49C3F6B7">
+    <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="0..1" />
+    <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Programa_formacion">
+        <PropertyRef Name="Id_programa" />
+      </Principal>
+      <Dependent Role="Competencia">
+        <PropertyRef Name="Id_programa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Competenc__Id_Us__4AB81AF0">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Competencia" Type="Self.Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Competencia">
+        <PropertyRef Name="Id_Usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ficha__Id_Aprend__44FF419A">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Ficha" Type="Self.Ficha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Ficha">
+        <PropertyRef Name="Id_Aprendiz" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ficha__Id_Instru__45F365D3">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Ficha" Type="Self.Ficha" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Ficha">
+        <PropertyRef Name="Id_Instructor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ficha__Id_progra__3B75D760">
     <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="0..1" />
     <End Role="Ficha" Type="Self.Ficha" Multiplicity="*" />
     <ReferentialConstraint>
@@ -193,19 +238,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Ficha__Id_Usuari__6EF57B66">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-    <End Role="Ficha" Type="Self.Ficha" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="Id_usuario" />
-      </Principal>
-      <Dependent Role="Ficha">
-        <PropertyRef Name="Id_Usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Programa___Id_Us__6E01572D">
+  <Association Name="FK__Programa___Id_Us__440B1D61">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="*" />
     <ReferentialConstraint>
@@ -217,7 +250,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RegistroA__Id_as__35BCFE0A">
+  <Association Name="FK__RegistroA__Id_as__60A75C0F">
     <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
     <End Role="RegistroAsistencia" Type="Self.RegistroAsistencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -229,7 +262,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__RegistroA__Id_us__36B12243">
+  <Association Name="FK__RegistroA__Id_us__619B8048">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="RegistroAsistencia" Type="Self.RegistroAsistencia" Multiplicity="*" />
     <ReferentialConstraint>
@@ -241,31 +274,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Reporte__Id_asis__3E52440B">
-    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
-    <End Role="Reporte" Type="Self.Reporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Asistencia">
-        <PropertyRef Name="Id_asistencia" />
-      </Principal>
-      <Dependent Role="Reporte">
-        <PropertyRef Name="Id_asistencia" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Reporte__Id_usua__3D5E1FD2">
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-    <End Role="Reporte" Type="Self.Reporte" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="Id_usuario" />
-      </Principal>
-      <Dependent Role="Reporte">
-        <PropertyRef Name="Id_usuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Soporte__Id_asis__3A81B327">
+  <Association Name="FK__Soporte__Id_asis__6754599E">
     <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -277,7 +286,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__Id_Inst__1AD3FDA4">
+  <Association Name="FK__Soporte__Id_Inst__66603565">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -289,7 +298,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Soporte__Id_usua__398D8EEE">
+  <Association Name="FK__Soporte__Id_usua__656C112C">
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
     <End Role="Soporte" Type="Self.Soporte" Multiplicity="*" />
     <ReferentialConstraint>
@@ -301,7 +310,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__Id_fich__2A4B4B5E">
+  <Association Name="FK__Usuario__Id_fich__4222D4EF">
     <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -313,82 +322,209 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="BDAssistsADSOModelStoreContainer">
+  <Association Name="FK_Ficha_has_Competencia_Competencia">
+    <End Role="Competencia" Type="Self.Competencia" Multiplicity="1" />
+    <End Role="Ficha_has_Competencia" Type="Self.Ficha_has_Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competencia">
+        <PropertyRef Name="Id_competencia" />
+      </Principal>
+      <Dependent Role="Ficha_has_Competencia">
+        <PropertyRef Name="Id_competencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ficha_has_Competencia_Ficha">
+    <End Role="Ficha" Type="Self.Ficha" Multiplicity="1" />
+    <End Role="Ficha_has_Competencia" Type="Self.Ficha_has_Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ficha">
+        <PropertyRef Name="Id_ficha" />
+      </Principal>
+      <Dependent Role="Ficha_has_Competencia">
+        <PropertyRef Name="Id_ficha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ficha_has_Usuario_Ficha">
+    <End Role="Ficha" Type="Self.Ficha" Multiplicity="1" />
+    <End Role="Ficha_has_Usuario" Type="Self.Ficha_has_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ficha">
+        <PropertyRef Name="Id_ficha" />
+      </Principal>
+      <Dependent Role="Ficha_has_Usuario">
+        <PropertyRef Name="Id_ficha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ficha_has_Usuario_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Ficha_has_Usuario" Type="Self.Ficha_has_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Principal>
+      <Dependent Role="Ficha_has_Usuario">
+        <PropertyRef Name="Id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fichas_has_Programa_Formacion_Ficha">
+    <End Role="Ficha" Type="Self.Ficha" Multiplicity="1" />
+    <End Role="Fichas_has_Programa_Formacion" Type="Self.Fichas_has_Programa_Formacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ficha">
+        <PropertyRef Name="Id_ficha" />
+      </Principal>
+      <Dependent Role="Fichas_has_Programa_Formacion">
+        <PropertyRef Name="Id_ficha" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fichas_has_Programa_Formacion_Programa">
+    <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="1" />
+    <End Role="Fichas_has_Programa_Formacion" Type="Self.Fichas_has_Programa_Formacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Programa_formacion">
+        <PropertyRef Name="Id_programa" />
+      </Principal>
+      <Dependent Role="Fichas_has_Programa_Formacion">
+        <PropertyRef Name="Id_programa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Programas_has_Competencia_Competencia">
+    <End Role="Competencia" Type="Self.Competencia" Multiplicity="1" />
+    <End Role="Programas_has_Competencia" Type="Self.Programas_has_Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competencia">
+        <PropertyRef Name="Id_competencia" />
+      </Principal>
+      <Dependent Role="Programas_has_Competencia">
+        <PropertyRef Name="Id_competencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Programas_has_Competencia_Programa">
+    <End Role="Programa_formacion" Type="Self.Programa_formacion" Multiplicity="1" />
+    <End Role="Programas_has_Competencia" Type="Self.Programas_has_Competencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Programa_formacion">
+        <PropertyRef Name="Id_programa" />
+      </Principal>
+      <Dependent Role="Programas_has_Competencia">
+        <PropertyRef Name="Id_programa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BDAssistsADSOv2ModelStoreContainer">
     <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Competencia" EntityType="Self.Competencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ficha" EntityType="Self.Ficha" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ficha_has_Competencia" EntityType="Self.Ficha_has_Competencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ficha_has_Usuario" EntityType="Self.Ficha_has_Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fichas_has_Programa_Formacion" EntityType="Self.Fichas_has_Programa_Formacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Programa_formacion" EntityType="Self.Programa_formacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Programas_has_Competencia" EntityType="Self.Programas_has_Competencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegistroAsistencia" EntityType="Self.RegistroAsistencia" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Reporte" EntityType="Self.Reporte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Soporte" EntityType="Self.Soporte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Asistenci__Id_co__32E0915F" Association="Self.FK__Asistenci__Id_co__32E0915F">
+    <AssociationSet Name="FK__Asistenci__Id_co__5BE2A6F2" Association="Self.FK__Asistenci__Id_co__5BE2A6F2">
       <End Role="Competencia" EntitySet="Competencia" />
       <End Role="Asistencia" EntitySet="Asistencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__Asistenci__Id_fi__31EC6D26" Association="Self.FK__Asistenci__Id_fi__31EC6D26">
+    <AssociationSet Name="FK__Asistenci__Id_fi__5AEE82B9" Association="Self.FK__Asistenci__Id_fi__5AEE82B9">
       <End Role="Ficha" EntitySet="Ficha" />
       <End Role="Asistencia" EntitySet="Asistencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__Asistenci__Id_us__30F848ED" Association="Self.FK__Asistenci__Id_us__30F848ED">
+    <AssociationSet Name="FK__Asistenci__Id_us__59FA5E80" Association="Self.FK__Asistenci__Id_us__59FA5E80">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Asistencia" EntitySet="Asistencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__Competenc__Id_pr__2E1BDC42" Association="Self.FK__Competenc__Id_pr__2E1BDC42">
-      <End Role="Programa_formacion" EntitySet="Programa_formacion" />
-      <End Role="Competencia" EntitySet="Competencia" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Competenc__Id_Us__6FE99F9F" Association="Self.FK__Competenc__Id_Us__6FE99F9F">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Competencia" EntitySet="Competencia" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Competenc__Numer__2D27B809" Association="Self.FK__Competenc__Numer__2D27B809">
+    <AssociationSet Name="FK__Competenc__Id_fi__48CFD27E" Association="Self.FK__Competenc__Id_fi__48CFD27E">
       <End Role="Ficha" EntitySet="Ficha" />
       <End Role="Competencia" EntitySet="Competencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__Ficha__Id_progra__267ABA7A" Association="Self.FK__Ficha__Id_progra__267ABA7A">
+    <AssociationSet Name="FK__Competenc__Id_pr__49C3F6B7" Association="Self.FK__Competenc__Id_pr__49C3F6B7">
       <End Role="Programa_formacion" EntitySet="Programa_formacion" />
-      <End Role="Ficha" EntitySet="Ficha" />
+      <End Role="Competencia" EntitySet="Competencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__Ficha__Id_Usuari__6EF57B66" Association="Self.FK__Ficha__Id_Usuari__6EF57B66">
+    <AssociationSet Name="FK__Competenc__Id_Us__4AB81AF0" Association="Self.FK__Competenc__Id_Us__4AB81AF0">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Competencia" EntitySet="Competencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ficha__Id_Aprend__44FF419A" Association="Self.FK__Ficha__Id_Aprend__44FF419A">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Ficha" EntitySet="Ficha" />
     </AssociationSet>
-    <AssociationSet Name="FK__Programa___Id_Us__6E01572D" Association="Self.FK__Programa___Id_Us__6E01572D">
+    <AssociationSet Name="FK__Ficha__Id_Instru__45F365D3" Association="Self.FK__Ficha__Id_Instru__45F365D3">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Ficha" EntitySet="Ficha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ficha__Id_progra__3B75D760" Association="Self.FK__Ficha__Id_progra__3B75D760">
+      <End Role="Programa_formacion" EntitySet="Programa_formacion" />
+      <End Role="Ficha" EntitySet="Ficha" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Programa___Id_Us__440B1D61" Association="Self.FK__Programa___Id_Us__440B1D61">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Programa_formacion" EntitySet="Programa_formacion" />
     </AssociationSet>
-    <AssociationSet Name="FK__RegistroA__Id_as__35BCFE0A" Association="Self.FK__RegistroA__Id_as__35BCFE0A">
+    <AssociationSet Name="FK__RegistroA__Id_as__60A75C0F" Association="Self.FK__RegistroA__Id_as__60A75C0F">
       <End Role="Asistencia" EntitySet="Asistencia" />
       <End Role="RegistroAsistencia" EntitySet="RegistroAsistencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__RegistroA__Id_us__36B12243" Association="Self.FK__RegistroA__Id_us__36B12243">
+    <AssociationSet Name="FK__RegistroA__Id_us__619B8048" Association="Self.FK__RegistroA__Id_us__619B8048">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="RegistroAsistencia" EntitySet="RegistroAsistencia" />
     </AssociationSet>
-    <AssociationSet Name="FK__Reporte__Id_asis__3E52440B" Association="Self.FK__Reporte__Id_asis__3E52440B">
-      <End Role="Asistencia" EntitySet="Asistencia" />
-      <End Role="Reporte" EntitySet="Reporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Reporte__Id_usua__3D5E1FD2" Association="Self.FK__Reporte__Id_usua__3D5E1FD2">
-      <End Role="Usuario" EntitySet="Usuario" />
-      <End Role="Reporte" EntitySet="Reporte" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_asis__3A81B327" Association="Self.FK__Soporte__Id_asis__3A81B327">
+    <AssociationSet Name="FK__Soporte__Id_asis__6754599E" Association="Self.FK__Soporte__Id_asis__6754599E">
       <End Role="Asistencia" EntitySet="Asistencia" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_Inst__1AD3FDA4" Association="Self.FK__Soporte__Id_Inst__1AD3FDA4">
+    <AssociationSet Name="FK__Soporte__Id_Inst__66603565" Association="Self.FK__Soporte__Id_Inst__66603565">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Soporte__Id_usua__398D8EEE" Association="Self.FK__Soporte__Id_usua__398D8EEE">
+    <AssociationSet Name="FK__Soporte__Id_usua__656C112C" Association="Self.FK__Soporte__Id_usua__656C112C">
       <End Role="Usuario" EntitySet="Usuario" />
       <End Role="Soporte" EntitySet="Soporte" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__Id_fich__2A4B4B5E" Association="Self.FK__Usuario__Id_fich__2A4B4B5E">
+    <AssociationSet Name="FK__Usuario__Id_fich__4222D4EF" Association="Self.FK__Usuario__Id_fich__4222D4EF">
       <End Role="Ficha" EntitySet="Ficha" />
       <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ficha_has_Competencia_Competencia" Association="Self.FK_Ficha_has_Competencia_Competencia">
+      <End Role="Competencia" EntitySet="Competencia" />
+      <End Role="Ficha_has_Competencia" EntitySet="Ficha_has_Competencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ficha_has_Competencia_Ficha" Association="Self.FK_Ficha_has_Competencia_Ficha">
+      <End Role="Ficha" EntitySet="Ficha" />
+      <End Role="Ficha_has_Competencia" EntitySet="Ficha_has_Competencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ficha_has_Usuario_Ficha" Association="Self.FK_Ficha_has_Usuario_Ficha">
+      <End Role="Ficha" EntitySet="Ficha" />
+      <End Role="Ficha_has_Usuario" EntitySet="Ficha_has_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ficha_has_Usuario_Usuario" Association="Self.FK_Ficha_has_Usuario_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Ficha_has_Usuario" EntitySet="Ficha_has_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fichas_has_Programa_Formacion_Ficha" Association="Self.FK_Fichas_has_Programa_Formacion_Ficha">
+      <End Role="Ficha" EntitySet="Ficha" />
+      <End Role="Fichas_has_Programa_Formacion" EntitySet="Fichas_has_Programa_Formacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fichas_has_Programa_Formacion_Programa" Association="Self.FK_Fichas_has_Programa_Formacion_Programa">
+      <End Role="Programa_formacion" EntitySet="Programa_formacion" />
+      <End Role="Fichas_has_Programa_Formacion" EntitySet="Fichas_has_Programa_Formacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Programas_has_Competencia_Competencia" Association="Self.FK_Programas_has_Competencia_Competencia">
+      <End Role="Competencia" EntitySet="Competencia" />
+      <End Role="Programas_has_Competencia" EntitySet="Programas_has_Competencia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Programas_has_Competencia_Programa" Association="Self.FK_Programas_has_Competencia_Programa">
+      <End Role="Programa_formacion" EntitySet="Programa_formacion" />
+      <End Role="Programas_has_Competencia" EntitySet="Programas_has_Competencia" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

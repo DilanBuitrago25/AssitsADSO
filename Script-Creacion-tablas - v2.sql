@@ -35,9 +35,14 @@ primary key (Id_ficha))
 
 go
 
-create table Fichas_has_Programa_Formacion(
-Id_ficha int references Ficha(Id_ficha),
-Id_programa int references Programa_formacion(Id_programa))
+CREATE TABLE Fichas_has_Programa_Formacion (
+    Id_ficha INT NOT NULL,
+    Id_programa INT NOT NULL,
+    CONSTRAINT PK_Fichas_has_Programa_Formacion PRIMARY KEY (Id_ficha, Id_programa),
+    CONSTRAINT FK_Fichas_has_Programa_Formacion_Ficha FOREIGN KEY (Id_ficha) REFERENCES Ficha(Id_ficha),
+    CONSTRAINT FK_Fichas_has_Programa_Formacion_Programa FOREIGN KEY (Id_programa) REFERENCES Programa_formacion(Id_programa)
+);
+
 
 go
 
@@ -81,21 +86,36 @@ primary key (ID_competencia))
 
 go
 
-create table Ficha_has_Competencia(
-Id_ficha int references Ficha(Id_ficha),
-Id_compentencia int references Competencia(Id_competencia))
+CREATE TABLE Ficha_has_Competencia (
+    Id_ficha INT NOT NULL,
+    Id_competencia INT NOT NULL,
+    CONSTRAINT PK_Ficha_has_Competencia PRIMARY KEY (Id_ficha, Id_competencia),
+    CONSTRAINT FK_Ficha_has_Competencia_Ficha FOREIGN KEY (Id_ficha) REFERENCES Ficha(Id_ficha),
+    CONSTRAINT FK_Ficha_has_Competencia_Competencia FOREIGN KEY (Id_competencia) REFERENCES Competencia(Id_competencia)
+);
+
 
 go
 
-create table Programas_has_Competencia(
-Id_programa int references Programa_formacion(Id_programa),
-Id_compentencia int references Competencia(Id_competencia))
+CREATE TABLE Programas_has_Competencia (
+    Id_programa INT NOT NULL,
+    Id_competencia INT NOT NULL,
+    CONSTRAINT PK_Programas_has_Competencia PRIMARY KEY (Id_programa, Id_competencia),
+    CONSTRAINT FK_Programas_has_Competencia_Programa FOREIGN KEY (Id_programa) REFERENCES Programa_formacion(Id_programa),
+    CONSTRAINT FK_Programas_has_Competencia_Competencia FOREIGN KEY (Id_competencia) REFERENCES Competencia(Id_competencia)
+);
+
 
 go
 
-create table Ficha_has_Usuario(
-Id_ficha int references Ficha(Id_ficha),
-Id_usuario int references Usuario(Id_usuario))
+CREATE TABLE Ficha_has_Usuario (
+    Id_ficha INT NOT NULL,
+    Id_usuario INT NOT NULL,
+    CONSTRAINT PK_Ficha_has_Usuario PRIMARY KEY (Id_ficha, Id_usuario),
+    CONSTRAINT FK_Ficha_has_Usuario_Ficha FOREIGN KEY (Id_ficha) REFERENCES Ficha(Id_ficha),
+    CONSTRAINT FK_Ficha_has_Usuario_Usuario FOREIGN KEY (Id_usuario) REFERENCES Usuario(Id_usuario)
+);
+
 
 go
 
@@ -110,6 +130,7 @@ Id_usuario int references Usuario(Id_usuario),
 Id_ficha int references Ficha(Id_ficha),
 Id_competencia int references Competencia(Id_competencia),
 Estado_Asistencia bit default (1),
+QrCode varchar(max),
 Primary Key (Id_asistencia))
 
 go

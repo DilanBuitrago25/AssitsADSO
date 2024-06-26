@@ -18,13 +18,13 @@ namespace AssitADSOproyect.Controllers
 {
     public class AsistenciasController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-        [AutorizarTipoUsuario("Instructor")]
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         // GET: Asistencias
         public ActionResult Index(string estadoFiltro = "")
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
-
+            
             var AsistenciasFiltradas = db.Asistencia
                                          .Where(f => f.Id_usuario.ToString() == idUsuarioSesion);
 
@@ -40,6 +40,7 @@ namespace AssitADSOproyect.Controllers
             ViewBag.EstadoFiltro = estadoFiltro;
 
             return View(AsistenciasFiltradas);
+            
         }
 
         public ActionResult GenerarReportePDF()
@@ -168,8 +169,8 @@ namespace AssitADSOproyect.Controllers
             if (ModelState.IsValid)
             {
                 
-                db.Asistencia.Add(asistencia);
-                db.SaveChanges();
+                //db.Asistencia.Add(asistencia);
+                //db.SaveChanges();
                 var createRegistroUrl = Url.Action("Create", "RegistroAsistencias", new { id_Asistencia = asistencia.Id_asistencia }, Request.Url.Scheme);
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(createRegistroUrl, QRCodeGenerator.ECCLevel.Q);
@@ -181,20 +182,9 @@ namespace AssitADSOproyect.Controllers
                     bitmap.Save(qrCodePath, ImageFormat.Png);
                 }
 
-                // Obtener usuarios asociados a la ficha
-                //var usuariosFicha = db.Usuario.Where(u => u.Id_ficha == asistencia.Id_ficha).ToList();
-
-                //foreach (var usuario in usuariosFicha)
-                //{
-                //    var registroAsistencia = new RegistroAsistencia
-                //    {
-                //        Id_asistencia = asistencia.Id_asistencia,
-                //        Id_usuario = usuario.Id_usuario
-                //        // ... otros campos del registro de asistencia ...
-                //    };
-                //    db.RegistroAsistencia.Add(registroAsistencia);
-                //}
-
+                asistencia.QrCode = $"~/QRCodes/{asistencia.Id_asistencia}.png";
+                db.Asistencia.Add(asistencia);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 

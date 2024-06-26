@@ -16,7 +16,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class RegistroAsistenciasController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
         [AutorizarTipoUsuario("Aprendiz")]
         // GET: RegistroAsistencias
         public ActionResult Index(string estadoFiltro = "")

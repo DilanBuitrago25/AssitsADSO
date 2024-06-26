@@ -16,8 +16,8 @@ namespace AssitADSOproyect.Controllers
 {
     public class CompetenciasController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-        [AutorizarTipoUsuario("Instructor")]
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         // GET: Competencias
         public ActionResult Index(string estadoFiltro = "")
         {
@@ -161,7 +161,7 @@ namespace AssitADSOproyect.Controllers
             }
 
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Numero_ficha);
+            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
             return View(competencia);
         }
 
@@ -178,7 +178,7 @@ namespace AssitADSOproyect.Controllers
                 return HttpNotFound();
             }
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Numero_ficha);
+            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
             return View(competencia);
         }
 
@@ -196,7 +196,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Numero_ficha);
+            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
             return View(competencia);
         }
 

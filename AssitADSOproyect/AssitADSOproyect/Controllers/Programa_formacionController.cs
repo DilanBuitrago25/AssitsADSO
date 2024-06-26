@@ -16,8 +16,8 @@ namespace AssitADSOproyect.Controllers
 {
     public class Programa_formacionController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-        [AutorizarTipoUsuario("Instructor")]
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         // GET: Programa_formacion
         public ActionResult Index(string estadoFiltro = "")
         {

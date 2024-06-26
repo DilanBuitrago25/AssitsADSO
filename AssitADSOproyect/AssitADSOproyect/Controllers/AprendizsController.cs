@@ -14,7 +14,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class AprendizsController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
 
 
         //[WebService(Namespace = "http://tempuri.org/")]

@@ -17,8 +17,8 @@ namespace AssitADSOproyect.Controllers
 {
     public class JustificacionInasistenciaController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendizs")]
         // GET: JustificacionInasistencia
         public ActionResult Index()
         {
@@ -96,7 +96,7 @@ public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcio
                         archivo.SaveAs(rutaArchivo);
 
                         // 4. Almacenar la ruta relativa en la base de datos
-                        soporte.Formato_soporte = "~/ArchivosSoportes/" + nombreArchivo;
+                        soporte.Archivo_soporte = "~/ArchivosSoportes/" + nombreArchivo;
                     }
                 }
                 else
@@ -151,7 +151,7 @@ public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcio
                 return HttpNotFound();
             }
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
-            ViewBag.RutaArchivo = soporte.Formato_soporte;
+            ViewBag.RutaArchivo = soporte.Archivo_soporte;
             return View(soporte);
         }
 

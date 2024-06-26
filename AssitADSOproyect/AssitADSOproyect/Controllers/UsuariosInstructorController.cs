@@ -16,8 +16,8 @@ namespace AssitADSOproyect.Controllers
 {
     public class UsuariosInstructorController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
-        [AutorizarTipoUsuario("Instructor")]
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        [AutorizarTipoUsuario("InstructorAdmin")]
         // GET: UsuariosInstructor
         public ActionResult Index(string estadoFiltro = "")
         {
@@ -152,7 +152,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_usuario,Documento_usuario,Tipo_usuario,Tipo_Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Tipo_instructor,Id_ficha,Esinstructormaster_usuario,Contrasena_usuario")] Usuario usuario)
+        public ActionResult Create([Bind(Include = "Id_usuario,Documento_usuario,Tipo_usuario,Tipo_Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Tipo_Usuario,Id_ficha,Estado_usuario,Contrasena_usuario")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {

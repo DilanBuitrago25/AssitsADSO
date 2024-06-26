@@ -14,14 +14,14 @@ namespace AssitADSOproyect.Controllers
 {
     public class InstructorController : Controller
     {
-        private BDAssistsADSOEntities db = new BDAssistsADSOEntities();
+        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
 
         // GET: Instructor
         [AutorizarTipoUsuario("Instructor")]
         public ActionResult Index()
         {
             int Total_Aprendices;
-            string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
+            string Conexion = "Data Source=LAPTOP-NC5UJ7OA;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
             using (SqlConnection connection = new SqlConnection(Conexion))
             {
                 string query = "(select count(*) from Usuario where Tipo_usuario = 'Aprendiz')";
