@@ -57,7 +57,6 @@
                         <div class="col-md-6 p-0">
                             <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
                                 <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true"><i data-feather="target"></i>All</a></li>
-                                <li class="nav-item"><a class="nav-link" id="profile-top-tab" data-bs-toggle="tab" href="#top-profile" role="tab" aria-controls="top-profile" aria-selected="false"><i data-feather="clock"></i>Por Empezar</a></li>
                                 <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="check-circle"></i>A Tiempo</a></li>
                                 <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="info"></i>Finalizado</a></li>
                             </ul>
@@ -83,24 +82,35 @@
                     <div class="card-body">
                         <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Asistencias")'">
                             Generar Reporte PDF
+                           
                         </button>
                         <div class="tab-content" id="top-tabContent">
                             <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                                 <div class="row">
 
+
+
                                     @foreach (var item in Model)
                                     {
+                                        var asistenciaidQr = @Html.DisplayFor(model => item.Id_asistencia);
                                         <div class="col-xxl-4 col-lg-6">
                                             <div class="project-box">
-                                                <span class="badge badge-primary">A Tiempo</span>
+                                                @{
+                                                    var fechaFinAsistencia = DateTime.Parse(item.Fecha_fin_asistencia + " " + item.Hora_fin_asistencia);
+                                                }
+
+                                                <span class="badge @(DateTime.Now > fechaFinAsistencia ? "badge-danger" : "badge-primary")">
+                                                    @(DateTime.Now > fechaFinAsistencia ? "Finalizado" : "A Tiempo")
+                                                </span>
                                                 <h6>Asistencia @Html.DisplayFor(model => item.Fecha_inicio_asistencia)</h6>
                                                 <div class="media">
                                                     <div class="media-body">
                                                         <p>Ficha - @Html.DisplayFor(model => item.Ficha.Codigo_ficha)</p>
                                                     </div>
-                                                    <button type="button" class="badge-light btn-block btn-mail" data-bs-toggle="modal" data-bs-target="#qrModal-@item.Id_asistencia">
-                                                        <i class="me-2" data-feather="check-circle"></i>Ver QR
-                                                    </button>
+                                                    @*<a class="badge-light btn-block btn-mail" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id_asistencia" href="javascript:void(0)" target="_blank">
+                <i class="me-2" data-feather="check-circle"></i>Ver Qr
+            </a>*@
+                                                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id_asistencia">Ver Qr</button>
                                                 </div>
                                                 <p>Competencia - @Html.DisplayFor(model => item.Competencia.Nombre_competencia).</p>
 
@@ -112,24 +122,32 @@
                                                     <div class="col-6"> <span>Justificaron Inasistencia</span></div>
                                                     <div class="col-6 font-primary">7</div>
                                                 </div>
-                                                <div class="customers"> </div>
+                                                <div class="customers"></div>
                                             </div>
                                         </div>
 
-                                        <div class="modal fade" id="qrModal-@item.Id_asistencia" tabindex="-1" aria-labelledby="qrModalLabel-@item.Id_asistencia" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
+                                        <!-- Modal -->
+                                        <div class="modal fade modal-bookmark" id="exampleModal-@item.Id_asistencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="qrModalLabel-@item.Id_asistencia">Código QR de la Asistencia @item.Id_asistencia</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Codigo Qr de la Asistencia</h5>
+                                                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
-                                                    <div class="modal-body text-center">
-                                                        <img src="@Url.Content(item.QrCode)" alt="QR para asistencia @item.Id_asistencia" class="img-fluid" />
+                                                    <div class="modal-body">
+                                                        <form class="form-bookmark needs-validation" id="bookmark-form" novalidate="">
+                                                            <a href="@Url.Action("Edit", "Asistencias", new { id = item.Id_asistencia })">
+                                                                <img class="qr-image" src="@Url.Content("~/QRCodes/" + item.Id_asistencia + ".png")" alt="QR para editar asistencia" />
+                                                            </a>
+                                                            <input id="index_var" type="hidden" value="6">
+                                                            <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     }
+
 
 
                                     <div class="col-xxl-4 col-lg-6">
@@ -209,48 +227,27 @@
                 </div>
             </div>
 
-            @*<h2>Index</h2>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
+        const asistenciaItems = document.querySelectorAll('.asistencia-item');
 
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tipo_asistencia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.fecha_asistencia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Hora_asistencia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Usuario.Tipo_Documento_usuario)
-                </th>
-                <th></th>
-            </tr>
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                const filtro = this.textContent.trim(); // "All", "A Tiempo" o "Finalizado"
 
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tipo_asistencia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.fecha_asistencia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Hora_asistencia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Usuario.Tipo_Documento_usuario)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.Id_asistencia }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.Id_asistencia }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id_asistencia })
-                </td>
-            </tr>
-        }
+                asistenciaItems.forEach(item => {
+                    const span = item.querySelector('.badge'); // Obtener el span de la asistencia
+                    const estado = span.textContent.trim();  // "A Tiempo" o "Finalizado"
 
-        </table>*@
+                    if (filtro === "All" || estado === filtro) {
+                        item.style.display = 'block'; // Mostrar el item
+                    } else {
+                        item.style.display = 'none'; // Ocultar el item
+                    }
+                });
+            });
+        });
+    });
+
+</script>

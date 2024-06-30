@@ -37,6 +37,7 @@ namespace AssitADSOproyect.Controllers
 
             ViewBag.EstadoFiltro = estadoFiltro; 
 
+
             return View(CompetenciasFiltradas);
         }
 
@@ -142,7 +143,7 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Create()
         {
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
             return View();
         }
 
@@ -151,7 +152,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia,Id_usuario")] Competencia competencia)
+        public ActionResult Create([Bind(Include = "Id_competencia,tipo_competencia,Id_ficha,Id_programa,Nombre_competencia,Id_usuario")] Competencia competencia)
         {
             if (ModelState.IsValid)
             {
@@ -161,7 +162,7 @@ namespace AssitADSOproyect.Controllers
             }
 
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
             return View(competencia);
         }
 

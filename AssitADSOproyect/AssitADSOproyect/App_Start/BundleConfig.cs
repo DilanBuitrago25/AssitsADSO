@@ -78,7 +78,11 @@ namespace AssitADSOproyect
                         "~/assets/js/datepicker/date-time-picker/tempusdominus-bootstrap-4.min.js",
                         "~/assets/js/datepicker/date-time-picker/datetimepicker.custom.js",
                          "~/assets/js/datatable/datatables/jquery.dataTables.min.js",
-                        "~/assets/js/datatable/datatables/datatable.custom.js"
+                        "~/assets/js/datatable/datatables/datatable.custom.js",
+
+                        "~/assets/js/sweet-alert/sweetalert.min.js",
+                        "~/assets/js/sweet-alert/app.js"
+
                         ));
 
             // Utilice la versión de desarrollo de Modernizr para desarrollar y obtener información sobre los formularios.  De esta manera estará
@@ -114,7 +118,8 @@ namespace AssitADSOproyect
                       "~/assets/css/themify.css",
                       "~/assets/css/dropzone.css",
                       "~/assets/css/timepicker.css",
-                      "~/assets/css/datatables.css"
+                      "~/assets/css/datatables.css",
+                      "~/assets/css/sweetalert2.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

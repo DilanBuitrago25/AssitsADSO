@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>*@
-                           
+
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
@@ -87,7 +87,7 @@
                                     <div class="mb-3">
                                         <label>Fecha Inicio</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
+                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", languaje = "es" } })
 
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
@@ -109,8 +109,7 @@
                                     <div class="mb-3">
                                         <label>Fecha Fin</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
-
+                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", languaje = "es" } })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
                                     </div>
@@ -120,7 +119,7 @@
                                         <label>Hora Fin</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Hora_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
-                                           
+
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
 
@@ -128,11 +127,11 @@
                                 </div>
                                 @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })
                                 @*<div class="col-sm-4">
-            <div class="mb-3">
-                <label>Ending date</label>
-                <input class="datepicker-here form-control" type="text" data-language="en">
-            </div>
-        </div>*@
+                <div class="mb-3">
+                    <label>Ending date</label>
+                    <input class="datepicker-here form-control" type="text" data-language="en">
+                </div>
+            </div>*@
                             </div>
 
                             <div class="row">
@@ -141,7 +140,7 @@
                                         <label for="exampleFormControlTextarea4">Enter some Details</label>
                                         <div class="input-group">
                                             @Html.TextAreaFor(model => model.Detalles_asistencia, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3" })
-                                          
+
 
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Detalles_asistencia, "", new { @class = "text-danger" })
@@ -172,8 +171,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
 
+                            @Html.HiddenFor(model => model.Estado_Asistencia, new { Value = "True" })
 
 
                         </div>

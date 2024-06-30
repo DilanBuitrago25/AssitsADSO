@@ -22,7 +22,7 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Index(string estadoFiltro = "")
         {
             var InstructoresFiltrados = db.Usuario
-             .Where(u => u.Tipo_usuario == "Instructor" && u.Estado_Usuario == true)
+             .Where(u => u.Tipo_usuario == "Instructor" && u.Tipo_usuario == "InstructorAdmin" && u.Estado_Usuario == true)
              .ToList();
 
             //if (estadoFiltro == "true")
