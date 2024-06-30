@@ -137,6 +137,7 @@ namespace AssitADSOproyect.Controllers
         // GET: Programa_formacion/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -188,31 +189,47 @@ namespace AssitADSOproyect.Controllers
             return View(programa_formacion);
         }
 
-        // GET: Programa_formacion/Delete/5
-        public ActionResult Delete(int? id)
+
+        //--- Despues de aqui relaciones foraneas
+
+        public ActionResult Programas_Competencias(int id)
         {
-            if (id == null)
+            var competencias = db.Programa_formacion
+                .Where(pf => pf.Id_programa == id)
+                .SelectMany(pf => pf.Competencia1) // Obtener todas las competencias asociadas
+                .ToList();
+
+            ViewBag.NombrePrograma = db.Programa_formacion.Find(id).Nombre_programa; // Obtener el nombre del programa
+
+            return View(competencias);
+        }
+
+        // GET: Programa_formacion_competencia/Asociación
+        public ActionResult Programas_Competencias_Asociar(int id)
+        {
+            //ViewBag.NombrePrograma = new SelectList(db.Programa_formacion, "id_programa", "Nombre_programa");
+            ViewBag.NombrePrograma = db.Programa_formacion.Find(id).Nombre_programa;
+            ViewBag.Competencias = new SelectList(db.Competencia, "id_competencia", "Nombre_competencia");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Programas_Competencias_Asociar([Bind(Include = "Id_programa,Competencia1")] Programa_formacion programa_formacion, Competencia competencia)
+        {
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.Programa_formacion.Add(programa_formacion);
+                db.Competencia.Add(competencia);
+                db.SaveChanges();
+                return RedirectToAction("Programas_Competencias");
             }
-            Programa_formacion programa_formacion = db.Programa_formacion.Find(id);
-            if (programa_formacion == null)
-            {
-                return HttpNotFound();
-            }
+            ViewBag.Competencias = new SelectList(db.Competencia, "id_competencia", "Nombre_competencia", programa_formacion.Competencia1);
+            ViewBag.NombrePrograma = new SelectList(db.Programa_formacion, "id_competencia", "Nombre_programa", competencia.Programa_formacion1);
             return View(programa_formacion);
         }
 
-        // POST: Programa_formacion/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Programa_formacion programa_formacion = db.Programa_formacion.Find(id);
-            db.Programa_formacion.Remove(programa_formacion);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+
 
         protected override void Dispose(bool disposing)
         {

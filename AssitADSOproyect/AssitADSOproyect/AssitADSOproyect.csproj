@@ -6128,6 +6128,8 @@
     <Content Include="Views\InstructorAdmin\Details.cshtml" />
     <Content Include="Views\InstructorAdmin\Edit.cshtml" />
     <Content Include="Views\InstructorAdmin\Index.cshtml" />
+    <Content Include="Views\Programa_formacion\Programas_Competencias.cshtml" />
+    <Content Include="Views\Programa_formacion\Programas_Competencias_Asociar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

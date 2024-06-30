@@ -71,22 +71,23 @@
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Duracion</th>
+                        <th>Acciones</th>
                     </tr>
 
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                       <tr>
                             <td>@Html.DisplayFor(modelItem => item.Id_programa)</td>
                             <td>@Html.DisplayFor(model => item.Nombre_programa)</td>
                             <td>@Html.DisplayFor(model => item.Tipo_programa)</td>
                             <td>@Html.DisplayFor(model => item.Duracion_programa)</td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id_programa }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.Id_programa })
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id_programa }) |
+                                @Html.ActionLink("Detalles", "Details", new { id = item.Id_programa }) |
+                                @Html.ActionLink("Competencias", "Programas_Competencias", new { id = item.Id_programa })
                             </td>
-
                         </tr>
                     }
                 </tbody>
@@ -96,6 +97,7 @@
                         <th>Nombre</th>
                         <th>Tipo</th>
                         <th>Duracion</th>
+                        <th>Acciones</th>
                     </tr>
                 </tfoot>
             </table>

@@ -125,7 +125,7 @@
                                         <label class="form-label">Fecha inicio</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Fecha_inicio, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", languaje = "es" } })
-                                            
+
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Fecha_inicio, "", new { @class = "text-danger" })
                                     </div>
@@ -138,6 +138,7 @@
                                         @Html.ValidationMessageFor(model => model.Fecha_fin, "", new { @class = "text-danger" })
                                     </div>
                                     @Html.HiddenFor(model => model.Id_Instructor, new { Value = @Session["Idusuario"].ToString() })
+                                    @Html.HiddenFor(model => model.Estado_ficha, new { Value = "True" })
                                 </form>
                             </div>
                         </div>

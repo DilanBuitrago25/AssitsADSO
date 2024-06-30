@@ -13,6 +13,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using QRCoder;
 using static AssitADSOproyect.Controllers.LoginController;
+using System.Globalization;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -20,29 +21,48 @@ namespace AssitADSOproyect.Controllers
     {
         private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
-        // GET: Asistencias
-        public ActionResult Index(string estadoFiltro = "")
+        //GET: Asistencias
+        public ActionResult Index(string fechaFiltro = "", int? fichaFiltro = null, int? competenciaFiltro = null)
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
-            
-            var AsistenciasFiltradas = db.Asistencia
-                                         .Where(f => f.Id_usuario.ToString() == idUsuarioSesion);
+            var asistenciasFiltradas = db.Asistencia.Where(f => f.Id_usuario.ToString() == idUsuarioSesion);
 
-            if (estadoFiltro == "true")
+            if (!string.IsNullOrEmpty(fechaFiltro))
             {
-                AsistenciasFiltradas = AsistenciasFiltradas.Where(f => f.Estado_Asistencia == true);
-            }
-            else if (estadoFiltro == "false")
-            {
-                AsistenciasFiltradas = AsistenciasFiltradas.Where(f => f.Estado_Asistencia == false);
+                DateTime fecha;
+                if (DateTime.TryParseExact(fechaFiltro, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out fecha))
+                {
+                    asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Fecha_inicio_asistencia == fechaFiltro);
+                }
             }
 
-            ViewBag.EstadoFiltro = estadoFiltro;
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
+            if (fichaFiltro.HasValue)
+            {
+                asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Id_ficha == fichaFiltro);
 
-            return View(AsistenciasFiltradas);
-            
+                // Obtener competencias asociadas a la ficha seleccionada
+                ViewBag.Competencias = new SelectList(db.Ficha
+                    .Where(fhc => fhc.Id_ficha == fichaFiltro)
+                    .Select(fhc => fhc.Competencia), "Id_competencia", "Nombre_competencia");
+            }
+            else
+            {
+                ViewBag.Competencias = new SelectList(new List<Competencia>()); // Lista vacía si no se selecciona ficha
+            }
+
+            if (competenciaFiltro.HasValue)
+            {
+                asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Id_competencia == competenciaFiltro);
+            }
+
+            //ViewBag.EstadoFiltro = estadofiltro;
+            ViewBag.Id_ficha = new SelectList(db.Ficha.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion || f.Id_Aprendiz.ToString() == idUsuarioSesion), "Id_ficha", "Codigo_ficha");
+
+            return View(asistenciasFiltradas.ToList());
         }
+
+
+
 
         public ActionResult GenerarReportePDF()
         {
@@ -169,9 +189,10 @@ namespace AssitADSOproyect.Controllers
             }
             if (ModelState.IsValid)
             {
-
                 db.Asistencia.Add(asistencia);
-                db.SaveChanges();
+                db.SaveChanges(); // Guardar la asistencia para obtener el Id_asistencia generado
+
+                // Generar el código QR después de guardar la asistencia
                 var createRegistroUrl = Url.Action("Create", "RegistroAsistencias", new { id_Asistencia = asistencia.Id_asistencia }, Request.Url.Scheme);
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(createRegistroUrl, QRCodeGenerator.ECCLevel.Q);
@@ -183,9 +204,9 @@ namespace AssitADSOproyect.Controllers
                     bitmap.Save(qrCodePath, ImageFormat.Png);
                 }
 
-                asistencia.QrCode = $"~/QRCodes/{asistencia.Id_asistencia}.png";
-                //db.Asistencia.Add(asistencia);
-                //db.SaveChanges();
+                asistencia.QrCode = $"~/QRCodes/{asistencia.Id_asistencia}.png"; // Asignar la ruta del QR
+                db.SaveChanges(); // Guardar la actualización de la asistencia
+
                 return RedirectToAction("Index");
             }
 
