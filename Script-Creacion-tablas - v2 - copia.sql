@@ -1,4 +1,4 @@
---Nombre de la BD (BDAssistsADSOv3)
+--Nombre de la BD (BDAssistsADSOv4)
 
 --Creación de las tablas
 go
@@ -35,16 +35,6 @@ primary key (Id_ficha));
 
 go
 
---CREATE TABLE Fichas_has_Programa_Formacion (
---    Id_ficha INT NOT NULL,
---    Id_programa INT NOT NULL,
---    CONSTRAINT PK_Fichas_has_Programa_Formacion PRIMARY KEY (Id_ficha, Id_programa),
---    CONSTRAINT FK_Fichas_has_Programa_Formacion_Ficha FOREIGN KEY (Id_ficha) REFERENCES Ficha(Id_ficha),
---    CONSTRAINT FK_Fichas_has_Programa_Formacion_Programa FOREIGN KEY (Id_programa) REFERENCES Programa_formacion(Id_programa)
---);
-
-
---go
 
 create table Usuario(
 Id_usuario int identity (1,1) not null,
@@ -65,10 +55,6 @@ go
 Insert into Usuario (Tipo_Documento_usuario, Documento_usuario, Nombre_usuario, Apellido_usuario, Telefono_usuario, Correo_usuario, Contrasena_usuario, Tipo_usuario, Estado_Usuario) values
 ('C.C', 11111111, 'User', 'Admin', 0000000000, 'admin@soy.sena.edu.co', 'admin123', 'InstructorAdmin', 1)
 
---go
-
---Alter table Programa_formacion
---add Id_Usuario int references Usuario(Id_Usuario);
 
 go
 
@@ -81,22 +67,8 @@ create table Competencia(
 Id_competencia int identity (10000,1) not null,
 Nombre_competencia varchar (500) not null,
 tipo_competencia varchar (100) not null,
---Id_ficha int references Ficha(Id_ficha),
---Id_programa int references Programa_formacion(Id_programa),
---Id_Usuario int references Usuario(Id_Usuario),
 Estado_Competencia bit default (1),
 primary key (ID_competencia))
-
---go
-
---CREATE TABLE Ficha_has_Competencia (
---    Id_ficha INT NOT NULL,
---    Id_competencia INT NOT NULL,
---    CONSTRAINT PK_Ficha_has_Competencia PRIMARY KEY (Id_ficha, Id_competencia),
---    CONSTRAINT FK_Ficha_has_Competencia_Ficha FOREIGN KEY (Id_ficha) REFERENCES Ficha(Id_ficha),
---    CONSTRAINT FK_Ficha_has_Competencia_Competencia FOREIGN KEY (Id_competencia) REFERENCES Competencia(Id_competencia)
---);
-
 
 go
 
@@ -131,7 +103,6 @@ Hora_fin_asistencia varchar(200) not null,
 Detalles_asistencia varchar (500) not null,
 Id_usuario int references Usuario(Id_usuario),
 Id_ficha int references Ficha(Id_ficha),
---Id_competencia int references Competencia(Id_competencia),
 Estado_Asistencia bit default (1),
 QrCode varchar(max),
 Primary Key (Id_asistencia))

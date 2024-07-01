@@ -16,7 +16,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class UsuariosInstructorController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("InstructorAdmin")]
         // GET: UsuariosInstructor
         public ActionResult Index(string estadoFiltro = "")

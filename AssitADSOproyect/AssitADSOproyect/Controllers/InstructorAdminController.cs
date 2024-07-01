@@ -13,7 +13,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class InstructorAdminController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("InstructorAdmin")]
         // GET: InstructorAdmin
         public ActionResult Index()

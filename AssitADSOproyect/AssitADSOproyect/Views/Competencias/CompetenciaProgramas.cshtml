@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ClaseDatos.Programa_formacion>
+
+<h2>Programas asociados a la competencia: @ViewBag.NombreCompetencia</h2>
+
+<ul>
+    @foreach (var programa in Model)
+    {
+        <li>@programa.Nombre_programa</li>
+    }
+</ul>
+
+@Html.ActionLink("Asociar Nuevo Programa", "CrearProgramaCompetencia", new { competenciaId = ViewBag.CompetenciaId }, new { @class = "btn btn-primary" })

@@ -13,7 +13,7 @@
             <div class="mb-3">
                 <label class="form-label">Programa de Formación</label>
                 <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.NombrePrograma">
-                @Html.ValidationMessageFor(model => model.Competencia1, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Competencia, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
         <label class="form-label">Competencias</label>
         <div class="col-md-10">
             @Html.DropDownList("Competencias", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(Model => Model.Competencia1, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(Model => Model.Competencia, "", new { @class = "text-danger" })
         </div>
     </div>
 

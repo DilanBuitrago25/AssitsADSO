@@ -13,10 +13,10 @@ namespace ClaseDatos
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BDAssistsADSOv2Entities : DbContext
+    public partial class BDAssistsADSOv4Entities : DbContext
     {
-        public BDAssistsADSOv2Entities()
-            : base("name=BDAssistsADSOv2Entities")
+        public BDAssistsADSOv4Entities()
+            : base("name=BDAssistsADSOv4Entities")
         {
         }
     

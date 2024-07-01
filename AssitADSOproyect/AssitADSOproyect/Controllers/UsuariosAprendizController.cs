@@ -16,7 +16,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class UsuariosAprendizController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("InstructorAdmin")]
         // GET: UsuariosAprendiz
         public ActionResult Index()
@@ -77,7 +77,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(aprendiz.Apellido_usuario));
                     table.AddCell(new Phrase(aprendiz.Telefono_usuario.ToString()));
                     table.AddCell(new Phrase(aprendiz.Correo_usuario));
-                    table.AddCell(new Phrase(aprendiz.Ficha2.Codigo_ficha.ToString()));
+                    //table.AddCell(new Phrase(aprendiz.Ficha2.Codigo_ficha.ToString()));
                     table.AddCell(new Phrase(aprendiz.Estado_Usuario.ToString()));
 
                 }

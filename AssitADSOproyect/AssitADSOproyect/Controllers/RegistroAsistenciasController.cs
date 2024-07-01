@@ -16,7 +16,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class RegistroAsistenciasController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("Aprendiz")]
         // GET: RegistroAsistencias
         public ActionResult Index(string estadoFiltro = "")
@@ -165,7 +165,7 @@ namespace AssitADSOproyect.Controllers
                 Id_usuario = (int)Session["IdUsuario"]
             };
             ViewBag.CodigoFicha = asistencia.Ficha.Codigo_ficha; // Pasar el código de ficha a la vista
-            ViewBag.Nombre_competencia = asistencia.Competencia.Nombre_competencia; // Pasar el nombre de la competencia a la vista
+     /*       ViewBag.Nombre_competencia = asistencia.Competencia.Nombre_competencia;*/ // Pasar el nombre de la competencia a la vista
             ViewBag.Nombre_Aprendiz = asistencia.Usuario.Nombre_usuario; 
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia");
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario");

@@ -16,29 +16,27 @@ namespace AssitADSOproyect.Controllers
 {
     public class Programa_formacionController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         // GET: Programa_formacion
         public ActionResult Index(string estadoFiltro = "")
         {
-            string idUsuarioSesion = Session["Idusuario"].ToString();
-
-            var ProgramasFiltradas = db.Programa_formacion
-                                         .Where(f => f.Id_Usuario.ToString() == idUsuarioSesion);
+            var ProgramasFiltrados = db.Programa_formacion.AsQueryable(); // Comienza con todas las competencias
 
             if (estadoFiltro == "true")
             {
-                ProgramasFiltradas = ProgramasFiltradas.Where(f => f.Estado_Programa_formacion == true);
+                ProgramasFiltrados = ProgramasFiltrados.Where(c => c.Estado_Programa_formacion == true);
             }
             else if (estadoFiltro == "false")
             {
-                ProgramasFiltradas = ProgramasFiltradas.Where(f => f.Estado_Programa_formacion == false);
+                ProgramasFiltrados = ProgramasFiltrados.Where(c => c.Estado_Programa_formacion == false);
             }
 
             ViewBag.EstadoFiltro = estadoFiltro;
 
-            return View(ProgramasFiltradas);
+            return View(ProgramasFiltrados);
         }
+
 
         public ActionResult GenerarReportePDF()
         {
@@ -192,17 +190,17 @@ namespace AssitADSOproyect.Controllers
 
         //--- Despues de aqui relaciones foraneas
 
-        public ActionResult Programas_Competencias(int id)
-        {
-            var competencias = db.Programa_formacion
-                .Where(pf => pf.Id_programa == id)
-                .SelectMany(pf => pf.Competencia1) // Obtener todas las competencias asociadas
-                .ToList();
+        //public ActionResult Programas_Competencias(int id)
+        //{
+        //    //var competencias = db.Programa_formacion
+        //    //    .Where(pf => pf.Id_programa == id)
+        //    //    .SelectMany(pf => pf.Competencia1) // Obtener todas las competencias asociadas
+        //    //    .ToList();
 
-            ViewBag.NombrePrograma = db.Programa_formacion.Find(id).Nombre_programa; // Obtener el nombre del programa
+        //    //ViewBag.NombrePrograma = db.Programa_formacion.Find(id).Nombre_programa; // Obtener el nombre del programa
 
-            return View(competencias);
-        }
+        //    //return View(competencias);
+        //}
 
         // GET: Programa_formacion_competencia/Asociación
         public ActionResult Programas_Competencias_Asociar(int id)
@@ -224,8 +222,8 @@ namespace AssitADSOproyect.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Programas_Competencias");
             }
-            ViewBag.Competencias = new SelectList(db.Competencia, "id_competencia", "Nombre_competencia", programa_formacion.Competencia1);
-            ViewBag.NombrePrograma = new SelectList(db.Programa_formacion, "id_competencia", "Nombre_programa", competencia.Programa_formacion1);
+            //ViewBag.Competencias = new SelectList(db.Competencia, "id_competencia", "Nombre_competencia", programa_formacion.Competencia1);
+            //ViewBag.NombrePrograma = new SelectList(db.Programa_formacion, "id_competencia", "Nombre_programa", competencia.Programa_formacion1);
             return View(programa_formacion);
         }
 

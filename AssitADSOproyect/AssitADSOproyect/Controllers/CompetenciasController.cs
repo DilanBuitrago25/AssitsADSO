@@ -16,15 +16,12 @@ namespace AssitADSOproyect.Controllers
 {
     public class CompetenciasController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         // GET: Competencias
         public ActionResult Index(string estadoFiltro = "")
         {
-            string idUsuarioSesion = Session["Idusuario"].ToString();
-
-            var CompetenciasFiltradas = db.Competencia
-                                         .Where(c => c.Id_Usuario.ToString() == idUsuarioSesion);
+            var CompetenciasFiltradas = db.Competencia.AsQueryable(); // Comienza con todas las competencias
 
             if (estadoFiltro == "true")
             {
@@ -35,11 +32,11 @@ namespace AssitADSOproyect.Controllers
                 CompetenciasFiltradas = CompetenciasFiltradas.Where(c => c.Estado_Competencia == false);
             }
 
-            ViewBag.EstadoFiltro = estadoFiltro; 
-
+            ViewBag.EstadoFiltro = estadoFiltro;
 
             return View(CompetenciasFiltradas);
         }
+
 
         public ActionResult GenerarReportePDF()
         {
@@ -82,8 +79,8 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(competencia.Id_competencia.ToString()));
                     table.AddCell(new Phrase(competencia.Nombre_competencia));
                     table.AddCell(new Phrase(competencia.tipo_competencia));
-                    table.AddCell(new Phrase(competencia.Ficha.Codigo_ficha.ToString()));
-                    table.AddCell(new Phrase(competencia.Programa_formacion.Nombre_programa));
+                    //table.AddCell(new Phrase(competencia.Ficha.Codigo_ficha.ToString()));
+                    table.AddCell(new Phrase(competencia.Programa_formacion.ToString()));
                     table.AddCell(new Phrase(competencia.Estado_Competencia.ToString()));
                     
                 }
@@ -125,6 +122,7 @@ namespace AssitADSOproyect.Controllers
 
 
         // GET: Competencias/Details/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -140,10 +138,9 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Competencias/Create
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Create()
         {
-            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
             return View();
         }
 
@@ -152,7 +149,8 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_competencia,tipo_competencia,Id_ficha,Id_programa,Nombre_competencia,Id_usuario")] Competencia competencia)
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        public ActionResult Create([Bind(Include = "Id_competencia,tipo_competencia,Nombre_competencia,Estado_Competencia")] Competencia competencia)
         {
             if (ModelState.IsValid)
             {
@@ -160,13 +158,11 @@ namespace AssitADSOproyect.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
             return View(competencia);
         }
 
         // GET: Competencias/Edit/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -178,8 +174,8 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
+            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Programa_formacion);
+            //ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Programa_formacion);
             return View(competencia);
         }
 
@@ -188,6 +184,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Edit([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia,Id_usuario,Estado_competencia")] Competencia competencia)
         {
             if (ModelState.IsValid)
@@ -196,36 +193,61 @@ namespace AssitADSOproyect.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Id_programa);
-            ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
+            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Programa_formacion);
+            //ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
             return View(competencia);
         }
 
-        // GET: Competencias/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult CompetenciaProgramas(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Competencia competencia = db.Competencia.Find(id);
-            if (competencia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(competencia);
+            var programas = db.Competencia
+                .Where(c => c.Id_competencia == id)
+                .SelectMany(c => c.Programa_formacion) // Accedemos a los programas a través de la colección de navegación
+                .ToList();
+
+            ViewBag.NombreCompetencia = db.Competencia.Find(id)?.Nombre_competencia; // Obtenemos el nombre de la competencia para mostrar en la vista
+            ViewBag.CompetenciaId = id;
+            return View(programas);
         }
 
-        // POST: Competencias/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult CrearProgramaCompetencia(int competenciaId)
         {
-            Competencia competencia = db.Competencia.Find(id);
-            db.Competencia.Remove(competencia);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            ViewBag.CompetenciaId = competenciaId;
+            ViewBag.ProgramasDisponibles = db.Programa_formacion.ToList(); // Obtén todos los programas disponibles
+
+            return View();
         }
+
+        [HttpPost]
+        public ActionResult GuardarRelacionProgramaCompetencia(int competenciaId, int programaId)
+        {
+            // Obtener la competencia y el programa desde la base de datos
+            var competencia = db.Competencia.Find(competenciaId);
+            var programa = db.Programa_formacion.Find(programaId);
+
+            if (competencia != null && programa != null)
+            {
+                // Verificar si la relación ya existe (opcional)
+                if (!competencia.Programa_formacion.Contains(programa))
+                {
+                    // Agregar el programa a la colección de navegación de la competencia
+                    competencia.Programa_formacion.Add(programa);
+
+                    // Guardar los cambios en la base de datos
+                    db.SaveChanges();
+                }
+            }
+            //else
+            //{
+            //    // Manejar el caso en que la competencia o el programa no existen
+            //}
+
+            return RedirectToAction("CompetenciaProgramas", new { id = competenciaId });
+        }
+
+
+
+
 
         protected override void Dispose(bool disposing)
         {

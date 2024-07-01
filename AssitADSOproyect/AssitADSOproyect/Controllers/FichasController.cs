@@ -17,7 +17,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class FichasController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
 
         // GET: Fichas1
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]

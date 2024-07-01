@@ -14,7 +14,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class InstructorController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
 
         // GET: Instructor
         [AutorizarTipoUsuario("Instructor")]

@@ -11,7 +11,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class LoginController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         // GET: Login
         public ActionResult Index() 
         {

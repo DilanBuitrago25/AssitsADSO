@@ -19,7 +19,7 @@ namespace AssitADSOproyect.Controllers
 {
     public class AsistenciasController : Controller
     {
-        private BDAssistsADSOv2Entities db = new BDAssistsADSOv2Entities();
+        private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         //GET: Asistencias
         public ActionResult Index(string fechaFiltro = "", int? fichaFiltro = null, int? competenciaFiltro = null)
@@ -36,27 +36,27 @@ namespace AssitADSOproyect.Controllers
                 }
             }
 
-            if (fichaFiltro.HasValue)
-            {
-                asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Id_ficha == fichaFiltro);
+            //if (fichaFiltro.HasValue)
+            //{
+            //    asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Id_ficha == fichaFiltro);
 
-                // Obtener competencias asociadas a la ficha seleccionada
-                ViewBag.Competencias = new SelectList(db.Ficha
-                    .Where(fhc => fhc.Id_ficha == fichaFiltro)
-                    .Select(fhc => fhc.Competencia), "Id_competencia", "Nombre_competencia");
-            }
+            //    // Obtener competencias asociadas a la ficha seleccionada
+            //    ViewBag.Competencias = new SelectList(db.Ficha
+            //        .Where(fhc => fhc.Id_ficha == fichaFiltro)
+            //        .Select(fhc => fhc.Competencia), "Id_competencia", "Nombre_competencia");
+            //}
             else
             {
                 ViewBag.Competencias = new SelectList(new List<Competencia>()); // Lista vacía si no se selecciona ficha
             }
 
-            if (competenciaFiltro.HasValue)
-            {
-                asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Id_competencia == competenciaFiltro);
-            }
+            //if (competenciaFiltro.HasValue)
+            //{
+            //    asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Ficha.Programa_formacion.Competencia == competenciaFiltro);
+            //}
 
             //ViewBag.EstadoFiltro = estadofiltro;
-            ViewBag.Id_ficha = new SelectList(db.Ficha.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion || f.Id_Aprendiz.ToString() == idUsuarioSesion), "Id_ficha", "Codigo_ficha");
+            //ViewBag.Id_ficha = new SelectList(db.Ficha.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion || f.Id_Aprendiz.ToString() == idUsuarioSesion), "Id_ficha", "Codigo_ficha");
 
             return View(asistenciasFiltradas.ToList());
         }
@@ -112,7 +112,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(asistencia.Hora_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Detalles_asistencia));
                     table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha.ToString()));
-                    table.AddCell(new Phrase(asistencia.Competencia.Nombre_competencia));
+                    //table.AddCell(new Phrase(asistencia.Competencia.Nombre_competencia));
                     table.AddCell(new Phrase(asistencia.Estado_Asistencia.ToString()));
 
                 }
@@ -211,7 +211,7 @@ namespace AssitADSOproyect.Controllers
             }
 
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_usuario);
-            ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
+            //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
 
             
@@ -234,7 +234,7 @@ namespace AssitADSOproyect.Controllers
                 return HttpNotFound();
             }
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_usuario);
-            ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
+            //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);
         }
@@ -253,7 +253,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_usuario);
-            ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
+            //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);
         }

@@ -41,7 +41,7 @@ namespace AssitADSOproyect
 
         public void GenerarRegistrosAsistencia()
         {
-            using (var db = new BDAssistsADSOv2Entities())
+            using (var db = new BDAssistsADSOv4Entities())
             {
                 var fechaHoraActual = DateTime.Now;
 
