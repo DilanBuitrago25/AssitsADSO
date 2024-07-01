@@ -48,70 +48,73 @@
             <br />
             <button class="btn btn-light"><a href="@Url.Action("Create","Competencias")">Crear</a></button>
         </div>
-        @using (Html.BeginForm("Index", "Competencias", FormMethod.Get))
-        {
-            <label for="estadoFiltro">Estado:</label>
-            <select id="estadoFiltro" name="estadoFiltro">
-                <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
-                <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
-                <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
-            </select>
-            <input type="submit" value="Filtrar" />
-        }
-    <div class="card-body">
-        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Competencias")'">
-            Generar Reporte PDF
-        </button>
-        <div class="table-responsive">
-            <table class="display datatables" id="ajax-data-object">
-                <thead>
+        <div class="col-md-4">
 
-                    <tr>
-                        <th>Id</th>
-                        <th>Tipo</th>
-                        <th>Nombre</th>
-                        <th>Programa Formacion</th>
-                        <th>Codigo Ficha</th>
-                    </tr>
+            @using (Html.BeginForm("Index", "Competencias", FormMethod.Get))
+            {
+                <label for="estadoFiltro">Estado:</label>
+                <select class="form-select" id="estadoFiltro" name="estadoFiltro">
+                    <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                    <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                    <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+                </select>
+                <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+            }
+        </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Competencias")'">
+                    Generar Reporte PDF
+                </button>
+                <div class="table-responsive">
+                    <table class="display datatables" id="ajax-data-object">
+                        <thead>
 
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Id_competencia)</td>
-                            @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
-                            <td>@Html.DisplayFor(model => item.tipo_competencia)</td>
-                            <td>@Html.DisplayFor(model => item.Nombre_competencia)</td>
-                            <td>@Html.DisplayFor(model => item.Programa_formacion)</td>
-                            @*<td>@Html.DisplayFor(model => item.Ficha.Id_ficha)</td>*@
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id_competencia }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id_competencia }) |
-                            @Html.ActionLink("Programas", "CompetenciaProgramas", new { id = item.Id_competencia })
-                        </td>
+                            <tr>
+                                <th>Id</th>
+                                <th>Tipo</th>
+                                <th>Nombre</th>
+                                @*<th>Programa Formacion</th>*@
+                                <th>Acciones</th>
+                            </tr>
 
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Id</th>
-                        <th>Tipo</th>
-                        <th>Nombre</th>
-                        <th>Programa Formacion</th>
-                        <th>Ficha</th>
-                    </tr>
-                </tfoot>
-            </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Id_competencia)</td>
+                                    @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
+                                    <td>@Html.DisplayFor(model => item.tipo_competencia)</td>
+                                    <td>@Html.DisplayFor(model => item.Nombre_competencia)</td>
+                                    @*<td>@Html.DisplayFor(model => item.Programa_formacion)</td>*@
+                                    @*<td>@Html.DisplayFor(model => item.Ficha.Id_ficha)</td>*@
+                                    <td>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.Id_competencia }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.Id_competencia }) |
+                                        @Html.ActionLink("Programas", "CompetenciaProgramas", new { id = item.Id_competencia })
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Tipo</th>
+                                <th>Nombre</th>
+                                @*<th>Programa Formacion</th>*@
+                                <th>Acciones</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+
+
+
         </div>
     </div>
-
-
-
-
-    </div>
-</div>
 @Scripts.Render("~/Content/datatables")
 @*<h2>Index</h2>
 

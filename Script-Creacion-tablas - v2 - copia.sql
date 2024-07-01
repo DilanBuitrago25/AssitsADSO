@@ -63,6 +63,7 @@ add Id_Instructor int references Usuario(Id_Usuario);
 
 go
 
+
 create table Competencia(
 Id_competencia int identity (10000,1) not null,
 Nombre_competencia varchar (500) not null,

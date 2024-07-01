@@ -210,37 +210,32 @@ namespace AssitADSOproyect.Controllers
             return View(programas);
         }
 
-        public ActionResult CrearProgramaCompetencia(int competenciaId)
+        public ActionResult CrearProgramaCompetencia(int competenciaId, [Bind(Include = "Id_competencia,Programa_formacion")] Competencia competencia)
         {
             ViewBag.CompetenciaId = competenciaId;
             ViewBag.ProgramasDisponibles = db.Programa_formacion.ToList(); // Obtén todos los programas disponibles
-
+            //ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
             return View();
         }
 
         [HttpPost]
-        public ActionResult GuardarRelacionProgramaCompetencia(int competenciaId, int programaId)
+        public ActionResult CrearProgramaCompetencia(int competenciaId, int programaId)
         {
-            // Obtener la competencia y el programa desde la base de datos
             var competencia = db.Competencia.Find(competenciaId);
             var programa = db.Programa_formacion.Find(programaId);
 
             if (competencia != null && programa != null)
             {
-                // Verificar si la relación ya existe (opcional)
                 if (!competencia.Programa_formacion.Contains(programa))
                 {
-                    // Agregar el programa a la colección de navegación de la competencia
                     competencia.Programa_formacion.Add(programa);
-
-                    // Guardar los cambios en la base de datos
                     db.SaveChanges();
                 }
             }
-            //else
-            //{
-            //    // Manejar el caso en que la competencia o el programa no existen
-            //}
+            else
+            {
+                // Manejar el caso en que la competencia o el programa no existen
+            }
 
             return RedirectToAction("CompetenciaProgramas", new { id = competenciaId });
         }
