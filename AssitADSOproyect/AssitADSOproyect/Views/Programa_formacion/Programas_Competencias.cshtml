@@ -1,49 +1,98 @@
-﻿@model IEnumerable<ClaseDatos.Programa_formacion>
+﻿@model IEnumerable<ClaseDatos.Competencia>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre_programa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tipo_programa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duracion_programa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Estado_Programa_formacion)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Usuario.Tipo_Documento_usuario)
-        </th>*@
-        <th></th>
-    </tr>
+@Styles.Render("~/Content/datatables")
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Programas asociados a la competencia: @ViewBag.NombrePrograma</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Programas de Formacion</li>
+                    <li class="breadcrumb-item">@ViewBag.NombrePrograma</li>
+                    <li class="breadcrumb-item active">Consultar Competencias</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Individual column searching (text inputs) Starts-->
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>Tabla de datos - Competencias Asociadas</h5>
+            <br />
+            @Html.ActionLink("Asociar Nueva Competencia", "Programas_Competencias_Asociar", new { programaId = ViewBag.ProgramaId }, new { @class = "btn btn-primary" })
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre_programa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tipo_programa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duracion_programa)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Competencia1.)
-        </td>*@
-       
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_programa }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_programa }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_programa })
-        </td>
-    </tr>
-}
+            <div class="col-md-3">
 
-</table>
+                @using (Html.BeginForm("Index", "Programa_formacion", FormMethod.Get))
+                {
+                    <br />
+                    <label for="estadoFiltro">Estado:</label>
+                    <br />
+                    <select class="form-select" id="estadoFiltro" name="estadoFiltro">
+                        <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                        <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                        <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+                    </select>
+                    <br />
+                    <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                }
+            </div>
+        </div>
+        <div class="card-body">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'">
+                Generar Reporte PDF
+            </button>
+            <div class="table-responsive">
+                <table class="display datatables" id="ajax-data-object">
+                    <thead>
+
+                        <tr>
+                            <th>Id</th>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            @*<th>Programa Formacion</th>*@
+                            @*<th>Acciones</th>*@
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Id_competencia)</td>
+                                @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
+                                <td>@Html.DisplayFor(model => item.tipo_competencia)</td>
+                                <td>@Html.DisplayFor(model => item.Nombre_competencia)</td>
+                                @*<td>@Html.DisplayFor(model => item.Programa_formacion)</td>*@
+                                @*<td>@Html.DisplayFor(model => item.Ficha.Id_ficha)</td>*@
+                                @*<td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_competencia }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.Id_competencia }) |
+                                </td>*@
+
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
+                            @*<th>Programa Formacion</th>*@
+                            @*<th>Acciones</th>*@
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+@Scripts.Render("~/Content/datatables")

@@ -19,14 +19,18 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("InstructorAdmin")]
         // GET: UsuariosAprendiz
-        public ActionResult Index()
+        public ActionResult Index(string estadoFiltro = "") // Agregar parámetro para el filtro de estado
         {
             var AprendizFiltro = db.Usuario
-            .Where(u => u.Tipo_usuario == "Aprendiz" && u.Estado_Usuario == true)
-            .ToList();
+                .Where(u => u.Tipo_usuario == "Aprendiz" && (estadoFiltro == "" || u.Estado_Usuario.ToString() == estadoFiltro)) // Filtrar por tipo y estado
+                .ToList();
+
+            ViewBag.EstadoFiltro = estadoFiltro; // Pasar el valor del filtro a la vista
 
             return View(AprendizFiltro);
         }
+
+
 
         public ActionResult GenerarReportePDF()
         {

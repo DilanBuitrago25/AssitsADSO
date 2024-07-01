@@ -70,7 +70,7 @@
                         <th>Codigo</th>
                         <th>Jornada</th>
                         <th>Modalidad</th>
-                        <th>Tipo</th>
+                        <th>Instructor(es)</th>
                         <th>Programa de formación</th>
                         <th> </th>
                     </tr>
@@ -81,14 +81,17 @@
                     {
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.Codigo_ficha)</td>
-                            @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
                             <td>@Html.DisplayFor(model => item.Jornada_ficha)</td>
                             <td>@Html.DisplayFor(model => item.Modalidad_ficha)</td>
-                            <td>@Html.DisplayFor(model => item.tipo_ficha)</td>
+                            <td>
+                                @Html.DisplayFor(model => item.Usuario.Nombre_usuario) 
+                                @Html.DisplayFor(model => item.Usuario.Apellido_usuario)
+                            </td>
                             <td>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.Id_ficha })
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_ficha }) |
+                                @Html.ActionLink("Aprendices", "Aprendices_Ficha", new { id = item.Id_ficha })
                             </td>
 
                         </tr>
@@ -99,7 +102,7 @@
                         <th>Codigo</th>
                         <th>Jornada</th>
                         <th>Modalidad</th>
-                        <th>Tipo</th>
+                        <th>Instructor(es)</th>
                         <th>Programa de formación</th>
                         <th> </th>
                     </tr>

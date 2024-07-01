@@ -1,0 +1,14 @@
+﻿@using (Html.BeginForm("Crear_FichaAprendiz", "Fichas", FormMethod.Post))
+{
+
+    <div class="form-group">
+        @Html.Label("Aprendiz")
+        @Html.DropDownList("aprendizId", new SelectList(ViewBag.AprendicesDisponibles, "Id_usuario", "Nombre_usuario"), "Selecciona un aprendiz", new { @class = "form-control" })
+    </div>
+
+    <input name="fichaId" value="@ViewBag.FichaId" />
+
+    <button type="submit" class="btn btn-primary">Asociar Aprendiz</button>
+}
+
+

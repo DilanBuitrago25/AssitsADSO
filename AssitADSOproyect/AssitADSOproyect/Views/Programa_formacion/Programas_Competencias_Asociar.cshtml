@@ -1,36 +1,15 @@
-﻿@model ClaseDatos.Programa_formacion
-@Model Clase
+﻿@model ClaseDatos.Competencia
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Programas_Competencias_Asociar", "Programa_formacion", FormMethod.Post))
 {
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Programa_formacion</h4>
-    <hr />
-    <div class="row">
-        <div class="col">
-            <div class="mb-3">
-                <label class="form-label">Programa de Formación</label>
-                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.NombrePrograma">
-                @Html.ValidationMessageFor(model => model.Competencia, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
     <div class="form-group">
-        <label class="form-label">Competencias</label>
-        <div class="col-md-10">
-            @Html.DropDownList("Competencias", null, htmlAttributes: new { @class = "form-control" })
-            @Html.ValidationMessageFor(Model => Model.Competencia, "", new { @class = "text-danger" })
-        </div>
+        @Html.Label("Competencia")
+        @Html.DropDownList("competenciaId", new SelectList(ViewBag.CompetenciasDisponibles, "Id_competencia", "Nombre_competencia"), "Selecciona una Competencia", new { @class = "form-control" })
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
-        </div>
-    </div>
-</div>
+    <input name="programaId" value="@ViewBag.ProgramaId" />
+
+    <button type="submit" class="btn btn-primary">Asociar Competencia</button>
 }
 
 <div>

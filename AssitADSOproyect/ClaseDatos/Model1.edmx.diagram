@@ -24,6 +24,9 @@
         <AssociationConnector Association="BDAssistsADSOv4Model.FK__Soporte__Id_usua__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="BDAssistsADSOv4Model.Ficha_has_Aprendices" ManuallyRouted="false" />
         <AssociationConnector Association="BDAssistsADSOv4Model.Programas_has_Competencia" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.Ficha_has_Usuario" Width="1.5" PointX="12.75" PointY="7" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK_Ficha_has_Usuario_Ficha" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK_Ficha_has_Usuario_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
