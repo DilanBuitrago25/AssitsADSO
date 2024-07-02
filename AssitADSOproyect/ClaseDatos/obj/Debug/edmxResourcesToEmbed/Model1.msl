@@ -10,7 +10,7 @@
           <ScalarProperty Name="Hora_inicio_asistencia" ColumnName="Hora_inicio_asistencia" />
           <ScalarProperty Name="Hora_fin_asistencia" ColumnName="Hora_fin_asistencia" />
           <ScalarProperty Name="Detalles_asistencia" ColumnName="Detalles_asistencia" />
-          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
           <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
           <ScalarProperty Name="Estado_Asistencia" ColumnName="Estado_Asistencia" />
           <ScalarProperty Name="QrCode" ColumnName="QrCode" />
@@ -39,7 +39,15 @@
           <ScalarProperty Name="Fecha_fin" ColumnName="Fecha_fin" />
           <ScalarProperty Name="Estado_ficha" ColumnName="Estado_ficha" />
           <ScalarProperty Name="Id_programa" ColumnName="Id_programa" />
-          <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ficha_has_Usuario">
+      <EntityTypeMapping TypeName="BDAssistsADSOv4Model.Ficha_has_Usuario">
+        <MappingFragment StoreEntitySet="Ficha_has_Usuario">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
+          <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -62,7 +70,7 @@
           <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
           <ScalarProperty Name="Asistio_registro" ColumnName="Asistio_registro" />
           <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
-          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_Aprendiz" ColumnName="Id_Aprendiz" />
           <ScalarProperty Name="Estado_RegistroAsitencia" ColumnName="Estado_RegistroAsitencia" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -75,11 +83,13 @@
           <ScalarProperty Name="Descripcion_soporte" ColumnName="Descripcion_soporte" />
           <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
           <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />
-          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_Aprendiz" ColumnName="Id_Aprendiz" />
           <ScalarProperty Name="Id_Instructor" ColumnName="Id_Instructor" />
           <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
           <ScalarProperty Name="Archivo_soporte" ColumnName="Archivo_soporte" />
           <ScalarProperty Name="Estado_Soporte" ColumnName="Estado_Soporte" />
+          <ScalarProperty Name="Validacion_Instructor" ColumnName="Validacion_Instructor" />
+          <ScalarProperty Name="Nota_Instructor" ColumnName="Nota_Instructor" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -95,19 +105,10 @@
           <ScalarProperty Name="Correo_usuario" ColumnName="Correo_usuario" />
           <ScalarProperty Name="Contrasena_usuario" ColumnName="Contrasena_usuario" />
           <ScalarProperty Name="Tipo_usuario" ColumnName="Tipo_usuario" />
-          <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
           <ScalarProperty Name="Estado_Usuario" ColumnName="Estado_Usuario" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="Ficha_has_Aprendices" TypeName="BDAssistsADSOv4Model.Ficha_has_Aprendices" StoreEntitySet="Ficha_has_Aprendices">
-      <EndProperty Name="Ficha">
-        <ScalarProperty Name="Id_ficha" ColumnName="Id_ficha" />
-      </EndProperty>
-      <EndProperty Name="Usuario">
-        <ScalarProperty Name="Id_usuario" ColumnName="Id_Aprendiz" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="Programas_has_Competencia" TypeName="BDAssistsADSOv4Model.Programas_has_Competencia" StoreEntitySet="Programas_has_Competencia">
       <EndProperty Name="Competencia">
         <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />

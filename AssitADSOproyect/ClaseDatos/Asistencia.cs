@@ -27,7 +27,7 @@ namespace ClaseDatos
         public string Hora_inicio_asistencia { get; set; }
         public string Hora_fin_asistencia { get; set; }
         public string Detalles_asistencia { get; set; }
-        public Nullable<int> Id_usuario { get; set; }
+        public Nullable<int> Id_Instructor { get; set; }
         public Nullable<int> Id_ficha { get; set; }
         public Nullable<bool> Estado_Asistencia { get; set; }
         public string QrCode { get; set; }

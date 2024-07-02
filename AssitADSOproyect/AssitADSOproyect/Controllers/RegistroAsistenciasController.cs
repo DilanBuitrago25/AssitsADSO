@@ -24,7 +24,7 @@ namespace AssitADSOproyect.Controllers
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
             var RegistrosFiltrados = db.RegistroAsistencia
-                                         .Where(r => r.Id_usuario.ToString() == idUsuarioSesion);
+                                         .Where(r => r.Id_Aprendiz.ToString() == idUsuarioSesion);
 
             if (estadoFiltro == "true")
             {
@@ -45,7 +45,7 @@ namespace AssitADSOproyect.Controllers
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
             var RegistrosFiltrados = db.RegistroAsistencia
-                                         .Where(r => r.Id_usuario.ToString() == idUsuarioSesion);
+                                         .Where(r => r.Id_Aprendiz.ToString() == idUsuarioSesion);
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -162,7 +162,7 @@ namespace AssitADSOproyect.Controllers
             }
             var registroAsistencia = new RegistroAsistencia { 
                 Id_asistencia = Id_Asistencia.Value,
-                Id_usuario = (int)Session["IdUsuario"]
+                Id_Aprendiz = (int)Session["IdUsuario"]
             };
             ViewBag.CodigoFicha = asistencia.Ficha.Codigo_ficha; // Pasar el código de ficha a la vista
      /*       ViewBag.Nombre_competencia = asistencia.Competencia.Nombre_competencia;*/ // Pasar el nombre de la competencia a la vista
@@ -218,7 +218,7 @@ namespace AssitADSOproyect.Controllers
             }
 
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
-            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_usuario);
+            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_Aprendiz);
             return View(registroAsistencia);
         }
 
@@ -235,7 +235,7 @@ namespace AssitADSOproyect.Controllers
                 return HttpNotFound();
             }
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
-            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_usuario);
+            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_Aprendiz);
             return View(registroAsistencia);
         }
 
@@ -253,7 +253,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
-            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_usuario);
+            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_Aprendiz);
             return View(registroAsistencia);
         }
 

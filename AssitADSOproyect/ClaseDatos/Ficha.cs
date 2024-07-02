@@ -18,8 +18,7 @@ namespace ClaseDatos
         public Ficha()
         {
             this.Asistencia = new HashSet<Asistencia>();
-            this.Usuario1 = new HashSet<Usuario>();
-            this.Usuario2 = new HashSet<Usuario>();
+            this.Ficha_has_Usuario = new HashSet<Ficha_has_Usuario>();
         }
     
         public int Id_ficha { get; set; }
@@ -31,15 +30,11 @@ namespace ClaseDatos
         public string Fecha_fin { get; set; }
         public Nullable<bool> Estado_ficha { get; set; }
         public Nullable<int> Id_programa { get; set; }
-        public Nullable<int> Id_Instructor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistencia> Asistencia { get; set; }
-        public virtual Usuario Usuario { get; set; }
         public virtual Programa_formacion Programa_formacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuario> Usuario2 { get; set; }
+        public virtual ICollection<Ficha_has_Usuario> Ficha_has_Usuario { get; set; }
     }
 }

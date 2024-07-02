@@ -1,0 +1,26 @@
+﻿@model IEnumerable<ClaseDatos.Usuario>
+
+<h2>Aprendices de la Ficha @ViewBag.FichaId</h2>
+@foreach (var item in Model)
+{
+    <table class="table">
+        <td>
+            @Html.DisplayFor(modelItem => item.Id_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Tipo_Documento_usuario)
+            @Html.DisplayFor(model => item.Documento_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Nombre_usuario)
+            @Html.DisplayFor(model => item.Apellido_usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(model => item.Correo_usuario)
+        </td>
+    </table>
+}
+    <button class="btn btn-primary" onclick="window.location.href='@Url.Action("Asociar_Aprendiz_Ficha", "Fichas", new { idFicha = ViewBag.FichaId })'">
+        Agregar Aprendiz
+    </button>
+

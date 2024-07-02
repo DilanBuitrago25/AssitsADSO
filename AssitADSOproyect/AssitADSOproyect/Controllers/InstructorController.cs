@@ -17,7 +17,7 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
 
         // GET: Instructor
-        [AutorizarTipoUsuario("Instructor")]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Index()
         {
             int Total_Aprendices;
@@ -67,8 +67,8 @@ namespace AssitADSOproyect.Controllers
             }
             ViewBag.Total_Fichas = Total_Fichas;
 
-            var usuario = db.Usuario.Include(u => u.Ficha);
-            return View(usuario.ToList());
+            //var usuario = db.Ficha_has_Usuario.Include(u => u.Id_ficha);
+            return View();
         }
 
         // GET: Instructor/Details/5

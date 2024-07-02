@@ -34,8 +34,7 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Index()
         {
-            var usuario = db.Usuario.Include(u => u.Ficha);
-            return View(usuario.ToList());
+            return View(db.Usuario.ToList());
         }
 
         // GET: Aprendizs/Details/5

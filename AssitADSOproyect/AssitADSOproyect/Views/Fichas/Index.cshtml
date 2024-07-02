@@ -88,7 +88,8 @@
                             <td>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.Id_ficha })
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_ficha }) |
+                                @Html.ActionLink("Aprendices", "Aprendices_Ficha", new { id = item.Id_ficha })
                             </td>
 
                         </tr>

@@ -19,7 +19,7 @@ namespace ClaseDatos
         public string Hora_registro { get; set; }
         public Nullable<bool> Asistio_registro { get; set; }
         public Nullable<int> Id_asistencia { get; set; }
-        public Nullable<int> Id_usuario { get; set; }
+        public Nullable<int> Id_Aprendiz { get; set; }
         public Nullable<bool> Estado_RegistroAsitencia { get; set; }
     
         public virtual Asistencia Asistencia { get; set; }

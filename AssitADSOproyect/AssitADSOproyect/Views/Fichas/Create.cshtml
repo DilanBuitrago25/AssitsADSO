@@ -137,7 +137,7 @@
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Fecha_fin, "", new { @class = "text-danger" })
                                     </div>
-                                    @Html.HiddenFor(model => model.Id_Instructor, new { Value = @Session["Idusuario"].ToString() })
+                                    @*@Html.HiddenFor(model => model.Id_Instructor, new { Value = @Session["Idusuario"].ToString() })*@
                                     @Html.HiddenFor(model => model.Estado_ficha, new { Value = "True" })
                                 </form>
                             </div>

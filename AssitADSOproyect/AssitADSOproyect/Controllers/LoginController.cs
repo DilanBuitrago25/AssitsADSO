@@ -42,7 +42,7 @@ namespace AssitADSOproyect.Controllers
                 }
                 else if (usuario.Tipo_usuario == "InstructorAdmin" && usuario.Estado_Usuario == true)
                 {
-                    return RedirectToAction("Index", "InstructorAdmin"); // Vista para instructores Administradores 
+                    return RedirectToAction("Index", "Instructor"); // Vista para instructores Administradores 
                 }
             }
             if (usuario == null) 

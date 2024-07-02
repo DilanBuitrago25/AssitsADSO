@@ -166,6 +166,7 @@
     <Compile Include="Controllers\AsistenciasController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
     <Compile Include="Controllers\FichasController.cs" />
+    <Compile Include="Controllers\Ficha_has_UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstructorAdminController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Controllers\Programa_formacionController.cs" />
     <Compile Include="Controllers\RegistroAsistenciasController.cs" />
     <Compile Include="Controllers\UsuariosAprendizController.cs" />
+    <Compile Include="Controllers\UsuariosconpruebaController.cs" />
     <Compile Include="Controllers\UsuariosInstructorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -6132,6 +6134,18 @@
     <Content Include="Views\Programa_formacion\Programas_Competencias.cshtml" />
     <Content Include="Views\Competencias\CompetenciaProgramas.cshtml" />
     <Content Include="Views\Competencias\CrearProgramaCompetencia.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Create.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Delete.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Details.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Edit.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Index.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Create.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Delete.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Details.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Edit.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Index.cshtml" />
+    <Content Include="Views\Fichas\Aprendices_Ficha.cshtml" />
+    <Content Include="Views\Fichas\Asociar_Aprendiz_Ficha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

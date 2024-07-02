@@ -19,11 +19,13 @@ namespace ClaseDatos
         public string Descripcion_soporte { get; set; }
         public string Fecha_registro { get; set; }
         public string Hora_registro { get; set; }
-        public Nullable<int> Id_usuario { get; set; }
+        public Nullable<int> Id_Aprendiz { get; set; }
         public Nullable<int> Id_Instructor { get; set; }
         public Nullable<int> Id_asistencia { get; set; }
         public string Archivo_soporte { get; set; }
         public Nullable<bool> Estado_Soporte { get; set; }
+        public Nullable<bool> Validacion_Instructor { get; set; }
+        public string Nota_Instructor { get; set; }
     
         public virtual Asistencia Asistencia { get; set; }
         public virtual Usuario Usuario { get; set; }

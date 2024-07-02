@@ -52,7 +52,7 @@ namespace AssitADSOproyect.Controllers
         public JsonResult GetAsistenciasPorInstructor(int instructorId)
         {
             var asistencias = db.Asistencia
-                .Where(a => a.Id_usuario == instructorId)
+                .Where(a => a.Id_Instructor == instructorId)
                 .Select(a => new { a.Id_asistencia, a.Fecha_inicio_asistencia }) // O el campo que desees mostrar
                 .ToList();
 
@@ -113,7 +113,7 @@ public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcio
                 }
                 }
             ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", soporte.Id_asistencia);
-            ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor"), "Id_Usuario", "Nombre_Usuario", soporte.Id_usuario);
+            ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor"), "Id_Usuario", "Nombre_Usuario", soporte.Id_Instructor);
             
             return View(soporte);
 

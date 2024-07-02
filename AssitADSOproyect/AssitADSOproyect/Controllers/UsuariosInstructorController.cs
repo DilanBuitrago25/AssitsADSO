@@ -22,17 +22,10 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Index(string estadoFiltro = "")
         {
             var InstructoresFiltrados = db.Usuario
-             .Where(u => u.Tipo_usuario == "Instructor" && u.Tipo_usuario == "InstructorAdmin" && u.Estado_Usuario == true)
-             .ToList();
+                .Where(u => (u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin") && u.Estado_Usuario == true)
+                .ToList();
 
-            //if (estadoFiltro == "true")
-            //{
-            //    InstructoresFiltrados = InstructoresFiltrados.Where(f => f.Estado_Usuario == true);
-            //}
-            //else if (estadoFiltro == "false")
-            //{
-            //    InstructoresFiltrados = InstructoresFiltrados.Where(f => f.Estado_Usuario == false);
-            //}
+
 
             ViewBag.EstadoFiltro = estadoFiltro;
 
@@ -161,7 +154,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
             return View(usuario);
         }
 
@@ -177,7 +170,7 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
             return View(usuario);
         }
 
@@ -194,7 +187,7 @@ namespace AssitADSOproyect.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
             return View(usuario);
         }
 

@@ -66,9 +66,9 @@ namespace AssitADSOproyect
                     int? idFicha = asistencia.Id_ficha; // Obtener el Id_ficha fuera de la consulta
 
                     // Obtener aprendices de la ficha que no se han registrado
-                    var aprendicesSinRegistro = db.Usuario
-                        .Where(u => u.Tipo_usuario == "Aprendiz" && u.Id_ficha == idFicha &&
-                                    !db.RegistroAsistencia.Any(ra => ra.Id_asistencia == asistencia.Id_asistencia && ra.Id_usuario == u.Id_usuario))
+                    var aprendicesSinRegistro = db.Ficha_has_Usuario
+                        .Where(u => u.TipoUsuario == "Aprendiz" && u.Id_ficha == idFicha &&
+                                    !db.RegistroAsistencia.Any(ra => ra.Id_asistencia == asistencia.Id_asistencia && ra.Id_Aprendiz == u.Id_usuario))
                         .ToList();
 
                     foreach (var aprendiz in aprendicesSinRegistro)
@@ -79,7 +79,7 @@ namespace AssitADSOproyect
                             Fecha_registro = null,
                             Hora_registro = null,
                             Id_asistencia = asistencia.Id_asistencia,
-                            Id_usuario = aprendiz.Id_usuario,
+                            Id_Aprendiz = aprendiz.Id_usuario,
                             Asistio_registro = false
                         };
                         db.RegistroAsistencia.Add(nuevoRegistro);

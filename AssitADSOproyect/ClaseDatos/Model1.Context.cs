@@ -28,6 +28,7 @@ namespace ClaseDatos
         public virtual DbSet<Asistencia> Asistencia { get; set; }
         public virtual DbSet<Competencia> Competencia { get; set; }
         public virtual DbSet<Ficha> Ficha { get; set; }
+        public virtual DbSet<Ficha_has_Usuario> Ficha_has_Usuario { get; set; }
         public virtual DbSet<Programa_formacion> Programa_formacion { get; set; }
         public virtual DbSet<RegistroAsistencia> RegistroAsistencia { get; set; }
         public virtual DbSet<Soporte> Soporte { get; set; }

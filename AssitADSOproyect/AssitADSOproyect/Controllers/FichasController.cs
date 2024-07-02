@@ -23,31 +23,24 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "")
         {
-            string idUsuarioSesion = Session["Idusuario"].ToString();
-
-            var FichasFiltradas = db.Ficha
-                                         .Where(f => f.Id_Instructor.ToString() == idUsuarioSesion);
-
-            if (estadoFiltro == "true")
-            {
-                FichasFiltradas = FichasFiltradas.Where(f => f.Estado_ficha == true);
-            }
-            else if (estadoFiltro == "false")
-            {
-                FichasFiltradas = FichasFiltradas.Where(f => f.Estado_ficha == false);
-            }
+            var fichasFiltradas = db.Ficha
+                .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
+                .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) // Filtrar por estado (opcional)
+                .ToList();
 
             ViewBag.EstadoFiltro = estadoFiltro;
 
-            return View(FichasFiltradas);
+            return View(fichasFiltradas);
         }
 
 
-        
 
-// ...
 
-public ActionResult GenerarReportePDF()
+
+
+        // ...
+
+        public ActionResult GenerarReportePDF()
     {
         var fichas = db.Ficha.ToList(); // Obtén los datos de las fichas
 
@@ -206,31 +199,55 @@ public ActionResult GenerarReportePDF()
             return View(ficha);
         }
 
-        // GET: Fichas1/Delete/5
-        public ActionResult Delete(int? id)
+        // Foranea despues de aca
+        public ActionResult Aprendices_Ficha(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Ficha ficha = db.Ficha.Find(id);
-            if (ficha == null)
-            {
-                return HttpNotFound();
-            }
-            return View(ficha);
+            var aprendices = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_ficha == id && fu.TipoUsuario == "Aprendiz")
+                .Select(fu => fu.Usuario)
+                .ToList();
+
+            ViewBag.FichaId = id; // Pasar el ID de la ficha a la vista
+
+            return View(aprendices);
         }
 
-        // POST: Fichas1/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Asociar_Aprendiz_Ficha(int idFicha)
         {
-            Ficha ficha = db.Ficha.Find(id);
-            db.Ficha.Remove(ficha);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var aprendices = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
+            ViewBag.Aprendices = aprendices;
+            ViewBag.FichaId = idFicha;
+
+            return View(new Ficha_has_Usuario { Id_ficha = idFicha }); // Inicializa el modelo con el ID de la ficha
         }
+
+        [HttpPost]
+        public ActionResult Asociar_Aprendiz_Ficha(Ficha_has_Usuario fichaHasUsuario)
+        {
+            if (ModelState.IsValid)
+            {
+                var aprendiz = db.Usuario.Find(fichaHasUsuario.Id_usuario);
+                var ficha = db.Ficha.Find(fichaHasUsuario.Id_ficha); // Cargar la ficha
+
+                if (aprendiz != null && aprendiz.Tipo_usuario == "Aprendiz" && ficha != null)
+                {
+                    fichaHasUsuario.TipoUsuario = aprendiz.Tipo_usuario;
+                    db.Ficha_has_Usuario.Add(fichaHasUsuario);
+                    db.SaveChanges();
+                    return RedirectToAction("Asociar_Aprendiz_Ficha", new { idFicha = fichaHasUsuario.Id_ficha });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "El usuario seleccionado no es un aprendiz válido o la ficha no existe.");
+                }
+            }
+
+            // Si hay errores de validación, volver a mostrar el formulario
+            ViewBag.Aprendices = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
+            return View(fichaHasUsuario);
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

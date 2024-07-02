@@ -1,13 +1,13 @@
---Nombre de la BD (BDAssistsADSOv4)
+--Nombre de la BD (BDAssistsADSOv5)
 
 --Creación de las tablas
 go
 --Base de datos se modifico y se tiene que verificar que los datos impuestos en el modelo y en el controlador esten de la misma secuencia
-Create database BDAssistsADSOv4
+Create database BDAssistsADSOv5
 
 go
 
-use BDAssistsADSOv4
+use BDAssistsADSOv5
 
 go
 
@@ -17,7 +17,7 @@ Nombre_programa varchar (100) not null,
 Tipo_programa varchar (100) not null,
 Duracion_programa varchar (100) not null,
 Estado_Programa_formacion bit default (1),
-primary key (Id_programa))
+primary key (Id_programa));
 
 go
 
@@ -38,28 +38,40 @@ go
 
 create table Usuario(
 Id_usuario int identity (1,1) not null,
-Tipo_Documento_usuario varchar (200) not null,
-Documento_usuario int not null,
-Nombre_usuario varchar (55) not null,
-Apellido_usuario varchar (55) not null,
+Tipo_Documento_usuario varchar (200),
+Documento_usuario int,
+Nombre_usuario varchar (100) not null,
+Apellido_usuario varchar (100),
 Telefono_usuario numeric (18, 0),
 Correo_usuario varchar (100) not null,
 Contrasena_usuario varchar (100) not null,
-Tipo_usuario Varchar (100),
-Id_ficha int references Ficha(Id_ficha),
+Tipo_usuario Varchar (100)not null,
 Estado_Usuario bit default (1),
-primary key (Id_usuario))
+primary key (Id_usuario));
 
 go
 
-Insert into Usuario (Tipo_Documento_usuario, Documento_usuario, Nombre_usuario, Apellido_usuario, Telefono_usuario, Correo_usuario, Contrasena_usuario, Tipo_usuario, Estado_Usuario) values
-('C.C', 11111111, 'User', 'Admin', 0000000000, 'admin@soy.sena.edu.co', 'admin123', 'InstructorAdmin', 1)
+
+CREATE TABLE Ficha_has_Usuario (
+    Id_usuario INT,
+    Id_ficha INT,
+    TipoUsuario VARCHAR(50),
+	CONSTRAINT PK_Ficha_has_Usuario PRIMARY KEY (Id_ficha, Id_usuario),
+    CONSTRAINT FK_Ficha_has_Usuario_Ficha FOREIGN KEY (Id_ficha) REFERENCES Ficha(Id_ficha),
+    CONSTRAINT FK_Ficha_has_Usuario_Usuario FOREIGN KEY (Id_usuario) REFERENCES Usuario(Id_usuario)
+);
 
 
 go
 
-Alter table Ficha
-add Id_Instructor int references Usuario(Id_Usuario);
+Insert into Usuario (Tipo_Documento_usuario, Nombre_usuario, Apellido_usuario, Correo_usuario, Contrasena_usuario, Tipo_usuario, Estado_Usuario) values
+('C.C', 'User', 'Admin', 'admin@soy.sena.edu.co', 'admin123', 'InstructorAdmin', 1);
+
+
+--go
+
+--Alter table Ficha
+--add Id_Instructor int references Usuario(Id_Usuario);
 
 go
 
@@ -69,7 +81,7 @@ Id_competencia int identity (10000,1) not null,
 Nombre_competencia varchar (500) not null,
 tipo_competencia varchar (100) not null,
 Estado_Competencia bit default (1),
-primary key (ID_competencia))
+primary key (ID_competencia));
 
 go
 
@@ -84,12 +96,14 @@ CREATE TABLE Programas_has_Competencia (
 
 go
 
-CREATE TABLE Ficha_has_Aprendices (
-    Id_ficha INT  ,
-    Id_Aprendiz INT  ,
-    CONSTRAINT PK_Ficha_has_Usuario PRIMARY KEY (Id_ficha, Id_Aprendiz),
+
+CREATE TABLE Ficha_has_Usuario (
+    Id_usuario INT,
+    Id_ficha INT,
+    Tipo_usuario VARCHAR(50),
+	CONSTRAINT PK_Ficha_has_Usuario PRIMARY KEY (Id_ficha, Id_usuario),
     CONSTRAINT FK_Ficha_has_Usuario_Ficha FOREIGN KEY (Id_ficha) REFERENCES Ficha(Id_ficha),
-    CONSTRAINT FK_Ficha_has_Usuario_Usuario FOREIGN KEY (Id_Aprendiz) REFERENCES Usuario(Id_usuario)
+    CONSTRAINT FK_Ficha_has_Usuario_Usuario FOREIGN KEY (Id_usuario) REFERENCES Usuario(Id_usuario)
 );
 
 
@@ -102,11 +116,11 @@ Fecha_fin_asistencia varchar(200) not null,
 Hora_inicio_asistencia varchar(200) not null,
 Hora_fin_asistencia varchar(200) not null,
 Detalles_asistencia varchar (500) not null,
-Id_usuario int references Usuario(Id_usuario),
+Id_Instructor int references Usuario(Id_usuario),
 Id_ficha int references Ficha(Id_ficha),
 Estado_Asistencia bit default (1),
 QrCode varchar(max),
-Primary Key (Id_asistencia))
+Primary Key (Id_asistencia));
 
 go
 
@@ -116,9 +130,9 @@ Fecha_registro varchar(200) not null,
 Hora_registro varchar(200) not null,
 Asistio_registro bit default (0),
 Id_asistencia int references Asistencia(Id_asistencia),
-Id_usuario int references Usuario(Id_usuario),
+Id_Aprendiz int references Usuario(Id_usuario),
 Estado_RegistroAsitencia bit default (1),
-Primary Key (Id_Registroasistencia))
+Primary Key (Id_Registroasistencia));
 
 go
 
@@ -128,11 +142,13 @@ Nombre_soporte varchar (100) not null,
 Descripcion_soporte varchar (500) not null,
 Fecha_registro varchar(200) not null,
 Hora_registro varchar(200) not null,
-Id_usuario int references Usuario(Id_usuario),
+Id_Aprendiz int references Usuario(Id_usuario),
 Id_Instructor int references Usuario(Id_usuario),
 Id_asistencia int references Asistencia(Id_asistencia), 
 Archivo_soporte varchar(max),
 Estado_Soporte bit default (1),
-primary key (Id_soporte))
+Validacion_Instructor bit default (0),
+Nota_Instructor varchar(500),
+primary key (Id_soporte));
 
 

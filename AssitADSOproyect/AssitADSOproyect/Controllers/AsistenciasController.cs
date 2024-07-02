@@ -25,7 +25,7 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Index(string fechaFiltro = "", int? fichaFiltro = null, int? competenciaFiltro = null)
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
-            var asistenciasFiltradas = db.Asistencia.Where(f => f.Id_usuario.ToString() == idUsuarioSesion);
+            var asistenciasFiltradas = db.Asistencia.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion);
 
             if (!string.IsNullOrEmpty(fechaFiltro))
             {
@@ -169,7 +169,7 @@ namespace AssitADSOproyect.Controllers
         // GET: Asistencias/Create
         public ActionResult Create()
         {
-            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
+            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
             ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia");
             return View();
@@ -210,7 +210,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_usuario);
+            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_Instructor);
             //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
 
@@ -233,7 +233,7 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_usuario);
+            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_Instructor);
             //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);
@@ -252,7 +252,7 @@ namespace AssitADSOproyect.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_usuario);
+            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_Instructor  );
             //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);

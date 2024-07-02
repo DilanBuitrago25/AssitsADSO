@@ -18,7 +18,7 @@ namespace AssitADSOproyect.Controllers
         // GET: InstructorAdmin
         public ActionResult Index()
         {
-            var usuario = db.Usuario.Include(u => u.Ficha2);
+            var usuario = db.Ficha_has_Usuario.Include(u => u.Id_ficha);
             return View(usuario.ToList());
         }
 
@@ -58,7 +58,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
             return View(usuario);
         }
 
@@ -74,7 +74,7 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
             return View(usuario);
         }
 
@@ -91,7 +91,7 @@ namespace AssitADSOproyect.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha", usuario.Id_ficha);
             return View(usuario);
         }
 
