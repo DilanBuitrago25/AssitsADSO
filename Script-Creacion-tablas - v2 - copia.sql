@@ -46,21 +46,11 @@ Telefono_usuario numeric (18, 0),
 Correo_usuario varchar (100) not null,
 Contrasena_usuario varchar (100) not null,
 Tipo_usuario Varchar (100),
+Id_ficha int references Ficha(Id_ficha),
 Estado_Usuario bit default (1),
 primary key (Id_usuario))
 
 go
-
-
-CREATE TABLE Ficha_has_Usuario (
-    Id_usuario INT,
-    Id_ficha INT,
-    TipoUsuario VARCHAR(50),
-	CONSTRAINT PK_Ficha_has_Usuario PRIMARY KEY (Id_ficha, Id_usuario),
-    CONSTRAINT FK_Ficha_has_Usuario_Ficha FOREIGN KEY (Id_ficha) REFERENCES Ficha(Id_ficha),
-    CONSTRAINT FK_Ficha_has_Usuario_Usuario FOREIGN KEY (Id_usuario) REFERENCES Usuario(Id_usuario)
-);
-
 
 Insert into Usuario (Tipo_Documento_usuario, Documento_usuario, Nombre_usuario, Apellido_usuario, Telefono_usuario, Correo_usuario, Contrasena_usuario, Tipo_usuario, Estado_Usuario) values
 ('C.C', 11111111, 'User', 'Admin', 0000000000, 'admin@soy.sena.edu.co', 'admin123', 'InstructorAdmin', 1)

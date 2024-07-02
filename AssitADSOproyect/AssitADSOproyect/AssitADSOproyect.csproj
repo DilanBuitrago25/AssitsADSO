@@ -6132,8 +6132,6 @@
     <Content Include="Views\Programa_formacion\Programas_Competencias.cshtml" />
     <Content Include="Views\Competencias\CompetenciaProgramas.cshtml" />
     <Content Include="Views\Competencias\CrearProgramaCompetencia.cshtml" />
-    <Content Include="Views\Fichas\Aprendices_Ficha.cshtml" />
-    <Content Include="Views\Fichas\Crear_FichaAprendiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

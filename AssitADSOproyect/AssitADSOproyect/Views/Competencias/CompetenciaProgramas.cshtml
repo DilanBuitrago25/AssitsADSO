@@ -14,6 +14,26 @@
                     <li class="breadcrumb-item active">Consultar Programas</li>
                 </ol>
             </div>
+            <div class="col-sm-6">
+                <!-- Bookmark Start-->
+                <div class="bookmark">
+                    <ul>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
+                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
+                        <li>
+                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
+                            <form class="form-inline search-form">
+                                <div class="form-group form-control-search">
+                                    <input type="text" placeholder="Search..">
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Bookmark Ends-->
+            </div>
         </div>
     </div>
 </div>
@@ -21,27 +41,20 @@
 <div class="col-sm-12">
     <div class="card">
         <div class="card-header">
-            <h5>Tabla de datos - Programas de Formación Asociados</h5>
+            <h5>Tabla de datos - Programas de Formación</h5>
             <br />
             @Html.ActionLink("Asociar Nuevo Programa", "CrearProgramaCompetencia", new { competenciaId = ViewBag.CompetenciaId }, new { @class = "btn btn-primary" })
-
-        <div class="col-md-3">
-
-            @using (Html.BeginForm("Index", "Competencias", FormMethod.Get))
-            {
-                <br />
-                <label for="estadoFiltro">Estado:</label>
-                <br />
-                <select class="form-select" id="estadoFiltro" name="estadoFiltro">
-                    <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
-                    <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
-                    <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
-                </select>
-                <br />
-                <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
-            }
         </div>
-        </div>
+        @using (Html.BeginForm("Index", "Programa_formacion", FormMethod.Get))
+        {
+            <label for="estadoFiltro">Estado:</label>
+            <select id="estadoFiltro" name="estadoFiltro">
+                <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+            </select>
+            <input type="submit" value="Filtrar" />
+        }
         <div class="card-body">
             <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'">
                 Generar Reporte PDF
@@ -90,3 +103,15 @@
     </div>
 </div>
 
+
+
+<h2>Programas asociados a la competencia: @ViewBag.NombreCompetencia</h2>
+
+<ul>
+    @foreach (var programa in Model)
+    {
+        <li>@programa.Nombre_programa</li>
+    }
+</ul>
+
+@Html.ActionLink("Asociar Nuevo Programa", "CrearProgramaCompetencia", new { competenciaId = ViewBag.CompetenciaId }, new { @class = "btn btn-primary" })

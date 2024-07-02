@@ -206,47 +206,31 @@ public ActionResult GenerarReportePDF()
             return View(ficha);
         }
 
-        //Despues de aqui manejo de tablas foraneas
-
-        public ActionResult Aprendices_Ficha(int id)
+        // GET: Fichas1/Delete/5
+        public ActionResult Delete(int? id)
         {
-            var aprendices = db.Ficha
-                .Where(fu => fu.Id_ficha == id && fu.Usuario.Tipo_usuario == "Aprendiz") // Filtrar por aprendices
-                .Select(fu => fu.Usuario)
-                .ToList();
-
-            ViewBag.NombreFicha = db.Ficha.Find(id)?.Codigo_ficha; // Obtén el código de la ficha
-            ViewBag.FichaId = id;
-
-            return View(aprendices);
-        }
-
-        public ActionResult Crear_FichaAprendiz(int fichaId)
-        {
-            ViewBag.FichaId = fichaId;
-            ViewBag.AprendicesDisponibles = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Crear_FichaAprendiz(int fichaId, int aprendizId)
-        {
-            var ficha = db.Ficha.Find(fichaId);
-            var aprendiz = db.Usuario.Find(aprendizId);
-
-            if (ficha != null && aprendiz != null && aprendiz.Tipo_usuario == "Aprendizz")
+            if (id == null)
             {
-                if (!ficha.Usuario2.Any(u => u.Id_usuario == aprendizId)) // Usar la colección de navegación Usuario2
-                {
-                    ficha.Usuario2.Add(aprendiz); // Agregar directamente el aprendiz
-                    //aprendiz.Tipo_usuario 
-                    db.SaveChanges();
-                }
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            return RedirectToAction("Aprendices_Ficha", new { id = fichaId });
+            Ficha ficha = db.Ficha.Find(id);
+            if (ficha == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ficha);
         }
 
+        // POST: Fichas1/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Ficha ficha = db.Ficha.Find(id);
+            db.Ficha.Remove(ficha);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         protected override void Dispose(bool disposing)
         {
