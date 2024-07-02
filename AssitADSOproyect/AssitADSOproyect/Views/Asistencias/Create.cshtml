@@ -70,18 +70,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!--<div class="row">
                                 <div class="col">
-                                    <div class="mb-3">
-                                        <label>Competencia</label>
+                                    <div class="mb-3">-->
+                                        @*<label>Competencia</label>
                                         <div class="input-group">
                                             @Html.DropDownList("Id_competencia", null, htmlAttributes: new { @class = "form-control" })
 
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })
-                                    </div>
+                                        @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })*@
+                                    <!--</div>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="mb-3">
@@ -125,7 +125,7 @@
 
                                     </div>
                                 </div>
-                                @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })
+                                @Html.HiddenFor(model => model.Id_Instructor, new { Value = @Session["Idusuario"].ToString() })
                                 @*<div class="col-sm-4">
                 <div class="mb-3">
                     <label>Ending date</label>

@@ -144,7 +144,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa,Id_usuario")] Programa_formacion programa_formacion)
+        public ActionResult Create([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa,Estado_Programa_formacion")] Programa_formacion programa_formacion)
         {
             if (ModelState.IsValid)
             {

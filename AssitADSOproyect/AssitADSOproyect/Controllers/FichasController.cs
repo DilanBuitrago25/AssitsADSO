@@ -202,39 +202,79 @@ namespace AssitADSOproyect.Controllers
         // Foranea despues de aca
         public ActionResult Aprendices_Ficha(int id)
         {
-            var aprendices = db.Ficha_has_Usuario
+            var aprendizId = db.Ficha_has_Usuario
                 .Where(fu => fu.Id_ficha == id && fu.TipoUsuario == "Aprendiz")
                 .Select(fu => fu.Usuario)
                 .ToList();
 
             ViewBag.FichaId = id; // Pasar el ID de la ficha a la vista
 
-            return View(aprendices);
+            return View(aprendizId);
+        }
+
+        public ActionResult Instructores_Ficha(int id)
+        {
+            var instructorId = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_ficha == id && fu.TipoUsuario == "Instructor" || fu.TipoUsuario == "InstructorAdmin")
+                .Select(fu => fu.Usuario)
+                .ToList();
+
+            ViewBag.FichaId = id; // Pasar el ID de la ficha a la vista
+
+            return View(instructorId);
         }
 
         public ActionResult Asociar_Aprendiz_Ficha(int idFicha)
         {
-            var aprendices = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
-            ViewBag.Aprendices = aprendices;
+            var aprendizId = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
+            ViewBag.Aprendices = aprendizId;
             ViewBag.FichaId = idFicha;
+            return View();
+        }
 
-            return View(new Ficha_has_Usuario { Id_ficha = idFicha }); // Inicializa el modelo con el ID de la ficha
+        public ActionResult Asociar_Instructor_Ficha(int idFicha)
+        {
+            var instructorId = db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin").ToList();
+            ViewBag.Instructores = instructorId;
+            ViewBag.FichaId = idFicha;
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Asociar_Aprendiz_Ficha(Ficha_has_Usuario fichaHasUsuario)
+        public ActionResult Asociar_Aprendiz_Ficha(int idFicha, int aprendizId) 
         {
             if (ModelState.IsValid)
             {
-                var aprendiz = db.Usuario.Find(fichaHasUsuario.Id_usuario);
-                var ficha = db.Ficha.Find(fichaHasUsuario.Id_ficha); // Cargar la ficha
+                // Obtén el ID del aprendiz seleccionado del formulario
+                if (!int.TryParse(Request.Form["aprendizId"], out aprendizId))
+                {
+                    ModelState.AddModelError("", "Error al seleccionar el aprendiz.");
+                    return View(); // O redirige a otra acción si lo prefieres
+                }
+
+                var aprendiz = db.Usuario.Find(aprendizId);
+                var ficha = db.Ficha.Find(idFicha);
 
                 if (aprendiz != null && aprendiz.Tipo_usuario == "Aprendiz" && ficha != null)
                 {
-                    fichaHasUsuario.TipoUsuario = aprendiz.Tipo_usuario;
-                    db.Ficha_has_Usuario.Add(fichaHasUsuario);
-                    db.SaveChanges();
-                    return RedirectToAction("Asociar_Aprendiz_Ficha", new { idFicha = fichaHasUsuario.Id_ficha });
+                    // Verificar si el aprendiz ya está asociado a la ficha
+                    if (!db.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == idFicha && fhu.Id_usuario == aprendizId))
+                    {
+                        // Crea el objeto Ficha_has_Usuario aquí
+                        var fichaHasUsuario = new Ficha_has_Usuario
+                        {
+                            Id_ficha = idFicha,
+                            Id_usuario = aprendizId,
+                            TipoUsuario = aprendiz.Tipo_usuario
+                        };
+
+                        db.Ficha_has_Usuario.Add(fichaHasUsuario);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "El aprendiz ya está asociado a esta ficha.");
+                    }
                 }
                 else
                 {
@@ -242,10 +282,60 @@ namespace AssitADSOproyect.Controllers
                 }
             }
 
-            // Si hay errores de validación, volver a mostrar el formulario
+            // Si hay errores de validación, volver a mostrar el formulario con los datos previos
             ViewBag.Aprendices = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
-            return View(fichaHasUsuario);
+            ViewBag.FichaId = idFicha;
+            return RedirectToAction("Aprendices_Ficha", new { id = idFicha });
         }
+
+        [HttpPost]
+        public ActionResult Asociar_Instructor_Ficha(int idFicha, int instructorId) 
+        {
+            if (ModelState.IsValid)
+            {
+                // Obtén el ID del instructor seleccionado del formulario
+                if (!int.TryParse(Request.Form["instructorId"], out instructorId))
+                {
+                    ModelState.AddModelError("", "Error al seleccionar el Instructor.");
+                    return View();
+                }
+
+                var instructor = db.Usuario.Find(instructorId);
+                var ficha = db.Ficha.Find(idFicha);
+
+                if (instructor != null && instructor.Tipo_usuario == "Instructor" || instructor.Tipo_usuario == "InstructorAdmin" && ficha != null)
+                {
+                    // Verificar si el instructor ya está asociado a la ficha
+                    if (!db.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == idFicha && fhu.Id_usuario == instructorId))
+                    {
+                        // Crea el objeto Ficha_has_Usuario
+                        var fichaHasUsuario = new Ficha_has_Usuario
+                        {
+                            Id_ficha = idFicha,
+                            Id_usuario = instructorId,
+                            TipoUsuario = instructor.Tipo_usuario
+                        };
+
+                        db.Ficha_has_Usuario.Add(fichaHasUsuario);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "El instructor ya está asociado a esta ficha.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "El usuario seleccionado no es un instructor válido o la ficha no existe.");
+                }
+            }
+
+            // Si hay errores de validación, volver a mostrar el formulario con los datos previos
+            ViewBag.Instructores = db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin").ToList();
+            ViewBag.FichaId = idFicha;
+            return RedirectToAction("Instructores_Ficha", new { id = idFicha });
+        }
+
 
 
 
