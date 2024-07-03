@@ -70,8 +70,8 @@ Insert into Usuario (Tipo_Documento_usuario, Nombre_usuario, Apellido_usuario, C
 
 --go
 
---Alter table Ficha
---add Id_Instructor int references Usuario(Id_Usuario);
+--Alter table Asistencia
+--add Id_competencia int references Competencia(Id_competencia);
 
 go
 
@@ -118,6 +118,7 @@ Hora_fin_asistencia varchar(200) not null,
 Detalles_asistencia varchar (500) not null,
 Id_Instructor int references Usuario(Id_usuario),
 Id_ficha int references Ficha(Id_ficha),
+Id_competencia int references Competencia(Id_competencia),
 Estado_Asistencia bit default (1),
 QrCode varchar(max),
 Primary Key (Id_asistencia));

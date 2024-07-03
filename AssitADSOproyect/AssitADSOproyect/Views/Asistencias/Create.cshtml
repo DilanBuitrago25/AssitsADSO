@@ -63,31 +63,30 @@
                                     <div class="mb-3">
                                         <label>Ficha</label>
                                         <div class="input-group">
-                                            @Html.DropDownList("Id_ficha", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "form-control", onchange = "cargarCompetencias()" })
 
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                             </div>
-                            <!--<div class="row">
+                            <div class="row">
                                 <div class="col">
-                                    <div class="mb-3">-->
-                                        @*<label>Competencia</label>
+                                    <div class="mb-3">
+                                        <label>Competencia</label>
                                         <div class="input-group">
                                             @Html.DropDownList("Id_competencia", null, htmlAttributes: new { @class = "form-control" })
-
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })*@
-                                    <!--</div>
+                                        @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="mb-3">
                                         <label>Fecha Inicio</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", languaje = "es" } })
+                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "text", languaje = "es", @id = "minMaxExample", autocomplete = "off" } })
 
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
@@ -109,7 +108,7 @@
                                     <div class="mb-3">
                                         <label>Fecha Fin</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", languaje = "es" } })
+                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", @id = "minMaxExample", autocomplete = "off" } })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
                                     </div>
@@ -194,6 +193,22 @@
             input.removeAttribute('readonly');
         });
     });
+
+    function cargarCompetencias() {
+        var fichaId = $("#Id_ficha").val();
+        $.ajax({
+            url: '@Url.Action("ObtenerCompetenciasPorFicha", "Asistencias")', // Cambiar el controlador
+            type: 'GET',
+            data: { idFicha: fichaId },
+            success: function (data) {
+                var selectCompetencia = $("#Id_competencia");
+                selectCompetencia.empty();
+                $.each(data, function (index, competencia) {
+                    selectCompetencia.append($('<option></option>').val(competencia.Value).text(competencia.Text));
+                });
+            }
+        });
+    }
 </script>
 
 @*<h2>Create</h2>

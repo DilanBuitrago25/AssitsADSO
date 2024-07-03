@@ -18,6 +18,7 @@ namespace ClaseDatos
         public Competencia()
         {
             this.Programa_formacion = new HashSet<Programa_formacion>();
+            this.Asistencia = new HashSet<Asistencia>();
         }
     
         public int Id_competencia { get; set; }
@@ -27,5 +28,7 @@ namespace ClaseDatos
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Programa_formacion> Programa_formacion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Asistencia> Asistencia { get; set; }
     }
 }

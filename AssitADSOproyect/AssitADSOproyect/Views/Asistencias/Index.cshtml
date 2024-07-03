@@ -65,35 +65,39 @@
                             <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="@Url.Action("Create","Asistencias")"> <i data-feather="plus-square"> </i>Crear Nueva Asistencia</a>
                         </div>
                     </div>
-                </div>
-            </div>
-            @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
-            {
-                <div class="col-md-4">
-                   
-                        <label for="estadoFiltro">Fecha:</label>
-                        <input class="datepicker-here form-control digits" type="text" data-language="en" data-bs-original-title="" title="">
-                        <br />
-                        <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
-                    
-                </div>
-                <div class="col-md-4">
+                    @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
+                    {
+                        <div class="row">
+                            <div class="col-md-4">
 
-                    <label for="estadoFiltro">Fichas:</label>
-                    @*@Html.DropDownList("fichaFiltro", ViewBag.Id_ficha as SelectList, "Selecciona una ficha", new { @class = "form-select" })*@
-                    <br />
+                                <label for="estadoFiltro">Fecha:</label>
+                                <input class="form-control digits" id="reportrange" type="text">
+                                <br />
 
-                </div>
-                <div class="col-md-4">
 
-                    <label for="estadoFiltro">Competencias:</label>
-                    @Html.DropDownList("competenciaFiltro", new SelectList(ViewBag.Competencias, "Id_competencia", "Nombre_competencia"), "Selecciona una competencia", new { @class = "form-select" })
-                    @*<select class="form-select" id="estadoFiltro" name="estadoFiltro">
+                            </div>
+                            <div class="col-md-4">
+
+                                <label for="estadoFiltro">Fichas:</label>
+                                <input class="datepicker-here form-control digits" type="text" data-language="en" data-bs-original-title="" title="">
+                                @*@Html.DropDownList("fichaFiltro", ViewBag.Id_ficha as SelectList, "Selecciona una ficha", new { @class = "form-select" })*@
+                                <br />
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <label for="estadoFiltro">Competencias:</label>
+                                @Html.DropDownList("competenciaFiltro", new SelectList(ViewBag.Competencias, "Id_competencia", "Nombre_competencia"), "Selecciona una competencia", new { @class = "form-select" })
+                                @*<select class="form-select" id="estadoFiltro" name="estadoFiltro">
                     </select>*@
-                    <br />
+                                <br />
+                                <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                            </div>
+                        </div>
+                    }
+                    </div>
+            </div>
 
-                </div>
-            }
                 <div class="col-sm-12">
                     <br />
                     <div class="card">

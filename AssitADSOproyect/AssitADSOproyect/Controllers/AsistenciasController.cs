@@ -112,7 +112,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(asistencia.Hora_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Detalles_asistencia));
                     table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha.ToString()));
-                    //table.AddCell(new Phrase(asistencia.Competencia.Nombre_competencia));
+                    table.AddCell(new Phrase(asistencia.Competencia.Nombre_competencia));
                     table.AddCell(new Phrase(asistencia.Estado_Asistencia.ToString()));
 
                 }
@@ -166,14 +166,48 @@ namespace AssitADSOproyect.Controllers
             return View(asistencia);
         }
 
+        public ActionResult ObtenerCompetenciasPorFicha(int idFicha)
+        {
+            var competencias = db.Ficha
+                .Where(f => f.Id_ficha == idFicha)
+                .Select(f => new
+                {
+                    Competencias = f.Programa_formacion.Competencia.Select(c => new { Value = c.Id_competencia, Text = c.Nombre_competencia })
+                })
+                .FirstOrDefault()?
+                .Competencias;
+
+            return Json(competencias, JsonRequestBehavior.AllowGet);
+        }
+
+
         // GET: Asistencias/Create
         public ActionResult Create()
         {
-            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
-            ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia");
+            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
+
+            // Cargar competencias de la primera ficha (ajusta la lógica si es necesario)
+            var primeraFicha = db.Ficha.FirstOrDefault();
+
+            if (primeraFicha != null && primeraFicha.Id_programa != null)
+            {
+                var competencias = db.Programa_formacion
+                    .Where(pf => pf.Id_programa == primeraFicha.Id_programa)
+                    .SelectMany(pf => pf.Competencia)
+                    .Select(c => new { Value = c.Id_competencia, Text = c.Nombre_competencia })
+                    .ToList();
+
+                ViewBag.Id_competencia = new SelectList(competencias, "Value", "Text");
+            }
+            else
+            {
+                ViewBag.Id_competencia = new SelectList(new List<object>(), "Value", "Text"); // Lista vacía si no hay competencias
+            }
+
             return View();
         }
+
 
 
         // POST: Asistencias/Create
@@ -181,7 +215,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_asistencia,Fecha_inicio_asistencia,Hora_inicio_asistencia,Fecha_fin_asistencia,Hora_fin_asistencia,Detalles_asistencia,Id_Instructor,Id_ficha,Estado_asistencia")] Asistencia asistencia)
+        public ActionResult Create([Bind(Include = "Id_asistencia,Fecha_inicio_asistencia,Hora_inicio_asistencia,Fecha_fin_asistencia,Hora_fin_asistencia,Detalles_asistencia,Id_Instructor,Id_ficha,Id_competencia,Estado_asistencia")] Asistencia asistencia)
         {
             if (string.IsNullOrWhiteSpace(asistencia.Detalles_asistencia))
             {

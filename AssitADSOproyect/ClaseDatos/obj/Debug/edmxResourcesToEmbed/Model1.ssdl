@@ -14,6 +14,7 @@
     <Property Name="Id_ficha" Type="int" />
     <Property Name="Estado_Asistencia" Type="bit" />
     <Property Name="QrCode" Type="varchar(max)" />
+    <Property Name="Id_competencia" Type="int" />
   </EntityType>
   <EntityType Name="Competencia">
     <Key>
@@ -109,6 +110,18 @@
     <Property Name="Tipo_usuario" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Estado_Usuario" Type="bit" />
   </EntityType>
+  <Association Name="FK__Asistenci__Id_co__6E01572D">
+    <End Role="Competencia" Type="Self.Competencia" Multiplicity="0..1" />
+    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competencia">
+        <PropertyRef Name="Id_competencia" />
+      </Principal>
+      <Dependent Role="Asistencia">
+        <PropertyRef Name="Id_competencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Asistenci__Id_fi__4D94879B">
     <End Role="Ficha" Type="Self.Ficha" Multiplicity="0..1" />
     <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
@@ -263,6 +276,10 @@
     <EntitySet Name="RegistroAsistencia" EntityType="Self.RegistroAsistencia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Soporte" EntityType="Self.Soporte" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Asistenci__Id_co__6E01572D" Association="Self.FK__Asistenci__Id_co__6E01572D">
+      <End Role="Competencia" EntitySet="Competencia" />
+      <End Role="Asistencia" EntitySet="Asistencia" />
+    </AssociationSet>
     <AssociationSet Name="FK__Asistenci__Id_fi__4D94879B" Association="Self.FK__Asistenci__Id_fi__4D94879B">
       <End Role="Ficha" EntitySet="Ficha" />
       <End Role="Asistencia" EntitySet="Asistencia" />

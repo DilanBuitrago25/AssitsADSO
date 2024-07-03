@@ -18,6 +18,8 @@
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Asistenci__Id_In__4CA06362" FromRole="Asistencia" ToRole="Usuario" />
     <NavigationProperty Name="RegistroAsistencia" Relationship="Self.FK__RegistroA__Id_as__52593CB8" FromRole="Asistencia" ToRole="RegistroAsistencia" />
     <NavigationProperty Name="Soporte" Relationship="Self.FK__Soporte__Id_asis__59063A47" FromRole="Asistencia" ToRole="Soporte" />
+    <Property Name="Id_competencia" Type="Int32" />
+    <NavigationProperty Name="Competencia" Relationship="BDAssistsADSOv4Model.FK__Asistenci__Id_co__6E01572D" FromRole="Asistencia" ToRole="Competencia" />
   </EntityType>
   <EntityType Name="Competencia">
     <Key>
@@ -28,6 +30,7 @@
     <Property Name="tipo_competencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Estado_Competencia" Type="Boolean" />
     <NavigationProperty Name="Programa_formacion" Relationship="Self.Programas_has_Competencia" FromRole="Competencia" ToRole="Programa_formacion" />
+    <NavigationProperty Name="Asistencia" Relationship="BDAssistsADSOv4Model.FK__Asistenci__Id_co__6E01572D" FromRole="Competencia" ToRole="Asistencia" />
   </EntityType>
   <EntityType Name="Ficha">
     <Key>
@@ -300,5 +303,21 @@
       <End Role="Competencia" EntitySet="Competencia" />
       <End Role="Programa_formacion" EntitySet="Programa_formacion" />
     </AssociationSet>
+    <AssociationSet Name="FK__Asistenci__Id_co__6E01572D" Association="BDAssistsADSOv4Model.FK__Asistenci__Id_co__6E01572D">
+      <End Role="Competencia" EntitySet="Competencia" />
+      <End Role="Asistencia" EntitySet="Asistencia" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK__Asistenci__Id_co__6E01572D">
+    <End Type="BDAssistsADSOv4Model.Competencia" Role="Competencia" Multiplicity="0..1" />
+    <End Type="BDAssistsADSOv4Model.Asistencia" Role="Asistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Competencia">
+        <PropertyRef Name="Id_competencia" />
+      </Principal>
+      <Dependent Role="Asistencia">
+        <PropertyRef Name="Id_competencia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
