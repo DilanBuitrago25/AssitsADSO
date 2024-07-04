@@ -203,30 +203,95 @@ namespace AssitADSOproyect.Controllers
             return View(usuario);
         }
 
-        // GET: UsuariosAprendiz/Delete/5
-        public ActionResult Delete(int? id)
+        //desde aca tablas foranea
+        public ActionResult Fichas_Aprendiz(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
+            // Obtener fichas relacionadas al aprendiz
+            var fichasAprendiz = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_usuario == id && fu.TipoUsuario == "Aprendiz")
+                .Select(fu => fu.Ficha)
+                .ToList();
+
+            ViewBag.AprendizId = id; // Pasar el ID del aprendiz a la vista
+
+            return View(fichasAprendiz);
         }
 
-        // POST: UsuariosAprendiz/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Asociar_Ficha_Aprendiz(int idAprendiz)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            // Obtener las fichas ya asociadas al aprendiz
+            var fichasAsociadas = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_usuario == idAprendiz)
+                .Select(fu => fu.Id_ficha)
+                .ToList();
+
+            // Obtener todas las fichas y excluir las ya asociadas
+            var fichasDisponibles = db.Ficha
+                .Where(f => !fichasAsociadas.Contains(f.Id_ficha))
+                .ToList();
+
+            ViewBag.Fichas = fichasDisponibles;
+            ViewBag.AprendizId = idAprendiz;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Asociar_Ficha_Aprendiz(int idAprendiz, int fichaId)
+        {
+            if (ModelState.IsValid)
+            {
+                // Obtén el ID de la ficha seleccionado del formulario
+                if (!int.TryParse(Request.Form["fichaId"], out fichaId))
+                {
+                    ModelState.AddModelError("", "Error al seleccionar la ficha.");
+                    return View(); // O redirige a otra acción si lo prefieres
+                }
+
+                var ficha = db.Ficha.Find(fichaId);
+                var aprendiz = db.Usuario.Find(idAprendiz);
+
+                if (aprendiz != null && aprendiz.Tipo_usuario == "Aprendiz" && ficha != null)
+                {
+                    // Verificar si el aprendiz ya está asociado a la ficha
+                    if (!db.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == fichaId && fhu.Id_usuario == idAprendiz))
+                    {
+                        // Crea el objeto Ficha_has_Usuario aquí
+                        var fichaHasUsuario = new Ficha_has_Usuario
+                        {
+                            Id_ficha = fichaId,
+                            Id_usuario = idAprendiz,
+                            TipoUsuario = aprendiz.Tipo_usuario
+                        };
+
+                        db.Ficha_has_Usuario.Add(fichaHasUsuario);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "El aprendiz ya está asociado a esta ficha.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "El usuario seleccionado no es un aprendiz válido o la ficha no existe.");
+                }
+            }
+
+            // Si hay errores de validación, volver a mostrar el formulario con los datos previos
+            // Obtener las fichas ya asociadas al aprendiz
+            var fichasAsociadas = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_usuario == idAprendiz)
+                .Select(fu => fu.Id_ficha)
+                .ToList();
+
+            // Obtener todas las fichas y excluir las ya asociadas
+            var fichasDisponibles = db.Ficha
+                .Where(f => !fichasAsociadas.Contains(f.Id_ficha))
+                .ToList();
+
+            ViewBag.Fichas = fichasDisponibles;
+            ViewBag.AprendizId = idAprendiz;
+            return RedirectToAction("Fichas_Aprendiz", new { id = idAprendiz });
         }
 
         protected override void Dispose(bool disposing)

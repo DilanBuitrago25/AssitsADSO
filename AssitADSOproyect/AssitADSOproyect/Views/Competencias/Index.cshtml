@@ -43,24 +43,30 @@
 <!-- Individual column searching (text inputs) Starts-->
 <div class="col-sm-12">
     <div class="card">
-        <div class="card-header">
-            <h5>Tabla de datos - Competencias</h5>
-            <br />
-            <button class="btn btn-light"><a href="@Url.Action("Create","Competencias")">Crear</a></button>
-        </div>
-        <div class="col-md-4">
+        <div class="row">
+            <div class="card-header">
+                <div class="col-sm-6">
+                    <h5>Tabla de datos - Competencias</h5>
+                    <br />
+                    <button class="btn btn-light"><a href="@Url.Action("Create","Competencias")">Crear</a></button>
+                </div>
+                    
+                    <div class="col-sm-6">
 
-            @using (Html.BeginForm("Index", "Competencias", FormMethod.Get))
-            {
-                <label for="estadoFiltro">Estado:</label>
-                <select class="form-select" id="estadoFiltro" name="estadoFiltro">
-                    <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
-                    <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
-                    <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
-                </select>
-                <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
-            }
-        </div>
+                        @using (Html.BeginForm("Index", "Competencias", FormMethod.Get))
+                        {
+                            <label for="estadoFiltro">Estado:</label>
+                            <select class="form-select" id="estadoFiltro" name="estadoFiltro">
+                                <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                                <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                                <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+                            </select>
+                            <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                        }
+                    </div>
+                </div>
+
+            </div>
             <div class="card-body">
                 <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Competencias")'">
                     Generar Reporte PDF

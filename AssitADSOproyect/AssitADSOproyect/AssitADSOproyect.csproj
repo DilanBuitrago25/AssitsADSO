@@ -6148,6 +6148,8 @@
     <Content Include="Views\Fichas\Asociar_Aprendiz_Ficha.cshtml" />
     <Content Include="Views\Fichas\Instructores_Ficha.cshtml" />
     <Content Include="Views\Fichas\Asociar_Instructor_Ficha.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Fichas_Aprendiz.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Asociar_Ficha_Aprendiz.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
