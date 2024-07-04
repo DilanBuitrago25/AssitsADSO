@@ -191,30 +191,95 @@ namespace AssitADSOproyect.Controllers
             return View(usuario);
         }
 
-        // GET: UsuariosInstructor/Delete/5
-        public ActionResult Delete(int? id)
+        //desde aca tablas foranea
+        public ActionResult Fichas_Instructor(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
+            // Obtener fichas relacionadas al instructor
+            var fichasInstructor = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_usuario == id && (fu.TipoUsuario == "Instructor" || fu.TipoUsuario == "InstructorAdmin"))
+                .Select(fu => fu.Ficha)
+                .ToList();
+
+            ViewBag.InstructorId = id; // Pasar el ID del aprendiz a la vista
+
+            return View(fichasInstructor);
         }
 
-        // POST: UsuariosInstructor/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Asociar_Ficha_Instructor(int idInstructor)
         {
-            Usuario usuario = db.Usuario.Find(id);
-            db.Usuario.Remove(usuario);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            // Obtener las fichas ya asociadas al instructor
+            var fichasAsociadas = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_usuario == idInstructor)
+                .Select(fu => fu.Id_ficha)
+                .ToList();
+
+            // Obtener todas las fichas y excluir las ya asociadas
+            var fichasDisponibles = db.Ficha
+                .Where(f => !fichasAsociadas.Contains(f.Id_ficha))
+                .ToList();
+
+            ViewBag.Fichas = fichasDisponibles;
+            ViewBag.InstructorId = idInstructor;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Asociar_Ficha_Instructor(int idInstructor, int fichaId)
+        {
+            if (ModelState.IsValid)
+            {
+                // Obtén el ID de la ficha seleccionado del formulario
+                if (!int.TryParse(Request.Form["fichaId"], out fichaId))
+                {
+                    ModelState.AddModelError("", "Error al seleccionar la ficha.");
+                    return View(); // O redirige a otra acción si lo prefieres
+                }
+
+                var ficha = db.Ficha.Find(fichaId);
+                var instructor = db.Usuario.Find(idInstructor);
+
+                if (instructor != null && (instructor.Tipo_usuario == "Instructor" || instructor.Tipo_usuario == "InstructorAdmin") && ficha != null)
+                {
+                    // Verificar si el instructor ya está asociado a la ficha
+                    if (!db.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == fichaId && fhu.Id_usuario == idInstructor))
+                    {
+                        // Crea el objeto Ficha_has_Usuario aquí
+                        var fichaHasUsuario = new Ficha_has_Usuario
+                        {
+                            Id_ficha = fichaId,
+                            Id_usuario = idInstructor,
+                            TipoUsuario = instructor.Tipo_usuario
+                        };
+
+                        db.Ficha_has_Usuario.Add(fichaHasUsuario);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "El instructor ya está asociado a esta ficha.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "El usuario seleccionado no es un instructor válido o la ficha no existe.");
+                }
+            }
+
+            // Si hay errores de validación, volver a mostrar el formulario con los datos previos
+            // Obtener las fichas ya asociadas al instructor
+            var fichasAsociadas = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_usuario == idInstructor)
+                .Select(fu => fu.Id_ficha)
+                .ToList();
+
+            // Obtener todas las fichas y excluir las ya asociadas
+            var fichasDisponibles = db.Ficha
+                .Where(f => !fichasAsociadas.Contains(f.Id_ficha))
+                .ToList();
+
+            ViewBag.Fichas = fichasDisponibles;
+            ViewBag.InstructorId = idInstructor;
+            return RedirectToAction("Fichas_Instructor", new { id = idInstructor });
         }
 
         protected override void Dispose(bool disposing)

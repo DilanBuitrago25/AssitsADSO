@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ClaseDatos.Ficha>
+
+<h2>Fichas del Instructor @ViewBag.InstructorId</h2>
+
+<div class="table-responsive">
+    <table class="display" id="row-select-delete">
+        <thead>
+
+            <tr>
+                <th>Codigo</th>
+                <th>Jornada</th>
+                <th>Modalidad</th>
+                <th>Tipo</th>
+                <th>Programa de formación</th>
+                <th> </th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Codigo_ficha)</td>
+                    @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
+                    <td>@Html.DisplayFor(model => item.Jornada_ficha)</td>
+                    <td>@Html.DisplayFor(model => item.Modalidad_ficha)</td>
+                    <td>@Html.DisplayFor(model => item.tipo_ficha)</td>
+                    <td>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id_ficha }) |
+                            @Html.ActionLink("Aprendices", "Aprendices_Ficha", new { id = item.Id_ficha }) |
+                            @Html.ActionLink("Instructores", "Instructores_Ficha", new { id = item.Id_ficha })*@
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Codigo</th>
+                <th>Jornada</th>
+                <th>Modalidad</th>
+                <th>Tipo</th>
+                <th>Programa de formación</th>
+                <th> </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<button class="btn btn-primary" onclick="window.location.href='@Url.Action("Asociar_Ficha_Instructor", "UsuariosInstructor", new { idInstructor = ViewBag.InstructorId })'">
+    Agregar Ficha
+</button>
+

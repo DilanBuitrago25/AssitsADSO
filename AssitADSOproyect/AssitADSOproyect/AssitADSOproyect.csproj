@@ -6150,6 +6150,8 @@
     <Content Include="Views\Fichas\Asociar_Instructor_Ficha.cshtml" />
     <Content Include="Views\UsuariosAprendiz\Fichas_Aprendiz.cshtml" />
     <Content Include="Views\UsuariosAprendiz\Asociar_Ficha_Aprendiz.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Fichas_Instructor.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Asociar_Ficha_Instructor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
