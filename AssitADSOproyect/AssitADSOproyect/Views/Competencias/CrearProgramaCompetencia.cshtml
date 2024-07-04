@@ -2,12 +2,13 @@
 
 @using (Html.BeginForm("CrearProgramaCompetencia", "Competencias", FormMethod.Post))
 {
+    @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.Label("Programa")
         @Html.DropDownList("programaId", new SelectList(ViewBag.ProgramasDisponibles, "Id_programa", "Nombre_programa"), "Selecciona un programa", new { @class = "form-control" })
     </div>
 
-    <input  name="competenciaId" value="@ViewBag.CompetenciaId" />
+    <input name="competenciaId" value="@ViewBag.CompetenciaId" />
 
     <button type="submit" class="btn btn-primary">Asociar Programa</button>
 }
