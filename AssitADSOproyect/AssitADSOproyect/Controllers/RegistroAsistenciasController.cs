@@ -143,12 +143,14 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: RegistroAsistencias/Create
-
+        [AllowAnonymous]
         public ActionResult Create(int? Id_Asistencia, string fechaFin)
         {
 
             if (Session["IdUsuario"] == null)
             {
+                TempData["ReturnUrl"] = Url.Action("Create", "RegistroAsistencias", new { id_Asistencia = Id_Asistencia });
+
                 return RedirectToAction("Index", "Login");
             }
             if (Id_Asistencia == null)
@@ -165,8 +167,8 @@ namespace AssitADSOproyect.Controllers
                 Id_Aprendiz = (int)Session["IdUsuario"]
             };
             ViewBag.CodigoFicha = asistencia.Ficha.Codigo_ficha; // Pasar el código de ficha a la vista
-     /*       ViewBag.Nombre_competencia = asistencia.Competencia.Nombre_competencia;*/ // Pasar el nombre de la competencia a la vista
-            ViewBag.Nombre_Aprendiz = asistencia.Usuario.Nombre_usuario; 
+            ViewBag.Nombre_competencia = asistencia.Competencia.Nombre_competencia; // Pasar el nombre de la competencia a la vista
+            ViewBag.Nombre_Aprendiz = asistencia.Usuario.Nombre_usuario;
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia");
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario");
             return View(registroAsistencia);
@@ -219,6 +221,8 @@ namespace AssitADSOproyect.Controllers
 
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_Aprendiz);
+            ViewBag.CodigoFicha = new SelectList(db.Usuario, "Id_ficha", "Codigo_ficha", registroAsistencia.Asistencia.Ficha.Codigo_ficha); // Pasar el código de ficha a la vista
+            ViewBag.Nombre_competencia = new SelectList(db.Usuario, "Id_competencia", "Nombre_competencia", registroAsistencia.Asistencia.Competencia.Nombre_competencia); // Pasar el nombre de la competencia a la vista
             return View(registroAsistencia);
         }
 

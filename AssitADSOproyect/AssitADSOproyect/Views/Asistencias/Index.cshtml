@@ -46,57 +46,48 @@
                 </div>
             </div>
         </div>
-    </div>
     <!-- Container-fluid starts-->
 
-    <div class="container-fluid">
-        <div class="row project-cards">
-            <div class="col-md-12 project-list">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-6 p-0">
-                            <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                                <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true"><i data-feather="target"></i>All</a></li>
-                                <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="check-circle"></i>A Tiempo</a></li>
-                                <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="info"></i>Finalizado</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6 p-0">
-                            <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="@Url.Action("Create","Asistencias")"> <i data-feather="plus-square"> </i>Crear Nueva Asistencia</a>
-                        </div>
-                    </div>
-                    @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
-                    {
+        <div class="container-fluid">
+            <div class="row project-cards">
+                <div class="col-md-12 project-list">
+                    <div class="card">
                         <div class="row">
-                            <div class="col-md-4">
-
-                                <label for="estadoFiltro">Fecha:</label>
-                                <input class="form-control digits" id="reportrange" type="text">
-                                <br />
-
-
+                            <div class="col-md-6 p-0">
+                                <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
+                                    <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true"><i data-feather="target"></i>All</a></li>
+                                    <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="check-circle"></i>A Tiempo</a></li>
+                                    <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="info"></i>Finalizado</a></li>
+                                </ul>
                             </div>
-                            <div class="col-md-4">
-
-                                <label for="estadoFiltro">Fichas:</label>
-                                <input class="datepicker-here form-control digits" type="text" data-language="en" data-bs-original-title="" title="">
-                                @*@Html.DropDownList("fichaFiltro", ViewBag.Id_ficha as SelectList, "Selecciona una ficha", new { @class = "form-select" })*@
-                                <br />
-
-                            </div>
-                            <div class="col-md-4">
-
-                                <label for="estadoFiltro">Competencias:</label>
-                                @Html.DropDownList("competenciaFiltro", new SelectList(ViewBag.Competencias, "Id_competencia", "Nombre_competencia"), "Selecciona una competencia", new { @class = "form-select" })
-                                @*<select class="form-select" id="estadoFiltro" name="estadoFiltro">
-                    </select>*@
-                                <br />
-                                <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                            <div class="col-md-6 p-0">
+                                <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="@Url.Action("Create","Asistencias")"> <i data-feather="plus-square"> </i>Crear Nueva Asistencia</a>
                             </div>
                         </div>
-                    }
+                        @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="estadoFiltro">Fecha:</label>
+                                    <input class="form-control digits" id="reportrange" type="text" name="fechaFiltro" value="@ViewBag.fechaFiltro" />
+                                    <br />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="estadoFiltro">Fichas:</label>
+                                    @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "form-control", onchange = "cargarCompetencias()" })
+                                    <br />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="estadoFiltro">Competencias:</label>
+                                    @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "form-control" })
+
+                                    <br />
+                                    <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                                </div>
+                            </div>
+                        }
                     </div>
-            </div>
+                </div>
 
                 <div class="col-sm-12">
                     <br />
@@ -135,7 +126,7 @@
                                                     </a>*@
                                                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id_asistencia">Ver Qr</button>
                                                     </div>
-                                                    <p>Competencia - @*@Html.DisplayFor(model => item.Competencia.Nombre_competencia)*@.</p>
+                                                    <p>Competencia - @Html.DisplayFor(model => item.Competencia.Nombre_competencia).</p>
 
                                                     <div class="row details">
                                                         <div class="col-6"><span>Asistieron </span></div>
@@ -176,7 +167,8 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+        </div>
                 <script>
                     document.addEventListener('DOMContentLoaded', function () {
                         const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
@@ -199,5 +191,30 @@
                             });
                         });
                     });
+
+                     function cargarCompetencias() {
+                     var fichaId = $("#Id_ficha").val();
+                     $.ajax({
+                         url: '@Url.Action("ObtenerCompetenciasPorFicha", "Asistencias")', // Cambiar el controlador
+                         type: 'GET',
+                         data: { idFicha: fichaId },
+                         success: function (data) {
+                             var selectCompetencia = $("#Id_competencia");
+                             selectCompetencia.empty();
+                             $.each(data, function (index, competencia) {
+                                 selectCompetencia.append($('<option></option>').val(competencia.Value).text(competencia.Text));
+                             });
+                         }
+                     });
+                    }
+
+                    $(function () {
+                        $('#reportrange').daterangepicker({
+                            locale: {
+                                format: 'MM/DD/YYYY'
+                            }
+                        });
+                    });
+
 
                 </script>

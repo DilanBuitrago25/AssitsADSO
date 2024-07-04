@@ -72,7 +72,7 @@
                         {
                         <h6 class="mt-3 f-14 f-w-600"> @Session["NombreUsuario"].ToString()</h6>
                         }
-                    </a>
+                    
                     
                     <p class="mb-0 font-roboto">@Session["TipoUsuario".ToString()]</p>
                     @*<ul>
@@ -202,9 +202,9 @@
                                         </ul>
                                     </li>
                                 }
-
-
-
+                            </ul>
+                        </div>
+                    </div>
 </nav>
             </header>
             <!-- Page Sidebar Ends-->
@@ -229,7 +229,24 @@
     </div>
 
     @Scripts.Render("~/bundles/assets")
-    
+<script>
+    var timeout = @(Session.Timeout * 60000); // Convertir minutos a milisegundos
+    var timer;
+
+    function resetTimer() {
+        clearTimeout(timer);
+        timer = setTimeout(logout, timeout);
+    }
+
+    function logout() {
+        window.location.href = '@Url.Action("Logout", "Login")';
+    }
+
+    $(document).ready(function () {
+        resetTimer();
+        $(document).on('mousemove keydown click', resetTimer); // Reiniciar el temporizador con cualquier actividad
+    });
+</script>
 </body>
 </html>
 

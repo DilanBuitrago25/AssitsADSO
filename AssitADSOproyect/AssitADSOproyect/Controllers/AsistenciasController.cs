@@ -25,40 +25,73 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Index(string fechaFiltro = "", int? fichaFiltro = null, int? competenciaFiltro = null)
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
-            var asistenciasFiltradas = db.Asistencia.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion);
+
+            var query = db.Asistencia
+                .Where(a => a.Id_Instructor.ToString() == idUsuarioSesion);
+
+
 
             if (!string.IsNullOrEmpty(fechaFiltro))
             {
-                DateTime fecha;
-                if (DateTime.TryParseExact(fechaFiltro, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out fecha))
+                var fechas = fechaFiltro.Split('-');
+                if (fechas.Length == 2)
                 {
-                    asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Fecha_inicio_asistencia == fechaFiltro);
+                    DateTime fechaInicioParsed, fechaFinParsed;
+                    if (DateTime.TryParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicioParsed) &&
+                        DateTime.TryParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinParsed))
+                    {
+                        // Filtrar por fecha después de obtener los resultados de la base de datos
+                        query = query.ToList().Where(a =>
+                        {
+                            DateTime fechaAsistencia = DateTime.ParseExact(a.Fecha_inicio_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                            return fechaAsistencia >= fechaInicioParsed && fechaAsistencia <= fechaFinParsed;
+                        }).AsQueryable(); // Volver a convertir a IQueryable para los filtros posteriores
+                    }
                 }
             }
 
-            //if (fichaFiltro.HasValue)
-            //{
-            //    asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Id_ficha == fichaFiltro);
-
-            //    // Obtener competencias asociadas a la ficha seleccionada
-            //    ViewBag.Competencias = new SelectList(db.Ficha
-            //        .Where(fhc => fhc.Id_ficha == fichaFiltro)
-            //        .Select(fhc => fhc.Competencia), "Id_competencia", "Nombre_competencia");
-            //}
-            else
+            if (fichaFiltro.HasValue)
             {
-                ViewBag.Competencias = new SelectList(new List<Competencia>()); // Lista vacía si no se selecciona ficha
+                query = query.Where(a => a.Id_ficha == fichaFiltro.Value);
             }
 
-            //if (competenciaFiltro.HasValue)
+            if (competenciaFiltro.HasValue)
+            {
+                query = query
+                    .Join(db.Ficha.Where(f => f.Programa_formacion.Competencia.Any(c => c.Id_competencia == competenciaFiltro)),
+                          a => a.Id_ficha,
+                          f => f.Id_ficha,
+                          (a, f) => a);
+            }
+
+            // Realizar la conversión de fecha y aplicar el filtro de fecha aquí (si es necesario)
+            var asistenciasFiltradas = query.ToList().Where(a =>
             //{
-            //    asistenciasFiltradas = asistenciasFiltradas.Where(f => f.Ficha.Programa_formacion.Competencia == competenciaFiltro);
-            //}
+            //    DateTime fechaAsistencia = DateTime.ParseExact(a.Fecha_inicio_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            //    return fechaFiltro == "" || (fechaAsistencia >= fechaInicioParsed && fechaAsistencia <= fechaFinParsed);
+            //}).ToList();
 
-            //ViewBag.EstadoFiltro = estadofiltro;
-            //ViewBag.Id_ficha = new SelectList(db.Ficha.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion || f.Id_Aprendiz.ToString() == idUsuarioSesion), "Id_ficha", "Codigo_ficha");
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", fichaFiltro));//el ultimo ) no va realmente
+            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
 
-            return View(asistenciasFiltradas.ToList());
+            // Cargar competencias de la ficha seleccionada
+            if (fichaFiltro.HasValue)
+            {
+                var competencias = db.Ficha
+                    .Where(f => f.Id_ficha == fichaFiltro.Value)
+                    .SelectMany(f => f.Programa_formacion.Competencia)
+                    .Select(c => new { Value = c.Id_competencia, Text = c.Nombre_competencia })
+                    .ToList();
+
+                ViewBag.Id_competencia = new SelectList(competencias, "Value", "Text", competenciaFiltro);
+            }
+            else
+            {
+                ViewBag.Id_competencia = new SelectList(new List<object>(), "Value", "Text");
+            }
+
+            ViewBag.fechaFiltro = fechaFiltro;
+            return View(asistenciasFiltradas);
         }
 
 

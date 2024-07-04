@@ -32,6 +32,13 @@ namespace AssitADSOproyect.Controllers
                 Session["NombreUsuario"] = usuario.Nombre_usuario + " " + usuario.Apellido_usuario;
                 ViewBag.TipoUsuario = usuario.Tipo_usuario;
 
+                if (TempData["ReturnUrl"] != null)
+                {
+                    string returnUrl = TempData["ReturnUrl"].ToString();
+                    TempData.Remove("ReturnUrl"); // Eliminar el valor de TempData
+                    return Redirect(returnUrl);
+                }
+
                 if (usuario.Tipo_usuario == "Aprendiz" && usuario.Estado_Usuario == true)
                 {
                     return RedirectToAction("Index", "Aprendizs"); // Vista para aprendices
