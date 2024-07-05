@@ -26,10 +26,12 @@ namespace AssitADSOproyect.Controllers
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
+            // Consulta base con Include para cargar relaciones necesarias
             var query = db.Asistencia
+                .Include(a => a.Ficha)
+                .Include(a => a.Ficha.Programa_formacion)
+                .Include(a => a.Ficha.Programa_formacion.Competencia)
                 .Where(a => a.Id_Instructor.ToString() == idUsuarioSesion);
-
-
 
             if (!string.IsNullOrEmpty(fechaFiltro))
             {
@@ -40,16 +42,20 @@ namespace AssitADSOproyect.Controllers
                     if (DateTime.TryParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicioParsed) &&
                         DateTime.TryParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinParsed))
                     {
-                        // Filtrar por fecha después de obtener los resultados de la base de datos
-                        query = query.ToList().Where(a =>
-                        {
-                            DateTime fechaAsistencia = DateTime.ParseExact(a.Fecha_inicio_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                            return fechaAsistencia >= fechaInicioParsed && fechaAsistencia <= fechaFinParsed;
-                        }).AsQueryable(); // Volver a convertir a IQueryable para los filtros posteriores
+                        // Realizar la conversión de fecha fuera de la consulta LINQ to Entities
+                        var asistenciasFiltradasLista = query.ToList(); // Convertir a lista para usar LINQ to Objects
+
+                        asistenciasFiltradasLista = asistenciasFiltradasLista.Where(a =>
+                            DateTime.ParseExact(a.Fecha_inicio_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= fechaInicioParsed &&
+                            DateTime.ParseExact(a.Fecha_inicio_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
+
+                        // Volver a asignar el resultado filtrado
+                        query = asistenciasFiltradasLista.AsQueryable();
                     }
                 }
             }
 
+            // Aplicar filtros de ficha y competencia ANTES de materializar la consulta
             if (fichaFiltro.HasValue)
             {
                 query = query.Where(a => a.Id_ficha == fichaFiltro.Value);
@@ -57,21 +63,10 @@ namespace AssitADSOproyect.Controllers
 
             if (competenciaFiltro.HasValue)
             {
-                query = query
-                    .Join(db.Ficha.Where(f => f.Programa_formacion.Competencia.Any(c => c.Id_competencia == competenciaFiltro)),
-                          a => a.Id_ficha,
-                          f => f.Id_ficha,
-                          (a, f) => a);
+                query = query.Where(a => a.Id_competencia == competenciaFiltro.Value);
             }
 
-            // Realizar la conversión de fecha y aplicar el filtro de fecha aquí (si es necesario)
-            var asistenciasFiltradas = query.ToList().Where(a =>
-            //{
-            //    DateTime fechaAsistencia = DateTime.ParseExact(a.Fecha_inicio_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            //    return fechaFiltro == "" || (fechaAsistencia >= fechaInicioParsed && fechaAsistencia <= fechaFinParsed);
-            //}).ToList();
-
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", fichaFiltro));//el ultimo ) no va realmente
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", fichaFiltro);
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
 
             // Cargar competencias de la ficha seleccionada
@@ -83,16 +78,21 @@ namespace AssitADSOproyect.Controllers
                     .Select(c => new { Value = c.Id_competencia, Text = c.Nombre_competencia })
                     .ToList();
 
-                ViewBag.Id_competencia = new SelectList(competencias, "Value", "Text", competenciaFiltro);
+                ViewBag.Id_competencia = new SelectList(competencias, "Value", "Text", competenciaFiltro); // Mantener la competencia seleccionada
             }
             else
             {
-                ViewBag.Id_competencia = new SelectList(new List<object>(), "Value", "Text");
+                ViewBag.Id_competencia = new SelectList(new List<object>(), "Value", "Text"); // Lista vacía si no hay ficha seleccionada
             }
 
-            ViewBag.fechaFiltro = fechaFiltro;
+            ViewBag.fechaFiltro = fechaFiltro; // Para mantener el valor en el campo
+
+            // Materializar la consulta al final
+            var asistenciasFiltradas = query.ToList();
+
             return View(asistenciasFiltradas);
         }
+
 
 
 
