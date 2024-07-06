@@ -61,7 +61,7 @@
                                                    Value = 100013
                                                })*@
                                                 </div>
-                                                @*@Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })*@
+                                                @Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Asunto</label>
                                                     @Html.EditorFor(model => model.Nombre_soporte, new { htmlAttributes = new { @class = "form-control digits", @type = "text" } })
@@ -104,7 +104,7 @@
 
                                                 @Html.HiddenFor(model => model.Id_Aprendiz, new { Value = @Session["Idusuario"].ToString() })
 
-                                                @*@Html.HiddenFor(model => model.Estado_Soporte, new { Value = true })*@
+                                                @Html.HiddenFor(model => model.Estado_Soporte, new { Value = true })
 
                                             </form>
                                             <div class="action-wrapper">

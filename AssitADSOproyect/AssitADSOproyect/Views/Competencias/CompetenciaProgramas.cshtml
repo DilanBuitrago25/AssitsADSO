@@ -15,24 +15,7 @@
                 </ol>
             </div>
             <div class="col-sm-6">
-                <!-- Bookmark Start-->
-                <div class="bookmark">
-                    <ul>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                            <form class="form-inline search-form">
-                                <div class="form-group form-control-search">
-                                    <input type="text" placeholder="Search..">
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Bookmark Ends-->
+              
             </div>
         </div>
     </div>
@@ -40,78 +23,78 @@
 <!-- Individual column searching (text inputs) Starts-->
 <div class="col-sm-12">
     <div class="card">
-        <div class="card-header">
-            <h5>Tabla de datos - Programas de Formación</h5>
-            <br />
+        <div class="row">
+            <div class="card-header d-flex align-items-center">
+                <div class="col-sm-8">
+                    <h5>Tabla de datos - Competencias</h5>
+                    <br />
+
+                </div>
+                @using (Html.BeginForm("Index", "Programa_formacion", FormMethod.Get))
+                {
+                    <div class="d-flex align-items-center">
+                        <label for="estadoFiltro" class="me-2">Estado:</label>
+                        <select class="form-select me-2" id="estadoFiltro" name="estadoFiltro">
+                            <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                            <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                            <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+                        </select>
+                        <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                    </div>
+                }
+
+            </div>
+            
+        </div>
+        <div class="col-sm-8 d-flex justify-content-end">
             @Html.ActionLink("Asociar Nuevo Programa", "CrearProgramaCompetencia", new { competenciaId = ViewBag.CompetenciaId }, new { @class = "btn btn-primary" })
         </div>
-        @using (Html.BeginForm("Index", "Programa_formacion", FormMethod.Get))
-        {
-            <label for="estadoFiltro">Estado:</label>
-            <select id="estadoFiltro" name="estadoFiltro">
-                <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
-                <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
-                <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
-            </select>
-            <input type="submit" value="Filtrar" />
-        }
-        <div class="card-body">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'">
-                Generar Reporte PDF
-            </button>
-            <div class="table-responsive">
-                <table class="display datatables" id="ajax-data-object">
-                    <thead>
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'">
+            Generar Reporte PDF
+        </button>
+        <div class="table-responsive">
+            <table class="display datatables" id="ajax-data-object">
+                <thead>
 
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Duracion</th>
+                        @*<th>Acciones</th>*@
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Duracion</th>
-                            @*<th>Acciones</th>*@
-                        </tr>
-
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Id_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Nombre_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Tipo_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Duracion_programa)</td>
-                                @*<td>
+                            <td>@Html.DisplayFor(modelItem => item.Id_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Nombre_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Tipo_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Duracion_programa)</td>
+                            @*<td>
                                     @Html.ActionLink("Editar", "Edit", new { id = item.Id_programa }) |
                                     @Html.ActionLink("Detalles", "Details", new { id = item.Id_programa }) |
                                     @Html.ActionLink("Competencias", "Programas_Competencias", new { id = item.Id_programa })
                                 </td>*@
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Duracion</th>
-                            @*<th>Acciones</th>*@
                         </tr>
-                    </tfoot>
-                </table>
-            </div>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Duracion</th>
+                        @*<th>Acciones</th>*@
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </div>
+        </div>
 
 
-
-<h2>Programas asociados a la competencia: @ViewBag.NombreCompetencia</h2>
-
-<ul>
-    @foreach (var programa in Model)
-    {
-        <li>@programa.Nombre_programa</li>
-    }
-</ul>
-
-@Html.ActionLink("Asociar Nuevo Programa", "CrearProgramaCompetencia", new { competenciaId = ViewBag.CompetenciaId }, new { @class = "btn btn-primary" })

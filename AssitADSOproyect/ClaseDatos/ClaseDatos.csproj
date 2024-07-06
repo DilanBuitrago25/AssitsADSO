@@ -154,6 +154,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="UsuarioConAsistenciaViewModel.cs" />
     <Compile Include="UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

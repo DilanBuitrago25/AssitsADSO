@@ -208,7 +208,7 @@ namespace AssitADSOproyect.Controllers
                 .ToList();
 
             ViewBag.FichaId = id; // Pasar el ID de la ficha a la vista
-
+            ViewBag.CodigoFIcha = db.Ficha.Find(id)?.Codigo_ficha; // Obtenemos el nombre de la competencia para mostrar en la vista
             return View(aprendizId);
         }
 
@@ -220,7 +220,6 @@ namespace AssitADSOproyect.Controllers
                 .ToList();
 
             ViewBag.FichaId = id; // Pasar el ID de la ficha a la vista
-
             return View(instructorId);
         }
 

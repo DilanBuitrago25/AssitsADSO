@@ -6152,6 +6152,7 @@
     <Content Include="Views\UsuariosAprendiz\Asociar_Ficha_Aprendiz.cshtml" />
     <Content Include="Views\UsuariosInstructor\Fichas_Instructor.cshtml" />
     <Content Include="Views\UsuariosInstructor\Asociar_Ficha_Instructor.cshtml" />
+    <Content Include="Views\Asistencias\Asistencia_Aprendices.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6217,7 +6218,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50633</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44369/</IISUrl>
+          <IISUrl>http://192.168.1.5:44373/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://192.168.1.5:44373/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

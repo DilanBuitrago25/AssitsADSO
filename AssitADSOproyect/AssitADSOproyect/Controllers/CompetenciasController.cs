@@ -214,7 +214,7 @@ namespace AssitADSOproyect.Controllers
         {
             ViewBag.CompetenciaId = competenciaId;
             ViewBag.ProgramasDisponibles = db.Programa_formacion.ToList(); // Obtén todos los programas disponibles
-            //ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
+            ViewBag.NombreCompetencia = db.Competencia.Find(competenciaId)?.Nombre_competencia; // Obtenemos el nombre de la competencia para mostrar en la vista
             return View();
         }
 
@@ -236,7 +236,8 @@ namespace AssitADSOproyect.Controllers
             {
                 // Manejar el caso en que la competencia o el programa no existen
             }
-
+            ViewBag.NombreCompetencia = db.Competencia.Find(competenciaId)?.Nombre_competencia; // Obtenemos el nombre de la competencia para mostrar en la vista
+            ViewBag.CompetenciaId = competenciaId;
             return RedirectToAction("CompetenciaProgramas", new { id = competenciaId });
         }
 

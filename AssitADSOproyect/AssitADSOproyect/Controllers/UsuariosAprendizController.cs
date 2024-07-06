@@ -164,12 +164,12 @@ namespace AssitADSOproyect.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Usuario usuario = db.Usuario.Find(id);
-            Ficha_has_Usuario ficha_Has_Usuario = db.Ficha_has_Usuario.Find(id);
+            //Ficha_has_Usuario ficha_Has_Usuario = db.Ficha_has_Usuario.Find(id);
             if (usuario == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, ficha_Has_Usuario.Id_ficha);
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, ficha_Has_Usuario.Id_ficha);
             return View(usuario);
         }
 

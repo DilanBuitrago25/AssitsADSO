@@ -65,7 +65,7 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Create()
         {
-            ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor"), "Id_Usuario", "Nombre_Usuario");
+            ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin"), "Id_Usuario", "Nombre_Usuario", "Apellido_Usuario");
             ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_Asistencia", "Fecha_inicio_asistencia");
             ViewBag.Id_Competencia = new SelectList(db.Competencia, "Id_Competencia", "Nombre_Competencia");
             return View();
@@ -78,7 +78,7 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
 [ValidateAntiForgeryToken]
 [AutorizarTipoUsuario("Aprendiz")]
-public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Fecha_registro,Hora_registro,Id_usuario,Id_asistencia,Id_Instructor,Formato_soporte")] Soporte soporte, HttpPostedFileBase archivo)
+public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Fecha_registro,Hora_registro,Id_Aprendiz,Id_asistencia,Id_Instructor,Archivo_soporte,Estado_soporte")] Soporte soporte, HttpPostedFileBase archivo)
 {
             if (ModelState.IsValid)
             {

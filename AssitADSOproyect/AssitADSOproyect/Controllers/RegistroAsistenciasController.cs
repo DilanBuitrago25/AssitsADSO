@@ -180,7 +180,7 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Aprendiz")]
-        public ActionResult Create([Bind(Include = "Id_Registroasistencia,Fecha_registro,Hora_registro,Id_asistencia,Id_usuario,Asistio_registro")] RegistroAsistencia registroAsistencia)
+        public ActionResult Create([Bind(Include = "Id_Registroasistencia,Fecha_registro,Hora_registro,Id_asistencia,Id_Aprendiz,Asistio_registro,Estado_RegistroAsistencia")] RegistroAsistencia registroAsistencia)
         {
             if (ModelState.IsValid)
             {

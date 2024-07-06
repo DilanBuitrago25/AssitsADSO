@@ -325,6 +325,36 @@ namespace AssitADSOproyect.Controllers
             return View(asistencia);
         }
 
+        public ActionResult Asistencia_Aprendices(int fichaId, int asistenciaId)
+        {
+            // 1. Obtener la "Ficha" usando el fichaId proporcionado
+            var ficha = db.Ficha.Find(fichaId); // Asumiendo que tienes un DbSet<Ficha> en tu DbContext
+
+            if (ficha == null)
+            {
+                return HttpNotFound(); // O maneja el caso donde la ficha no existe
+            }
+
+            // 2. Obtener los usuarios "Aprendiz" y sus registros de asistencia
+            var aprendicesConAsistencia = db.Usuario
+             .Where(u => u.Tipo_usuario == "Aprendiz" &&
+                         u.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == fichaId))
+             .Select(u => new UsuarioConAsistenciaViewModel
+             {
+                 Usuario = u,
+                 Asistio_registro = u.RegistroAsistencia
+                                      .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true) // Verifica si existe y es true
+             })
+             .ToList();
+
+
+            // 3. Pasar los datos a la vista
+            ViewBag.Ficha = ficha;
+            return View(aprendicesConAsistencia); // Pasamos la lista del ViewModel
+        }
+
+
+
         // GET: Asistencias1/Delete/5
         public ActionResult Delete(int? id)
         {

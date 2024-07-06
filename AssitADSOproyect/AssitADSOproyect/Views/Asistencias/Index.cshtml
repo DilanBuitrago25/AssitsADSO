@@ -25,24 +25,6 @@
                     </ol>
                 </div>
                 <div class="col-sm-6">
-                    <!-- Bookmark Start-->
-                    <div class="bookmark">
-                        <ul>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                                <form class="form-inline search-form">
-                                    <div class="form-group form-control-search">
-                                        <input type="text" placeholder="Search..">
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Bookmark Ends-->
                 </div>
             </div>
         </div>
@@ -98,6 +80,7 @@
                                 Generar Reporte PDF
 
                             </button>
+
                             <div class="tab-content" id="top-tabContent">
                                 <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
                                     <div class="row">
@@ -121,13 +104,11 @@
                                                         <div class="media-body">
                                                             <p>Ficha - @Html.DisplayFor(model => item.Ficha.Codigo_ficha)</p>
                                                         </div>
-                                                        @*<a class="badge-light btn-block btn-mail" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id_asistencia" href="javascript:void(0)" target="_blank">
-                                                        <i class="me-2" data-feather="check-circle"></i>Ver Qr
-                                                    </a>*@
+
                                                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id_asistencia">Ver Qr</button>
                                                     </div>
                                                     <p>Competencia - @Html.DisplayFor(model => item.Competencia.Nombre_competencia).</p>
-
+                                                    @Html.ActionLink("Ver Listado Asistencias", "Asistencia_Aprendices", new { fichaId = item.Id_ficha, asistenciaId = item.Id_asistencia })
                                                     <div class="row details">
                                                         <div class="col-6"><span>Asistieron </span></div>
                                                         <div class="col-6 font-primary">12 </div>

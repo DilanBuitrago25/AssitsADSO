@@ -115,13 +115,13 @@
                                         </div>
                                     </div>
                                     @Html.HiddenFor(model => model.Tipo_usuario, new { Value = "Aprendiz" })
-                                    <div class="mb-3 m-form__group">
+                                    @*<div class="mb-3 m-form__group">
                                         <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">
                                             @Html.DropDownList("Id_ficha", null, htmlAttributes: new { @class = "form-control" })
                                             @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
                                         </div>
-                                    </div>
+                                    </div>*@
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Estado Usuario</label>
                                         <div class="input-group">
