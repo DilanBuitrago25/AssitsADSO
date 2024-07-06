@@ -22,7 +22,7 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         //GET: Asistencias
-        public ActionResult Index(string fechaFiltro = "", int? fichaFiltro = null, int? competenciaFiltro = null)
+        public ActionResult Index(int? pagina,string fechaFiltro = "", int? fichaFiltro = null, int? competenciaFiltro = null)
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
@@ -87,8 +87,17 @@ namespace AssitADSOproyect.Controllers
 
             ViewBag.fechaFiltro = fechaFiltro; // Para mantener el valor en el campo
 
-            // Materializar la consulta al final
-            var asistenciasFiltradas = query.ToList();
+            int registrosPorPagina = 9;
+            int numeroPagina = (pagina ?? 1); // Si 'pagina' es nulo, usa la página 1
+
+            var asistenciasFiltradas = db.Asistencia
+                .OrderByDescending(a => a.Fecha_inicio_asistencia)
+                .Skip((numeroPagina - 1) * registrosPorPagina)
+                .Take(registrosPorPagina)
+                .ToList();
+
+            ViewBag.PaginaActual = numeroPagina;
+            ViewBag.TotalRegistros = db.Asistencia.Count();
 
             return View(asistenciasFiltradas);
         }
@@ -144,7 +153,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(asistencia.Fecha_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Hora_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Detalles_asistencia));
-                    table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha.ToString()));
+                    //table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha));
                     table.AddCell(new Phrase(asistencia.Competencia.Nombre_competencia));
                     table.AddCell(new Phrase(asistencia.Estado_Asistencia.ToString()));
 

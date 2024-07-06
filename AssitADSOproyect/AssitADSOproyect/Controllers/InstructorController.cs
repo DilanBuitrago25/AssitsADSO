@@ -20,52 +20,75 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "")
         {
-            int Total_Aprendices;
-            
-            using (SqlConnection connection = new SqlConnection(Conexion))
-            {
-                string query = "(select count(*) from Usuario where Tipo_usuario = 'Aprendiz')";
-
-                SqlCommand comando = new SqlCommand(query, connection);
-                connection.Open();
-                Total_Aprendices = (int)comando.ExecuteScalar();
-            }
-            ViewBag.Total_Aprendices = Total_Aprendices;
-            int Total_Competencias;
+            int usuarioId = (int)Session["Idusuario"];
+            int TotalFichas;
 
             using (SqlConnection connection = new SqlConnection(Conexion))
             {
-                string query = "(select count(*) from Competencia)";
+                string query = @"
+                    SELECT COUNT(DISTINCT fhu.Id_ficha) 
+                    FROM Ficha_has_Usuario fhu
+                    WHERE fhu.Id_usuario = @UsuarioId
+                ";
 
                 SqlCommand comando = new SqlCommand(query, connection);
+                comando.Parameters.AddWithValue("@UsuarioId", usuarioId);
                 connection.Open();
-                Total_Competencias = (int)comando.ExecuteScalar();
+                TotalFichas = (int)comando.ExecuteScalar();
             }
-            ViewBag.Total_Competencias = Total_Competencias;
+            ViewBag.TotalFichas = TotalFichas;
+            int Total_Soporte;
+
+            using (SqlConnection connection = new SqlConnection(Conexion))
+            {
+                string query = @"
+                    SELECT COUNT(*) 
+                    FROM Soporte 
+                    WHERE Id_Aprendiz = @UsuarioId
+                ";
+
+                SqlCommand comando = new SqlCommand(query, connection);
+                comando.Parameters.AddWithValue("@UsuarioId", usuarioId); // Agrega el parámetro
+                connection.Open();
+                Total_Soporte = (int)comando.ExecuteScalar();
+            }
+            ViewBag.Total_Soporte = Total_Soporte;
 
             int Total_Asistencias;
 
             using (SqlConnection connection = new SqlConnection(Conexion))
             {
-                string query = "(select count(*) from Asistencia)";
+                string query = @"
+                    SELECT COUNT(*) 
+                    FROM Asistencia 
+                    WHERE Id_instructor = @UsuarioId
+                ";
 
                 SqlCommand comando = new SqlCommand(query, connection);
+                comando.Parameters.AddWithValue("@UsuarioId", usuarioId); // Agrega el parámetro
                 connection.Open();
                 Total_Asistencias = (int)comando.ExecuteScalar();
             }
             ViewBag.Total_Asistencias = Total_Asistencias;
 
-            int Total_Fichas;
+            int Total_Inasistencias;
 
             using (SqlConnection connection = new SqlConnection(Conexion))
             {
-                string query = "(select count(*) from Ficha)";
+                string query = @"
+                    SELECT COUNT(*) 
+                    FROM RegistroAsistencia ra
+                    INNER JOIN Asistencia a ON ra.Id_asistencia = a.Id_asistencia
+                    WHERE ra.Id_Aprendiz = @UsuarioId AND ra.Asistio_registro = 0 
+                ";
 
                 SqlCommand comando = new SqlCommand(query, connection);
+                comando.Parameters.AddWithValue("@UsuarioId", usuarioId); // Agrega el parámetro
                 connection.Open();
-                Total_Fichas = (int)comando.ExecuteScalar();
+                Total_Inasistencias = (int)comando.ExecuteScalar();
             }
-            ViewBag.Total_Fichas = Total_Fichas;
+            ViewBag.Total_Inasistencias = Total_Inasistencias;
+
 
             var fichasFiltradas = db.Ficha
                  .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
@@ -187,7 +210,16 @@ namespace AssitADSOproyect.Controllers
             return View(usuario);
         }
 
-        
+        public ActionResult Asistencias_Ficha(int fichaId)
+        {
+            var asistencias = db.Asistencia
+                .Where(a => a.Id_ficha == fichaId)
+                .ToList();
+
+            ViewBag.FichaId = fichaId; // Opcional, para mostrar el código de la ficha en la vista
+            return View(asistencias);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

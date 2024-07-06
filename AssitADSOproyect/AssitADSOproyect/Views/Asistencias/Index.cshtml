@@ -53,6 +53,10 @@
                                     <label for="estadoFiltro">Fecha:</label>
                                     <input class="form-control digits" id="reportrange" type="text" name="fechaFiltro" value="@ViewBag.fechaFiltro" />
                                     <br />
+                                    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Asistencias")'">
+                                        Generar Reporte PDF
+
+                                    </button>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="estadoFiltro">Fichas:</label>
@@ -76,10 +80,7 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Asistencias")'">
-                                Generar Reporte PDF
-
-                            </button>
+                            
 
                             <div class="tab-content" id="top-tabContent">
                                 <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
@@ -141,6 +142,12 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        }
+                                    </div>
+                                    <div class="paginacion">
+                                        @for (int i = 1; i <= Math.Ceiling((double)ViewBag.TotalRegistros / 10); i++)
+                                        {
+                                            <a href="@Url.Action("Index", new { pagina = i })" class="@(i == ViewBag.PaginaActual ? "active" : "")">@i</a>
                                         }
                                     </div>
                                 </div>
