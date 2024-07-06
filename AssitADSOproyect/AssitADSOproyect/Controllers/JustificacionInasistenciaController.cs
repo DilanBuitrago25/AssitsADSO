@@ -12,6 +12,8 @@ using ClaseDatos;
 using Ganss.Xss;
 using System.Web.Hosting;
 using static AssitADSOproyect.Controllers.LoginController;
+using Antlr.Runtime.Misc;
+using System.Data.Entity.Infrastructure;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -26,11 +28,22 @@ namespace AssitADSOproyect.Controllers
             return View(soporte.ToList());
             
         }
-        
-        public ActionResult IndexAprendiz()
+
+        public ActionResult MisSoportes()
         {
-            var soporte = db.Soporte.Include(s => s.Asistencia);
-            return View(soporte.ToList());
+            if (Session["Idusuario"] != null)
+            {
+                string idUsuarioSesion = Session["Idusuario"].ToString();
+
+                var Soportesfiltrados = db.Soporte
+                                             .Where(r => r.Id_Aprendiz.ToString() == idUsuarioSesion);
+               
+                return View(Soportesfiltrados);
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
         }
 
         // GET: JustificacionInasistencia/Details/5
@@ -63,28 +76,57 @@ namespace AssitADSOproyect.Controllers
 
         // GET: JustificacionInasistencia/Create
         [AutorizarTipoUsuario("Aprendiz")]
-        public ActionResult Create()
+        public ActionResult Create(int asistenciaId) // Recibe el asistenciaId
         {
-            ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin"), "Id_Usuario", "Nombre_Usuario", "Apellido_Usuario");
-            ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_Asistencia", "Fecha_inicio_asistencia");
+            var soporte = new Soporte
+            {
+                Id_asistencia = asistenciaId
+            };
+
+            // Obtener la fecha de inicio de la asistencia
+            var asistencia = db.Asistencia.Find(asistenciaId);
+            var instructor = db.Usuario.Find(asistencia.Id_Instructor);
+            if (instructor != null)
+            {
+                ViewBag.Nombre_instructor = instructor.Nombre_usuario + " " + instructor.Apellido_usuario;
+                soporte.Id_Instructor = asistencia.Id_Instructor; // Asignar el ID al modelo
+            }
+            if (asistencia != null)
+            {
+                ViewBag.Fecha_inicio_asistencia = asistencia.Fecha_inicio_asistencia;// Formato de fecha
+            }
+            else
+            {
+                // Manejar el caso donde la asistencia no existe
+                ViewBag.Fecha_inicio_asistencia = "Fecha no encontrada"; // O un mensaje de error
+            }
+
+            //ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin"), "Id_Usuario", "Nombre_Usuario", "Apellido_Usuario");
             ViewBag.Id_Competencia = new SelectList(db.Competencia, "Id_Competencia", "Nombre_Competencia");
-            return View();
+
+            return View(soporte); // Pasa el modelo prellenado a la vista
         }
 
 
-    
+
 
         // POST: JustificacionInasistencia/Create
         [HttpPost]
-[ValidateAntiForgeryToken]
-[AutorizarTipoUsuario("Aprendiz")]
-public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Fecha_registro,Hora_registro,Id_Aprendiz,Id_asistencia,Id_Instructor,Archivo_soporte,Estado_soporte")] Soporte soporte, HttpPostedFileBase archivo)
-{
+        [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Aprendiz")]
+        public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Fecha_registro,Hora_registro,Id_Aprendiz,Id_asistencia,Id_Instructor,Archivo_soporte,Estado_soporte")] Soporte soporte, HttpPostedFileBase archivo)
+        {
+
             if (ModelState.IsValid)
             {
                 if (archivo != null && archivo.ContentLength > 0)
                 {
-                    if (!archivo.FileName.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+                    string extension = Path.GetExtension(archivo.FileName).ToLowerInvariant();
+                    if (extension != ".pdf")
+                    {
+                        ViewBag.ErrorArchivo = "El archivo debe ser un PDF.";
+                    }
+                    else
                     {
                         // 1. Generar nombre de archivo único (para evitar conflictos)
                         string nombreArchivo = Guid.NewGuid().ToString() + Path.GetExtension(archivo.FileName);
@@ -103,40 +145,24 @@ public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcio
                 {
                     ModelState.AddModelError("archivo", "Debe seleccionar un archivo.");
                 }
-
-                if (ModelState.IsValid)
+                var asistencia = db.Asistencia.Find(soporte.Id_asistencia);
+                if (asistencia != null)
                 {
-                    db.Soporte.Add(soporte);
-                    db.SaveChanges();
-
-                    return RedirectToAction("Index");
+                    soporte.Id_Instructor = asistencia.Id_Instructor; // Asignar el ID del instructor
                 }
-                }
-            ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", soporte.Id_asistencia);
-            ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor"), "Id_Usuario", "Nombre_Usuario", soporte.Id_Instructor);
-            
-            return View(soporte);
-
-
-
-
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateAprendiz([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia")] Soporte soporte)
-        {
-            if (ModelState.IsValid)
-            {
                 db.Soporte.Add(soporte);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
 
-            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
-            return View(soporte);
+                return RedirectToAction("MisSoportes");
+            }
+                ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", soporte.Id_asistencia);
+                ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor"), "Id_Usuario", "Nombre_Usuario", soporte.Id_Instructor);
+            
+                return View(soporte);
         }
+
+
+
 
         // GET: JustificacionInasistencia/Edit/5
         public ActionResult Edit(int? id)
@@ -155,48 +181,74 @@ public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcio
             return View(soporte);
         }
 
-        // POST: JustificacionInasistencia/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Tipo_soporte,Id_asistencia")] Soporte soporte)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(soporte).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
-            return View(soporte);
-        }
+        //// POST: JustificacionInasistencia/Edit/5
+        //// Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        //// más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id_soporte, Validacion_Instructor, Nota_Instructor")] Soporte soporte, string accion)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            var soporteExistente = db.Soporte.Find(soporte.Id_soporte);
 
+        //            if (soporteExistente != null)
+        //            {
+        //                if (accion == "rechazar")
+        //                {
+        //                    soporte.Validacion_Instructor = false;
+        //                }
+        //                else if (accion == "validar")
+        //                {
+        //                    soporte.Validacion_instructor = true;
+        //                }
+        //                db.Entry(soporte).State = EntityState.Modified;
+        //                db.SaveChanges();
+        //                return RedirectToAction("Index");
+        //            }
+
+        //            return RedirectToAction("Details", new { id = soporte.Id_soporte });
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            return RedirectToAction("Index");
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            ModelState.AddModelError("", "Error al guardar los cambios: " + ex.Message);
+        //        }
+        //    }
+
+        //    ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
+        //    return View(soporte);
+        //}
         // GET: JustificacionInasistencia/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Soporte soporte = db.Soporte.Find(id);
-            if (soporte == null)
-            {
-                return HttpNotFound();
-            }
-            return View(soporte);
-        }
+        //    public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Soporte soporte = db.Soporte.Find(id);
+        //    if (soporte == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(soporte);
+        //}
 
-        // POST: JustificacionInasistencia/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Soporte soporte = db.Soporte.Find(id);
-            db.Soporte.Remove(soporte);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: JustificacionInasistencia/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Soporte soporte = db.Soporte.Find(id);
+        //    db.Soporte.Remove(soporte);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

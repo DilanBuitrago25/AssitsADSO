@@ -84,7 +84,7 @@
                     }
                     @if (@Session["TipoUsuario"].ToString() == "Aprendiz")
                     {
-                        <p class="mb-0 font-roboto">Instructor</p>
+                        <p class="mb-0 font-roboto">Aprendiz</p>
                     }
                 </div>
                 <nav>
@@ -188,7 +188,7 @@
                                                 <a href="@Url.Action("Index","RegistroAsistencias")"><i data-feather="edit"></i><span>Consultar Asistencias</span></a>
                                             </li>
                                             <li>
-                                                <a href="@Url.Action("Create","JustificacionInasistencia")"><i data-feather="folder"></i><span>Consultar Inasistencias</span></a>
+                                                <a href="@Url.Action("MisSoportes","JustificacionInasistencia")"><i data-feather="folder"></i><span>Consultar Inasistencias</span></a>
                                             </li>
                                         </ul>
                                     </li>

@@ -6101,7 +6101,6 @@
     <Content Include="Views\JustificacionInasistencia\Create.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Delete.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Details.cshtml" />
-    <Content Include="Views\JustificacionInasistencia\Edit.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Index.cshtml" />
     <Content Include="Views\Fichas1\Create.cshtml" />
     <Content Include="Views\Fichas1\Delete.cshtml" />
@@ -6151,6 +6150,8 @@
     <Content Include="Views\Asistencias\Asistencia_Aprendices.cshtml" />
     <Content Include="Views\Instructor\Asistencias_Ficha.cshtml" />
     <Content Include="Views\Login\EditarPerfil.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\MisSoportes.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

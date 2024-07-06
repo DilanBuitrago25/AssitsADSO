@@ -1,8 +1,8 @@
-﻿@model ClaseDatos.Soporte
+﻿﻿@model ClaseDatos.Soporte
 
-@{
+@*@{
     Layout = "~/Views/Shared-Aprendiz/_Layout.cshtml";
-}
+}*@
 
 
 <br />
@@ -94,10 +94,12 @@
                                         <div class="row">
                                             <div class="col-xl-12">
                                                 <div class="media">
+
                                                     <img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
                                                     <div class="media-body">
-                                                        <h6 class="d-block">@Html.DisplayFor(model => model.Usuario1.Nombre_usuario)        @Html.DisplayFor(model => model.Usuario1.Apellido_usuario)                                                       </h6>
-                                                        <p>Ficha - @Html.DisplayFor(model => model.Asistencia.Id_ficha).</p>
+                                                        <h6 class="d-block">@Html.DisplayFor(model => model.Usuario.Nombre_usuario)        @Html.DisplayFor(model => model.Usuario.Apellido_usuario)                                                       </h6>
+                                                        <p>Ficha - @Html.DisplayFor(model => model.Asistencia.Ficha.Codigo_ficha).</p>
+                                                        <h5> @Html.DisplayFor(model => model.Nombre_soporte).</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,12 +109,12 @@
                                         <div class="emailread-group">
                                             <div class="read-group">
                                                 <p>Hola</p>
-                                                <p>Instructor Buenas Tardes,</p>
+                                                <p>Instructor(a) Cordial Saludo,</p>
                                             </div>
                                             <div class="read-group">
-                                                <h5> @Html.DisplayFor(model => model.Nombre_soporte).</h5>
+
                                                 <p> @Html.DisplayFor(model => model.Descripcion_soporte)</p>
-                                               
+
                                             </div>
                                         </div>
                                         <div class="emailread-group">
@@ -121,18 +123,23 @@
                                             <div class="attachment">
                                                 <ul>
                                                     <li> <a href="@Url.Content(ViewBag.RutaArchivo)" download><img class="img-fluid" src="~/assets/images/email/PdfIcon.png" alt="Archivo Soporte"></a> </li>
-                                                  
+
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="emailread-group">
-                                            <textarea class="form-control" rows="4" cols="50" placeholder="Escribe Una Respuesta..."></textarea>
+                                            @*<textarea class="form-control" rows="4" cols="50" placeholder="Escribe Una Respuesta..."></textarea>*@
+                                            @Html.TextAreaFor(model => model.Nota_Instructor, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3", placeholder = "Escribe Una Respuesta..." })
+                                            @Html.ValidationMessageFor(model => model.Nota_Instructor, "", new { @class = "text-danger" })
+
                                             <div class="action-wrapper">
-                                                <ul class="actions">
-                                                    <li><a class="btn btn-danger" href="javascript:void(0)"><i class="fa fa-reply me-2"></i>Rechazar</a></li>
-                                                    @*<li><a class="btn btn-secondary" href="javascript:void(0)"><i class="fa fa-reply-all me-2"></i></a></li>*@
-                                                    <li><a class="btn btn-primary" href="javascript:void(0)"><i class="fa fa-share me-2"></i>Validar</a></li>
-                                                </ul>
+                                                <button class="btn btn-danger" type="submit" name="accion" value="rechazar">
+                                                    <i class="fa fa-reply me-2"></i>Rechazar
+                                                </button>
+
+                                                <button class="btn btn-primary" type="submit" name="accion" value="validar">
+                                                    <i class="fa fa-share me-2"></i>Validar
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -145,7 +152,7 @@
         </div>
     </div>
 </div>
-</div>
+
 
 <script>
     // Elimina el atributo 'readonly' al cargar la página
@@ -159,59 +166,3 @@
         });
     });
 </script>
-
-@*<h2>Edit</h2>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Soporte</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Id_soporte)
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nombre_soporte, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nombre_soporte, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Nombre_soporte, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Descripcion_soporte, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Descripcion_soporte, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Descripcion_soporte, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Archivo_soporte, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Archivo_soporte, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Archivo_soporte, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Id_asistencia, "Id_asistencia", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("Id_asistencia", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
-
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@

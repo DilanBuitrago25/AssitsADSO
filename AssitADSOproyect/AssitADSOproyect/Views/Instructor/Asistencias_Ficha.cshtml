@@ -38,7 +38,8 @@
                         <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id_asistencia">Ver Qr</button>
                     </div>
                     <p>Competencia - @Html.DisplayFor(model => item.Competencia.Nombre_competencia).</p>
-                    @Html.ActionLink("Ver Listado Asistencias", "Asistencia_Aprendices", new { fichaId = item.Id_ficha, asistenciaId = item.Id_asistencia })
+                    @Html.ActionLink("Ver Listado Asistencias", "Asistencia_Aprendices", "Asistencias", new { fichaId = item.Id_ficha, asistenciaId = item.Id_asistencia }, null)
+
                     <div class="row details">
                         <div class="col-6"><span>Asistieron </span></div>
                         <div class="col-6 font-primary">12 </div>

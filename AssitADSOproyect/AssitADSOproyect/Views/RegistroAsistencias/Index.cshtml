@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared-Aprendiz/_Layout.cshtml";
 }
 
 
@@ -65,7 +64,7 @@
             Generar Reporte PDF
         </button>
         <div class="table-responsive">
-            <table class="display" id="row-select-delete">
+            <table class="display datatables" id="ajax-data-object">
                 <thead>
 
                     <tr>
@@ -87,7 +86,11 @@
                             <td>@Html.DisplayFor(model => item.Asistencia.Competencia.Nombre_competencia)</td>
                             <td>@Html.DisplayFor(model => item.Asistio_registro)</td>
                             <td>
-                                @Html.ActionLink("Details", "Details", new { id = item.Id_Registroasistencia })
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_Registroasistencia }) |
+                                @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value)
+                                {
+                                    @Html.ActionLink("Agregar Soporte", "Create", "JustificacionInasistencia", new { asistenciaId = item.Id_asistencia }, null)
+                                }
                             </td>
 
                         </tr>

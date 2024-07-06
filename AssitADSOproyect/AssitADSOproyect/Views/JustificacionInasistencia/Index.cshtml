@@ -120,7 +120,7 @@
                                                 </label>*@<i class="like" data-feather="star"></i><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
                                             </div>
                                             <div class="media-body">
-                                                <h6><a href="@Url.Action("Edit","JustificacionInasistencia", new { id=item.Id_soporte })">@Html.DisplayFor(model => item.Usuario1.Nombre_usuario) @Html.DisplayFor(model => item.Usuario1.Apellido_usuario) </a> </h6>
+                                                <h6><a href="@Url.Action("Edit","JustificacionInasistencia", new { id=item.Id_soporte })">@Html.DisplayFor(model => item.Usuario.Nombre_usuario) @Html.DisplayFor(model => item.Usuario1.Apellido_usuario) </a> </h6>
                                                 <p>@Html.DisplayFor(model => item.Nombre_soporte)</p><span>@Html.DisplayFor(model => item.Hora_registro)</span>
                                             </div>
                                         </div>
