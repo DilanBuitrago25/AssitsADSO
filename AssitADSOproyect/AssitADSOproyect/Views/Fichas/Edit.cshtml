@@ -53,18 +53,19 @@
                         <div class="row">
                             <div class="col">
                                 <form>
+                                     @Html.HiddenFor(model => model.Id_ficha)
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Id_ficha, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Codigo_ficha, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Codigo_ficha, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Jornada</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Jornada_ficha, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Modalidad_ficha, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="mb-3 m-form__group">
@@ -88,6 +89,35 @@
                                             @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Fecha inicio</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Fecha_inicio, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Fecha_inicio, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Fecha fin</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Fecha_fin, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Fecha_fin, "", new { @class = "text-danger" })
+                                    </div>
+                                    @*@Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Estado Ficha</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.Estado_Ficha, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "Activo", Value = "True" },
+                                                     new SelectListItem { Text = "No Activo", Value = "False" },
+                                                }, new { @class = "form-control" })
+
+                                        </div>
+                                    </div>*@
+
                                 </form>
                             </div>
                         </div>
@@ -100,7 +130,19 @@
             </div>
         </div>
     }
-   
+  
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_ficha)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
 
 @*<h2>Edit</h2>
 

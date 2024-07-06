@@ -1,0 +1,14 @@
+﻿@model ClaseDatos.Programa_formacion
+
+@using (Html.BeginForm("Programas_Competencias_Asociar", "Programa_formacion", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.Label("Competencia")
+        @Html.DropDownList("competenciaId", new SelectList(ViewBag.CompetenciasDisponibles, "Id_competencia", "Nombre_competencia"), "Selecciona una competencia", new { @class = "form-control" })
+    </div>
+
+    <input name="programaId" value="@ViewBag.ProgramaId" />
+
+    <button type="submit" class="btn btn-primary">Asociar Competencia</button>
+}

@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Create";
+    Layout = "~/Views/Shared-Instructor-admin/_Layout.cshtml";
 }
 
 <br />
@@ -58,66 +59,87 @@
                               
 
                                     @Html.AntiForgeryToken()
-                                    <form>
+                                <form>
 
-                                        <div class="mb-3 input-group-solid">
-                                            <label class="form-label">Documento</label>
-                                            <div class="input-group">
-                                                @Html.EditorFor(model => model.Documento_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Documento_usuario, "", new { @class = "text-danger" })
-                                            </div>
-                                        </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Documento</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Documento_usuario, new { htmlAttributes = new { @class = "form-control" } })
 
-                                        <div class="mb-3 m-form__group">
-                                            <label class="form-label">Tipo Documento</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text">A</span>
-                                                @Html.DropDownListFor(model => model.Tipo_Documento_usuario, new List<SelectListItem>
-                                                    {
-                                                         new SelectListItem { Text = "Cedula de Ciudadania", Value = "C.C" },
-                                                         new SelectListItem { Text = "Tarjeta de Identidad", Value = "T.I" },
-                                                         new SelectListItem { Text = "Cedula de Extranjeria", Value = "C.E" }
-                                                    }, new { @class = "form-control" })
-                                                @Html.ValidationMessageFor(model => model.Tipo_Documento_usuario, "", new { @class = "text-danger" })
-                                            </div>
                                         </div>
-                                        <div class="mb-3 input-group-solid">
-                                            <label class="form-label">Nombre(s)</label>
-                                            <div class="input-group">
-                                                @Html.EditorFor(model => model.Nombre_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Nombre_usuario, "", new { @class = "text-danger" })
-                                            </div>
+                                        @Html.ValidationMessageFor(model => model.Documento_usuario, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Tipo Documento</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">A</span>
+                                            @Html.DropDownListFor(model => model.Tipo_Documento_usuario, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "Cedula de Ciudadania", Value = "C.C" },
+                                                     new SelectListItem { Text = "Tarjeta de Identidad", Value = "T.I" },
+                                                     new SelectListItem { Text = "Cedula de Extranjeria", Value = "C.E" }
+                                                }, new { @class = "form-control" })
+
                                         </div>
-                                        <div class="mb-3 m-form__group">
-                                            <label class="form-label">Apellidos</label>
-                                            <div class="input-group">
-                                                @Html.EditorFor(model => model.Apellido_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Apellido_usuario, "", new { @class = "text-danger" })
-                                            </div>
+                                        @Html.ValidationMessageFor(model => model.Tipo_Documento_usuario, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Nombre(s)</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Nombre_usuario, new { htmlAttributes = new { @class = "form-control" } })
+
                                         </div>
-                                        <div class="mb-3 input-group-solid">
-                                            <label class="form-label">Telefono</label>
-                                            <div class="input-group">
-                                                @Html.EditorFor(model => model.Telefono_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Telefono_usuario, "", new { @class = "text-danger" })
-                                            </div>
+                                        @Html.ValidationMessageFor(model => model.Nombre_usuario, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Apellidos</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Apellido_usuario, new { htmlAttributes = new { @class = "form-control" } })
+
                                         </div>
-                                        <div class="mb-3 m-form__group">
-                                            <label class="form-label">Correo</label>
-                                            <div class="input-group">
-                                                @Html.EditorFor(model => model.Correo_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Correo_usuario, "", new { @class = "text-danger" })
-                                            </div>
+                                        @Html.ValidationMessageFor(model => model.Apellido_usuario, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Telefono</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Telefono_usuario, new { htmlAttributes = new { @class = "form-control" } })
+
                                         </div>
-                                        <div class="mb-3 input-group-solid">
-                                            <label class="form-label">Contraseña</label>
-                                            <div class="input-group">
-                                                @Html.EditorFor(model => model.Contrasena_usuario, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Contrasena_usuario, "", new { @class = "text-danger" })
-                                            </div>
+                                        @Html.ValidationMessageFor(model => model.Telefono_usuario, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Correo</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Correo_usuario, new { htmlAttributes = new { @class = "form-control" } })
+
                                         </div>
-                                        @Html.HiddenFor(model => model.Tipo_usuario, new { Value = "Instructor" })
-                    </form> @* Moved the end form tag here *@
+                                        @Html.ValidationMessageFor(model => model.Correo_usuario, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Contraseña</label>
+                                        <div class="input-group">
+                                            @Html.EditorFor(model => model.Contrasena_usuario, new { htmlAttributes = new { @class = "form-control" } })
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Contrasena_usuario, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Tipo Documento</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">A</span>
+                                            @Html.DropDownListFor(model => model.Tipo_usuario, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "Instructor Administrador", Value = "InstructorAdmin" },
+                                                     new SelectListItem { Text = "Instructor", Value = "Instructor" }
+                                                }, new { @class = "form-control" })
+
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.Tipo_usuario, "", new { @class = "text-danger" })
+
+                                        @Html.HiddenFor(model => model.Estado_Usuario, new { Value = "True"})
+                                    </div>
+                                </form> @* Moved the end form tag here *@
                 </div>
                         </div>
                     </div>
@@ -132,6 +154,18 @@
         </div>
     </div>
 }
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Nombre_usuario)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
 @*@using (Html.BeginForm())
 {
     <div class="container-fluid">

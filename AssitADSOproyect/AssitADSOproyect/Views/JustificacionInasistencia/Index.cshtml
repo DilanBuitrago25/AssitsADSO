@@ -59,13 +59,19 @@
                                         </div>
                                     </div>
                                     <ul class="nav main-menu" role="tablist">
+
                                         <li class="nav-item"><a class="btn-primary btn-block btn-mail w-100" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome" role="tab" aria-controls="pills-darkhome" aria-selected="true"><i class="icofont icofont-envelope me-2"></i> Fichas</a></li>
                                         <li class="nav-item"><a class="show" id="pills-darkprofile-tab" data-bs-toggle="pill" href="#pills-darkprofile" role="tab" aria-controls="pills-darkprofile" aria-selected="false"><span class="title"><i class="icon-import"></i> Bandeja de Entrada</span><span class="badge pull-right">(236)</span></a></li>
+                                        @*@foreach (var item in Model.Where(s => s.Id_Instructor == (int)Session["Idusuario"]))
+                                        {
+                                            <li><a href="#"><span class="title"><i class="icon-folder"></i> @Html.DisplayFor(modelItem => item.Asistencia.Ficha.Codigo_ficha)</span></a></li>
+                                        }*@
                                         <li><a href="#"><span class="title"><i class="icon-folder"></i> 2693606</span></a></li>
                                         <li><a href="#"><span class="title"><i class="icon-new-window"></i> 2693607</span><span class="badge pull-right">(69)</span></a></li>
                                         <li><a href="#"><span class="title"><i class="icon-pencil-alt"></i> 2874841</span><span class="badge pull-right">(59)</span></a></li>
                                         <li><a href="#"><span class="title"><i class="icon-trash"></i> 1875476</span><span class="badge pull-right">(99)</span></a></li>
                                         <li>
+
                                             <hr>
                                         </li>
                                         <li><a href="#"><span class="title"><i class="icon-email"></i> No leidos</span></a></li>
@@ -91,9 +97,9 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="media">
-                                                <label class="email-chek d-block" for="chk-ani">
+                                                @*<label class="email-chek d-block" for="chk-ani">
                                                     <input class="checkbox_animated" id="chk-ani" type="checkbox" checked="">
-                                                </label>
+                                                </label>*@
                                                 <div class="media-body">
                                                     <div class="dropdown">
                                                         <button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </button>
@@ -109,12 +115,12 @@
                                     {
                                         <div class="media">
                                             <div class="media-size-email">
-                                                <label class="d-block mb-0" for="chk-ani">
+                                                @*<label class="d-block mb-0" for="chk-ani">
                                                     <input class="checkbox_animated" id="chk-ani" type="checkbox" checked="">
-                                                </label><i class="like" data-feather="star"></i><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
+                                                </label>*@<i class="like" data-feather="star"></i><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
                                             </div>
                                             <div class="media-body">
-                                                <h6><a href="@Html.ActionLink("Edit", "Edit", new { id=item.Id_soporte })">@Html.DisplayFor(model => item.Usuario.Nombre_usuario)</a> </h6>
+                                                <h6><a href="@Url.Action("Edit","JustificacionInasistencia", new { id=item.Id_soporte })">@Html.DisplayFor(model => item.Usuario.Nombre_usuario) @Html.DisplayFor(model => item.Usuario1.Apellido_usuario) </a> </h6>
                                                 <p>@Html.DisplayFor(model => item.Nombre_soporte)</p><span>@Html.DisplayFor(model => item.Hora_registro)</span>
                                             </div>
                                         </div>
@@ -276,7 +282,7 @@
                     @Html.DisplayNameFor(model => model.Descripcion_soporte)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Tipo_soporte)
+                    @Html.DisplayNameFor(model => model.Archivo_soporte)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Asistencia.Tipo_asistencia)
@@ -293,7 +299,7 @@
                     @Html.DisplayFor(modelItem => item.Descripcion_soporte)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Tipo_soporte)
+                    @Html.DisplayFor(modelItem => item.Archivo_soporte)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Asistencia.Tipo_asistencia)

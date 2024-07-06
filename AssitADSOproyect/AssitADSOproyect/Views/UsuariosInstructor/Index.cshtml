@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared-Instructor-admin/_Layout.cshtml";
 }
 
 <br />
@@ -48,62 +49,76 @@
             <br />
             <button class="btn btn-light"><a href="@Url.Action("Create","UsuariosInstructor")">Crear</a></button>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="display" id="row-select-delete">
-                    <thead>
+        @using (Html.BeginForm("Index", "UsuariosInstructor", FormMethod.Get))
+        {
+            <label for="estadoFiltro">Estado:</label>
+            <select id="estadoFiltro" name="estadoFiltro">
+                <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+            </select>
+            <input type="submit" value="Filtrar" />
+        }
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "UsuariosInstructor")'">
+            Generar Reporte PDF
+        </button>
+        <div class="table-responsive">
+            <table class="display datatables" id="ajax-data-object">
+                <thead>
 
+                    <tr>
+                        <th>Id</th>
+                        <th>Documento</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Tipo Instructor</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
                         <tr>
-                            <th>Id</th>
-                            <th>Documento</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Tipo Instructor</th>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Tipo_Documento_usuario)
+                                @Html.DisplayFor(model => item.Documento_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Nombre_usuario)
+                                @Html.DisplayFor(model => item.Apellido_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Correo_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => item.Tipo_usuario)
+                            </td>
+                            <td>
+
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id_usuario }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id_usuario }) |
+                                @Html.ActionLink("Fichas", "Fichas_Instructor", new { id = item.Id_usuario })
+                            </td>
+
                         </tr>
-
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Id_usuario)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Tipo_Documento_usuario)
-                                    @Html.DisplayFor(model => item.Documento_usuario)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Nombre_usuario)
-                                    @Html.DisplayFor(model => item.Apellido_usuario)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Correo_usuario)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Tipo_instructor)
-                                </td>
-                                <td>
-
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_usuario }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id_usuario })
-                                </td>
-
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Documento</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                            <th>Tipo Instructor</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Documento</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Tipo Instructor</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
+    </div>
     </div>
 </div>
 

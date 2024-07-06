@@ -92,6 +92,17 @@
                                             @Html.ValidationMessageFor(model => model.Duracion_programa, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Estado Programa Formacion</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.Estado_Programa_formacion, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "Activo", Value = "True" },
+                                                     new SelectListItem { Text = "No Activo", Value = "False" },
+                                                }, new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -106,6 +117,18 @@
     </div>
 }
 
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_programa)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
 
 @*<h2>Edit</h2>
 

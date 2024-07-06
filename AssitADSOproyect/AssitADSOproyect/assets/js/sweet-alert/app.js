@@ -33,7 +33,7 @@ var SweetAlert_custom = {
         },  document.querySelector('.sweet-7').onclick = function(){
                 swal("Good job!", "You clicked the button!", "error");
         },  document.querySelector('.sweet-8').onclick = function(){
-                swal("Good job!", "You clicked the button!", "success");
+            swal("Registro Exitoso!", "El Registro de la Asistencia se Realizo con Sastisfactoriamente!", "success");
         },  document.querySelector('.sweet-9').onclick = function(){
                 swal("Good job!", "You clicked the button!", "info");
         },  document.querySelector('.sweet-10').onclick = function(){

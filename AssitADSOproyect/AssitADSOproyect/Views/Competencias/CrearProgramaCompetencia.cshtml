@@ -1,0 +1,95 @@
+﻿@model ClaseDatos.Programa_formacion
+
+
+
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Programas asociados a la competencia: @ViewBag.NombreCompetencia</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Competencias</li>
+                    <li class="breadcrumb-item">@ViewBag.NombreCompetencia</li>
+                    <li class="breadcrumb-item active">Asignar Programa</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("CrearProgramaCompetencia", "Competencias", FormMethod.Post))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h5>Asignar Programa de Formación</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+
+                                @Html.AntiForgeryToken()
+                                <form>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Programas de formación</label>
+                                        <div class="input-group">
+                                            @Html.DropDownList("programaId", new SelectList(ViewBag.ProgramasDisponibles, "Id_programa", "Nombre_programa"), "Selecciona un programa", new { @class = "form-control" })
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Competencia</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.NombreCompetencia">
+                                                <input hidden name="competenciaId" value="@ViewBag.CompetenciaId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Asociar Programa</button>
+                        <button class="btn btn-light" type="button"><a href="@Url.Action("CompetenciaProgramas","Competencias", new { id = @ViewBag.CompetenciaId })">Volver</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_programa)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
+
+
+@*@using (Html.BeginForm("CrearProgramaCompetencia", "Competencias", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.Label("Programa")
+            @Html.DropDownList("programaId", new SelectList(ViewBag.ProgramasDisponibles, "Id_programa", "Nombre_programa"), "Selecciona un programa", new { @class = "form-control" })
+        </div>
+
+        <input name="competenciaId" value="@ViewBag.CompetenciaId" />
+
+        <button type="submit" class="btn btn-primary">Asociar Programa</button>
+    }*@
+

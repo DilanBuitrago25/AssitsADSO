@@ -4,31 +4,27 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="17b9758ab692423c84a8013352886d5e" Name="Diagram1" ZoomLevel="85">
-        <EntityTypeShape EntityType="BDAssistsADSOModel.Asistencia" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.Competencia" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.Ficha" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.Programa_formacion" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.Reporte" Width="1.5" PointX="9.75" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.Soporte" Width="1.5" PointX="9.75" PointY="8.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.Usuario" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Asistenci__Id_us__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Reporte__Id_asis__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_asis__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Competenc__Id_pr__2D27B809" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Competenc__Numer__2C3393D0" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Ficha__Id_progra__267ABA7A" ManuallyRouted="false" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Usuario__Id_fich__29572725" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="BDAssistsADSOModel.RegistroAsistencia" Width="1.5" PointX="13.375" PointY="7" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Asistenci__Id_co__32E0915F" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Asistenci__Id_fi__31EC6D26" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__RegistroA__Id_as__35BCFE0A" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__RegistroA__Id_us__36B12243" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Reporte__Id_usua__3D5E1FD2" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Soporte__Id_usua__398D8EEE" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Competenc__Id_Us__5BE2A6F2" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Ficha__Id_Usuari__5CD6CB2B" />
-        <AssociationConnector Association="BDAssistsADSOModel.FK__Programa___Id_Us__5DCAEF64" />
+      <Diagram DiagramId="c956f66226c54c59ae2402223dde7732" Name="Diagram1">
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.Asistencia" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.Competencia" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.Ficha" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.Ficha_has_Usuario" Width="1.5" PointX="6" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.Programa_formacion" Width="1.5" PointX="1.5" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.RegistroAsistencia" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.Soporte" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDAssistsADSOv4Model.Usuario" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__Asistenci__Id_fi__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__Asistenci__Id_In__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__RegistroA__Id_as__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__Soporte__Id_asis__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__Ficha__Id_progra__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK_Ficha_has_Usuario_Ficha" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK_Ficha_has_Usuario_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__RegistroA__Id_Ap__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__Soporte__Id_Apre__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__Soporte__Id_Inst__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.Programas_has_Competencia" ManuallyRouted="false" />
+        <AssociationConnector Association="BDAssistsADSOv4Model.FK__Asistenci__Id_co__6E01572D" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

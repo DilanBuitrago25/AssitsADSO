@@ -48,46 +48,61 @@
             <br />
             <button class="btn btn-light"><a href="@Url.Action("Create","Programa_formacion")">Crear</a></button>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="display" id="row-select-delete">
-                    <thead>
+        @using (Html.BeginForm("Index", "Programa_formacion", FormMethod.Get))
+        {
+            <label for="estadoFiltro">Estado:</label>
+            <select id="estadoFiltro" name="estadoFiltro">
+                <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+            </select>
+            <input type="submit" value="Filtrar" />
+        }
+    <div class="card-body">
+        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'">
+            Generar Reporte PDF
+        </button>
+        <div class="table-responsive">
+            <table class="display datatables" id="ajax-data-object">
+                <thead>
 
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Duracion</th>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Duracion</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                       <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Id_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Nombre_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Tipo_programa)</td>
+                            <td>@Html.DisplayFor(model => item.Duracion_programa)</td>
+                            <td>
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id_programa }) |
+                                @Html.ActionLink("Detalles", "Details", new { id = item.Id_programa }) |
+                                @Html.ActionLink("Competencias", "Programas_Competencias", new { id = item.Id_programa })
+                            </td>
                         </tr>
-
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Id_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Nombre_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Tipo_programa)</td>
-                                <td>@Html.DisplayFor(model => item.Duracion_programa)</td>
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_programa }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id_programa })
-                                </td>
-
-                            </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Tipo</th>
-                            <th>Duracion</th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Duracion</th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
+    </div>
     </div>
 </div>
 

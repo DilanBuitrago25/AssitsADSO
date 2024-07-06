@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ClaseDatos.Soporte>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Gestionar Soportes</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Aprendiz</li>
+                    <li class="breadcrumb-item">Soporte</li>
+                    <li class="breadcrumb-item active">Consultar</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Individual column searching (text inputs) Starts-->
+<div class="col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h5>Tabla de datos - Justificaciones Inasistencias</h5>
+            <br />
+            <button class="btn btn-light"><a href="@Url.Action("Create","Fichas")">Crear</a></button>
+        </div>
+        @using (Html.BeginForm("Index", "Fichas", FormMethod.Get))
+        {
+            <label for="estadoFiltro">Estado:</label>
+            <select id="estadoFiltro" name="estadoFiltro">
+                <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+            </select>
+            <input type="submit" value="Filtrar" />
+        }
+        <div class="card-body">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "JustificacionInasistencia")'">
+                Generar Reporte PDF
+            </button>
+            <div class="table-responsive">
+                <<table class="display datatables" id="ajax-data-object">
+                    <thead>
+
+                        <tr>
+                            <th>Id</th>
+                            <th>Asunto</th>
+                            <th>Fecha registro</th>
+                            <th>Fecha Inasistencia</th>
+                            <th>Codigo Ficha</th>
+                            <th>Estado Soporte</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Id_soporte)</td>
+                                @*<td>@Html.DisplayFor(model => item.Nombre_ficha)</td>*@
+                                <td>@Html.DisplayFor(model => item.Nombre_soporte)</td>
+                                <td>@Html.DisplayFor(model => item.Fecha_registro)</td>
+                                <td>@Html.DisplayFor(model => item.Asistencia.Fecha_inicio_asistencia)</td>
+                                <td>@Html.DisplayFor(model => item.Asistencia.Ficha.Codigo_ficha)</td>
+                                <td>@Html.DisplayFor(model => item.Validacion_Instructor)</td>
+
+                                <td>
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_soporte })
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Asunto</th>
+                            <th>Fecha registro</th>
+                            <th>Fecha Inasistencia</th>
+                            <th>Codigo Ficha</th>
+                            <th>Estado Soporte</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

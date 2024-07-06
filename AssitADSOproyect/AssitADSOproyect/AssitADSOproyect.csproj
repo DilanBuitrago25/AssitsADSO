@@ -45,11 +45,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AngleSharp, Version=0.17.1.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.0.17.1\lib\net472\AngleSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="AngleSharp.Css, Version=0.17.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
+      <HintPath>..\packages\AngleSharp.Css.0.17.0\lib\net472\AngleSharp.Css.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlSanitizer, Version=8.0.0.0, Culture=neutral, PublicKeyToken=61c49a1a9e79cc28, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlSanitizer.8.0.865\lib\net461\HtmlSanitizer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -64,8 +81,29 @@
       <HintPath>..\packages\QRCoder.1.5.1\lib\net40\QRCoder.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.8.0.0\lib\net462\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encoding.CodePages, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encoding.CodePages.8.0.0\lib\net462\System.Text.Encoding.CodePages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -124,22 +162,21 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AprendizController.cs" />
     <Compile Include="Controllers\AprendizsController.cs" />
-    <Compile Include="Controllers\Asistencias1Controller.cs" />
     <Compile Include="Controllers\AsistenciasController.cs" />
     <Compile Include="Controllers\CompetenciasController.cs" />
-    <Compile Include="Controllers\Fichas1Controller.cs" />
     <Compile Include="Controllers\FichasController.cs" />
+    <Compile Include="Controllers\Ficha_has_UsuarioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InstructorAdminController.cs" />
     <Compile Include="Controllers\InstructorController.cs" />
     <Compile Include="Controllers\JustificacionInasistenciaController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Programa_formacionController.cs" />
     <Compile Include="Controllers\RegistroAsistenciasController.cs" />
     <Compile Include="Controllers\UsuariosAprendizController.cs" />
+    <Compile Include="Controllers\UsuariosconpruebaController.cs" />
     <Compile Include="Controllers\UsuariosInstructorController.cs" />
-    <Compile Include="Controllers\UsuariospruebaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -4866,6 +4903,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\erro401.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -6063,7 +6101,6 @@
     <Content Include="Views\JustificacionInasistencia\Create.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Delete.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Details.cshtml" />
-    <Content Include="Views\JustificacionInasistencia\Edit.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Index.cshtml" />
     <Content Include="Views\Fichas1\Create.cshtml" />
     <Content Include="Views\Fichas1\Delete.cshtml" />
@@ -6081,11 +6118,40 @@
     <Content Include="Views\RegistroAsistencias\Edit.cshtml" />
     <Content Include="Views\RegistroAsistencias\Index.cshtml" />
     <Content Include="Views\Crear_justificación.cshtml" />
-    <Content Include="Views\Usuariosprueba\Create.cshtml" />
-    <Content Include="Views\Usuariosprueba\Delete.cshtml" />
-    <Content Include="Views\Usuariosprueba\Details.cshtml" />
-    <Content Include="Views\Usuariosprueba\Edit.cshtml" />
-    <Content Include="Views\Usuariosprueba\Index.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\IndexAprendiz.cshtml" />
+    <Content Include="Views\Home\Error401.cshtml" />
+    <Content Include="Views\Shared\Error401.cshtml" />
+    <Content Include="Views\Shared-Instructor-admin\_Layout.cshtml" />
+    <Content Include="Views\Shared-Instructor-admin\Error.cshtml" />
+    <Content Include="Views\Shared-Instructor-admin\Error401.cshtml" />
+    <Content Include="Views\InstructorAdmin\Index.cshtml" />
+    <Content Include="Views\Programa_formacion\Programas_Competencias_Asociar.cshtml" />
+    <Content Include="Views\Programa_formacion\Programas_Competencias.cshtml" />
+    <Content Include="Views\Competencias\CompetenciaProgramas.cshtml" />
+    <Content Include="Views\Competencias\CrearProgramaCompetencia.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Create.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Delete.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Details.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Edit.cshtml" />
+    <Content Include="Views\Usuariosconprueba\Index.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Create.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Delete.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Details.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Edit.cshtml" />
+    <Content Include="Views\Ficha_has_Usuario\Index.cshtml" />
+    <Content Include="Views\Fichas\Aprendices_Ficha.cshtml" />
+    <Content Include="Views\Fichas\Asociar_Aprendiz_Ficha.cshtml" />
+    <Content Include="Views\Fichas\Instructores_Ficha.cshtml" />
+    <Content Include="Views\Fichas\Asociar_Instructor_Ficha.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Fichas_Aprendiz.cshtml" />
+    <Content Include="Views\UsuariosAprendiz\Asociar_Ficha_Aprendiz.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Fichas_Instructor.cshtml" />
+    <Content Include="Views\UsuariosInstructor\Asociar_Ficha_Instructor.cshtml" />
+    <Content Include="Views\Asistencias\Asistencia_Aprendices.cshtml" />
+    <Content Include="Views\Instructor\Asistencias_Ficha.cshtml" />
+    <Content Include="Views\Login\EditarPerfil.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\MisSoportes.cshtml" />
+    <Content Include="Views\JustificacionInasistencia\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6151,7 +6217,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50633</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44369/</IISUrl>
+          <IISUrl>http://192.168.1.5:44373/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://192.168.1.5:44373/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -6165,12 +6233,12 @@
     <PropertyGroup>
       <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -57,10 +57,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Id_usuario, "Id_usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Id_Instructor, "Id_Instructor", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Id_usuario", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Id_usuario, "", new { @class = "text-danger" })
+                @Html.DropDownList("Id_Instructor", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Id_Instructor, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -79,15 +79,24 @@
                 @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <div class="mb-3 input-group-solid">
+            <label class="form-label">Estado Asistencia</label>
+            <div class="input-group">
+                @Html.DropDownListFor(model => model.Estado_Asistencia, new List<SelectListItem>
+                    {
+                         new SelectListItem { Text = "Activo", Value = "True" },
+                         new SelectListItem { Text = "No Activo", Value = "False" },
+                    }, new { @class = "form-control" })
             </div>
         </div>
-    </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>

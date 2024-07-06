@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     @Html.HiddenFor(model => model.Id_asistencia)
                                 </div>
-                                @Html.HiddenFor(model => model.Id_usuario)
+                                @Html.HiddenFor(model => model.Id_Aprendiz)
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
@@ -72,7 +72,7 @@
                                             {
                                                 <label class="form-label">Aprendiz</label>
                                                 <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Session["NombreUsuario"].ToString()">
-                                                @*<h6 class="mt-3 f-14 f-w-600"> @Session["NombreUsuario"].ToString()</h6>*@
+                                                <h6 class="mt-3 f-14 f-w-600"> @Session["NombreUsuario"].ToString()</h6>
                                             }
 
                                         </div>
@@ -114,12 +114,12 @@
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
-                                            <label>Hora de Registro</label>
+                                            <label>Hora de dasdRegistro</label>
                                             <div class="input-group" data-placement="left" data-align="top" data-autoclose="true">
                                                 @Html.TextBoxFor(model => model.Hora_registro, new
                                                 {
                                                     @class = "form-control digits",
-                                                    @readonly = "readonly",
+                                                    @readonly = true,
                                                     @Value = DateTime.Now.ToString("HH:mm")
                                                 })
                                                 <span class="input-group-addon">
@@ -128,66 +128,18 @@
                                             </div>
                                             @Html.ValidationMessageFor(model => model.Hora_registro, "", new { @class = "text-danger" })
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 @Html.HiddenFor(model => model.Asistio_registro, new { Value = true })
-                                @*<div class="row">
-        <div class="col-sm-4">
-            <div class="mb-3">
-                <label>Fecha Inicio</label>
-                <div class="input-group">
-                    @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
-                    @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="mb-3">
-                <label>Hora Inicio</label>
-                <div class="input-group">
-                    @Html.EditorFor(model => model.Hora_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "time" } })
-                    @Html.ValidationMessageFor(model => model.Hora_fin_asistencia, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>*@
-                                @*<div class="col-sm-4">
-            <div class="mb-3">
-                <label>Ending date</label>
-                <input class="datepicker-here form-control" type="text" data-language="en">
-            </div>
-        </div>*@
-                                @*</div>
-
-        <div class="row">
-            <div class="col">
-                <div class="mb-3">
-                    <label for="exampleFormControlTextarea4">Enter some Details</label>
-                    <div class="input-group">
-                        @Html.TextAreaFor(model => model.Detalles_asistencia, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3" })
-                        @Html.ValidationMessageFor(model => model.Detalles_asistencia, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-                                @*<div class="row">
-            <div class="col">
-                <div class="mb-3">
-                    <label>Upload project file</label>
-                    <form class="dropzone" id="singleFileUpload" action="/upload.php">
-                        <div class="dz-message needsclick">
-                            <i class="icon-cloud-up"></i>
-                            <h6>Drop files here or click to upload.</h6><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>*@
+                                @Html.HiddenFor(model => model.Id_Aprendiz, new { Value = @Session["Idusuario"].ToString() })
+                                @Html.HiddenFor(model => model.Estado_RegistroAsitencia, new { Value = true })
                                 <div class="row">
                                     <div class="col">
                                         <div class="text-end">
 
-                                            <button class="btn btn-success me-3" type="submit">Confirmar Asistencia</button>
+                                            @*<button class="btn btn-success me-3" type="submit">Confirmar Asistencia</button>*@
+                                            <button class="btn btn-success sweet-8" type="submit" onclick="_gaq.push(['_trackEvent', 'example', 'try', 'sweet-8']);">Confirmar</button>
 
                                             <button class="btn btn-danger" type="button">
                                                 <a href="@Url.Action("Index", "Asistencias")">Cancelar</a>
@@ -195,11 +147,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -207,7 +155,18 @@
     </div>
 }
 
-
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_asistencia)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
 
 @*<h2>Create</h2>
 

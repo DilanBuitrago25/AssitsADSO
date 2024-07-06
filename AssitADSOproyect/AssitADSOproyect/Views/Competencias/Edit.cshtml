@@ -57,6 +57,7 @@
 
                                 @Html.AntiForgeryToken()
                                 <form>
+                                   
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Id</label>
                                         <div class="input-group">
@@ -97,7 +98,18 @@
                                             @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Estado Competencia</label>
+                                        <div class="input-group">
+                                            @Html.DropDownListFor(model => model.Estado_Competencia, new List<SelectListItem>
+                                                {
+                                                     new SelectListItem { Text = "Activo", Value = "True" },
+                                                     new SelectListItem { Text = "No Activo", Value = "False" },
+                                                }, new { @class = "form-control" })
 
+                                        </div>
+                                    </div>
+                                    @Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })
                                 </form>
                             </div>
                         </div>
@@ -112,7 +124,18 @@
     </div>
 }
 
-
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_competencia)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
 
 @*<h2>Edit</h2>
 

@@ -67,8 +67,9 @@
                                         <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Codigo_ficha, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Codigo_ficha, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Codigo_ficha, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Jornada</label>
@@ -81,8 +82,9 @@
                                                      new SelectListItem { Text = "Nocturna", Value = "Nocturna" },
                                                      new SelectListItem { Text = "Mixta", Value = "Mixta" }
                                                 }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Jornada_ficha, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Modalidad</label>
@@ -94,8 +96,9 @@
                                                      new SelectListItem { Text = "Virtual", Value = "Virtual" },
                                                      new SelectListItem { Text = "Distancia", Value = "Distancia" },
                                                 }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Modalidad_ficha, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Modalidad_ficha, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Tipo Ficha</label>
@@ -106,31 +109,36 @@
                                                      new SelectListItem { Text = "Cerrada", Value = "Cerrada" },
                                                      new SelectListItem { Text = "Abierta", Value = "Abierta" },
                                                 }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.tipo_ficha, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.tipo_ficha, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Programa de formación</label>
                                         <div class="input-group">
                                             @Html.DropDownList("Id_programa", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Fecha inicio</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_inicio, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
-                                            @Html.ValidationMessageFor(model => model.Fecha_inicio, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Fecha_inicio, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", languaje = "es", autocomplete = "off" } })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Fecha_inicio, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Fecha fin</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_fin, new { htmlAttributes = new { @class = "form-control digits", @type = "date" } })
-                                            @Html.ValidationMessageFor(model => model.Fecha_fin, "", new { @class = "text-danger" })
+                                            @Html.EditorFor(model => model.Fecha_fin, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", languaje = "es", autocomplete = "off" } })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Fecha_fin, "", new { @class = "text-danger" })
                                     </div>
-                                    @Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })
+                                    @*@Html.HiddenFor(model => model.Id_Instructor, new { Value = @Session["Idusuario"].ToString() })*@
+                                    @Html.HiddenFor(model => model.Estado_ficha, new { Value = "True" })
                                 </form>
                             </div>
                         </div>
@@ -144,6 +152,27 @@
         </div>
     </div>
 }
+<script>
+    $(document).ready(function () {
+        $('.datepicker-here').datepicker({
+            language: 'es',
+            minDate: new Date(),
+            onSelect: function (fd, d, picker) {  
+            }
+        });
+    });
+
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_ficha)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
 
     @*<h2>Create</h2>*@
 

@@ -1,0 +1,116 @@
+﻿@model IEnumerable<ClaseDatos.Ficha>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<br />
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-10">
+            <h3>General</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                <li class="breadcrumb-item">Instructor</li>
+                <li class="breadcrumb-item active">Panel de Administración</li>
+            </ol>
+        </div>
+        <div class="col-sm-2">
+           
+            
+                <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="@Url.Action("Index","Instructor")">Panel Instructor</a>
+       
+            
+        </div>
+    </div>
+</div>
+
+<!-- Container-fluid starts-->
+<div class="container-fluid general-widget">
+    <div class="row">
+        <div class="col-sm-6 col-xl-3 col-lg-6">
+            <div class="card o-hidden border-0">
+                <div class="bg-primary b-r-4 card-body">
+                    <div class="media static-top-widget">
+                        <div class="align-self-center text-center"><i data-feather="database"></i></div>
+                        <div class="media-body">
+                            <span class="m-0">Fichas</span>
+                            <h4 class="mb-0 counter">@ViewBag.Total_Fichas</h4><i class="icon-bg" data-feather="database"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3 col-lg-6">
+            <div class="card o-hidden border-0">
+                <div class="bg-secondary b-r-4 card-body">
+                    <div class="media static-top-widget">
+                        <div class="align-self-center text-center"><i data-feather="shopping-bag"></i></div>
+                        <div class="media-body">
+                            <span class="m-0">Asistencias</span>
+                            <h4 class="mb-0 counter">@ViewBag.Total_Asistencias</h4><i class="icon-bg" data-feather="calendar"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3 col-lg-6">
+            <div class="card o-hidden border-0">
+                <div class="bg-primary b-r-4 card-body">
+                    <div class="media static-top-widget">
+                        <div class="align-self-center text-center"><i data-feather="message-circle"></i></div>
+                        <div class="media-body">
+                            <span class="m-0">Competencias</span>
+                            <h4 class="mb-0 counter">@ViewBag.Total_Competencias</h4><i class="icon-bg" data-feather="layers"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3 col-lg-6">
+            <div class="card o-hidden border-0">
+                <div class="bg-primary b-r-4 card-body">
+                    <div class="media static-top-widget">
+                        <div class="align-self-center text-center"><i data-feather="user-plus"></i></div>
+                        <div class="media-body">
+                            <span class="m-0">Aprendices</span>
+                            <h4 class="mb-0 counter">@ViewBag.Total_Aprendices</h4><i class="icon-bg" data-feather="user-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid user-card">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6 col-lg-6 col-xl-4 box-col-6">
+                        <div class="card custom-card">
+                            <div class="text-center profile-details">
+                                <a href="@Url.Action("Asistencias_Ficha", "Instructor", new { fichaId = item.Id_ficha })">
+                                    <h4>Ficha - @Html.DisplayFor(modelItem => item.Codigo_ficha)</h4>
+                                </a>
+                                <h6>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</h6>
+                            </div>
+                            <div class="card-footer row">
+                                <div class="col-4 col-sm-4">
+                                    <h6>Asistencias</h6>
+                                    <h3 class="counter">@ViewBag.AsistenciasPorFicha[item.Id_ficha]</h3>
+                                </div>
+                                <div class="col-4 col-sm-4">
+                                    <h6>Inasistencias</h6>
+                                    <h3 class="counter">@ViewBag.RegistrosFaltantesPorFicha[item.Id_ficha]</h3>
+                                </div>
+                                <div class="col-4 col-sm-4">
+                                    <h6>Soportes</h6>
+                                    <h3 class="counter">@ViewBag.RegistrosSoportePorFicha[item.Id_ficha]</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -36,49 +36,53 @@
     </div>
 
         <!-- Section I -->
-        <div class="se-i">
-            <!-- user-form -->
-            <form class="user-form" method="post" id="loginForm">
-                <!-- logo -->
-                <a href="@Url.Action("Index", "Home")" class="logo">
-                    <img data-src="../assets/images/Logo-remove.png" class="lazy lt-img img-fluid" alt="HostX">
-                    <img data-src="../assets/images/theme/logo-d.png" class="lazy dt-img img-fluid" alt="HostX">
-                </a>
-                <!-- title-1 -->
-                <h1 class="title-1"><img data-src="../assets/images/pages/user/waving-hand.png" class="lazy img-fluid" alt="Icon">Bienvenido!<br></h1>
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    <!-- form-label -->
-                    <label class="form-label" for="Correo_usuario">
-                        <!-- form-input -->
-                        <input class="form-input" type="email" name="correo" id="correo" placeholder="Correo Electronico" required>
-                        <!-- state -->
-                        <span class="state"></span>
-                    </label>
-                    <!-- form-label -->
-                    <label class="form-label" for="Contrasena_usuario">
-                        <!-- form-input -->
-                        <input class="form-input" type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
-                        <!-- state -->
-                        <span class="state"></span>
-                    </label>
-                    <!-- div -->
-                    <div class="text-right">
-                        <!-- pass-link -->
-                        <a href="reset-pass.html" class="pass-link">Olvidaste tu contraseña?</a>
-                    </div>
-                    <!-- buttons -->
-                    <div class="buttons mt-2">
-                        <button type="submit" class="btn btn-sm btn-fill-success shadow-off text-uppercase w-100">Iniciar Sesión</button>
-                    </div>
-                }
+    <div class="se-i">
+        <!-- user-form -->
+        <form class="user-form" method="post" id="loginForm">
+            <!-- logo -->
+            <a href="@Url.Action("Index", "Home")" class="logo">
+                <img data-src="../assets/images/Logo-remove.png" class="lazy lt-img img-fluid" alt="HostX">
+                <img data-src="../assets/images/theme/logo-d.png" class="lazy dt-img img-fluid" alt="HostX">
+            </a>
+            <!-- title-1 -->
+            <h1 class="title-1"><img data-src="../assets/images/pages/user/waving-hand.png" class="lazy img-fluid" alt="Icon">Bienvenido!<br></h1>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <!-- form-label -->
+                <label class="form-label" for="Correo_usuario">
+                    <!-- form-input -->
+                    <input class="form-input" type="email" name="correo" id="correo" placeholder="Correo Electronico" required>
+                    <!-- state -->
+                    <span class="state"></span>
+                </label>
+                <!-- form-label -->
+                <label class="form-label" for="Contrasena_usuario">
+                    <!-- form-input -->
+                    <input class="form-input" type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
+                    <!-- state -->
+                    <span class="state"></span>
+                </label>
+                <!-- div -->
+                <div class="text-right">
+                    <!-- pass-link -->
+                    <a href="reset-pass.html" class="pass-link">Olvidaste tu contraseña?</a>
+                </div>
+                <!-- buttons -->
+                <div class="buttons mt-2">
+                    <button type="submit" class="btn btn-sm btn-fill-success shadow-off text-uppercase w-100">Iniciar Sesión</button>
                     @if (ViewData["Mensaje"] != null)
                     {
                         <p>@ViewData["Mensaje"]</p>
                     }
-                </form>
-        </div>
+                </div>
+
+            }
+
+
+        </form>
+        
+    </div>
     
         <!-- jquery-3.3.1.min.js -->
         <script src="../assets/js/jquery-3.3.1.min.js"></script>

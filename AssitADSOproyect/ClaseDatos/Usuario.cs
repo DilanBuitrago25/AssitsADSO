@@ -18,38 +18,32 @@ namespace ClaseDatos
         public Usuario()
         {
             this.Asistencia = new HashSet<Asistencia>();
+            this.Ficha_has_Usuario = new HashSet<Ficha_has_Usuario>();
             this.RegistroAsistencia = new HashSet<RegistroAsistencia>();
-            this.Reporte = new HashSet<Reporte>();
             this.Soporte = new HashSet<Soporte>();
-            this.Competencia = new HashSet<Competencia>();
-            this.Programa_formacion = new HashSet<Programa_formacion>();
+            this.Soporte1 = new HashSet<Soporte>();
         }
     
         public int Id_usuario { get; set; }
         public string Tipo_Documento_usuario { get; set; }
-        public int Documento_usuario { get; set; }
+        public Nullable<int> Documento_usuario { get; set; }
         public string Nombre_usuario { get; set; }
         public string Apellido_usuario { get; set; }
-        public Nullable<long> Telefono_usuario { get; set; }
+        public Nullable<decimal> Telefono_usuario { get; set; }
         public string Correo_usuario { get; set; }
         public string Contrasena_usuario { get; set; }
         public string Tipo_usuario { get; set; }
-        public string Tipo_instructor { get; set; }
-        public Nullable<bool> Esinstructormaster_usuario { get; set; }
-        public Nullable<int> Id_ficha { get; set; }
+        public Nullable<bool> Estado_Usuario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistencia> Asistencia { get; set; }
-        public virtual Ficha Ficha { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ficha_has_Usuario> Ficha_has_Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RegistroAsistencia> RegistroAsistencia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reporte> Reporte { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Soporte> Soporte { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Competencia> Competencia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Programa_formacion> Programa_formacion { get; set; }
+        public virtual ICollection<Soporte> Soporte1 { get; set; }
     }
 }

@@ -65,31 +65,36 @@
                                                      new SelectListItem { Text = "Tecnica", Value = "Tecnica" },
                                                      new SelectListItem { Text = "Transversal", Value = "Transversal" },
                                                 }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.tipo_competencia, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.tipo_competencia, "", new { @class = "text-danger" })
                                     </div>
                                     <div class="mb-3 m-form__group">
                                         <label class="form-label">Nombre</label>
                                         <div class="input-group">
                                             @Html.EditorFor(model => model.Nombre_competencia, new { htmlAttributes = new { @class = "form-control" } })
-                                            @Html.ValidationMessageFor(model => model.Nombre_competencia, "", new { @class = "text-danger" })
+
                                         </div>
+                                        @Html.ValidationMessageFor(model => model.Nombre_competencia, "", new { @class = "text-danger" })
                                     </div>
-                                    <div class="mb-3 input-group-solid">
+                                    @*<div class="mb-3 input-group-solid">
                                         <label class="form-label">Codigo Ficha</label>
                                         <div class="input-group">
-                                            @Html.DropDownList("Numero_ficha", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Numero_ficha, "", new { @class = "text-danger" })
+                                            @Html.DropDownList("Id_ficha", null, htmlAttributes: new { @class = "form-control" })
+
                                         </div>
-                                    </div>
-                                    <div class="mb-3 m-form__group">
+                                        @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
+                                    </div>*@
+                                    @*<div class="mb-3 m-form__group">
                                         <label class="form-label">Programa de formación</label>
                                         <div class="input-group">
                                             @Html.DropDownList("Id_programa", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
+
                                         </div>
-                                    </div>
-                                    @Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })
+                                        @Html.ValidationMessageFor(model => model.Programa_formacion, "", new { @class = "text-danger" })
+                                    </div>*@
+                                    @Html.HiddenFor(model => model.Estado_Competencia, new { Value = "True" })
+                                    @*@Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })*@
                                 </form>
                             </div>
                         </div>
@@ -104,6 +109,18 @@
     </div>
 }
 
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_competencia)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
 
 @*<h2>Create</h2>
 

@@ -1,0 +1,14 @@
+﻿@model ClaseDatos.Usuario
+
+<h2>Agregar Instructor a la Ficha @ViewBag.FichaId</h2>
+
+@using (Html.BeginForm("Asociar_Instructor_Ficha", "Fichas", new { idFicha = ViewBag.FichaId }, FormMethod.Post))
+{
+    <div class="form-group">
+        <label for="aprendizId">Seleccionar Aprendiz:</label>
+        @Html.DropDownList("instructorId", new SelectList(ViewBag.Instructores, "Id_usuario", "Nombre_usuario"), "Seleccionar Instructor", new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Agregar</button>
+}
+
