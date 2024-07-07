@@ -71,8 +71,8 @@
       <PropertyRef Name="Id_Registroasistencia" />
     </Key>
     <Property Name="Id_Registroasistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fecha_registro" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Hora_registro" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Fecha_registro" Type="varchar" MaxLength="200" />
+    <Property Name="Hora_registro" Type="varchar" MaxLength="200" />
     <Property Name="Asistio_registro" Type="bit" />
     <Property Name="Id_asistencia" Type="int" />
     <Property Name="Id_Aprendiz" Type="int" />

@@ -16,7 +16,7 @@ namespace AssitADSOproyect.Controllers
     public class AprendizsController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=LAPTOP-NC5UJ7OA;Initial Catalog=BDAssistsADSOvFinal;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=LAPTOP-NC5UJ7OA;Initial Catalog=BDAssistsADSOv5;Integrated Security=True;trustservercertificate=True;";
         // GET: Aprendizs
         [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Index(string estadoFiltro = "")
@@ -91,10 +91,14 @@ namespace AssitADSOproyect.Controllers
             }
             ViewBag.Total_Inasistencias = Total_Inasistencias;
 
+            var idUsuarioLoggeado = (int)Session["Idusuario"]; // Obtener el ID del usuario loggeado
+
             var fichasFiltradas = db.Ficha
-                 .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
-                 .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) // Filtrar por estado (opcional)
-                 .ToList();
+                .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
+                .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) // Filtrar por estado (opcional)
+                .Where(f => f.Ficha_has_Usuario.Any(fu => fu.Id_usuario == idUsuarioLoggeado && fu.TipoUsuario == "Aprendiz")) // Filtrar por relación con el usuario
+                .ToList();
+
 
             ViewBag.EstadoFiltro = estadoFiltro;
             var asistenciasPorFicha = ContarAsistenciasPorFicha();

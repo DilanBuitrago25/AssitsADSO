@@ -69,8 +69,8 @@
 
                     <tr>
                         <th>Codigo Ficha</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Fin</th>
+                        <th>Fecha Asistencia</th>
+                        <th>Fecha Registro Asistencia</th>
                         <th>Competencia</th>
                         <th>Asistió</th>
                     </tr>
@@ -82,11 +82,11 @@
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.Asistencia.Ficha.Codigo_ficha)</td>
                             <td>@Html.DisplayFor(model => item.Asistencia.Fecha_inicio_asistencia)</td>
-                            <td>@Html.DisplayFor(model => item.Asistencia.Fecha_fin_asistencia)</td>
+                            <td>@Html.DisplayFor(model => item.Fecha_registro)</td>
                             <td>@Html.DisplayFor(model => item.Asistencia.Competencia.Nombre_competencia)</td>
                             <td>@Html.DisplayFor(model => item.Asistio_registro)</td>
                             <td>
-                                @Html.ActionLink("Details", "Details", new { id = item.Id_Registroasistencia }) |
+                                @Html.ActionLink("Detalles", "Details", new { id = item.Id_Registroasistencia })  |
                                 @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value)
                                 {
                                     @Html.ActionLink("Agregar Soporte", "Create", "JustificacionInasistencia", new { asistenciaId = item.Id_asistencia }, null)

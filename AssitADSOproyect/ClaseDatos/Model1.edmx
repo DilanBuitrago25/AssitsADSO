@@ -76,8 +76,8 @@
             <PropertyRef Name="Id_Registroasistencia" />
           </Key>
           <Property Name="Id_Registroasistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Fecha_registro" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Hora_registro" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Fecha_registro" Type="varchar" MaxLength="200" />
+          <Property Name="Hora_registro" Type="varchar" MaxLength="200" />
           <Property Name="Asistio_registro" Type="bit" />
           <Property Name="Id_asistencia" Type="int" />
           <Property Name="Id_Aprendiz" Type="int" />
@@ -415,12 +415,12 @@
             <PropertyRef Name="Id_Registroasistencia" />
           </Key>
           <Property Name="Id_Registroasistencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fecha_registro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Hora_registro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Asistio_registro" Type="Boolean" />
-          <Property Name="Id_asistencia" Type="Int32" />
-          <Property Name="Id_Aprendiz" Type="Int32" />
-          <Property Name="Estado_RegistroAsitencia" Type="Boolean" />
+          <Property Name="Fecha_registro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Hora_registro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Asistio_registro" Type="Boolean" Nullable="true" />
+          <Property Name="Id_asistencia" Type="Int32" Nullable="true" />
+          <Property Name="Id_Aprendiz" Type="Int32" Nullable="true" />
+          <Property Name="Estado_RegistroAsitencia" Type="Boolean" Nullable="true" />
           <NavigationProperty Name="Asistencia" Relationship="Self.FK__RegistroA__Id_as__52593CB8" FromRole="RegistroAsistencia" ToRole="Asistencia" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK__RegistroA__Id_Ap__534D60F1" FromRole="RegistroAsistencia" ToRole="Usuario" />
         </EntityType>

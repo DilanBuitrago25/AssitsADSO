@@ -4,17 +4,23 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
+using System.Timers;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.SessionState;
 using WebGrease.Configuration;
+using System.Data.SqlClient;
+using AngleSharp.Common;
 
 namespace AssitADSOproyect
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+
+        private Timer timer;
+
         protected void Application_Error(object sender, EventArgs e)
         {
             Exception ex = Server.GetLastError();
@@ -34,61 +40,67 @@ namespace AssitADSOproyect
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            System.Timers.Timer timer = new System.Timers.Timer(36000000); // 1 hora en milisegundos
-            timer.Elapsed += (sender, e) => GenerarRegistrosAsistencia();
-            timer.Enabled = true;
+            timer = new Timer(60000); // 60000 milisegundos = 1 minuto
+            timer.Elapsed += VerificarAsistencias;
+            timer.Start();
         }
 
-        public void GenerarRegistrosAsistencia()
+
+        private void VerificarAsistencias(object sender, ElapsedEventArgs e)
         {
-            using (var db = new BDAssistsADSOv4Entities())
+            using ( var db = new BDAssistsADSOv4Entities())
             {
                 var fechaHoraActual = DateTime.Now;
 
-                // Obtener asistencias que potencialmente han finalizado
-                var posiblesAsistenciasFinalizadas = db.Asistencia.Include(a => a.Usuario).ToList();
+                var todasLasAsistencias = db.Asistencia.ToList();
 
-                // Filtrar asistencias finalizadas y no registradas
-                var asistenciasFinalizadas = posiblesAsistenciasFinalizadas
+                // Filtra las asistencias pasadas en memoria
+                var asistenciasPasadas = todasLasAsistencias
                     .Where(a =>
                     {
-                        DateTime fechaFin;
-                        TimeSpan horaFin;
-                        return DateTime.TryParseExact(a.Fecha_fin_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFin) &&
-                               TimeSpan.TryParseExact(a.Hora_fin_asistencia, "hh\\:mm", CultureInfo.InvariantCulture, out horaFin) &&
-                               fechaFin < fechaHoraActual.Date && horaFin < fechaHoraActual.TimeOfDay &&
-                               a.Usuario.Tipo_usuario == "Instructor";
+                        DateTime fechaFinAsistencia;
+                        if (DateTime.TryParseExact(a.Fecha_fin_asistencia + " " + a.Hora_fin_asistencia, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinAsistencia))
+                        {
+                            return fechaFinAsistencia < fechaHoraActual;
+                        }
+                        return false; // Si el formato de fecha/hora es incorrecto, no se considera como pasada
                     })
                     .ToList();
 
-                foreach (var asistencia in asistenciasFinalizadas)
+                foreach (var asistencia in asistenciasPasadas)
                 {
-                    int? idFicha = asistencia.Id_ficha; // Obtener el Id_ficha fuera de la consulta
+                    // Obtén los IDs de aprendices asociados a la ficha
+                    var aprendicesEnFicha = db.Ficha_has_Usuario
+                     .Where(fu => fu.Id_ficha == asistencia.Id_ficha && fu.TipoUsuario == "Aprendiz")
+                     .Select(fu => (int?)fu.Id_usuario) // <-- Convertir a int?
+                     .ToList();
 
-                    // Obtener aprendices de la ficha que no se han registrado
-                    var aprendicesSinRegistro = db.Ficha_has_Usuario
-                        .Where(u => u.TipoUsuario == "Aprendiz" && u.Id_ficha == idFicha &&
-                                    !db.RegistroAsistencia.Any(ra => ra.Id_asistencia == asistencia.Id_asistencia && ra.Id_Aprendiz == u.Id_usuario))
+                    var aprendicesConRegistro = db.RegistroAsistencia
+                        .Where(ra => ra.Id_asistencia == asistencia.Id_asistencia)
+                        .Select(ra => ra.Id_Aprendiz)
                         .ToList();
 
-                    foreach (var aprendiz in aprendicesSinRegistro)
+                    var aprendicesSinRegistro = aprendicesEnFicha.Except(aprendicesConRegistro).ToList();
+
+                    foreach (var aprendizId in aprendicesSinRegistro)
                     {
-                        // Crear registro de asistencia por defecto
                         var nuevoRegistro = new RegistroAsistencia
                         {
                             Fecha_registro = null,
                             Hora_registro = null,
                             Id_asistencia = asistencia.Id_asistencia,
-                            Id_Aprendiz = aprendiz.Id_usuario,
+                            Id_Aprendiz = aprendizId,
                             Asistio_registro = false
                         };
+
                         db.RegistroAsistencia.Add(nuevoRegistro);
                     }
                 }
 
-                db.SaveChanges(); // Guardar los nuevos registros
+                db.SaveChanges();
             }
         }
+
 
 
 

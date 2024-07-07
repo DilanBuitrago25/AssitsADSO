@@ -176,79 +176,36 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
+            if (soporte.Id_Instructor != (int)Session["Idusuario"])
+            {
+                return RedirectToAction("Index");
+            }
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
             ViewBag.RutaArchivo = soporte.Archivo_soporte;
             return View(soporte);
         }
 
-        //// POST: JustificacionInasistencia/Edit/5
-        //// Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        //// más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id_soporte, Validacion_Instructor, Nota_Instructor")] Soporte soporte, string accion)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            var soporteExistente = db.Soporte.Find(soporte.Id_soporte);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Soporte soportes)
+        {
+            using (var db = new BDAssistsADSOv4Entities())
+            {
+                if (ModelState.IsValid)
+                {
+                    var soporte = db.Soporte.Find(id);
 
-        //            if (soporteExistente != null)
-        //            {
-        //                if (accion == "rechazar")
-        //                {
-        //                    soporte.Validacion_Instructor = false;
-        //                }
-        //                else if (accion == "validar")
-        //                {
-        //                    soporte.Validacion_instructor = true;
-        //                }
-        //                db.Entry(soporte).State = EntityState.Modified;
-        //                db.SaveChanges();
-        //                return RedirectToAction("Index");
-        //            }
+                    // Actualiza solo los campos permitidos
+                    soporte.Validacion_Instructor = soportes.Validacion_Instructor;
+                    soporte.Nota_Instructor = soportes.Nota_Instructor;
 
-        //            return RedirectToAction("Details", new { id = soporte.Id_soporte });
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            ModelState.AddModelError("", "Error al guardar los cambios: " + ex.Message);
-        //        }
-        //    }
-
-        //    ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Tipo_asistencia", soporte.Id_asistencia);
-        //    return View(soporte);
-        //}
-        // GET: JustificacionInasistencia/Delete/5
-        //    public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Soporte soporte = db.Soporte.Find(id);
-        //    if (soporte == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(soporte);
-        //}
-
-        //// POST: JustificacionInasistencia/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Soporte soporte = db.Soporte.Find(id);
-        //    db.Soporte.Remove(soporte);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+                    db.Entry(soporte).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(soportes);
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {
