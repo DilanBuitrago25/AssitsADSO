@@ -42,37 +42,38 @@
                                     <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="info"></i>Finalizado</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-6 p-0">
-                                <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="@Url.Action("Create","Asistencias")"> <i data-feather="plus-square"> </i>Crear Nueva Asistencia</a>
+                                <div class="col-md-6 p-0">
+   
+                                    <div class="form-group mb-0 me-0"></div><a class="btn btn-primary" href="@Url.Action("Create","Asistencias")"> <i data-feather="plus-square"> </i>Crear Nueva Asistencia</a>
+                                </div>
                             </div>
+                            @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
+                            {
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="estadoFiltro">Fecha:</label>
+                                        <input class="form-control digits" id="reportrange" type="text" name="fechaFiltro" value="@ViewBag.fechaFiltro" />
+                                        <br />
+                                        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Asistencias")'">
+                                            Generar Reporte PDF
+                                        </button>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label for="estadoFiltro">Fichas:</label>
+                                        @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "form-control", onchange = "cargarCompetencias()" })
+                                        <br />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="estadoFiltro">Competencias:</label>
+                                        @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "form-control" })
+
+                                        <br />
+                                        <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                                    </div>
+                                </div>
+                            }
                         </div>
-                        @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
-                        {
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="estadoFiltro">Fecha:</label>
-                                    <input class="form-control digits" id="reportrange" type="text" name="fechaFiltro" value="@ViewBag.fechaFiltro" />
-                                    <br />
-                                    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Asistencias")'">
-                                        Generar Reporte PDF
-
-                                    </button>
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="estadoFiltro">Fichas:</label>
-                                    @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "form-control", onchange = "cargarCompetencias()" })
-                                    <br />
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="estadoFiltro">Competencias:</label>
-                                    @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "form-control" })
-
-                                    <br />
-                                    <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
-                                </div>
-                            </div>
-                        }
-                    </div>
                 </div>
 
                 <div class="col-sm-12">

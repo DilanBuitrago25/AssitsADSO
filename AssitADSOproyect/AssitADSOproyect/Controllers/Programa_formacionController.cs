@@ -197,10 +197,10 @@ namespace AssitADSOproyect.Controllers
         {
             var competencias = db.Programa_formacion
                 .Where(pf => pf.Id_programa == id)
-                .SelectMany(pf => pf.Competencia) // Obtener todas las competencias asociadas
+                .SelectMany(pf => pf.Competencia) 
                 .ToList();
 
-            ViewBag.NombrePrograma = db.Programa_formacion.Find(id).Nombre_programa; // Obtener el nombre del programa
+            ViewBag.NombrePrograma = db.Programa_formacion.Find(id).Nombre_programa; 
             ViewBag.ProgramaId = id;
             return View(competencias);
         }
@@ -211,6 +211,7 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Programas_Competencias_Asociar(int programaId, [Bind(Include = "Id_programa,Competencia")] Programa_formacion programa_formacion)
         {
             ViewBag.ProgramaId = programaId;
+            ViewBag.NombrePrograma = db.Programa_formacion.Find(programaId).Nombre_programa;
             ViewBag.CompetenciasDisponibles = db.Competencia.ToList(); // Obtén todos los programas disponibles
             return View();
         }
@@ -235,32 +236,10 @@ namespace AssitADSOproyect.Controllers
             {
                 // Manejar el caso en que la competencia o el programa no existen
             }
-
+            ViewBag.NombrePrograma = db.Programa_formacion.Find(programaId).Nombre_programa;// Obtenemos el nombre de la competencia para mostrar en la vista
+            ViewBag.ProgramaId = programaId;
             return RedirectToAction("Programas_Competencias", new { id = programaId });
         }
-
-        [HttpPost]
-        public ActionResult CrearProgramaCompetencia(int competenciaId, int programaId)
-        {
-            var competencia = db.Competencia.Find(competenciaId);
-            var programa = db.Programa_formacion.Find(programaId);
-
-            if (competencia != null && programa != null)
-            {
-                if (!competencia.Programa_formacion.Contains(programa))
-                {
-                    competencia.Programa_formacion.Add(programa);
-                    db.SaveChanges();
-                }
-            }
-            else
-            {
-                // Manejar el caso en que la competencia o el programa no existen
-            }
-
-            return RedirectToAction("Programas_Competencias", new { id = programaId });
-        }
-
 
 
         protected override void Dispose(bool disposing)

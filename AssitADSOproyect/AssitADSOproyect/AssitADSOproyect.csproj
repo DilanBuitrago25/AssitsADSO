@@ -6216,9 +6216,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50633</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://192.168.1.5:44373/</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://192.168.1.5:44373/</IISAppRootUrl>
+          <IISUrl>http://localhost:44369</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
