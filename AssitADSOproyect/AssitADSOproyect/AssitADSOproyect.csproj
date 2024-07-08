@@ -175,7 +175,6 @@
     <Compile Include="Controllers\Programa_formacionController.cs" />
     <Compile Include="Controllers\RegistroAsistenciasController.cs" />
     <Compile Include="Controllers\UsuariosAprendizController.cs" />
-    <Compile Include="Controllers\UsuariosconpruebaController.cs" />
     <Compile Include="Controllers\UsuariosInstructorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

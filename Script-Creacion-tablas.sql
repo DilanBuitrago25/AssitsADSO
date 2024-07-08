@@ -111,8 +111,8 @@ go
 
 create table RegistroAsistencia(
 Id_Registroasistencia int identity (10000000,1) not null,
-Fecha_registro varchar(200) not null,
-Hora_registro varchar(200) not null,
+Fecha_registro varchar(200)  ,
+Hora_registro varchar(200)  ,
 Asistio_registro bit default (0),
 Id_asistencia int references Asistencia(Id_asistencia),
 Id_Aprendiz int references Usuario(Id_usuario),

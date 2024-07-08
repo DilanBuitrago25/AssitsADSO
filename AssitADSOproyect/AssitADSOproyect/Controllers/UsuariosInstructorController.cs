@@ -119,6 +119,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: UsuariosInstructor/Details/5
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -134,6 +135,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: UsuariosInstructor/Create
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Create()
         {
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Jornada_ficha");
@@ -159,6 +161,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: UsuariosInstructor/Edit/5
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -192,6 +195,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         //desde aca tablas foranea
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Fichas_Instructor(int id)
         {
             // Obtener fichas relacionadas al instructor
@@ -205,6 +209,7 @@ namespace AssitADSOproyect.Controllers
             return View(fichasInstructor);
         }
 
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Asociar_Ficha_Instructor(int idInstructor)
         {
             // Obtener las fichas ya asociadas al instructor

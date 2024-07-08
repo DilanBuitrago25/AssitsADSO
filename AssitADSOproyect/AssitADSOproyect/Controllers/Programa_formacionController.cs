@@ -118,6 +118,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Programa_formacion/Details/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -133,6 +134,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Programa_formacion/Create
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Create()
         {
             
@@ -157,6 +159,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Programa_formacion/Edit/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -189,7 +192,7 @@ namespace AssitADSOproyect.Controllers
 
 
         //--- Despues de aqui relaciones foraneas
-
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Programas_Competencias(int id)
         {
             var competencias = db.Programa_formacion
@@ -204,6 +207,7 @@ namespace AssitADSOproyect.Controllers
 
 
         // GET: Programa_formacion_competencia/Asociación
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Programas_Competencias_Asociar(int programaId, [Bind(Include = "Id_programa,Competencia")] Programa_formacion programa_formacion)
         {
             ViewBag.ProgramaId = programaId;

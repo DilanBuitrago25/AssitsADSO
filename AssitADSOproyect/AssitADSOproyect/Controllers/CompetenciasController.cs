@@ -219,6 +219,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         [HttpPost]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult CrearProgramaCompetencia(int competenciaId, int programaId)
         {
             var competencia = db.Competencia.Find(competenciaId);

@@ -29,6 +29,7 @@ namespace AssitADSOproyect.Controllers
             
         }
 
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult MisSoportes()
         {
             if (Session["Idusuario"] != null)
@@ -47,6 +48,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: JustificacionInasistencia/Details/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null) 
@@ -66,7 +68,7 @@ namespace AssitADSOproyect.Controllers
         {
             var asistencias = db.Asistencia
                 .Where(a => a.Id_Instructor == instructorId)
-                .Select(a => new { a.Id_asistencia, a.Fecha_inicio_asistencia }) // O el campo que desees mostrar
+                .Select(a => new { a.Id_asistencia, a.Fecha_inicio_asistencia })
                 .ToList();
 
             return Json(asistencias, JsonRequestBehavior.AllowGet);
@@ -165,6 +167,7 @@ namespace AssitADSOproyect.Controllers
 
 
         // GET: JustificacionInasistencia/Edit/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -187,7 +190,8 @@ namespace AssitADSOproyect.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Soporte soportes)
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        public ActionResult Edit(int id, Soporte soportes, string accion)
         {
             using (var db = new BDAssistsADSOv4Entities())
             {
@@ -195,8 +199,17 @@ namespace AssitADSOproyect.Controllers
                 {
                     var soporte = db.Soporte.Find(id);
 
-                    // Actualiza solo los campos permitidos
-                    soporte.Validacion_Instructor = soportes.Validacion_Instructor;
+                    // Asigna Validacion_Instructor según el botón presionado
+                    if (accion == "rechazar")
+                    {
+                        soporte.Validacion_Instructor = false;
+                    }
+                    else if (accion == "validar")
+                    {
+                        soporte.Validacion_Instructor = true;
+                    }
+
+                    // Actualiza otros campos (Nota_Instructor)
                     soporte.Nota_Instructor = soportes.Nota_Instructor;
 
                     db.Entry(soporte).State = EntityState.Modified;
@@ -214,41 +227,6 @@ namespace AssitADSOproyect.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult Upload()
-        {
-            if (Request.Files.Count > 0)
-            {
-                var file = Request.Files[0];
-
-                if (file != null && file.ContentLength > 0)
-                {
-                    // Validación del tipo de archivo
-                    if (file.ContentType != "application/pdf")
-                    {
-                        return Json(new { error = "Solo se permiten archivos PDF" });
-                    }
-
-                    // Generar un nombre de archivo único y seguro
-                    var fileName = Guid.NewGuid().ToString() + ".pdf";
-                    var path = Path.Combine(Server.MapPath("~/uploads"), fileName);
-
-                    // Guardar el archivo
-                    file.SaveAs(path);
-
-                    // Actualizar la base de datos usando Entity Framework
-                    
-                        //var soporte = new Soporte { Tipo_soporte = "~/uploads/" + fileName }; // Ruta relativa
-                        //db.Soporte.Add(soporte);
-                        //db.SaveChanges();
-                    
-
-                    return Json(new { success = true, filePath = "~/uploads/" + fileName });
-                }
-            }
-
-            return Json(new { error = "No se seleccionó ningún archivo" });
         }
     }
 }

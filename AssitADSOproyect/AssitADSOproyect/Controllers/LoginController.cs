@@ -98,6 +98,7 @@ namespace AssitADSOproyect.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
         public ActionResult EditarPerfil([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Tipo_usuario,Tipo_instructor,Id_ficha,Estado_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
         {
             if (ModelState.IsValid)

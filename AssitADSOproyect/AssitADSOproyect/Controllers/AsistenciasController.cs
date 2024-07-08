@@ -153,7 +153,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(asistencia.Fecha_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Hora_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Detalles_asistencia));
-                    //table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha));
+                    table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha));
                     table.AddCell(new Phrase(asistencia.Competencia.Nombre_competencia));
                     table.AddCell(new Phrase(asistencia.Estado_Asistencia.ToString()));
 
@@ -194,6 +194,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Asistencias/Details/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -207,6 +208,7 @@ namespace AssitADSOproyect.Controllers
             }
             return View(asistencia);
         }
+
 
         public ActionResult ObtenerCompetenciasPorFicha(int idFicha)
         {
@@ -224,6 +226,7 @@ namespace AssitADSOproyect.Controllers
 
 
         // GET: Asistencias/Create
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Create()
         {
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
@@ -257,6 +260,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Create([Bind(Include = "Id_asistencia,Fecha_inicio_asistencia,Hora_inicio_asistencia,Fecha_fin_asistencia,Hora_fin_asistencia,Detalles_asistencia,Id_Instructor,Id_ficha,Id_competencia,Estado_asistencia")] Asistencia asistencia)
         {
             if (string.IsNullOrWhiteSpace(asistencia.Detalles_asistencia))
@@ -298,6 +302,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Asistencias/Edit/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -320,6 +325,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Edit([Bind(Include = "Id_asistencia,Id_ficha,Id_competencia,Fecha_inicio_asistencia,Hora_inicio_asistencia,Fecha_fin_asistencia,Hora_fin_asistencia,Detalles_asistencia,Id_usuario")] Asistencia asistencia)
         {
             if (ModelState.IsValid)
@@ -334,6 +340,7 @@ namespace AssitADSOproyect.Controllers
             return View(asistencia);
         }
 
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Asistencia_Aprendices(int fichaId, int asistenciaId)
         {
             // 1. Obtener la "Ficha" usando el fichaId proporcionado
@@ -364,31 +371,31 @@ namespace AssitADSOproyect.Controllers
 
 
 
-        // GET: Asistencias1/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Asistencia asistencia = db.Asistencia.Find(id);
-            if (asistencia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(asistencia);
-        }
+        //// GET: Asistencias1/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Asistencia asistencia = db.Asistencia.Find(id);
+        //    if (asistencia == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(asistencia);
+        //}
 
-        // POST: Asistencias1/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Asistencia asistencia = db.Asistencia.Find(id);
-            db.Asistencia.Remove(asistencia);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: Asistencias1/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Asistencia asistencia = db.Asistencia.Find(id);
+        //    db.Asistencia.Remove(asistencia);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

@@ -198,30 +198,7 @@ namespace AssitADSOproyect.Controllers
         }
 
 
-        // GET: Instructor/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuario.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        public ActionResult Asistencias_Ficha(int fichaId)
-        {
-            var asistencias = db.Asistencia
-                .Where(a => a.Id_ficha == fichaId)
-                .ToList();
-
-            ViewBag.FichaId = fichaId; // Opcional, para mostrar el código de la ficha en la vista
-            return View(asistencias);
-        }
+       
 
 
         protected override void Dispose(bool disposing)

@@ -128,6 +128,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: RegistroAsistencias/Details/5
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -227,6 +228,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: RegistroAsistencias/Edit/5
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -261,31 +263,7 @@ namespace AssitADSOproyect.Controllers
             return View(registroAsistencia);
         }
 
-        // GET: RegistroAsistencias/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            RegistroAsistencia registroAsistencia = db.RegistroAsistencia.Find(id);
-            if (registroAsistencia == null)
-            {
-                return HttpNotFound();
-            }
-            return View(registroAsistencia);
-        }
 
-        // POST: RegistroAsistencias/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            RegistroAsistencia registroAsistencia = db.RegistroAsistencia.Find(id);
-            db.RegistroAsistencia.Remove(registroAsistencia);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

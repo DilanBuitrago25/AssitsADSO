@@ -1,8 +1,8 @@
 ﻿﻿@model ClaseDatos.Soporte
 
 @*@{
-    Layout = "~/Views/Shared-Aprendiz/_Layout.cshtml";
-}*@
+        Layout = "~/Views/Shared-Aprendiz/_Layout.cshtml";
+    }*@
 
 
 <br />
@@ -43,103 +43,107 @@
 
 
 <!-- Container-fluid starts-->
-
-<div class="email-wrap">
-    <div class="row">
-        <div class="col-xl-3 col-md-6 xl-30">
-            <div class="email-sidebar">
-                <a class="btn btn-primary email-aside-toggle" href="javascript:void(0)">email filter</a>
-                <div class="email-left-aside">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="email-app-sidebar">
-                                <div class="media">
-                                    <div class="media-size-email"><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt=""></div>
-                                    <div class="media-body">
-                                        <h6 class="f-w-600">Dilan Buitrago</h6>
-                                        <p>dilanbuigar@gmail.com</p>
+@using (Html.BeginForm())
+{
+    <div class="email-wrap">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 xl-30">
+                <div class="email-sidebar">
+                    <a class="btn btn-primary email-aside-toggle" href="javascript:void(0)">email filter</a>
+                    <div class="email-left-aside">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="email-app-sidebar">
+                                    <div class="media">
+                                        <div class="media-size-email"><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt=""></div>
+                                        <div class="media-body">
+                                            <h6 class="f-w-600">Dilan Buitrago</h6>
+                                            <p>dilanbuigar@gmail.com</p>
+                                        </div>
                                     </div>
+                                    <ul class="nav main-menu" role="tablist">
+                                        <li class="nav-item"><a class="btn-primary btn-block btn-mail w-100" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome" role="tab" aria-controls="pills-darkhome" aria-selected="true"><i class="icofont icofont-envelope me-2"></i> Fichas</a></li>
+                                        <li class="nav-item"><a class="show" id="pills-darkprofile-tab" data-bs-toggle="pill" href="#pills-darkprofile" role="tab" aria-controls="pills-darkprofile" aria-selected="false"><span class="title"><i class="icon-import"></i> Bandeja de Entrada</span><span class="badge pull-right">(236)</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-folder"></i> 2693606</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-new-window"></i> 2693607</span><span class="badge pull-right">(69)</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-pencil-alt"></i> 2874841</span><span class="badge pull-right">(59)</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-trash"></i> 1875476</span><span class="badge pull-right">(99)</span></a></li>
+                                        <li>
+                                            <hr>
+                                        </li>
+                                        <li><a href="#"><span class="title"><i class="icon-email"></i> No leidos</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-export"></i> Leidos</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-share"></i> Validos</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-file"></i> Aceptados</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-bell"></i> Rechazados</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-notepad"></i> NOTES</span><span class="badge pull-right">(20)</span></a></li>
+                                    </ul>
                                 </div>
-                                <ul class="nav main-menu" role="tablist">
-                                    <li class="nav-item"><a class="btn-primary btn-block btn-mail w-100" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome" role="tab" aria-controls="pills-darkhome" aria-selected="true"><i class="icofont icofont-envelope me-2"></i> Fichas</a></li>
-                                    <li class="nav-item"><a class="show" id="pills-darkprofile-tab" data-bs-toggle="pill" href="#pills-darkprofile" role="tab" aria-controls="pills-darkprofile" aria-selected="false"><span class="title"><i class="icon-import"></i> Bandeja de Entrada</span><span class="badge pull-right">(236)</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-folder"></i> 2693606</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-new-window"></i> 2693607</span><span class="badge pull-right">(69)</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-pencil-alt"></i> 2874841</span><span class="badge pull-right">(59)</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-trash"></i> 1875476</span><span class="badge pull-right">(99)</span></a></li>
-                                    <li>
-                                        <hr>
-                                    </li>
-                                    <li><a href="#"><span class="title"><i class="icon-email"></i> No leidos</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-export"></i> Leidos</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-share"></i> Validos</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-file"></i> Aceptados</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-bell"></i> Rechazados</span></a></li>
-                                    <li><a href="#"><span class="title"><i class="icon-notepad"></i> NOTES</span><span class="badge pull-right">(20)</span></a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-9 col-md-12 xl-70">
-            <div class="email-right-aside">
-                <div class="card email-body">
-                    <div class="email-profile">
-                        <div class="email-right-aside">
-                            <div class="email-body">
-                                <div class="email-content">
-                                    <div class="email-top">
-                                        <div class="row">
-                                            <div class="col-xl-12">
-                                                <div class="media">
 
-                                                    <img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
-                                                    <div class="media-body">
-                                                        <h6 class="d-block">@Html.DisplayFor(model => model.Usuario.Nombre_usuario)        @Html.DisplayFor(model => model.Usuario.Apellido_usuario)                                                       </h6>
-                                                        <p>Ficha - @Html.DisplayFor(model => model.Asistencia.Ficha.Codigo_ficha).</p>
-                                                        <h5> @Html.DisplayFor(model => model.Nombre_soporte).</h5>
+            @Html.AntiForgeryToken()
+            <div class="col-xl-9 col-md-12 xl-70">
+                <div class="email-right-aside">
+                    <div class="card email-body">
+                        <div class="email-profile">
+                            <div class="email-right-aside">
+                                <div class="email-body">
+                                    <div class="email-content">
+                                        <div class="email-top">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="media">
+
+                                                        <img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
+                                                        <div class="media-body">
+                                                            <h6 class="d-block">@Html.DisplayFor(model => model.Usuario.Nombre_usuario)        @Html.DisplayFor(model => model.Usuario.Apellido_usuario)                                                       </h6>
+                                                            <p>Ficha - @Html.DisplayFor(model => model.Asistencia.Ficha.Codigo_ficha).</p>
+                                                            <h5> @Html.DisplayFor(model => model.Nombre_soporte).</h5>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="email-wrapper">
-                                        <div class="emailread-group">
-                                            <div class="read-group">
-                                                <p>Hola</p>
-                                                <p>Instructor(a) Cordial Saludo,</p>
+                                        <div class="email-wrapper">
+                                            <div class="emailread-group">
+                                                <div class="read-group">
+                                                    <p>Hola</p>
+                                                    <p>Instructor(a) Cordial Saludo,</p>
+                                                </div>
+                                                <div class="read-group">
+
+                                                    <p> @Html.DisplayFor(model => model.Descripcion_soporte)</p>
+
+                                                </div>
                                             </div>
-                                            <div class="read-group">
+                                            <div class="emailread-group">
+                                                <h6 class="text-muted mb-0"><i class="icofont icofont-clip"></i> Archivos</h6><a class="text-muted text-end right-download font-primary f-w-600" href="#"><i class="fa fa-long-arrow-down me-2"></i>Descargar Todos</a>
+                                                <div class="clearfix"></div>
+                                                <div class="attachment">
+                                                    <ul>
+                                                        <li> <a href="@Url.Content(ViewBag.RutaArchivo)" download><img class="img-fluid" src="~/assets/images/email/PdfIcon.png" alt="Archivo Soporte"></a> </li>
 
-                                                <p> @Html.DisplayFor(model => model.Descripcion_soporte)</p>
-
+                                                    </ul>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="emailread-group">
-                                            <h6 class="text-muted mb-0"><i class="icofont icofont-clip"></i> Archivos</h6><a class="text-muted text-end right-download font-primary f-w-600" href="#"><i class="fa fa-long-arrow-down me-2"></i>Descargar Todos</a>
-                                            <div class="clearfix"></div>
-                                            <div class="attachment">
-                                                <ul>
-                                                    <li> <a href="@Url.Content(ViewBag.RutaArchivo)" download><img class="img-fluid" src="~/assets/images/email/PdfIcon.png" alt="Archivo Soporte"></a> </li>
+                                            <div class="emailread-group">
+                                                @*<textarea class="form-control" rows="4" cols="50" placeholder="Escribe Una Respuesta..."></textarea>*@
+                                                @Html.TextAreaFor(model => model.Nota_Instructor, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3", placeholder = "Escribe Una Respuesta..." })
+                                                @Html.ValidationMessageFor(model => model.Nota_Instructor, "", new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => model.Id_soporte)
+                                                <div class="action-wrapper">
+                                                    <button class="btn btn-danger" type="submit" name="accion" value="rechazar">
+                                                        <i class="fa fa-reply me-2"></i>Rechazar
+                                                    </button>
 
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="emailread-group">
-                                            @*<textarea class="form-control" rows="4" cols="50" placeholder="Escribe Una Respuesta..."></textarea>*@
-                                            @Html.TextAreaFor(model => model.Nota_Instructor, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3", placeholder = "Escribe Una Respuesta..." })
-                                            @Html.ValidationMessageFor(model => model.Nota_Instructor, "", new { @class = "text-danger" })
-
-                                            <div class="action-wrapper">
-                                                <button class="btn btn-danger" type="submit" name="accion" value="rechazar">
-                                                    <i class="fa fa-reply me-2"></i>Rechazar
-                                                </button>
-
-                                                <button class="btn btn-primary" type="submit" name="accion" value="validar">
-                                                    <i class="fa fa-share me-2"></i>Validar
-                                                </button>
+                                                    <button class="btn btn-primary" type="submit" name="accion" value="validar">
+                                                        <i class="fa fa-share me-2"></i>Validar
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -151,10 +155,9 @@
             </div>
         </div>
     </div>
-</div>
+}
 
-
-<script>
+    <script>
     // Elimina el atributo 'readonly' al cargar la página
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('@Html.IdFor(model => model.Id_soporte)').removeAttribute('readonly');
@@ -165,4 +168,4 @@
             input.removeAttribute('readonly');
         });
     });
-</script>
+    </script>

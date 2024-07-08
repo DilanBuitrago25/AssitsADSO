@@ -117,6 +117,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: UsuariosAprendiz/Details/5
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -132,6 +133,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: UsuariosAprendiz/Create
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Create()
         {
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha","Codigo_ficha" /*"Jornada_ficha"*/);
@@ -157,6 +159,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: UsuariosAprendiz/Edit/5
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -173,22 +176,7 @@ namespace AssitADSOproyect.Controllers
             return View(usuario);
         }
 
-        // POST: UsuariosAprendiz/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "Id_usuario,Documento_usuario,Tipo_usuario,Tipo_Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Id_ficha")] Usuario usuario)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(usuario).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, usuario.Id_ficha);
-        //    return View(usuario);
-        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Tipo_usuario,Tipo_instructor,Id_ficha,Estado_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
@@ -204,6 +192,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         //desde aca tablas foranea
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Fichas_Aprendiz(int id)
         {
             // Obtener fichas relacionadas al aprendiz
@@ -217,6 +206,7 @@ namespace AssitADSOproyect.Controllers
             return View(fichasAprendiz);
         }
 
+        [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Asociar_Ficha_Aprendiz(int idAprendiz)
         {
             // Obtener las fichas ya asociadas al aprendiz

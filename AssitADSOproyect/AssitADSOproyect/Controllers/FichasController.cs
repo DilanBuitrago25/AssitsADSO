@@ -126,6 +126,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Fichas1/Details/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -141,7 +142,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Fichas1/Create
-   
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Create()
         {
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
@@ -153,6 +154,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Create([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin,Id_Instructor,Estado_ficha")] Ficha ficha)
         {
             if (ModelState.IsValid)
@@ -167,6 +169,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: Fichas1/Edit/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -187,6 +190,7 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Edit([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin,Id_usuario,Estado_ficha")] Ficha ficha)
         {
             if (ModelState.IsValid)
@@ -200,6 +204,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // Foranea despues de aca
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Aprendices_Ficha(int id)
         {
             var aprendizId = db.Ficha_has_Usuario
@@ -212,6 +217,7 @@ namespace AssitADSOproyect.Controllers
             return View(aprendizId);
         }
 
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Instructores_Ficha(int id)
         {
             var instructorId = db.Ficha_has_Usuario
@@ -223,6 +229,7 @@ namespace AssitADSOproyect.Controllers
             return View(instructorId);
         }
 
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Asociar_Aprendiz_Ficha(int idFicha)
         {
             var aprendizId = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
@@ -231,6 +238,7 @@ namespace AssitADSOproyect.Controllers
             return View();
         }
 
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Asociar_Instructor_Ficha(int idFicha)
         {
             var instructorId = db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin").ToList();
