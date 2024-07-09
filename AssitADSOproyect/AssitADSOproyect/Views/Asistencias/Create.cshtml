@@ -84,12 +84,12 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="mb-3">
-                                        <label>Fecha Inicio</label>
+                                        <label>Fecha</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_inicio_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "text", languaje = "es", @id = "minMaxExample", autocomplete = "off" } })
+                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "text", languaje = "es", @id = "minMaxExample", autocomplete = "off" } })
 
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.Fecha_inicio_asistencia, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -100,17 +100,6 @@
 
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Hora_inicio_asistencia, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="mb-3">
-                                        <label>Fecha Fin</label>
-                                        <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "datepicker-here form-control digits", @type = "text", @id = "minMaxExample", autocomplete = "off" } })
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -126,11 +115,11 @@
                                 </div>
                                 @Html.HiddenFor(model => model.Id_Instructor, new { Value = @Session["Idusuario"].ToString() })
                                 @*<div class="col-sm-4">
-                <div class="mb-3">
-                    <label>Ending date</label>
-                    <input class="datepicker-here form-control" type="text" data-language="en">
-                </div>
-            </div>*@
+            <div class="mb-3">
+                <label>Ending date</label>
+                <input class="datepicker-here form-control" type="text" data-language="en">
+            </div>
+        </div>*@
                             </div>
 
                             <div class="row">

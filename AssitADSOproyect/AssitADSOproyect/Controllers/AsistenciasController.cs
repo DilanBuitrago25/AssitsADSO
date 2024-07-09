@@ -261,7 +261,7 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
-        public ActionResult Create([Bind(Include = "Id_asistencia,Fecha_inicio_asistencia,Hora_inicio_asistencia,Fecha_fin_asistencia,Hora_fin_asistencia,Detalles_asistencia,Id_Instructor,Id_ficha,Id_competencia,Estado_asistencia")] Asistencia asistencia)
+        public ActionResult Create([Bind(Include = "Id_asistencia,Hora_inicio_asistencia,Fecha_fin_asistencia,Hora_fin_asistencia,Detalles_asistencia,Id_Instructor,Id_ficha,Id_competencia,Estado_asistencia")] Asistencia asistencia)
         {
             if (string.IsNullOrWhiteSpace(asistencia.Detalles_asistencia))
             {
