@@ -122,7 +122,8 @@ namespace AssitADSOproyect
                       "~/assets/css/timepicker.css",
                       "~/assets/css/datatables.css",
                       "~/assets/css/sweetalert2.css",
-                      "~/assets/css/daterange-picker.css"
+                      "~/assets/css/daterange-picker.css",
+                       "~/Content/site.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

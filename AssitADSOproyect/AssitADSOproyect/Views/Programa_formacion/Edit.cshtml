@@ -50,16 +50,15 @@
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Tipo Programa</label>
                                         <div class="input-group">
-
-                                            @Html.DropDownListFor(model => model.Tipo_programa, new List<SelectListItem>
-                                                 {
-                                                  new SelectListItem { Text = "", Value = "" },
-                                                  new SelectListItem { Text = "Tecnico", Value = "Tecnico" },
-                                                  new SelectListItem { Text = "Tecnología", Value = "Tecnologia" },
-                                                  new SelectListItem { Text = "Curso corto", Value = "Curso corto" },
-                                                  new SelectListItem { Text = "Especializacion", Value = "Especialización" },
-                                             }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Tipo_programa, "", new { @class = "text-danger" })
+                                         @Html.DropDownListFor(model => model.Tipo_programa, new List<SelectListItem>
+                                            {
+                                                new SelectListItem { Text = "", Value = "" },
+                                                new SelectListItem { Text = "Tecnico", Value = "Tecnico" },
+                                                new SelectListItem { Text = "Tecnología", Value = "Tecnologia" },
+                                                new SelectListItem { Text = "Curso corto", Value = "Curso corto" },
+                                                new SelectListItem { Text = "Especializacion", Value = "Especialización" },
+                                            }, new { @class = "form-control" })
+                                         @Html.ValidationMessageFor(model => model.Tipo_programa, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
                                     <div class="mb-3 input-group-solid">

@@ -27,7 +27,7 @@
         <div class="row">
             <div class="card-header d-flex align-items-center">
                 <div class="col-sm-4">
-                    <h5>Tabla de datos - Fichas</h5>
+                    <h5>Tabla de datos - Programas de Formación</h5>
                     <br />
                     @using (Html.BeginForm("Index", "Programa_formacion", FormMethod.Get))
                     {
@@ -49,7 +49,7 @@
         </div>
        
         <div class="card-body">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'" id="BottomPdf">
                 Generar Reporte PDF
             </button>
             <div class="table-responsive">

@@ -68,7 +68,7 @@ namespace AssitADSOproyect.Controllers
         {
             var asistencias = db.Asistencia
                 .Where(a => a.Id_Instructor == instructorId)
-                .Select(a => new { a.Id_asistencia, a.Fecha_inicio_asistencia })
+                .Select(a => new { a.Id_asistencia, a.Fecha_asistencia })
                 .ToList();
 
             return Json(asistencias, JsonRequestBehavior.AllowGet);
@@ -95,12 +95,12 @@ namespace AssitADSOproyect.Controllers
             }
             if (asistencia != null)
             {
-                ViewBag.Fecha_inicio_asistencia = asistencia.Fecha_inicio_asistencia;// Formato de fecha
+                ViewBag.Fecha_asistencia = asistencia.Fecha_asistencia;// Formato de fecha
             }
             else
             {
                 // Manejar el caso donde la asistencia no existe
-                ViewBag.Fecha_inicio_asistencia = "Fecha no encontrada"; // O un mensaje de error
+                ViewBag.Fecha_asistencia = "Fecha no encontrada"; // O un mensaje de error
             }
 
             //ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin"), "Id_Usuario", "Nombre_Usuario", "Apellido_Usuario");

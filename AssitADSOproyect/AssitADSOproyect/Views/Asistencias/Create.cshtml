@@ -86,10 +86,10 @@
                                     <div class="mb-3">
                                         <label>Fecha</label>
                                         <div class="input-group">
-                                            @Html.EditorFor(model => model.Fecha_fin_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "text", languaje = "es", @id = "minMaxExample", autocomplete = "off" } })
+                                            @Html.EditorFor(model => model.Fecha_asistencia, new { htmlAttributes = new { @class = "form-control digits", @type = "text", languaje = "es", @id = "minMaxExample", autocomplete = "off" } })
 
                                         </div>
-                                        @Html.ValidationMessageFor(model => model.Fecha_fin_asistencia, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessageFor(model => model.Fecha_asistencia, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-sm-4">

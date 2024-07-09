@@ -86,7 +86,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(registros.Id_Registroasistencia.ToString()));
                     table.AddCell(new Phrase(registros.Fecha_registro));
                     table.AddCell(new Phrase(registros.Hora_registro));
-                    table.AddCell(new Phrase(registros.Asistencia.Fecha_inicio_asistencia));
+                    table.AddCell(new Phrase(registros.Asistencia.Fecha_asistencia));
                     table.AddCell(new Phrase(registros.Usuario.Nombre_usuario));
                     table.AddCell(new Phrase(registros.Asistio_registro.ToString()));
                     table.AddCell(new Phrase(registros.Estado_RegistroAsitencia.ToString()));
@@ -191,7 +191,7 @@ namespace AssitADSOproyect.Controllers
                 if (asistencia != null)
                 {
                     // Parsear las fechas y horas (asumiendo que están en formato "yyyy-MM-dd" y "HH:mm")
-                    if (DateTime.TryParse(asistencia.Fecha_fin_asistencia, out DateTime fechaFin) &&
+                    if (DateTime.TryParse(asistencia.Fecha_asistencia, out DateTime fechaFin) &&
                         DateTime.TryParse(asistencia.Hora_fin_asistencia, out DateTime horaFin))
                     {
                         // Combinar la fecha y hora de fin de la asistencia

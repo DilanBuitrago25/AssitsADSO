@@ -10,8 +10,7 @@
             <PropertyRef Name="Id_asistencia" />
           </Key>
           <Property Name="Id_asistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Fecha_inicio_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Fecha_fin_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Fecha_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Hora_inicio_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Hora_fin_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Detalles_asistencia" Type="varchar" MaxLength="500" Nullable="false" />
@@ -343,8 +342,7 @@
             <PropertyRef Name="Id_asistencia" />
           </Key>
           <Property Name="Id_asistencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fecha_inicio_asistencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Fecha_fin_asistencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_asistencia" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Hora_inicio_asistencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Hora_fin_asistencia" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Detalles_asistencia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
@@ -667,10 +665,9 @@
           <EntitySetMapping Name="Asistencia">
             <EntityTypeMapping TypeName="BDAssistsADSOv4Model.Asistencia">
               <MappingFragment StoreEntitySet="Asistencia">
+                <ScalarProperty Name="Fecha_asistencia" ColumnName="Fecha_asistencia" />
                 <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />
                 <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
-                <ScalarProperty Name="Fecha_inicio_asistencia" ColumnName="Fecha_inicio_asistencia" />
-                <ScalarProperty Name="Fecha_fin_asistencia" ColumnName="Fecha_fin_asistencia" />
                 <ScalarProperty Name="Hora_inicio_asistencia" ColumnName="Hora_inicio_asistencia" />
                 <ScalarProperty Name="Hora_fin_asistencia" ColumnName="Hora_fin_asistencia" />
                 <ScalarProperty Name="Detalles_asistencia" ColumnName="Detalles_asistencia" />

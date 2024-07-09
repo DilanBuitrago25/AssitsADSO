@@ -95,13 +95,13 @@
                                             <div class="col-xxl-4 col-lg-6 asistencia-item">
                                                 <div class="project-box">
                                                     @{
-                                                        var fechaFinAsistencia = DateTime.Parse(item.Fecha_fin_asistencia + " " + item.Hora_fin_asistencia);
+                                                        var fechaFinAsistencia = DateTime.Parse(item.Fecha_asistencia + " " + item.Hora_fin_asistencia);
                                                     }
 
                                                     <span class="badge @(DateTime.Now > fechaFinAsistencia ? "badge-danger" : "badge-primary")">
                                                         @(DateTime.Now > fechaFinAsistencia ? "Finalizado" : "A Tiempo")
                                                     </span>
-                                                    <h6>Asistencia @Html.DisplayFor(model => item.Fecha_inicio_asistencia)</h6>
+                                                    <h6>Asistencia @Html.DisplayFor(model => item.Fecha_asistencia)</h6>
                                                     <div class="media">
                                                         <div class="media-body">
                                                             <p>Ficha - @Html.DisplayFor(model => item.Ficha.Codigo_ficha)</p>

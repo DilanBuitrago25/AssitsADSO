@@ -72,10 +72,10 @@
                                 <td>@Html.DisplayFor(model => item.Tipo_programa)</td>
                                 <td>@Html.DisplayFor(model => item.Duracion_programa)</td>
                                 @*<td>
-                                    @Html.ActionLink("Editar", "Edit", new { id = item.Id_programa }) |
-                                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_programa }) |
-                                    @Html.ActionLink("Competencias", "Programas_Competencias", new { id = item.Id_programa })
-                                </td>*@
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id_programa }) |
+                                @Html.ActionLink("Detalles", "Details", new { id = item.Id_programa }) |
+                                @Html.ActionLink("Competencias", "Programas_Competencias", new { id = item.Id_programa })
+                            </td>*@
                             </tr>
                         }
                     </tbody>
@@ -89,6 +89,9 @@
                         </tr>
                     </tfoot>
                 </table>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-end">
+                <button class="btn btn-light" type="button" style="margin-top: 15px;"><a href="@Url.Action("Index","Competencias")">Volver</a></button>
             </div>
         </div>
     </div>

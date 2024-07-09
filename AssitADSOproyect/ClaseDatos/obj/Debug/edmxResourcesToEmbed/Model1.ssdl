@@ -5,8 +5,7 @@
       <PropertyRef Name="Id_asistencia" />
     </Key>
     <Property Name="Id_asistencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fecha_inicio_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Fecha_fin_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Fecha_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Hora_inicio_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Hora_fin_asistencia" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Detalles_asistencia" Type="varchar" MaxLength="500" Nullable="false" />
