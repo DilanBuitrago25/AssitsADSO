@@ -22,8 +22,7 @@ namespace ClaseDatos
         }
     
         public int Id_asistencia { get; set; }
-        public string Fecha_inicio_asistencia { get; set; }
-        public string Fecha_fin_asistencia { get; set; }
+        public string Fecha_asistencia { get; set; }
         public string Hora_inicio_asistencia { get; set; }
         public string Hora_fin_asistencia { get; set; }
         public string Detalles_asistencia { get; set; }

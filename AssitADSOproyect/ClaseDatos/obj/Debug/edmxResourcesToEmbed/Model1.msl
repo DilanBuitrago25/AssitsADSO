@@ -4,10 +4,9 @@
     <EntitySetMapping Name="Asistencia">
       <EntityTypeMapping TypeName="BDAssistsADSOv4Model.Asistencia">
         <MappingFragment StoreEntitySet="Asistencia">
+          <ScalarProperty Name="Fecha_asistencia" ColumnName="Fecha_asistencia" />
           <ScalarProperty Name="Id_competencia" ColumnName="Id_competencia" />
           <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
-          <ScalarProperty Name="Fecha_inicio_asistencia" ColumnName="Fecha_inicio_asistencia" />
-          <ScalarProperty Name="Fecha_fin_asistencia" ColumnName="Fecha_fin_asistencia" />
           <ScalarProperty Name="Hora_inicio_asistencia" ColumnName="Hora_inicio_asistencia" />
           <ScalarProperty Name="Hora_fin_asistencia" ColumnName="Hora_fin_asistencia" />
           <ScalarProperty Name="Detalles_asistencia" ColumnName="Detalles_asistencia" />

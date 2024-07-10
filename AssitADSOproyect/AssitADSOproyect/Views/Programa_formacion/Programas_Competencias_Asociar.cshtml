@@ -1,5 +1,105 @@
 ﻿@model ClaseDatos.Programa_formacion
 
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Programas asociados a la competencia: @ViewBag.NombrePrograma</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Programa de Formación</li>
+                    <li class="breadcrumb-item">@ViewBag.NombrePrograma</li>
+                    <li class="breadcrumb-item active">Asignar Competencia</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("Programas_Competencias_Asociar", "Programa_formacion", FormMethod.Post))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h5>Asignar Competencia</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+
+                                @Html.AntiForgeryToken()
+                                <form>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Competencia</label>
+                                        <div class="input-group">
+                                            @Html.DropDownList("competenciaId", new SelectList(ViewBag.CompetenciasDisponibles, "Id_competencia", "Nombre_competencia"), "Selecciona una competencia", new { @class = "form-control" })
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="mb-3">
+                                                <label class="form-label">Programa de Formacion</label>
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.NombrePrograma">
+                                                <input hidden name="competenciaId" value="@ViewBag.ProgramaId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Asociar Competencia</button>
+                        <button class="btn btn-light" type="button"><a href="@Url.Action("Programas_Competencias","Programa_formacion", new { id = @ViewBag.ProgramaId })">Volver</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_programa)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
+
+
+
+
+
+@*<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Asociar Competencia al programa: @ViewBag.NombrePrograma</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Programa de Formacion</li>
+                    <li class="breadcrumb-item">@ViewBag.NombrePrograma</li>
+                    <li class="breadcrumb-item active">Asociar Competencias</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @using (Html.BeginForm("Programas_Competencias_Asociar", "Programa_formacion", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -11,4 +111,4 @@
     <input name="programaId" value="@ViewBag.ProgramaId" />
 
     <button type="submit" class="btn btn-primary">Asociar Competencia</button>
-}
+}*@

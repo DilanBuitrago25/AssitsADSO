@@ -85,20 +85,6 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 input-group-solid">
-                                        <label class="form-label">Codigo Ficha</label>
-                                        <div class="input-group">
-                                            @Html.DropDownList("Numero_ficha", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Numero_ficha, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 m-form__group">
-                                        <label class="form-label">Programa de formación</label>
-                                        <div class="input-group">
-                                            @Html.DropDownList("Id_programa", null, htmlAttributes: new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Id_programa, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 input-group-solid">
                                         <label class="form-label">Estado Competencia</label>
                                         <div class="input-group">
                                             @Html.DropDownListFor(model => model.Estado_Competencia, new List<SelectListItem>
@@ -109,13 +95,12 @@
 
                                         </div>
                                     </div>
-                                    @Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary m-r-15" type="submit">Submit</button>
+                        <button class="btn btn-primary m-r-15" type="submit">Editar</button>
                         <button class="btn btn-light" type="button"><a href="@Url.Action("Index","Competencias")">Cancelar</a></button>
                     </div>
                 </div>

@@ -95,8 +95,7 @@ go
 
 create table Asistencia(
 Id_asistencia int identity (100000,1) not null,
-Fecha_inicio_asistencia varchar(200) not null,
-Fecha_fin_asistencia varchar(200) not null,
+Fecha_asistencia varchar(200) not null,
 Hora_inicio_asistencia varchar(200) not null,
 Hora_fin_asistencia varchar(200) not null,
 Detalles_asistencia varchar (500) not null,
@@ -135,5 +134,4 @@ Estado_Soporte bit default (1),
 Validacion_Instructor bit default (0),
 Nota_Instructor varchar(500),
 primary key (Id_soporte));
-
 

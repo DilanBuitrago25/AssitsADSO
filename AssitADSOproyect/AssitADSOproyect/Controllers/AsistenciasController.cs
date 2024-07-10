@@ -46,8 +46,8 @@ namespace AssitADSOproyect.Controllers
                         var asistenciasFiltradasLista = query.ToList(); // Convertir a lista para usar LINQ to Objects
 
                         asistenciasFiltradasLista = asistenciasFiltradasLista.Where(a =>
-                            DateTime.ParseExact(a.Fecha_inicio_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= fechaInicioParsed &&
-                            DateTime.ParseExact(a.Fecha_inicio_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
+                            DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= fechaInicioParsed &&
+                            DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
 
                         // Volver a asignar el resultado filtrado
                         query = asistenciasFiltradasLista.AsQueryable();
@@ -91,7 +91,7 @@ namespace AssitADSOproyect.Controllers
             int numeroPagina = (pagina ?? 1); // Si 'pagina' es nulo, usa la página 1
 
             var asistenciasFiltradas = db.Asistencia
-                .OrderByDescending(a => a.Fecha_inicio_asistencia)
+                .OrderByDescending(a => a.Fecha_asistencia)
                 .Skip((numeroPagina - 1) * registrosPorPagina)
                 .Take(registrosPorPagina)
                 .ToList();
@@ -133,9 +133,8 @@ namespace AssitADSOproyect.Controllers
                 // Encabezados de la tabla
                 Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
                 table.AddCell(new Phrase("Id de Asistencia", headerFont));
-                table.AddCell(new Phrase("Fecha Inicio"));
+                table.AddCell(new Phrase("Fecha"));
                 table.AddCell(new Phrase("Hora Inicio"));
-                table.AddCell(new Phrase("Fecha Fin"));
                 table.AddCell(new Phrase("Hora Fin"));
                 table.AddCell(new Phrase("Detalles Asistencia"));
                 table.AddCell(new Phrase("Codigo Ficha"));
@@ -148,9 +147,8 @@ namespace AssitADSOproyect.Controllers
                 foreach (var asistencia in asistencias)
                 {
                     table.AddCell(new Phrase(asistencia.Id_asistencia.ToString()));
-                    table.AddCell(new Phrase(asistencia.Fecha_inicio_asistencia));
+                    table.AddCell(new Phrase(asistencia.Fecha_asistencia));
                     table.AddCell(new Phrase(asistencia.Hora_inicio_asistencia));
-                    table.AddCell(new Phrase(asistencia.Fecha_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Hora_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Detalles_asistencia));
                     table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha));
@@ -261,7 +259,7 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
-        public ActionResult Create([Bind(Include = "Id_asistencia,Fecha_inicio_asistencia,Hora_inicio_asistencia,Fecha_fin_asistencia,Hora_fin_asistencia,Detalles_asistencia,Id_Instructor,Id_ficha,Id_competencia,Estado_asistencia")] Asistencia asistencia)
+        public ActionResult Create([Bind(Include = "Id_asistencia,Hora_inicio_asistencia,Fecha_asistencia,Hora_fin_asistencia,Detalles_asistencia,Id_Instructor,Id_ficha,Id_competencia,Estado_asistencia")] Asistencia asistencia)
         {
             if (string.IsNullOrWhiteSpace(asistencia.Detalles_asistencia))
             {

@@ -131,8 +131,11 @@ a {
     text-decoration: none;
 }
 
+
+
 .btn-link {
-  text-decoration: none; }
+    text-decoration: none;
+}
 
 *a {
   color: #24695c;
@@ -213,6 +216,7 @@ input:focus {
 
 .media-widgets .media-body {
   margin-bottom: 30px; }
+
 
 .rating-star {
   display: -webkit-box;

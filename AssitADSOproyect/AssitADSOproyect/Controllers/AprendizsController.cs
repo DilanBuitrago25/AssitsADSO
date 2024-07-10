@@ -16,7 +16,7 @@ namespace AssitADSOproyect.Controllers
     public class AprendizsController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=LAPTOP-NC5UJ7OA;Initial Catalog=BDAssistsADSOv5;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDAssistsADSOvFinal;Integrated Security=True;trustservercertificate=True;";
         // GET: Aprendizs
         [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Index(string estadoFiltro = "")

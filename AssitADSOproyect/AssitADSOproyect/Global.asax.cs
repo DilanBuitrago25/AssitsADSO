@@ -59,7 +59,7 @@ namespace AssitADSOproyect
                     .Where(a =>
                     {
                         DateTime fechaFinAsistencia;
-                        if (DateTime.TryParseExact(a.Fecha_fin_asistencia + " " + a.Hora_fin_asistencia, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinAsistencia))
+                        if (DateTime.TryParseExact(a.Fecha_asistencia + " " + a.Hora_fin_asistencia, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinAsistencia))
                         {
                             return fechaFinAsistencia < fechaHoraActual;
                         }

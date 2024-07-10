@@ -212,8 +212,8 @@ namespace AssitADSOproyect.Controllers
                 .Select(fu => fu.Usuario)
                 .ToList();
 
-            ViewBag.FichaId = id; // Pasar el ID de la ficha a la vista
-            ViewBag.CodigoFIcha = db.Ficha.Find(id)?.Codigo_ficha; // Obtenemos el nombre de la competencia para mostrar en la vista
+            ViewBag.FichaId = id;
+            ViewBag.CodigoFicha = db.Ficha.Find(id)?.Codigo_ficha; 
             return View(aprendizId);
         }
 
@@ -225,7 +225,8 @@ namespace AssitADSOproyect.Controllers
                 .Select(fu => fu.Usuario)
                 .ToList();
 
-            ViewBag.FichaId = id; // Pasar el ID de la ficha a la vista
+            ViewBag.FichaId = id;
+            ViewBag.CodigoFicha = db.Ficha.Find(id)?.Codigo_ficha;
             return View(instructorId);
         }
 
@@ -235,6 +236,7 @@ namespace AssitADSOproyect.Controllers
             var aprendizId = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
             ViewBag.Aprendices = aprendizId;
             ViewBag.FichaId = idFicha;
+            ViewBag.CodigoFicha = db.Ficha.Find(idFicha)?.Codigo_ficha;
             return View();
         }
 
@@ -244,6 +246,7 @@ namespace AssitADSOproyect.Controllers
             var instructorId = db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin").ToList();
             ViewBag.Instructores = instructorId;
             ViewBag.FichaId = idFicha;
+            ViewBag.CodigoFicha = db.Ficha.Find(idFicha)?.Codigo_ficha;
             return View();
         }
 
@@ -289,7 +292,7 @@ namespace AssitADSOproyect.Controllers
                 }
             }
 
-            // Si hay errores de validación, volver a mostrar el formulario con los datos previos
+            
             ViewBag.Aprendices = db.Usuario.Where(u => u.Tipo_usuario == "Aprendiz").ToList();
             ViewBag.FichaId = idFicha;
             return RedirectToAction("Aprendices_Ficha", new { id = idFicha });

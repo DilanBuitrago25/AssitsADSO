@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared-Instructor-admin/_Layout.cshtml";
 }
 
 
@@ -21,24 +20,6 @@
                 </ol>
             </div>
             <div class="col-sm-6">
-                <!-- Bookmark Start-->
-                <div class="bookmark">
-                    <ul>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                            <form class="form-inline search-form">
-                                <div class="form-group form-control-search">
-                                    <input type="text" placeholder="Search..">
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Bookmark Ends-->
             </div>
         </div>
     </div>
@@ -50,7 +31,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>Registrar Aprendiz</h5>
+                        <h5>Editar Intructor</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -58,7 +39,7 @@
 
                                 @Html.AntiForgeryToken()
                                 <form>
-
+                                    @Html.HiddenFor(model => model.Id_usuario)
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Documento</label>
                                         <div class="input-group">
@@ -115,21 +96,20 @@
                                             @Html.ValidationMessageFor(model => model.Contrasena_usuario, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
-                                    @*<div class="mb-3 m-form__group">
+                                    <div class="mb-3 m-form__group">
                                         <label class="form-label">Tipo Instructor</label>
                                         <div class="input-group">
                                             <span class="input-group-text">A</span>
                                             @Html.DropDownListFor(model => model.Tipo_usuario, new List<SelectListItem>
                                                 {
-                                                     new SelectListItem { Text = "", Value = "False" },
-                                                     new SelectListItem { Text = "Aplica", Value = "True" },
-                                                     new SelectListItem { Text = "No aplica", Value = "False" }
+                                                     new SelectListItem { Text = "Instructor", Value = "Instructor" },
+                                                     new SelectListItem { Text = "Instructor Administrador", Value = "InstructorAdmin" }
 
 
                                                 }, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(model => model.Tipo_instructor, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(model => model.Tipo_usuario, "", new { @class = "text-danger" })
                                         </div>
-                                    </div>*@
+                                    </div>
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Estado Usuario</label>
                                         <div class="input-group">
