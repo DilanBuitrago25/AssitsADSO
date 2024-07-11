@@ -83,7 +83,9 @@ namespace AssitADSOproyect
                         "~/assets/js/datepicker/daterange-picker/daterangepicker.js",
                         "~/assets/js/datepicker/daterange-picker/daterange-picker.custom.js",
                         "~/assets/js/sweet-alert/sweetalert.min.js",
-                        "~/assets/js/sweet-alert/app.js"
+                        "~/assets/js/sweet-alert/app.js",
+                        "~/assets/js/select2/select2.full.min.js",
+                        "~/assets/js/select2/select2-custom.js"
 
                         ));
 
@@ -123,7 +125,8 @@ namespace AssitADSOproyect
                       "~/assets/css/datatables.css",
                       "~/assets/css/sweetalert2.css",
                       "~/assets/css/daterange-picker.css",
-                       "~/Content/site.css"
+                       "~/Content/site.css",
+                       "~/assets/css/select2.css"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

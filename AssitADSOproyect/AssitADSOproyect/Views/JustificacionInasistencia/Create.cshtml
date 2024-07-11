@@ -24,7 +24,6 @@
 </div>
 
 
-<!-- Container-fluid starts-->
 <div class="container-fluid">
     <div class="email-wrap">
         <div class="row">
@@ -55,7 +54,7 @@
 
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Fecha Inasistencia</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.Fecha_inicio_asistencia">
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.Fecha_asistencia">
                                                 @Html.HiddenFor(model => model.Id_asistencia)
                                             </div>
                                                 @*@Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })*@
@@ -67,18 +66,18 @@
                                                 @Html.ValidationMessageFor(model => model.Nombre_soporte, "", new { @class = "text-danger" })
 
                                                 @*@Html.HiddenFor(model => model.Archivo_soporte, new { id = "Archivo_soporte" })*@
+                                               
+                                            <div class="col-sm-12">
                                                 <label class="col-sm-3 col-form-label">Subir Archivo (solo PDF)</label>
-                                                <div class="col-sm-12">
+                                                <input type="file" name="archivo" id="archivo" class="form-control" />
 
-                                                    <input type="file" name="archivo" id="archivo" class="form-control" />
-
-                                                    @if (ViewBag.ErrorArchivo != null)
-                                                    {
-                                                        <div class="text-danger">@ViewBag.ErrorArchivo</div>
-                                                    }
+                                                @if (ViewBag.ErrorArchivo != null)
+                                                {
+                                                    <div class="text-danger">@ViewBag.ErrorArchivo</div>
+                                                }
 
 
-                                                </div>
+                                            </div>
                                                 <br />
 
                                                 <div class="form-group">

@@ -180,8 +180,16 @@ namespace AssitADSOproyect.Controllers
             return registrosSoportePorFicha;
         }
 
+        public ActionResult Asistencias_Ficha(int fichaId)
+        {
+            var asistencias = db.Asistencia
+                .Where(a => a.Id_ficha == fichaId)
+                .ToList();
 
-       
+            ViewBag.FichaId = fichaId; // Opcional, para mostrar el código de la ficha en la vista
+            return View(asistencias);
+        }
+
 
 
         protected override void Dispose(bool disposing)

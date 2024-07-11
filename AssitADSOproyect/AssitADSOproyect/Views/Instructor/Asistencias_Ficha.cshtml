@@ -4,74 +4,213 @@
     ViewBag.Title = "Asistencias de la Ficha " + ViewBag.FichaId;
 }
 
-<h2>@ViewBag.Title</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Fecha</th>
-            <th>Hora Inicio</th>
-            <th>Hora Fin</th>
-            <th>... (otras columnas relevantes)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<style>
+    .qr-image {
+        max-width: 100%; /* La imagen no superará el ancho del contenedor */
+        height: auto; /* Mantiene la proporción de aspecto de la imagen */
+    }
+</style>
 
-            var asistenciaidQr = @Html.DisplayFor(model => item.Id_asistencia);
-            <div class="col-xxl-4 col-lg-6 asistencia-item">
-                <div class="project-box">
-                    @{
-                        var fechaFinAsistencia = DateTime.Parse(item.Fecha_fin_asistencia + " " + item.Hora_fin_asistencia);
-                    }
+<br />
 
-                    <span class="badge @(DateTime.Now > fechaFinAsistencia ? "badge-danger" : "badge-primary")">
-                        @(DateTime.Now > fechaFinAsistencia ? "Finalizado" : "A Tiempo")
-                    </span>
-                    <h6>Asistencia @Html.DisplayFor(model => item.Fecha_inicio_asistencia)</h6>
-                    <div class="media">
-                        <div class="media-body">
-                            <p>Ficha - @Html.DisplayFor(model => item.Ficha.Codigo_ficha)</p>
-                        </div>
+<div class="page-header">
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Asistencias</h3>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item">Instructor</li>
+                <li class="breadcrumb-item active">Fichas</li>
+                <li class="breadcrumb-item active">Asistencias</li>
+                <li class="breadcrumb-item active">Consultar</li>
+            </ol>
+        </div>
+        <div class="col-sm-6">
+        </div>
+    </div>
+</div>
+<!-- Container-fluid starts-->
 
-                        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id_asistencia">Ver Qr</button>
+<div class="container-fluid">
+    <div class="row project-cards">
+        <div class="col-md-12 project-list">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6 p-0">
+                        <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
+                            <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true"><i data-feather="target"></i>All</a></li>
+                            <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="check-circle"></i>A Tiempo</a></li>
+                            <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="info"></i>Finalizado</a></li>
+                        </ul>
                     </div>
-                    <p>Competencia - @Html.DisplayFor(model => item.Competencia.Nombre_competencia).</p>
-                    @Html.ActionLink("Ver Listado Asistencias", "Asistencia_Aprendices", "Asistencias", new { fichaId = item.Id_ficha, asistenciaId = item.Id_asistencia }, null)
+                    <div class="col-md-6 p-0">
 
-                    <div class="row details">
-                        <div class="col-6"><span>Asistieron </span></div>
-                        <div class="col-6 font-primary">12 </div>
-                        <div class="col-6"> <span>No Asistieron</span></div>
-                        <div class="col-6 font-primary">5</div>
-                        <div class="col-6"> <span>Justificaron Inasistencia</span></div>
-                        <div class="col-6 font-primary">7</div>
-                    </div>
-                    <div class="customers"></div>
-                </div>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade modal-bookmark" id="exampleModal-@item.Id_asistencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Codigo Qr de la Asistencia</h5>
-                            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form class="form-bookmark needs-validation" id="bookmark-form" novalidate="">
-                                <a href="@Url.Action("Edit", "Asistencias", new { id = item.Id_asistencia })">
-                                    <img class="qr-image" src="@Url.Content("~/QRCodes/" + item.Id_asistencia + ".png")" alt="QR para editar asistencia" />
-                                </a>
-                                <input id="index_var" type="hidden" value="6">
-                                <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                            </form>
-                        </div>
+                        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Asistencias")'">
+                            Generar Reporte PDF
+                        </button>
                     </div>
                 </div>
+                @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="estadoFiltro">Fecha:</label>
+                            <input class="form-control digits" id="reportrange" type="text" name="fechaFiltro" value="@ViewBag.fechaFiltro" />
+
+                            <br />
+                            <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                        </div>
+
+                        <!--<div class="col-md-4">
+                            <label for="estadoFiltro">Fichas:</label>-->
+                            @*@Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "form-control", onchange = "cargarCompetencias()" })*@
+                            <!--<br />
+                        </div>-->
+                        <div class="col-md-8">
+                            @*<label for="estadoFiltro">Competencias:</label>*@
+                            @*@Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "form-control" })*@
+
+                            <br />
+                            
+                            
+                        </div>
+
+                    </div>
+                }
             </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br />
+            <div class="card">
+
+                <div class="card-body">
+
+
+                    <div class="tab-content" id="top-tabContent">
+                        <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+                            <div class="row">
+
+                                @foreach (var item in Model)
+                                {
+
+                                    var asistenciaidQr = @Html.DisplayFor(model => item.Id_asistencia);
+                                    <div class="col-xxl-4 col-lg-6 asistencia-item">
+                                        <div class="project-box">
+                                            @{
+                                                var fechaFinAsistencia = DateTime.Parse(item.Fecha_asistencia + " " + item.Hora_fin_asistencia);
+                                            }
+
+                                            <span class="badge @(DateTime.Now > fechaFinAsistencia ? "badge-danger" : "badge-primary")">
+                                                @(DateTime.Now > fechaFinAsistencia ? "Finalizado" : "A Tiempo")
+                                            </span>
+                                            <h6>Asistencia @Html.DisplayFor(model => item.Fecha_asistencia)</h6>
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <p>Ficha - @Html.DisplayFor(model => item.Ficha.Codigo_ficha)</p>
+                                                </div>
+
+                                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal-@item.Id_asistencia">Ver Qr</button>
+                                            </div>
+                                            <p>Competencia - @Html.DisplayFor(model => item.Competencia.Nombre_competencia).</p>
+                                            @Html.ActionLink("Ver Listado Asistencias", "Asistencia_Aprendices", "Asistencias", new { fichaId = item.Id_ficha, asistenciaId = item.Id_asistencia }, null)
+
+                                            <div class="row details">
+                                                <div class="col-6"><span>Asistieron </span></div>
+                                                <div class="col-6 font-primary">12 </div>
+                                                <div class="col-6"> <span>No Asistieron</span></div>
+                                                <div class="col-6 font-primary">5</div>
+                                                <div class="col-6"> <span>Justificaron Inasistencia</span></div>
+                                                <div class="col-6 font-primary">7</div>
+                                            </div>
+                                            <div class="customers"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade modal-bookmark" id="exampleModal-@item.Id_asistencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Codigo Qr de la Asistencia</h5>
+                                                    <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form-bookmark needs-validation" id="bookmark-form" novalidate="">
+                                                        <a href="@Url.Action("Edit", "Asistencias", new { id = item.Id_asistencia })">
+                                                            <img class="qr-image" src="@Url.Content("~/QRCodes/" + item.Id_asistencia + ".png")" alt="QR para editar asistencia" />
+                                                        </a>
+                                                        <input id="index_var" type="hidden" value="6">
+                                                        <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            @*<div class="paginacion">
+                                @for (int i = 1; i <= Math.Ceiling((double)ViewBag.TotalRegistros / 10); i++)
+                                {
+                                    <a href="@Url.Action("Index", new { pagina = i })" class="@(i == ViewBag.PaginaActual ? "active" : "")">@i</a>
+                                }
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
+    const asistenciaItems = document.querySelectorAll('.asistencia-item');
+
+    tabLinks.forEach(link => {
+        link.addEventListener('click', function () {
+            const filtro = this.textContent.trim(); // "All", "A Tiempo" o "Finalizado"
+
+            asistenciaItems.forEach(item => {
+                const span = item.querySelector('.badge'); // Obtener el span de la asistencia
+                const estado = span.textContent.trim();  // "A Tiempo" o "Finalizado"
+
+                if (filtro === "All" || estado === filtro) {
+                    item.style.display = 'block'; // Mostrar el item
+                } else {
+                    item.style.display = 'none'; // Ocultar el item
+                }
+            });
+        });
+    });
+});
+
+    function cargarCompetencias() {
+    var fichaId = $("#Id_ficha").val();
+    $.ajax({
+        url: '@Url.Action("ObtenerCompetenciasPorFicha", "Asistencias")', // Cambiar el controlador
+        type: 'GET',
+        data: { idFicha: fichaId },
+        success: function (data) {
+            var selectCompetencia = $("#Id_competencia");
+            selectCompetencia.empty();
+            $.each(data, function (index, competencia) {
+                selectCompetencia.append($('<option></option>').val(competencia.Value).text(competencia.Text));
+            });
         }
-    </tbody>
-</table>
+    });
+}
+
+$(function () {
+    $('#reportrange').daterangepicker({
+        locale: {
+            format: 'MM/DD/YYYY'
+        }
+    });
+});
+
+
+</script>
+
+

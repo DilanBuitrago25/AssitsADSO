@@ -115,7 +115,6 @@ Hora_registro varchar(200)  ,
 Asistio_registro bit default (0),
 Id_asistencia int references Asistencia(Id_asistencia),
 Id_Aprendiz int references Usuario(Id_usuario),
-Estado_RegistroAsitencia bit default (1),
 Primary Key (Id_Registroasistencia));
 
 go

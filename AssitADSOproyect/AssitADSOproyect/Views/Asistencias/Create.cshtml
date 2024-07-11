@@ -17,24 +17,7 @@
             </ol>
         </div>
         <div class="col-sm-6">
-            <!-- Bookmark Start-->
-            <div class="bookmark">
-                <ul>
-                    <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
-                    <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-                    <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-                    <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-                    <li>
-                        <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                        <form class="form-inline search-form">
-                            <div class="form-group form-control-search">
-                                <input type="text" placeholder="Search..">
-                            </div>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-            <!-- Bookmark Ends-->
+          
         </div>
     </div>
 </div>
@@ -49,21 +32,12 @@
                     @Html.AntiForgeryToken()
                     <div class="card-body">
                         <div class="form theme-form">
-                            @*<div class="row">
-            <div class="col">
-                <div class="mb-3">
-                    <label>Tipo Asistencia</label>
-                    <input class="form-control" type="text" placeholder="Project name *">
-                </div>
-            </div>
-        </div>*@
-
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
                                         <label>Ficha</label>
                                         <div class="input-group">
-                                            @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "form-control", onchange = "cargarCompetencias()" })
+                                            @Html.DropDownList("Id_ficha", null, "Selecciona una Ficha", new { @class = "js-example-basic-single col-sm-12 form-control", onchange = "cargarCompetencias()" })
 
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
@@ -75,7 +49,7 @@
                                     <div class="mb-3">
                                         <label>Competencia</label>
                                         <div class="input-group">
-                                            @Html.DropDownList("Id_competencia", null, htmlAttributes: new { @class = "form-control" })
+                                            @Html.DropDownList("Id_competencia",null,"Selecciona una Competencia" ,htmlAttributes: new { @class = "js-example-basic-single col-sm-12 form-control" })
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Id_competencia, "", new { @class = "text-danger" })
                                     </div>
@@ -114,18 +88,12 @@
                                     </div>
                                 </div>
                                 @Html.HiddenFor(model => model.Id_Instructor, new { Value = @Session["Idusuario"].ToString() })
-                                @*<div class="col-sm-4">
-            <div class="mb-3">
-                <label>Ending date</label>
-                <input class="datepicker-here form-control" type="text" data-language="en">
-            </div>
-        </div>*@
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea4">Enter some Details</label>
+                                        <label for="exampleFormControlTextarea4">Ingresar algunos Detalles</label>
                                         <div class="input-group">
                                             @Html.TextAreaFor(model => model.Detalles_asistencia, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3" })
 
@@ -135,20 +103,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            @*<div class="row">
-            <div class="col">
-                <div class="mb-3">
-                    <label>Upload project file</label>
-                    <form class="dropzone" id="singleFileUpload" action="/upload.php">
-                        <div class="dz-message needsclick">
-                            <i class="icon-cloud-up"></i>
-                            <h6>Drop files here or click to upload.</h6><span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>*@
                             <div class="row">
                                 <div class="col">
                                     <div class="text-end">
