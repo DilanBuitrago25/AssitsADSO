@@ -13,7 +13,7 @@
                 <h3>Gestionar Aprendiz</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
-                    <li class="breadcrumb-item">Aprendiz</li>
+                    <li class="breadcrumb-item">Gestionar Aprendiz</li>
                     <li class="breadcrumb-item">General</li>
                     <li class="breadcrumb-item active">Consultar</li>
                 </ol>
@@ -30,7 +30,7 @@
         <div class="row">
             <div class="card-header d-flex align-items-center">
                 <div class="col-sm-4">
-                    <h5>Tabla de datos - Fichas</h5>
+                    <h5>Tabla de datos - Aprendices</h5>
                     <br />
                     @using (Html.BeginForm("Index", "UsuariosAprendiz", FormMethod.Get))
                     {
@@ -52,7 +52,7 @@
         </div>
         
         <div class="card-body">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "UsuariosAprendiz")'">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "UsuariosAprendiz")'" id="BottomPdf">
                 Generar Reporte PDF
             </button>
             <div class="table-responsive">
@@ -64,7 +64,7 @@
                             <th>Documento</th>
                             <th>Nombre</th>
                             <th>Correo</th>
-                            <th>Id Ficha</th>
+                            <th>Acciones</th>
                         </tr>
 
                     </thead>
@@ -90,8 +90,8 @@
                                     @Html.DisplayFor(model => item.Id_ficha)
                                 </td>*@
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id_usuario }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id_usuario }) |
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.Id_usuario }) |
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_usuario }) |
                                     @Html.ActionLink("Fichas", "Fichas_Aprendiz", new { id = item.Id_usuario })
                                 </td>
 
@@ -104,7 +104,7 @@
                             <th>Documento</th>
                             <th>Nombre</th>
                             <th>Correo</th>
-                            <th>Id Ficha</th>
+                            <th>Acciones</th>
                         </tr>
                     </tfoot>
                 </table>
