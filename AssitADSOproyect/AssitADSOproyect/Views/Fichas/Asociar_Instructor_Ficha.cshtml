@@ -18,7 +18,7 @@
         </div>
     </div>
 </div>
-@using (Html.BeginForm("Asociar_Aprendiz_Ficha", "Fichas", new { idFicha = ViewBag.FichaId }, FormMethod.Post))
+@using (Html.BeginForm("Asociar_Instructor_Ficha", "Fichas", new { idFicha = ViewBag.FichaId }, FormMethod.Post))
 {
     <div class="container-fluid">
         <div class="row">
@@ -38,7 +38,7 @@
                                         <div class="input-group">
                                             @Html.DropDownList("instructorId", new SelectList(ViewBag.Instructores, "Id_usuario", "Nombre_usuario"), "Seleccionar Instructor", new { @class = "form-control" })
                                         </div>
-
+                                        @*@Html.ValidationMessageFor(model => model.Id_usuario, "", new { @class = "text-danger" })*@
                                     </div>
                                 </form>
                             </div>

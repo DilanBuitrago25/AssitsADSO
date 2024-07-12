@@ -19,95 +19,84 @@
                 </ol>
             </div>
             <div class="col-sm-6">
-                <!-- Bookmark Start-->
-                @*<div class="bookmark">
-                    <ul>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                            <form class="form-inline search-form">
-                                <div class="form-group form-control-search">
-                                    <input type="text" placeholder="Search..">
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </div>*@
-                <!-- Bookmark Ends-->
+            
             </div>
         </div>
     </div>
 </div>
-<!-- Individual column searching (text inputs) Starts-->
 <div class="col-sm-12">
     <div class="card">
-        <div class="card-header">
-            <h5>Tabla de Asistencias</h5>
-            @*<br />
-            <button class="btn btn-light"><a href="@Url.Action("Create","Programa_formacion")">Crear</a></button>*@
+        <div class="card-header d-flex align-items-center">
+            <div class="col-sm-8">
+                <h5>Tabla de Asistencias</h5>
+                <br />
+                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "RegistroAsistencias")'">
+                    Generar Reporte PDF
+                </button>
+                    
+            </div>
+            <div class="col-sm-4 ">
+                @using (Html.BeginForm("Index", "RegistroAsistencias", FormMethod.Get))
+                {
+                    <div class="d-flex align-items-center">
+                        <label for="estadoFiltro" class="me-2">Estado:</label>
+                        <select class="form-select me-2" id="estadoFiltro" name="estadoFiltro">
+                            <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                            <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                            <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+                        </select>
+                        <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                    </div>
+                }
+            </div>
         </div>
-        @using (Html.BeginForm("Index", "RegistroAsistencias", FormMethod.Get))
-        {
-            <label for="estadoFiltro">Estado:</label>
-            <select id="estadoFiltro" name="estadoFiltro">
-                <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
-                <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Asistencia</option>
-                <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>Inasistencia</option>
-            </select>
-            <input type="submit" value="Filtrar" />
-        }
-    <div class="card-body">
-        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "RegistroAsistencias")'">
-            Generar Reporte PDF
-        </button>
-        <div class="table-responsive">
-            <table class="display datatables" id="ajax-data-object">
-                <thead>
+        <div class="card-body">
+            
+            <div class="table-responsive">
+                <table class="display datatables" id="ajax-data-object">
+                    <thead>
 
-                    <tr>
-                        <th>Codigo Ficha</th>
-                        <th>Fecha Asistencia</th>
-                        <th>Fecha Registro Asistencia</th>
-                        <th>Competencia</th>
-                        <th>Asistió</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.Asistencia.Ficha.Codigo_ficha)</td>
-                            <td>@Html.DisplayFor(model => item.Asistencia.Fecha_inicio_asistencia)</td>
-                            <td>@Html.DisplayFor(model => item.Fecha_registro)</td>
-                            <td>@Html.DisplayFor(model => item.Asistencia.Competencia.Nombre_competencia)</td>
-                            <td>@Html.DisplayFor(model => item.Asistio_registro)</td>
-                            <td>
-                                @Html.ActionLink("Detalles", "Details", new { id = item.Id_Registroasistencia })  |
-                                @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value)
-                                {
-                                    @Html.ActionLink("Agregar Soporte", "Create", "JustificacionInasistencia", new { asistenciaId = item.Id_asistencia }, null)
-                                }
-                            </td>
-
+                            <th>Codigo Ficha</th>
+                            <th>Fecha Asistencia</th>
+                            <th>Fecha Registro Asistencia</th>
+                            <th>Competencia</th>
+                            <th>Asistió</th>
                         </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Codigo Ficha</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Fin</th>
-                        <th>Competencia</th>
-                        <th>Asistió</th>
-                    </tr>
-                </tfoot>
-            </table>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Asistencia.Ficha.Codigo_ficha)</td>
+                                <td>@Html.DisplayFor(model => item.Asistencia.Fecha_asistencia)</td>
+                                <td>@Html.DisplayFor(model => item.Fecha_registro)</td>
+                                <td>@Html.DisplayFor(model => item.Asistencia.Competencia.Nombre_competencia)</td>
+                                <td>@Html.DisplayFor(model => item.Asistio_registro)</td>
+                                <td>
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_Registroasistencia })  |
+                                    @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value)
+                                    {
+                                        @Html.ActionLink("Agregar Soporte", "Create", "JustificacionInasistencia", new { asistenciaId = item.Id_asistencia }, null)
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Codigo Ficha</th>
+                            <th>Fecha Asistencia</th>
+                            <th>Fecha Registro Asistencia</th>
+                            <th>Competencia</th>
+                            <th>Asistió</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
-    </div>
     </div>
 </div>
 

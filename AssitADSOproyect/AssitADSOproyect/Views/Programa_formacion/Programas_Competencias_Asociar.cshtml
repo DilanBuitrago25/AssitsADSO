@@ -1,4 +1,4 @@
-﻿@model ClaseDatos.Programa_formacion
+﻿@model ClaseDatos.Competencia
 
 <br />
 <div class="container-fluid">
@@ -45,7 +45,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Programa de Formacion</label>
                                                 <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.NombrePrograma">
-                                                <input hidden name="competenciaId" value="@ViewBag.ProgramaId" />
+                                                <input hidden name="programaId" value="@ViewBag.ProgramaId" />
                                             </div>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@
 <script>
     // Elimina el atributo 'readonly' al cargar la página
     document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('@Html.IdFor(model => model.Id_programa)').removeAttribute('readonly');
+        document.getElementById('@Html.IdFor(model => model.Id_competencia)').removeAttribute('readonly');
     });
     document.addEventListener('DOMContentLoaded', function () {
         var inputs = document.querySelectorAll('.form-control');

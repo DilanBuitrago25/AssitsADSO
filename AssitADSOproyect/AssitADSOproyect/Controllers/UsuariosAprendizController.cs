@@ -202,6 +202,8 @@ namespace AssitADSOproyect.Controllers
                 .ToList();
 
             ViewBag.AprendizId = id; // Pasar el ID del aprendiz a la vista
+            ViewBag.Nombre_Aprendiz = db.Usuario.Find(id)?.Nombre_usuario;
+            ViewBag.Apellido_Aprendiz = db.Usuario.Find(id)?.Apellido_usuario;
 
             return View(fichasAprendiz);
         }
@@ -222,6 +224,8 @@ namespace AssitADSOproyect.Controllers
 
             ViewBag.Fichas = fichasDisponibles;
             ViewBag.AprendizId = idAprendiz;
+            ViewBag.Nombre_Aprendiz = db.Usuario.Find(idAprendiz)?.Nombre_usuario;
+            ViewBag.Apellido_Aprendiz = db.Usuario.Find(idAprendiz)?.Apellido_usuario;
             return View();
         }
 

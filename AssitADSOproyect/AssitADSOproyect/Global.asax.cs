@@ -86,8 +86,8 @@ namespace AssitADSOproyect
                     {
                         var nuevoRegistro = new RegistroAsistencia
                         {
-                            Fecha_registro = null,
-                            Hora_registro = null,
+                            Fecha_registro = "N/A",
+                            Hora_registro = "N/A",
                             Id_asistencia = asistencia.Id_asistencia,
                             Id_Aprendiz = aprendizId,
                             Asistio_registro = false

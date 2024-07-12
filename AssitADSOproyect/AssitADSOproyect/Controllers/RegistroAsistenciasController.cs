@@ -147,12 +147,15 @@ namespace AssitADSOproyect.Controllers
         [AllowAnonymous]
         public ActionResult Create(int? Id_Asistencia, string fechaFin)
         {
-
             if (Session["IdUsuario"] == null)
             {
                 TempData["ReturnUrl"] = Url.Action("Create", "RegistroAsistencias", new { id_Asistencia = Id_Asistencia });
 
                 return RedirectToAction("Index", "Login");
+            }
+            if (Session["TipoUsuario"].ToString() != "Aprendiz")
+            {
+                return RedirectToAction("Error401", "Home");
             }
             if (Id_Asistencia == null)
             {

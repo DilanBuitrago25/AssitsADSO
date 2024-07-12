@@ -71,24 +71,7 @@ namespace AssitADSOproyect.Controllers
             }
             ViewBag.Total_Asistencias = Total_Asistencias;
 
-            int Total_Inasistencias;
-
-            using (SqlConnection connection = new SqlConnection(Conexion))
-            {
-                string query = @"
-                    SELECT COUNT(*) 
-                    FROM RegistroAsistencia ra
-                    INNER JOIN Asistencia a ON ra.Id_asistencia = a.Id_asistencia
-                    WHERE ra.Id_Aprendiz = @UsuarioId AND ra.Asistio_registro = 0 
-                ";
-
-                SqlCommand comando = new SqlCommand(query, connection);
-                comando.Parameters.AddWithValue("@UsuarioId", usuarioId); // Agrega el parámetro
-                connection.Open();
-                Total_Inasistencias = (int)comando.ExecuteScalar();
-            }
-            ViewBag.Total_Inasistencias = Total_Inasistencias;
-
+           
 
             var idUsuario = (int)Session["Idusuario"]; // Obtener el ID del usuario loggeado
 
@@ -197,8 +180,16 @@ namespace AssitADSOproyect.Controllers
             return registrosSoportePorFicha;
         }
 
+        public ActionResult Asistencias_Ficha(int fichaId)
+        {
+            var asistencias = db.Asistencia
+                .Where(a => a.Id_ficha == fichaId)
+                .ToList();
 
-       
+            ViewBag.FichaId = fichaId; // Opcional, para mostrar el código de la ficha en la vista
+            return View(asistencias);
+        }
+
 
 
         protected override void Dispose(bool disposing)

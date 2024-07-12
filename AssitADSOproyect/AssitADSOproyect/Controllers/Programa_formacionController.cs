@@ -219,6 +219,7 @@ namespace AssitADSOproyect.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Programas_Competencias_Asociar(int programaId, int competenciaId)
         {
             var programa = db.Programa_formacion.Find(programaId);
