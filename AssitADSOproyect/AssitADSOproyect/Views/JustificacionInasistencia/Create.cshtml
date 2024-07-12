@@ -24,6 +24,7 @@
 </div>
 
 
+<!-- Container-fluid starts-->
 <div class="container-fluid">
     <div class="email-wrap">
         <div class="row">
@@ -49,15 +50,15 @@
                                                     @Html.HiddenFor(model => model.Id_Instructor)
 
                                                 </div>
-                                                @Html.ValidationMessageFor(model => model.Id_Instructor, "", new { @class = "text-danger" })
+                                                @*@Html.ValidationMessageFor(model => model.Id_Instructor, "", new { @class = "text-danger" })*@
 
 
                                             <div class="form-group">
                                                 <label for="exampleInputPassword1">Fecha Inasistencia</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.Fecha_asistencia">
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.Fecha_inicio_asistencia">
                                                 @Html.HiddenFor(model => model.Id_asistencia)
                                             </div>
-                                                @Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })
+                                                @*@Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })*@
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Asunto</label>
                                                     @Html.EditorFor(model => model.Nombre_soporte, new { htmlAttributes = new { @class = "form-control digits", @type = "text" } })
@@ -65,19 +66,19 @@
                                                 </div>
                                                 @Html.ValidationMessageFor(model => model.Nombre_soporte, "", new { @class = "text-danger" })
 
-                                                @*@@Html.HiddenFor(model => model.Archivo_soporte, new { id = "Archivo_soporte" })*@
-                                               
-                                            <div class="col-sm-12">
+                                                @*@Html.HiddenFor(model => model.Archivo_soporte, new { id = "Archivo_soporte" })*@
                                                 <label class="col-sm-3 col-form-label">Subir Archivo (solo PDF)</label>
-                                                <input type="file" name="archivo" id="archivo" class="form-control" />
+                                                <div class="col-sm-12">
 
-                                                @if (ViewBag.ErrorArchivo != null)
-                                                {
-                                                    <div class="text-danger">@ViewBag.ErrorArchivo</div>
-                                                }
+                                                    <input type="file" name="archivo" id="archivo" class="form-control" />
+
+                                                    @if (ViewBag.ErrorArchivo != null)
+                                                    {
+                                                        <div class="text-danger">@ViewBag.ErrorArchivo</div>
+                                                    }
 
 
-                                            </div>
+                                                </div>
                                                 <br />
 
                                                 <div class="form-group">

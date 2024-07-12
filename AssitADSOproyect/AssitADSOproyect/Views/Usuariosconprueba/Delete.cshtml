@@ -1,0 +1,104 @@
+﻿@model ClaseDatos.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Usuario</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Tipo_Documento_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Tipo_Documento_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Documento_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Documento_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nombre_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Apellido_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Apellido_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Telefono_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Telefono_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Correo_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Correo_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Contrasena_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Contrasena_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Tipo_usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Tipo_usuario)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Estado_Usuario)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Estado_Usuario)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

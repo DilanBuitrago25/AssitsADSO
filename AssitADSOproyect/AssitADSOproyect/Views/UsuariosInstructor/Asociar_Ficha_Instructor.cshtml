@@ -1,75 +1,7 @@
 ﻿@model ClaseDatos.Ficha
 
 
-
-<br />
-<div class="container-fluid">
-    <div class="page-header">
-        <div class="row">
-            <div class="col-sm-6">
-                <h3>Fichas Asociadas al Aprendiz: @ViewBag.Nombre_Instructor @ViewBag.Apellido_Instructor</h3>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
-                    <li class="breadcrumb-item">Gestionar Aprendiz</li>
-                    <li class="breadcrumb-item">@ViewBag.Nombre_Instructor @ViewBag.Apellido_Instructor</li>
-                    <li class="breadcrumb-item active">Asociar Ficha</li>
-                </ol>
-            </div>
-            <div class="col-sm-6">
-            </div>
-        </div>
-    </div>
-</div>
 @using (Html.BeginForm("Asociar_Ficha_Instructor", "UsuariosInstructor", new { idInstructor = ViewBag.InstructorId }, FormMethod.Post))
-{
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>Asignar Aprendiz</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-
-                                @Html.AntiForgeryToken()
-                                <form>
-                                    <div class="mb-3 input-group-solid">
-                                        <label class="form-label">Seleccionar Ficha:</label>
-                                        <div class="input-group">
-                                            @Html.DropDownList("fichaId", new SelectList(ViewBag.Fichas, "Id_ficha", "Codigo_ficha"), "Seleccionar Ficha", new { @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">Agregar</button>
-                        <button class="btn btn-light" type="button"><a href="@Url.Action("Fichas_Instructor","UsuariosInstructor", new { id = @ViewBag.InstructorId })">Volver</a></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
-<script>
-    // Elimina el atributo 'readonly' al cargar la página
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('@Html.IdFor(model => model.Id_ficha)').removeAttribute('readonly');
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        var inputs = document.querySelectorAll('.form-control');
-        inputs.forEach(function (input) {
-            input.removeAttribute('readonly');
-        });
-    });
-</script>
-
-
-@*@using (Html.BeginForm("Asociar_Ficha_Instructor", "UsuariosInstructor", new { idInstructor = ViewBag.InstructorId }, FormMethod.Post))
 {
     <div class="form-group">
         <label for="fichaId">Seleccionar Ficha:</label>
@@ -77,4 +9,4 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Agregar</button>
-}*@
+}

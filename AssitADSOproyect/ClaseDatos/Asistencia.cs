@@ -11,8 +11,7 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Asistencia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,21 +20,16 @@ namespace ClaseDatos
             this.RegistroAsistencia = new HashSet<RegistroAsistencia>();
             this.Soporte = new HashSet<Soporte>();
         }
-
+    
         public int Id_asistencia { get; set; }
-        [Required(ErrorMessage = "Por favor colocar la fecha de la asistencia")]
         public string Fecha_asistencia { get; set; }
-        [Required(ErrorMessage = "Por favor de ingresar la hora inicial de la asistencia")]
         public string Hora_inicio_asistencia { get; set; }
-        [Required(ErrorMessage = "Por favor de ingresar la hora final de la asistencia")]
         public string Hora_fin_asistencia { get; set; }
         public string Detalles_asistencia { get; set; }
         public Nullable<int> Id_Instructor { get; set; }
-        [Required(ErrorMessage = "Por favor de ingresar la fecha de la asistencia")]
-        public int Id_ficha { get; set; }
+        public Nullable<int> Id_ficha { get; set; }
         public Nullable<bool> Estado_Asistencia { get; set; }
         public string QrCode { get; set; }
-        [Required(ErrorMessage = "Por favor de ingresar la competencia de la asistencia")]
         public Nullable<int> Id_competencia { get; set; }
     
         public virtual Ficha Ficha { get; set; }

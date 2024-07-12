@@ -90,22 +90,16 @@ namespace AssitADSOproyect.Controllers
             int registrosPorPagina = 9;
             int numeroPagina = (pagina ?? 1); // Si 'pagina' es nulo, usa la página 1
 
-            var asistenciasFiltradasporusuario = db.Asistencia.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion &&
-                                                     f.Estado_Asistencia == true);
-
             var asistenciasFiltradas = db.Asistencia
                 .OrderByDescending(a => a.Fecha_asistencia)
                 .Skip((numeroPagina - 1) * registrosPorPagina)
                 .Take(registrosPorPagina)
                 .ToList();
 
-
-            
-
             ViewBag.PaginaActual = numeroPagina;
             ViewBag.TotalRegistros = db.Asistencia.Count();
 
-            return View(asistenciasFiltradasporusuario);
+            return View(asistenciasFiltradas);
         }
 
 

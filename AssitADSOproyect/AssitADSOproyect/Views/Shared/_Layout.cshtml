@@ -221,7 +221,7 @@
 
     @Scripts.Render("~/bundles/assets")
 <script>
-    var timeout = @(Session.Timeout * 180000); // Convertir minutos a milisegundos
+    var timeout = @(Session.Timeout * 60000); // Convertir minutos a milisegundos
     var timer;
 
     function resetTimer() {

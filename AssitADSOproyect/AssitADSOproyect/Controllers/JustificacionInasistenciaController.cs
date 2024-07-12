@@ -157,11 +157,10 @@ namespace AssitADSOproyect.Controllers
 
                 return RedirectToAction("MisSoportes");
             }
-                ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_asistencia", soporte.Id_asistencia);
+                ViewBag.Fecha_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", soporte.Id_asistencia);
                 ViewBag.Id_Instructor = new SelectList(db.Usuario.Where(u => u.Tipo_usuario == "Instructor"), "Id_Usuario", "Nombre_Usuario", soporte.Id_Instructor);
-                ViewBag.Nombre_instructor = new SelectList(db.Usuario, "Id_Instructor", "Nombre_usuario", soporte.Id_Instructor);
-
-            return View(soporte);
+            
+                return View(soporte);
         }
 
 

@@ -35,7 +35,7 @@
         var end = moment();
 
         function cb(start, end) {
-            $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            $('#reportrange span').html(start.format('YYYY M, DDDD') + ' - ' + end.format('YYYY M, DDDD'));
         }
 
         $('#reportrange').daterangepicker({
@@ -65,7 +65,7 @@
         });
 
         $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-            $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+            $(this).val(picker.startDate.format('YYYY/MM/DD') + ' - ' + picker.endDate.format('YYYY/MM/DD'));
         });
 
         $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
