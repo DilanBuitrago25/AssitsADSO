@@ -54,18 +54,18 @@
                                     <div class="media">
                                         <div class="media-size-email"><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt=""></div>
                                         <div class="media-body">
-                                            <h6 class="f-w-600">Dilan Buitrago</h6>
-                                            <p>dilanbuigar@gmail.com</p>
+                                            <h6 class="f-w-600">@Session["NombreUsuario"].ToString()</h6>
+                                            <p>@Session["CorreoUsuario"].ToString()</p>
                                         </div>
                                     </div>
                                     <ul class="nav main-menu" role="tablist">
 
                                         <li class="nav-item"><a class="btn-primary btn-block btn-mail w-100" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome" role="tab" aria-controls="pills-darkhome" aria-selected="true"><i class="icofont icofont-envelope me-2"></i> Fichas</a></li>
                                         <li class="nav-item"><a class="show" id="pills-darkprofile-tab" data-bs-toggle="pill" href="#pills-darkprofile" role="tab" aria-controls="pills-darkprofile" aria-selected="false"><span class="title"><i class="icon-import"></i> Bandeja de Entrada</span><span class="badge pull-right">(236)</span></a></li>
-                                        @*@foreach (var item in Model.Where(s => s.Id_Instructor == (int)Session["Idusuario"]))
+                                        @foreach (var item in Model.Where(s => s.Id_Instructor == (int)Session["Idusuario"]))
                                         {
                                             <li><a href="#"><span class="title"><i class="icon-folder"></i> @Html.DisplayFor(modelItem => item.Asistencia.Ficha.Codigo_ficha)</span></a></li>
-                                        }*@
+                                        }
                                         <li><a href="#"><span class="title"><i class="icon-folder"></i> 2693606</span></a></li>
                                         <li><a href="#"><span class="title"><i class="icon-new-window"></i> 2693607</span><span class="badge pull-right">(69)</span></a></li>
                                         <li><a href="#"><span class="title"><i class="icon-pencil-alt"></i> 2874841</span><span class="badge pull-right">(59)</span></a></li>
@@ -76,10 +76,8 @@
                                         </li>
                                         <li><a href="#"><span class="title"><i class="icon-email"></i> No leidos</span></a></li>
                                         <li><a href="#"><span class="title"><i class="icon-export"></i> Leidos</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-share"></i> Validos</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-file"></i> Aceptados</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-bell"></i> Rechazados</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-notepad"></i> NOTES</span><span class="badge pull-right">(20)</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-share"></i> Aceptados</span></a></li>
+                                        <li><a href="#"><span class="title"><i class="icon-notepad"></i> Rechazados</span></a></li>  
                                     </ul>
                                 </div>
                             </div>

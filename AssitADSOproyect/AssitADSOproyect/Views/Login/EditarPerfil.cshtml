@@ -104,8 +104,15 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary m-r-15" type="submit"></button>
-                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","UsuariosAprendiz")">Cancelar</a></button>
+                        <button class="btn btn-primary m-r-15" type="submit">Editar</button>
+                        @if (@Session["TipoUsuario"].ToString() == "Instructor" || @Session["TipoUsuario"].ToString() == "InstructorAdmin")
+                        {
+                            <button class="btn btn-light" type="button"><a href="@Url.Action("Index", "Instructor")">Cancelar</a></button>
+                        }
+                        @if (@Session["TipoUsuario"].ToString() == "Aprendiz")
+                        {
+                            <button class="btn btn-light" type="button"><a href="@Url.Action("Index", "Aprendizs")">Cancelar</a></button>
+                        }
                     </div>
                 </div>
             </div>

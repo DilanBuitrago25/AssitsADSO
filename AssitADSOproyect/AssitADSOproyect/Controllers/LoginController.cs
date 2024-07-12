@@ -31,6 +31,7 @@ namespace AssitADSOproyect.Controllers
                 Session["Idusuario"] = usuario.Id_usuario; // Almacenar el ID en sesión
                 Session["TipoUsuario"] = usuario.Tipo_usuario;
                 Session["NombreUsuario"] = usuario.Nombre_usuario + " " + usuario.Apellido_usuario;
+                Session["CorreoUsuario"] = usuario.Correo_usuario;
                 ViewBag.TipoUsuario = usuario.Tipo_usuario;
 
                 if (TempData["ReturnUrl"] != null)
