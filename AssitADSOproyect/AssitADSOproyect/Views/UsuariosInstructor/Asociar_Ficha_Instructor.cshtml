@@ -7,10 +7,10 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Fichas Asociadas al Aprendiz: @ViewBag.Nombre_Instructor @ViewBag.Apellido_Instructor</h3>
+                <h3>Fichas Asociadas al Instructor: @ViewBag.Nombre_Instructor @ViewBag.Apellido_Instructor</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
-                    <li class="breadcrumb-item">Gestionar Aprendiz</li>
+                    <li class="breadcrumb-item">Gestionar Instructor</li>
                     <li class="breadcrumb-item">@ViewBag.Nombre_Instructor @ViewBag.Apellido_Instructor</li>
                     <li class="breadcrumb-item active">Asociar Ficha</li>
                 </ol>
@@ -27,7 +27,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>Asignar Aprendiz</h5>
+                        <h5>Asignar Ficha</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -38,7 +38,7 @@
                                     <div class="mb-3 input-group-solid">
                                         <label class="form-label">Seleccionar Ficha:</label>
                                         <div class="input-group">
-                                            @Html.DropDownList("fichaId", new SelectList(ViewBag.Fichas, "Id_ficha", "Codigo_ficha"), "Seleccionar Ficha", new { @class = "form-control" })
+                                            @Html.DropDownList("fichaId", new SelectList(ViewBag.Fichas, "Id_ficha", "Codigo_ficha"), "Seleccionar Ficha", new { @class = "js-example-basic-single col-sm-12 form-control" })
                                         </div>
                                     </div>
                                 </form>

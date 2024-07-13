@@ -114,7 +114,14 @@ namespace AssitADSOproyect.Controllers
 
         public ActionResult GenerarReportePDF()
         {
-            var asistencias = db.Asistencia.ToList();
+            string idUsuarioSesion = Session["Idusuario"].ToString();
+
+            // Consulta base con Include para cargar relaciones necesarias
+            var asistencias = db.Asistencia
+                .Include(a => a.Ficha)
+                .Include(a => a.Ficha.Programa_formacion)
+                .Include(a => a.Ficha.Programa_formacion.Competencia)
+                .Where(a => a.Id_Instructor.ToString() == idUsuarioSesion);
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -133,7 +140,7 @@ namespace AssitADSOproyect.Controllers
                 document.Add(Chunk.NEWLINE);
 
 
-                PdfPTable table = new PdfPTable(9);
+                PdfPTable table = new PdfPTable(8);
                 table.WidthPercentage = 100;
 
                 // Encabezados de la tabla
@@ -157,7 +164,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(asistencia.Hora_inicio_asistencia));
                     table.AddCell(new Phrase(asistencia.Hora_fin_asistencia));
                     table.AddCell(new Phrase(asistencia.Detalles_asistencia));
-                    table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha));
+                    table.AddCell(new Phrase(asistencia.Ficha.Codigo_ficha.ToString()));
                     table.AddCell(new Phrase(asistencia.Competencia.Nombre_competencia));
                     table.AddCell(new Phrase(asistencia.Estado_Asistencia.ToString()));
 

@@ -59,7 +59,7 @@ namespace AssitADSOproyect.Controllers
                 document.Add(Chunk.NEWLINE);
 
                 
-                PdfPTable table = new PdfPTable(6); 
+                PdfPTable table = new PdfPTable(4); 
                 table.WidthPercentage = 100;
 
                 // Encabezados de la tabla
@@ -67,8 +67,6 @@ namespace AssitADSOproyect.Controllers
                 table.AddCell(new Phrase("Id de Competencia", headerFont));
                 table.AddCell(new Phrase("Nombre Competencia"));
                 table.AddCell(new Phrase("Tipo Competencia"));
-                table.AddCell(new Phrase("Codigo Ficha"));
-                table.AddCell(new Phrase("Programa Formacion"));
                 table.AddCell(new Phrase("Estado Competencia"));
                 
 
@@ -79,8 +77,6 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(competencia.Id_competencia.ToString()));
                     table.AddCell(new Phrase(competencia.Nombre_competencia));
                     table.AddCell(new Phrase(competencia.tipo_competencia));
-                    //table.AddCell(new Phrase(competencia.Ficha.Codigo_ficha.ToString()));
-                    table.AddCell(new Phrase(competencia.Programa_formacion.ToString()));
                     table.AddCell(new Phrase(competencia.Estado_Competencia.ToString()));
                     
                 }

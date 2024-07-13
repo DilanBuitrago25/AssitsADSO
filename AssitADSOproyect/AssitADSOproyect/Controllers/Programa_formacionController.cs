@@ -52,7 +52,7 @@ namespace AssitADSOproyect.Controllers
                 document.Open();
 
                 // Título
-                Paragraph titulo = new Paragraph("Reporte de Programas de Formacion", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+                Paragraph titulo = new Paragraph("Reporte de Programas de Formacion", new Font(Font.FontFamily.HELVETICA, 15, Font.BOLD));
                 titulo.Alignment = Element.ALIGN_CENTER;
                 document.Add(titulo);
 

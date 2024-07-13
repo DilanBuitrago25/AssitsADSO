@@ -34,17 +34,14 @@ namespace AssitADSOproyect.Controllers
         }
 
 
-
-
-
-
-        // ...
-
-        public ActionResult GenerarReportePDF()
+        public ActionResult GenerarReportePDF(string estadoFiltro = "")
     {
-        var fichas = db.Ficha.ToList(); // Obtén los datos de las fichas
+            var fichas = db.Ficha
+                    .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
+                    .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) // Filtrar por estado (opcional)
+                    .ToList(); // Obtén los datos de las fichas
 
-        using (MemoryStream memoryStream = new MemoryStream())
+            using (MemoryStream memoryStream = new MemoryStream())
         {
                 Document document = new Document(PageSize.A4, 50, 50, 80, 50);
                 PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
@@ -98,6 +95,65 @@ namespace AssitADSOproyect.Controllers
             return File(memoryStream.ToArray(), "application/pdf", "ReporteFichas.pdf");
         }
     }
+
+
+        public ActionResult GenerarReportePDFAprendiz(int id)
+        {
+            var aprendizId = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_ficha == id && fu.TipoUsuario == "Aprendiz")
+                .Select(fu => fu.Usuario)
+                .ToList();
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                Document document = new Document(PageSize.A4, 50, 50, 80, 50);
+                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                document.Open();
+
+                // Título
+                Paragraph titulo = new Paragraph("Reporte de Aprendices Asociados a la Ficha", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+                titulo.Alignment = Element.ALIGN_CENTER;
+                document.Add(titulo);
+
+                document.Add(Chunk.NEWLINE);
+
+                // Agregar contenido al PDF (tabla con datos de las fichas)
+                PdfPTable table = new PdfPTable(6); // 4 columnas (ajusta según tus campos)
+                table.WidthPercentage = 100;
+
+                // Encabezados de la tabla
+                Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                table.AddCell(new Phrase("Documento", headerFont));
+                table.AddCell(new Phrase("Nombre(s)"));
+                table.AddCell(new Phrase("Apellidos"));
+                table.AddCell(new Phrase("Correo"));
+                table.AddCell(new Phrase("Telefono"));
+                table.AddCell(new Phrase("Estado Aprendiz"));
+                // ... (agrega más encabezados según tus campos)
+
+                // Datos de las fichas
+                Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                foreach (var aprendices in aprendizId)
+                {
+                    table.AddCell(new Phrase(aprendices.Tipo_Documento_usuario.ToString() + aprendices.Documento_usuario.ToString()));
+                    table.AddCell(new Phrase(aprendices.Nombre_usuario));
+                    table.AddCell(new Phrase(aprendices.Apellido_usuario));
+                    table.AddCell(new Phrase(aprendices.Correo_usuario));
+                    table.AddCell(new Phrase(aprendices.Telefono_usuario.ToString()));
+                    table.AddCell(new Phrase(aprendices.Estado_Usuario.ToString()));
+                  
+                }
+
+                document.Add(table);
+                document.Close();
+
+                // Devolver el PDF como archivo descargable
+                return File(memoryStream.ToArray(), "application/pdf", "ReporteAprendicesFicha.pdf");
+            }
+        }
 
         class HeaderFooterEvent : PdfPageEventHelper
         {
