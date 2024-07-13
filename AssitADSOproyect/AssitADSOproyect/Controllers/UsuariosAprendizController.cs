@@ -149,12 +149,33 @@ namespace AssitADSOproyect.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Usuario.Add(usuario);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Verificar si ya existe un usuario con el mismo Documento_usuario
+                bool existeDocumento = db.Usuario.Any(u => u.Documento_usuario == usuario.Documento_usuario);
+
+                // Verificar si ya existe un usuario con el mismo Correo_usuario
+                bool existeCorreo = db.Usuario.Any(u => u.Correo_usuario == usuario.Correo_usuario);
+
+                if (existeDocumento)
+                {
+                    ModelState.AddModelError("Documento_usuario", "Ya existe un usuario con este número de documento.");
+                }
+
+                if (existeCorreo)
+                {
+                    ModelState.AddModelError("Correo_usuario", "Ya existe un usuario con este correo electrónico.");
+                }
+
+                // Si no hay errores, guardar el usuario
+                if (ModelState.IsValid)
+                {
+                    db.Usuario.Add(usuario);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha" /*"Jornada_ficha"*/, usuario.Ficha_has_Usuario);
+            // Si hay errores, volver a la vista con los mensajes de error
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", usuario.Ficha_has_Usuario);
             return View(usuario);
         }
 

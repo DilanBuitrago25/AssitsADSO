@@ -96,9 +96,7 @@
                                     {
                                         <div class="media">
                                             <div class="media-size-email">
-                                                @*<label class="d-block mb-0" for="chk-ani">
-                                                    <input class="checkbox_animated" id="chk-ani" type="checkbox" checked="">
-                                                </label>*@<i class="like" data-feather="star"></i><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
+                                                <i class="like" data-feather="star"></i><img class="me-3 rounded-circle" src="../assets/images/user/user.png" alt="">
                                             </div>
                                             <div class="media-body">
                                                 <h6><a href="@Url.Action("Edit","JustificacionInasistencia", new { id=item.Id_soporte })">@Html.DisplayFor(model => item.Usuario.Nombre_usuario) @Html.DisplayFor(model => item.Usuario.Apellido_usuario) </a> </h6>

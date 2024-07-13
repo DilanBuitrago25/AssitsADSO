@@ -15,7 +15,7 @@ namespace AssitADSOproyect.Controllers
     public class InstructorController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDAssistsADSOvFinal;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=LAPTOP-NC5UJ7OA;Initial Catalog=BDAssistsADSOvFinal;Integrated Security=True;trustservercertificate=True;";
         // GET: Instructor
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "")
@@ -182,13 +182,17 @@ namespace AssitADSOproyect.Controllers
 
         public ActionResult Asistencias_Ficha(int fichaId)
         {
+            int instructorId = (int)Session["IdUsuario"]; // Obtener el ID del instructor de la sesión
+
             var asistencias = db.Asistencia
-                .Where(a => a.Id_ficha == fichaId)
+                .Where(a => a.Id_ficha == fichaId && a.Id_Instructor == instructorId) // Filtrar por ficha e instructor
                 .ToList();
 
-            ViewBag.FichaId = fichaId; // Opcional, para mostrar el código de la ficha en la vista
             return View(asistencias);
         }
+
+
+
 
 
 

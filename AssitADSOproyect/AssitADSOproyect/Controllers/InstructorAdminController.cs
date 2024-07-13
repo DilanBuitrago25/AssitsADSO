@@ -15,7 +15,7 @@ namespace AssitADSOproyect.Controllers
     public class InstructorAdminController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=DESKTOP-057421\\SQLEXPRESS;Initial Catalog=BDAssistsADSOvFinal;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=LAPTOP-NC5UJ7OA;Initial Catalog=BDAssistsADSOvFinal;Integrated Security=True;trustservercertificate=True;";
         // GET: Instructor
         [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "")
@@ -186,8 +186,16 @@ namespace AssitADSOproyect.Controllers
             return View(usuario);
         }
 
-      
-        
+        public ActionResult Asistencias_Ficha(int fichaId)
+        {
+            var asistencias = db.Asistencia
+                .Where(a => a.Id_ficha == fichaId)
+                .ToList();
+
+            ViewBag.FichaId = fichaId; // Opcional, para mostrar el código de la ficha en la vista
+            return View(asistencias);
+        }
+
 
         protected override void Dispose(bool disposing)
         {

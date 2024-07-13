@@ -22,23 +22,27 @@ namespace AssitADSOproyect.Controllers
         public ActionResult Index(string estadoFiltro = "")
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
+            int aprendizId = int.Parse(idUsuarioSesion); // Convertir a int
 
-            var RegistrosFiltrados = db.RegistroAsistencia
-                                         .Where(r => r.Id_Aprendiz.ToString() == idUsuarioSesion);
+            var registrosFiltrados = db.RegistroAsistencia
+                .Where(r => r.Id_Aprendiz == aprendizId); // Filtrar por el aprendiz actual
 
             if (estadoFiltro == "true")
             {
-                RegistrosFiltrados = RegistrosFiltrados.Where(c => c.Estado_RegistroAsitencia == true);
+                registrosFiltrados = registrosFiltrados.Where(c => c.Estado_RegistroAsitencia == true);
             }
             else if (estadoFiltro == "false")
             {
-                RegistrosFiltrados = RegistrosFiltrados.Where(c => c.Estado_RegistroAsitencia == false);
+                registrosFiltrados = registrosFiltrados.Where(c => c.Estado_RegistroAsitencia == false);
             }
 
             ViewBag.EstadoFiltro = estadoFiltro;
+            ViewBag.db = db;
 
-            return View(RegistrosFiltrados);
+            return View(registrosFiltrados.ToList()); // Convertir a lista antes de pasar a la vista
         }
+
+
 
         public ActionResult GenerarReportePDF()
         {
@@ -173,7 +177,7 @@ namespace AssitADSOproyect.Controllers
             ViewBag.CodigoFicha = asistencia.Ficha.Codigo_ficha; // Pasar el código de ficha a la vista
             ViewBag.Nombre_competencia = asistencia.Competencia.Nombre_competencia; // Pasar el nombre de la competencia a la vista
             ViewBag.Nombre_Aprendiz = asistencia.Usuario.Nombre_usuario;
-            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia");
+            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_asistencia");
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario");
             return View(registroAsistencia);
         }
@@ -188,45 +192,63 @@ namespace AssitADSOproyect.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Obtener la asistencia correspondiente al Id_asistencia
-                var asistencia = db.Asistencia.Find(registroAsistencia.Id_asistencia);
+                // Verificar si ya existe un registro para este usuario y asistencia
+                bool existeRegistro = db.RegistroAsistencia.Any(ra =>
+                    ra.Id_asistencia == registroAsistencia.Id_asistencia &&
+                    ra.Id_Aprendiz == registroAsistencia.Id_Aprendiz);
 
-                if (asistencia != null)
+                if (existeRegistro)
                 {
-                    // Parsear las fechas y horas (asumiendo que están en formato "yyyy-MM-dd" y "HH:mm")
-                    if (DateTime.TryParse(asistencia.Fecha_asistencia, out DateTime fechaFin) &&
-                        DateTime.TryParse(asistencia.Hora_fin_asistencia, out DateTime horaFin))
-                    {
-                        // Combinar la fecha y hora de fin de la asistencia
-                        DateTime fechaHoraFinAsistencia = fechaFin.Date + horaFin.TimeOfDay;
+                    ModelState.AddModelError("", "Ya existe un registro de asistencia para este usuario en esta asistencia.");
+                }
+                else
+                {
+                    // Obtener la asistencia correspondiente al Id_asistencia
+                    var asistencia = db.Asistencia.Find(registroAsistencia.Id_asistencia);
 
-                        // Verificar si la fecha y hora de fin ya pasaron
-                        if (fechaHoraFinAsistencia < DateTime.Now)
+                    if (asistencia != null)
+                    {
+                        // Parsear las fechas y horas (asumiendo que están en formato "yyyy-MM-dd" y "HH:mm")
+                        if (DateTime.TryParse(asistencia.Fecha_asistencia, out DateTime fechaFin) &&
+                            DateTime.TryParse(asistencia.Hora_fin_asistencia, out DateTime horaFin))
                         {
-                            ModelState.AddModelError("Id_asistencia", "La asistencia seleccionada ya ha finalizado. No se puede registrar.");
+                            // Combinar la fecha y hora de fin de la asistencia
+                            DateTime fechaHoraFinAsistencia = fechaFin.Date + horaFin.TimeOfDay;
 
-                            // Recargar el ViewBag para el dropdown list de asistencias
-                            ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
-
-                            return View(registroAsistencia); // Volver a la vista con el mensaje de error
+                            // Verificar si la fecha y hora de fin ya pasaron
+                            if (fechaHoraFinAsistencia < DateTime.Now)
+                            {
+                                ModelState.AddModelError("Id_asistencia", "La asistencia seleccionada ya ha finalizado. No se puede registrar.");
+                            }
                         }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Error al analizar la fecha y hora de fin de la asistencia.");
-                        return View(registroAsistencia);
+                        else
+                        {
+                            ModelState.AddModelError("", "Error al analizar la fecha y hora de fin de la asistencia.");
+                        }
                     }
                 }
 
-                db.RegistroAsistencia.Add(registroAsistencia);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid) // Verificar nuevamente después de las validaciones adicionales
+                {
+                    db.RegistroAsistencia.Add(registroAsistencia);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
+
+            var asistencias = db.Asistencia
+             .Include(a => a.Ficha)
+             .Include(a => a.Competencia)
+             .FirstOrDefault(a => a.Id_asistencia == registroAsistencia.Id_asistencia);
+
+            // Llenar los ViewBags con los datos de la asistencia (si existe)
+            ViewBag.CodigoFicha = asistencias?.Ficha?.Codigo_ficha;
+            ViewBag.Nombre_competencia = asistencias?.Competencia?.Nombre_competencia;
+            ViewBag.Nombre_Aprendiz = db.Usuario.Find(registroAsistencia.Id_Aprendiz)?.Nombre_usuario;
 
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_Aprendiz);
-            ViewBag.CodigoFicha = new SelectList(db.Usuario, "Id_ficha", "Codigo_ficha", registroAsistencia.Asistencia.Ficha.Codigo_ficha); // Pasar el código de ficha a la vista
-            ViewBag.Nombre_competencia = new SelectList(db.Usuario, "Id_competencia", "Nombre_competencia", registroAsistencia.Asistencia.Competencia.Nombre_competencia); // Pasar el nombre de la competencia a la vista
+
             return View(registroAsistencia);
         }
 

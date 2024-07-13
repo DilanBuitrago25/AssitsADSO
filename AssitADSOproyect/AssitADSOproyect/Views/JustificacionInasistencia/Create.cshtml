@@ -52,11 +52,11 @@
                                                 @Html.ValidationMessageFor(model => model.Id_Instructor, "", new { @class = "text-danger" })
 
 
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Fecha Inasistencia</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.Fecha_asistencia">
-                                                @Html.HiddenFor(model => model.Id_asistencia)
-                                            </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputPassword1">Fecha Inasistencia</label>
+                                                    <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@ViewBag.Fecha_asistencia">
+                                                    @Html.HiddenFor(model => model.Id_asistencia)
+                                                </div>
                                                 @Html.ValidationMessageFor(model => model.Id_asistencia, "", new { @class = "text-danger" })
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Asunto</label>
@@ -66,18 +66,18 @@
                                                 @Html.ValidationMessageFor(model => model.Nombre_soporte, "", new { @class = "text-danger" })
 
                                                 @*@@Html.HiddenFor(model => model.Archivo_soporte, new { id = "Archivo_soporte" })*@
-                                               
-                                            <div class="col-sm-12">
-                                                <label class="col-sm-3 col-form-label">Subir Archivo (solo PDF)</label>
-                                                <input type="file" name="archivo" id="archivo" class="form-control" />
 
-                                                @if (ViewBag.ErrorArchivo != null)
-                                                {
-                                                    <div class="text-danger">@ViewBag.ErrorArchivo</div>
-                                                }
+                                                <div class="col-sm-12">
+                                                    <label class="col-sm-3 col-form-label">Subir Archivo (solo PDF)</label>
+                                                    <input type="file" name="archivo" id="archivo" class="form-control" />
+
+                                                    @if (ViewBag.ErrorArchivo != null)
+                                                    {
+                                                        <div class="text-danger">@ViewBag.ErrorArchivo</div>
+                                                    }
 
 
-                                            </div>
+                                                </div>
                                                 <br />
 
                                                 <div class="form-group">
@@ -87,7 +87,7 @@
 
                                                 </div>
                                                 @Html.ValidationMessageFor(model => model.Descripcion_soporte, "", new { @class = "text-danger" })
-
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                                 @Html.HiddenFor(model => model.Fecha_registro, new
                                                 {
                                                     @Value = DateTime.Now.ToString("MM/dd/yyyy")
@@ -102,7 +102,7 @@
 
                                                 @Html.HiddenFor(model => model.Estado_Soporte, new { Value = true })
 
-                                                
+
                                             </form>
                                             <div class="action-wrapper">
                                                 <input type="submit" value="Subir" class="btn btn-default" />

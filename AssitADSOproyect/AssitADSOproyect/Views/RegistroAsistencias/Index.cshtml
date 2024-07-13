@@ -76,7 +76,7 @@
                                 <td>@Html.DisplayFor(model => item.Asistio_registro)</td>
                                 <td>
                                     @Html.ActionLink("Detalles", "Details", new { id = item.Id_Registroasistencia })  |
-                                    @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value)
+                                    @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value &&!((ClaseDatos.BDAssistsADSOv4Entities)ViewBag.db).Soporte.Any(s => s.Id_asistencia == item.Id_asistencia && s.Id_Aprendiz == item.Id_Aprendiz))
                                     {
                                         @Html.ActionLink("Agregar Soporte", "Create", "JustificacionInasistencia", new { asistenciaId = item.Id_asistencia }, null)
                                     }
@@ -99,50 +99,3 @@
         </div>
     </div>
 </div>
-
-
-@*<h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Fecha_registro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hora_registro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Asistencia.Fecha_inicio_asistencia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Usuario.Tipo_Documento_usuario)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Fecha_registro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hora_registro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Asistencia.Fecha_inicio_asistencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Tipo_Documento_usuario)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id_Registroasistencia }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id_Registroasistencia }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id_Registroasistencia })
-            </td>
-        </tr>
-    }
-
-    </table>*@

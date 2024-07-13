@@ -26,4 +26,10 @@ namespace ClaseDatos
         // Lista de todas las fichas disponibles (para el dropdown)
         public IEnumerable<Ficha> FichasDisponibles { get; set; }
     }
+
+    public class RegistroAsistenciaViewModel
+    {
+        public RegistroAsistencia RegistroAsistencia { get; set; }
+        public bool TieneSoporte { get; set; }
+    }
 }

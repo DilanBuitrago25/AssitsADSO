@@ -145,12 +145,12 @@ namespace AssitADSOproyect.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("archivo", "Debe seleccionar un archivo.");
+                    ModelState.AddModelError("", "Debe seleccionar un archivo.");
                 }
                 var asistencia = db.Asistencia.Find(soporte.Id_asistencia);
                 if (asistencia != null)
                 {
-                    soporte.Id_Instructor = asistencia.Id_Instructor; // Asignar el ID del instructor
+                    soporte.Id_Instructor = asistencia.Id_Instructor; 
                 }
                 db.Soporte.Add(soporte);
                 db.SaveChanges();
@@ -196,6 +196,10 @@ namespace AssitADSOproyect.Controllers
         {
             using (var db = new BDAssistsADSOv4Entities())
             {
+                if (string.IsNullOrWhiteSpace(soportes.Nota_Instructor))
+                {
+                    soportes.Nota_Instructor = "N/A";
+                }
                 if (ModelState.IsValid)
                 {
                     var soporte = db.Soporte.Find(id);

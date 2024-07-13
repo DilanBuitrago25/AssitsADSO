@@ -100,7 +100,7 @@
     <Property Name="Archivo_soporte" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Estado_Soporte" Type="Boolean" />
     <Property Name="Validacion_Instructor" Type="Boolean" />
-    <Property Name="Nota_Instructor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Nota_Instructor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="true" />
     <NavigationProperty Name="Asistencia" Relationship="Self.FK__Soporte__Id_asis__59063A47" FromRole="Soporte" ToRole="Asistencia" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__Soporte__Id_Apre__571DF1D5" FromRole="Soporte" ToRole="Usuario" />
     <NavigationProperty Name="Usuario1" Relationship="Self.FK__Soporte__Id_Inst__5812160E" FromRole="Soporte" ToRole="Usuario" />

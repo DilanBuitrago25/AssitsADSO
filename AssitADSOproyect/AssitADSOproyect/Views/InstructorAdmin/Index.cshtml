@@ -88,7 +88,7 @@
                     <div class="col-md-6 col-lg-6 col-xl-4 box-col-6">
                         <div class="card custom-card">
                             <div class="text-center profile-details">
-                                <a href="@Url.Action("Asistencias_Ficha", "Instructor", new { fichaId = item.Id_ficha })">
+                                <a href="@Url.Action("Asistencias_Ficha", "InstructorAdmin", new { fichaId = item.Id_ficha })">
                                     <h4>Ficha - @Html.DisplayFor(modelItem => item.Codigo_ficha)</h4>
                                 </a>
                                 <h6>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</h6>

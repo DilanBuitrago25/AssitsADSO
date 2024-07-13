@@ -148,7 +148,13 @@ namespace AssitADSOproyect.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa,Estado_Programa_formacion")] Programa_formacion programa_formacion)
         {
-            if (ModelState.IsValid)
+            bool existePrograma = db.Programa_formacion.Any(p => p.Nombre_programa == programa_formacion.Nombre_programa);
+
+            if (existePrograma)
+            {
+                ModelState.AddModelError("Nombre_programa", "Ya existe un programa con este nombre.");
+            }
+            else
             {
                 db.Programa_formacion.Add(programa_formacion);
                 db.SaveChanges();
@@ -179,13 +185,14 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa")] Programa_formacion programa_formacion) /* posibilidad de implementar el id usaurio con el session*/
+        public ActionResult Edit([Bind(Include = "Id_programa,Nombre_programa,Tipo_programa,Duracion_programa")] Programa_formacion programa_formacion) 
         {
             if (ModelState.IsValid)
             {
                 db.Entry(programa_formacion).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
             }
             return View(programa_formacion);
         }

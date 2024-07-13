@@ -155,18 +155,29 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
-        public ActionResult Create([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin,Id_Instructor,Estado_ficha")] Ficha ficha)
+        public ActionResult Create([Bind(Include = "Id_ficha,Codigo_ficha,Jornada_ficha,Modalidad_ficha,tipo_ficha,Id_programa,Fecha_inicio,Fecha_fin,Estado_ficha")] Ficha ficha)
         {
             if (ModelState.IsValid)
             {
-                db.Ficha.Add(ficha);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Verificar si ya existe una ficha con el mismo código
+                bool existeFicha = db.Ficha.Any(f => f.Codigo_ficha == ficha.Codigo_ficha);
+
+                if (existeFicha)
+                {
+                    ModelState.AddModelError("Codigo_ficha", "Ya existe una ficha con este código.");
+                }
+                else
+                {
+                    db.Ficha.Add(ficha);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
 
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", ficha.Id_programa);
             return View(ficha);
         }
+
 
         // GET: Fichas1/Edit/5
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
@@ -256,7 +267,7 @@ namespace AssitADSOproyect.Controllers
             if (ModelState.IsValid)
             {
                 // Obtén el ID del aprendiz seleccionado del formulario
-                if (!int.TryParse(Request.Form["aprendizId"], out aprendizId))
+                if (!int.TryParse(Request.Form["aprendizId"], out aprendizId)) 
                 {
                     ModelState.AddModelError("", "Error al seleccionar el aprendiz.");
                     return View(); // O redirige a otra acción si lo prefieres

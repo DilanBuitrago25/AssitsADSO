@@ -154,9 +154,19 @@ namespace AssitADSOproyect.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Competencia.Add(competencia);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                // Verificar si ya existe un programa con el mismo nombre
+                bool existeCompetencia = db.Competencia.Any(c => c.Nombre_competencia == competencia.Nombre_competencia);
+
+                if (existeCompetencia)
+                {
+                    ModelState.AddModelError("Nombre_competencia", "Ya existe una competencia con este nombre.");
+                }
+                else
+                {
+                    db.Competencia.Add(competencia);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             return View(competencia);
         }

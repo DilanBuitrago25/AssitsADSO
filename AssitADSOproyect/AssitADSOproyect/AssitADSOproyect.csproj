@@ -6089,10 +6089,6 @@
     <Content Include="Views\JustificacionInasistencia\Create.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Details.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Index.cshtml" />
-    <Content Include="Views\Aprendizs\Create.cshtml" />
-    <Content Include="Views\Aprendizs\Delete.cshtml" />
-    <Content Include="Views\Aprendizs\Details.cshtml" />
-    <Content Include="Views\Aprendizs\Edit.cshtml" />
     <Content Include="Views\Aprendizs\Index.cshtml" />
     <Content Include="Views\RegistroAsistencias\Create.cshtml" />
     <Content Include="Views\RegistroAsistencias\Details.cshtml" />
@@ -6119,6 +6115,7 @@
     <Content Include="Views\Login\EditarPerfil.cshtml" />
     <Content Include="Views\JustificacionInasistencia\MisSoportes.cshtml" />
     <Content Include="Views\JustificacionInasistencia\Edit.cshtml" />
+    <Content Include="Views\InstructorAdmin\Asistencias_Ficha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -6184,7 +6181,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50633</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:44369</IISUrl>
+          <IISUrl>http://192.168.1.4:44373</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
