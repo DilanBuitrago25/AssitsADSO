@@ -49,55 +49,60 @@
                 </div>
         </div>
 
-        <div class="card-body">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDFAprendiz", "Fichas")'" id="BottomPdf">
-                Generar Reporte PDF
-            </button>
-            <div class="table-responsive">
-                <table class="display datatables" id="ajax-data-object">
-                    <thead>
+            <div class="card-body">
+                @using (Html.BeginForm("GenerarReportePDFAprendiz", "Fichas", FormMethod.Post))
+                {
+                    <input type="hidden" name="id" value="@ViewBag.FichaId" />
+                    <button type="submit" class="btn btn-primary">Generar Reporte PDF</button>
+                }
 
-                        <tr>
-                            <th>Id</th>
-                            <th>Documento</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                        </tr>
 
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+                <div class="table-responsive">
+                    <table class="display datatables" id="ajax-data-object">
+                        <thead>
+
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Id_usuario)</td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Tipo_Documento_usuario)
-                                    @Html.DisplayFor(model => item.Documento_usuario)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => item.Nombre_usuario)
-                                    @Html.DisplayFor(model => item.Apellido_usuario)
-                                </td>
-                                <td>@Html.DisplayFor(model => item.Correo_usuario)</td>
+                                <th>Id</th>
+                                <th>Documento</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
                             </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Documento</th>
-                            <th>Nombre</th>
-                            <th>Correo</th>
-                        </tr>
-                    </tfoot>
-                </table>
+
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Id_usuario)</td>
+                                    <td>
+                                        @Html.DisplayFor(model => item.Tipo_Documento_usuario)
+                                        @Html.DisplayFor(model => item.Documento_usuario)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => item.Nombre_usuario)
+                                        @Html.DisplayFor(model => item.Apellido_usuario)
+                                    </td>
+                                    <td>@Html.DisplayFor(model => item.Correo_usuario)</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Id</th>
+                                <th>Documento</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="col-sm-12 d-flex justify-content-end">
+                    <button class="btn btn-light" type="button" style="margin-top: 15px;"><a href="@Url.Action("Index","Fichas")">Volver</a></button>
+                </div>
             </div>
-            <div class="col-sm-12 d-flex justify-content-end">
-                <button class="btn btn-light" type="button" style="margin-top: 15px;"><a href="@Url.Action("Index","Fichas")">Volver</a></button>
-            </div>
-        </div>
     </div>
 </div>
+
 
 
 @*<h2>Aprendices de la Ficha @ViewBag.FichaId</h2>

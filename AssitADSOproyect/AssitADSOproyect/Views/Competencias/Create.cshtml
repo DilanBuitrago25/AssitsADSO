@@ -19,24 +19,7 @@
                 </ol>
             </div>
             <div class="col-sm-6">
-                <!-- Bookmark Start-->
-                <div class="bookmark">
-                    <ul>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                            <form class="form-inline search-form">
-                                <div class="form-group form-control-search">
-                                    <input type="text" placeholder="Search..">
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Bookmark Ends-->
+
             </div>
         </div>
     </div>
@@ -77,22 +60,7 @@
                                         </div>
                                         @Html.ValidationMessageFor(model => model.Nombre_competencia, "", new { @class = "text-danger" })
                                     </div>
-                                    @*<div class="mb-3 input-group-solid">
-                                        <label class="form-label">Codigo Ficha</label>
-                                        <div class="input-group">
-                                            @Html.DropDownList("Id_ficha", null, htmlAttributes: new { @class = "form-control" })
-
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.Id_ficha, "", new { @class = "text-danger" })
-                                    </div>*@
-                                    @*<div class="mb-3 m-form__group">
-                                        <label class="form-label">Programa de formación</label>
-                                        <div class="input-group">
-                                            @Html.DropDownList("Id_programa", null, htmlAttributes: new { @class = "form-control" })
-
-                                        </div>
-                                        @Html.ValidationMessageFor(model => model.Programa_formacion, "", new { @class = "text-danger" })
-                                    </div>*@
+                                   
                                     @Html.HiddenFor(model => model.Estado_Competencia, new { Value = "True" })
                                     @*@Html.HiddenFor(model => model.Id_Usuario, new { Value = @Session["Idusuario"].ToString() })*@
                                 </form>
@@ -100,7 +68,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary m-r-15" type="submit">Submit</button>
+                        <button class="btn btn-primary m-r-15" type="submit">Registrar</button>
                         <button class="btn btn-light" type="button"><a href="@Url.Action("Index","Competencias")">Cancelar</a></button>
                     </div>
                 </div>

@@ -29,11 +29,11 @@ namespace AssitADSOproyect.Controllers
 
             if (estadoFiltro == "true")
             {
-                registrosFiltrados = registrosFiltrados.Where(c => c.Estado_RegistroAsitencia == true);
+                registrosFiltrados = registrosFiltrados.Where(c => c.Asistio_registro == true);
             }
             else if (estadoFiltro == "false")
             {
-                registrosFiltrados = registrosFiltrados.Where(c => c.Estado_RegistroAsitencia == false);
+                registrosFiltrados = registrosFiltrados.Where(c => c.Asistio_registro == false);
             }
 
             ViewBag.EstadoFiltro = estadoFiltro;
@@ -68,17 +68,18 @@ namespace AssitADSOproyect.Controllers
                 document.Add(Chunk.NEWLINE);
 
 
-                PdfPTable table = new PdfPTable(7);
+                PdfPTable table = new PdfPTable(8);
                 table.WidthPercentage = 100;
 
                 // Encabezados de la tabla
                 Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
-                table.AddCell(new Phrase("Id de Registro", headerFont));
+                table.AddCell(new Phrase("Fecha Asistencia", headerFont));
                 table.AddCell(new Phrase("Fecha Registro"));
                 table.AddCell(new Phrase("Hora Registro"));
-                table.AddCell(new Phrase("Fecha Asistencia"));
                 table.AddCell(new Phrase("Aprendiz"));
-                table.AddCell(new Phrase("Estado Asistencia"));
+                table.AddCell(new Phrase("Instructor"));
+                table.AddCell(new Phrase("Ficha"));
+                table.AddCell(new Phrase("Competencia"));
                 table.AddCell(new Phrase("Estado Registro"));
 
 
@@ -87,13 +88,14 @@ namespace AssitADSOproyect.Controllers
                 Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
                 foreach (var registros in RegistrosFiltrados)
                 {
-                    table.AddCell(new Phrase(registros.Id_Registroasistencia.ToString()));
+                    table.AddCell(new Phrase(registros.Asistencia.Fecha_asistencia));
                     table.AddCell(new Phrase(registros.Fecha_registro));
                     table.AddCell(new Phrase(registros.Hora_registro));
-                    table.AddCell(new Phrase(registros.Asistencia.Fecha_asistencia));
                     table.AddCell(new Phrase(registros.Usuario.Nombre_usuario));
+                    table.AddCell(new Phrase(registros.Asistencia.Usuario.Nombre_usuario));
+                    table.AddCell(new Phrase(registros.Asistencia.Ficha.Codigo_ficha.ToString()));
+                    table.AddCell(new Phrase(registros.Asistencia.Competencia.Nombre_competencia));
                     table.AddCell(new Phrase(registros.Asistio_registro.ToString()));
-                    table.AddCell(new Phrase(registros.Estado_RegistroAsitencia.ToString()));
 
                 }
 

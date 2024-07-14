@@ -71,7 +71,6 @@
           <ScalarProperty Name="Asistio_registro" ColumnName="Asistio_registro" />
           <ScalarProperty Name="Id_asistencia" ColumnName="Id_asistencia" />
           <ScalarProperty Name="Id_Aprendiz" ColumnName="Id_Aprendiz" />
-          <ScalarProperty Name="Estado_RegistroAsitencia" ColumnName="Estado_RegistroAsitencia" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

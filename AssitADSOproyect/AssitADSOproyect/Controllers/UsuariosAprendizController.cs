@@ -51,7 +51,7 @@ namespace AssitADSOproyect.Controllers
                 document.Add(Chunk.NEWLINE);
 
 
-                PdfPTable table = new PdfPTable(8);
+                PdfPTable table = new PdfPTable(7);
                 table.WidthPercentage = 100;
 
                 // Encabezados de la tabla
@@ -62,7 +62,6 @@ namespace AssitADSOproyect.Controllers
                 table.AddCell(new Phrase("Apellido"));
                 table.AddCell(new Phrase("Telefono"));
                 table.AddCell(new Phrase("Correo"));
-                table.AddCell(new Phrase("Codigo Ficha"));
                 table.AddCell(new Phrase("Estado Aprendiz"));
 
 
@@ -77,7 +76,6 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(aprendiz.Apellido_usuario));
                     table.AddCell(new Phrase(aprendiz.Telefono_usuario.ToString()));
                     table.AddCell(new Phrase(aprendiz.Correo_usuario));
-                    //table.AddCell(new Phrase(aprendiz.Ficha2.Codigo_ficha.ToString()));
                     table.AddCell(new Phrase(aprendiz.Estado_Usuario.ToString()));
 
                 }

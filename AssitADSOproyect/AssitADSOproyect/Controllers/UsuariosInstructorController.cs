@@ -35,8 +35,8 @@ namespace AssitADSOproyect.Controllers
         public ActionResult GenerarReportePDF()
         {
             var InstructoresFiltrados = db.Usuario
-              .Where(u => u.Tipo_usuario == "Instructor")
-              .ToList();
+                .Where(u => (u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin") && u.Estado_Usuario == true)
+                .ToList();
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
@@ -55,7 +55,7 @@ namespace AssitADSOproyect.Controllers
                 document.Add(Chunk.NEWLINE);
 
 
-                PdfPTable table = new PdfPTable(7);
+                PdfPTable table = new PdfPTable(8);
                 table.WidthPercentage = 100;
 
                 // Encabezados de la tabla
@@ -66,6 +66,7 @@ namespace AssitADSOproyect.Controllers
                 table.AddCell(new Phrase("Apellido"));
                 table.AddCell(new Phrase("Telefono"));
                 table.AddCell(new Phrase("Correo"));
+                table.AddCell(new Phrase("Tipo Instructor"));
                 table.AddCell(new Phrase("Estado Instructor"));
 
 
@@ -80,6 +81,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(instructor.Apellido_usuario));
                     table.AddCell(new Phrase(instructor.Telefono_usuario.ToString()));
                     table.AddCell(new Phrase(instructor.Correo_usuario));
+                    table.AddCell(new Phrase(instructor.Tipo_usuario));
                     table.AddCell(new Phrase(instructor.Estado_Usuario.ToString()));
 
                 }

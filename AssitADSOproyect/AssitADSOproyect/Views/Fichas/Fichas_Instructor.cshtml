@@ -16,14 +16,14 @@
                     <li class="breadcrumb-item">General</li>
                     <li class="breadcrumb-item active">Consultar</li>
                 </ol>
-            </div>  
+            </div>
             <div class="col-sm-10">
-            @if (@Session["TipoUsuario"].ToString() == "InstructorAdmin")
-            {
-                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Fichas_Instructor", "Fichas")'" id="BottomPdf">
-                    Fichas como Instructor
-                </button>
-            }
+                @if (@Session["TipoUsuario"].ToString() == "InstructorAdmin")
+                {
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Index", "Fichas")'" id="BottomPdf">
+                        Fichas como Administrador
+                    </button>
+                }
             </div>
         </div>
     </div>
@@ -54,12 +54,11 @@
                     <button class="btn btn-light"><a href="@Url.Action("Create", "Fichas")">Crear</a></button>
                 }
             </div>
-        </div>  
+        </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Fichas")'" id="BottomPdf">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDFInstructorFicha", "Fichas")'" id="BottomPdf">
                 Generar Reporte PDF
             </button>
-
             <div class="table-responsive">
                 <table class="display" id="row-select-delete">
                     <thead>
@@ -112,61 +111,3 @@
         </div>
     </div>
 </div>
-
-@*<h2>Index</h2>
-
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id_ficha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre_ficha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Jornada_ficha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modalidad_ficha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tipo_ficha)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Programa_formacion.Nombre_programa)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id_ficha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre_ficha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Jornada_ficha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Modalidad_ficha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipo_ficha)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Programa_formacion.Nombre_programa)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id_ficha }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id_ficha }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id_ficha })
-            </td>
-        </tr>
-    }
-
-    </table>*@
