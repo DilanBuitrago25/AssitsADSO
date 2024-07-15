@@ -51,9 +51,11 @@
         </div>
 
         <div class="card-body">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Programa_formacion")'" id="BottomPdf">
-                Generar Reporte PDF
-            </button>
+            @using (Html.BeginForm("GenerarReportePDFInstructor", "Fichas", FormMethod.Post))
+            {
+                <input type="hidden" name="id" value="@ViewBag.FichaId" />
+                <button type="submit" class="btn btn-primary">Generar Reporte PDF</button>
+            }
             <div class="table-responsive">
                 <table class="display datatables" id="ajax-data-object">
                     <thead>

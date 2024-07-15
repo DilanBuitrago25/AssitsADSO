@@ -11,6 +11,7 @@ using ClaseDatos;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using static AssitADSOproyect.Controllers.LoginController;
+using System.Diagnostics;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -88,6 +89,73 @@ namespace AssitADSOproyect.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult GenerarReportePDFAprendizFicha(int id)
+        {
+            try
+            {
+                var fichasAprendiz = db.Ficha_has_Usuario
+               .Where(fu => fu.Id_usuario == id && fu.TipoUsuario == "Aprendiz")
+               .Select(fu => fu.Ficha)
+               .ToList();
+
+                var aprendiz = db.Usuario.Find(id); // Busca la ficha por su ID
+                string nombreAprendiz = aprendiz?.Nombre_usuario + aprendiz.Apellido_usuario; // Obtiene el código de la ficha
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte de Fichas del Aprendiz " + nombreAprendiz, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(5);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("Codigo", headerFont));
+                    table.AddCell(new Phrase("Jornada", headerFont));
+                    table.AddCell(new Phrase("Modalidad", headerFont));
+                    table.AddCell(new Phrase("Tipo", headerFont));
+                    table.AddCell(new Phrase("Programa de Formación", headerFont));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var fichasapre in fichasAprendiz)
+                    {
+                        table.AddCell(new Phrase(fichasapre.Codigo_ficha.ToString()));
+                        table.AddCell(new Phrase(fichasapre.Jornada_ficha));
+                        table.AddCell(new Phrase(fichasapre.Modalidad_ficha));
+                        table.AddCell(new Phrase(fichasapre.tipo_ficha));
+                        table.AddCell(new Phrase(fichasapre.Programa_formacion.Nombre_programa));
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "Reportefichasde" + nombreAprendiz + ".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message); // Registro
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
+            }
+        }
+
+
         class HeaderFooterEvent : PdfPageEventHelper
         {
             private readonly Image _logo;
@@ -106,7 +174,7 @@ namespace AssitADSOproyect.Controllers
 
                 // Pie de página (texto centrado)
                 Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
-                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssisdsdsstADSO. Todos los derechos reservados.", footerFont);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssistADSO. Todos los derechos reservados.", footerFont);
                 float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
                 float xPosition = (document.PageSize.Width - textWidth) / 2;
 
@@ -214,13 +282,13 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Fichas_Aprendiz(int id)
         {
-            // Obtener fichas relacionadas al aprendiz
+           
             var fichasAprendiz = db.Ficha_has_Usuario
                 .Where(fu => fu.Id_usuario == id && fu.TipoUsuario == "Aprendiz")
                 .Select(fu => fu.Ficha)
                 .ToList();
 
-            ViewBag.AprendizId = id; // Pasar el ID del aprendiz a la vista
+            ViewBag.AprendizId = id; 
             ViewBag.Nombre_Aprendiz = db.Usuario.Find(id)?.Nombre_usuario;
             ViewBag.Apellido_Aprendiz = db.Usuario.Find(id)?.Apellido_usuario;
 

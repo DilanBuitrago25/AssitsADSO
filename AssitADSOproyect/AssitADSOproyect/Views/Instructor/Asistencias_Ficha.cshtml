@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-<!-- Container-fluid starts-->
+
 
 <div class="container-fluid">
     <div class="row project-cards">
@@ -46,9 +46,11 @@
                     </div>
                     <div class="col-md-6 p-0">
 
-                        <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Asistencias")'">
-                            Generar Reporte PDF
-                        </button>
+                        @using (Html.BeginForm("GenerarReportePDFAsistenciaFicha", "Instructor", FormMethod.Post))
+                        {
+                            <input type="hidden" name="fichaId" value="@ViewBag.fichaId" />
+                            <button type="submit" class="btn btn-primary">Generar Reporte PDF</button>
+                        }
                     </div>
                 </div>
                 @using (Html.BeginForm("Index", "Asistencias", FormMethod.Get))
@@ -62,11 +64,7 @@
                             <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
                         </div>
 
-                        <!--<div class="col-md-4">
-                            <label for="estadoFiltro">Fichas:</label>-->
-                            @*@Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "form-control", onchange = "cargarCompetencias()" })*@
-                            <!--<br />
-                        </div>-->
+                       
                         <div class="col-md-8">
                             @*<label for="estadoFiltro">Competencias:</label>*@
                             @*@Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "form-control" })*@

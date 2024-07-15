@@ -11,6 +11,7 @@ using ClaseDatos;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using static AssitADSOproyect.Controllers.LoginController;
+using System.Diagnostics;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -107,11 +108,77 @@ namespace AssitADSOproyect.Controllers
 
                 // Pie de página (texto centrado)
                 Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
-                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssisdsdsstADSO. Todos los derechos reservados.", footerFont);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssistADSO. Todos los derechos reservados.", footerFont);
                 float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
                 float xPosition = (document.PageSize.Width - textWidth) / 2;
 
                 ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, footerText, xPosition, document.BottomMargin, 0);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GenerarReportePDFCompetenciasProgramas(int id)
+        {
+            try
+            {
+                var programas = db.Competencia
+                .Where(c => c.Id_competencia == id)
+                .SelectMany(c => c.Programa_formacion) // Accedemos a los programas a través de la colección de navegación
+                .ToList();
+
+                var competencia = db.Competencia.Find(id); // Busca la ficha por su ID
+                string nombreCompetencia = competencia?.Nombre_competencia; // Obtiene el código de la ficha
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte de Programas relacionados con la competencia " + nombreCompetencia, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(5);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("id", headerFont));
+                    table.AddCell(new Phrase("Nombre", headerFont));
+                    table.AddCell(new Phrase("Tipo", headerFont));
+                    table.AddCell(new Phrase("Duracion", headerFont));
+                    table.AddCell(new Phrase("Estado", headerFont));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var programascom in programas)
+                    {
+                        table.AddCell(new Phrase(programascom.Id_programa.ToString()));
+                        table.AddCell(new Phrase(programascom.Nombre_programa));
+                        table.AddCell(new Phrase(programascom.Tipo_programa));
+                        table.AddCell(new Phrase(programascom.Duracion_programa));
+                        table.AddCell(new Phrase(programascom.Estado_Programa_formacion.ToString()));
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "ReporteProgramasde" + nombreCompetencia + ".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message); // Registro
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
             }
         }
 
@@ -219,10 +286,23 @@ namespace AssitADSOproyect.Controllers
         public ActionResult CrearProgramaCompetencia(int competenciaId, [Bind(Include = "Id_competencia,Programa_formacion")] Competencia competencia)
         {
             ViewBag.CompetenciaId = competenciaId;
-            ViewBag.ProgramasDisponibles = db.Programa_formacion.ToList(); // Obtén todos los programas disponibles
-            ViewBag.NombreCompetencia = db.Competencia.Find(competenciaId)?.Nombre_competencia; // Obtenemos el nombre de la competencia para mostrar en la vista
+
+            // Obtener los programas ya asociados a la competencia
+            var programasAsociados = db.Competencia
+            .Where(c => c.Id_competencia == competenciaId)
+            .SelectMany(c => c.Programa_formacion) // Accede a los programas asociados a través de la propiedad de navegación
+            .Select(p => p.Id_programa)
+            .ToList();
+
+            // Obtener todos los programas y excluir los ya asociados
+            ViewBag.ProgramasDisponibles = db.Programa_formacion
+                .Where(p => !programasAsociados.Contains(p.Id_programa))
+                .ToList();
+
+            ViewBag.NombreCompetencia = db.Competencia.Find(competenciaId)?.Nombre_competencia;
             return View();
         }
+
 
         [HttpPost]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]

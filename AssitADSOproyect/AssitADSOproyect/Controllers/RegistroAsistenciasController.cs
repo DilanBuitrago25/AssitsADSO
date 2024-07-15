@@ -53,7 +53,7 @@ namespace AssitADSOproyect.Controllers
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                Document document = new Document(PageSize.A4, 50, 50, 80, 50);
+                Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                 PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
                 writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png"));
@@ -86,13 +86,13 @@ namespace AssitADSOproyect.Controllers
 
 
                 Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
-                foreach (var registros in RegistrosFiltrados)
+                foreach (var registros in RegistrosFiltrados) 
                 {
                     table.AddCell(new Phrase(registros.Asistencia.Fecha_asistencia));
                     table.AddCell(new Phrase(registros.Fecha_registro));
                     table.AddCell(new Phrase(registros.Hora_registro));
-                    table.AddCell(new Phrase(registros.Usuario.Nombre_usuario));
-                    table.AddCell(new Phrase(registros.Asistencia.Usuario.Nombre_usuario));
+                    table.AddCell(new Phrase(registros.Usuario.Nombre_usuario + " " + registros.Usuario.Apellido_usuario));
+                    table.AddCell(new Phrase(registros.Asistencia.Usuario.Nombre_usuario +" "+ registros.Asistencia.Usuario.Apellido_usuario));
                     table.AddCell(new Phrase(registros.Asistencia.Ficha.Codigo_ficha.ToString()));
                     table.AddCell(new Phrase(registros.Asistencia.Competencia.Nombre_competencia));
                     table.AddCell(new Phrase(registros.Asistio_registro.ToString()));

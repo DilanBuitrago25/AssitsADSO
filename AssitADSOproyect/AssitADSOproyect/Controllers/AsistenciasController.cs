@@ -14,6 +14,7 @@ using iTextSharp.text;
 using QRCoder;
 using static AssitADSOproyect.Controllers.LoginController;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -125,7 +126,7 @@ namespace AssitADSOproyect.Controllers
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                Document document = new Document(PageSize.A4, 50, 50, 80, 50);
+                Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                 PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
                 writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png"));
@@ -175,6 +176,86 @@ namespace AssitADSOproyect.Controllers
 
 
                 return File(memoryStream.ToArray(), "application/pdf", "ReporteAsistencias.pdf");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GenerarReportePDFAprendizAsistencia(int fichaId, int asistenciaId)
+        {
+            try
+            {
+                var ficha = db.Ficha.Find(fichaId);
+
+                if (ficha == null)
+                {
+                    return HttpNotFound(); // O maneja el caso donde la ficha no existe
+                }
+
+                // 2. Obtener los usuarios "Aprendiz" y sus registros de asistencia
+                var aprendicesConAsistencia = db.Usuario
+                 .Where(u => u.Tipo_usuario == "Aprendiz" &&
+                             u.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == fichaId))
+                 .Select(u => new UsuarioConAsistenciaViewModel
+                 {
+                     Usuario = u,
+                     Asistio_registro = u.RegistroAsistencia
+                                          .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true) // Verifica si existe y es true
+                 })
+                 .ToList();
+
+                var Ficha = db.Ficha.Find(fichaId);
+                var Asistencia = db.Asistencia.Find(asistenciaId);
+                string codigoFicha = Ficha?.Codigo_ficha.ToString();
+                string fechaAsistencia = Asistencia?.Fecha_asistencia;
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte de Asistencia del "+ fechaAsistencia + " de la ficha " + codigoFicha, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(4);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("Documento", headerFont));
+                    table.AddCell(new Phrase("Aprendiz", headerFont));
+                    table.AddCell(new Phrase("Correo", headerFont));
+                    table.AddCell(new Phrase("Asistencia", headerFont));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var AsistenciaApre in aprendicesConAsistencia)
+                    {
+                        table.AddCell(new Phrase(AsistenciaApre.Usuario.Tipo_Documento_usuario + AsistenciaApre.Usuario.Documento_usuario));
+                        table.AddCell(new Phrase(AsistenciaApre.Usuario.Nombre_usuario + AsistenciaApre.Usuario.Apellido_usuario));
+                        table.AddCell(new Phrase(AsistenciaApre.Usuario.Correo_usuario));
+                        table.AddCell(new Phrase(AsistenciaApre.Asistio_registro.ToString()));
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "Reporteasitenciade ficha" + codigoFicha + fechaAsistencia+".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message); // Registro
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
             }
         }
 
@@ -354,8 +435,8 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Asistencia_Aprendices(int fichaId, int asistenciaId)
         {
-            // 1. Obtener la "Ficha" usando el fichaId proporcionado
-            var ficha = db.Ficha.Find(fichaId); // Asumiendo que tienes un DbSet<Ficha> en tu DbContext
+           
+            var ficha = db.Ficha.Find(fichaId); 
 
             if (ficha == null)
             {
@@ -377,36 +458,11 @@ namespace AssitADSOproyect.Controllers
 
             // 3. Pasar los datos a la vista
             ViewBag.Ficha = ficha;
+            ViewBag.asistenciaId = asistenciaId;
+            ViewBag.fichaId = fichaId;
             return View(aprendicesConAsistencia); // Pasamos la lista del ViewModel
         }
 
-
-
-        //// GET: Asistencias1/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Asistencia asistencia = db.Asistencia.Find(id);
-        //    if (asistencia == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(asistencia);
-        //}
-
-        //// POST: Asistencias1/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Asistencia asistencia = db.Asistencia.Find(id);
-        //    db.Asistencia.Remove(asistencia);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {

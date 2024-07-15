@@ -14,6 +14,9 @@ using System.Web.Hosting;
 using static AssitADSOproyect.Controllers.LoginController;
 using Antlr.Runtime.Misc;
 using System.Data.Entity.Infrastructure;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.Diagnostics;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -38,8 +41,9 @@ namespace AssitADSOproyect.Controllers
 
                 var Soportesfiltrados = db.Soporte
                                              .Where(r => r.Id_Aprendiz.ToString() == idUsuarioSesion);
-               
+               ViewBag.aprendizId = idUsuarioSesion;
                 return View(Soportesfiltrados);
+                
             }
             else
             {
@@ -118,7 +122,10 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Create([Bind(Include = "Id_soporte,Nombre_soporte,Descripcion_soporte,Fecha_registro,Hora_registro,Id_Aprendiz,Id_asistencia,Id_Instructor,Archivo_soporte,Estado_soporte")] Soporte soporte, HttpPostedFileBase archivo)
         {
-
+            if (string.IsNullOrWhiteSpace(soporte.Descripcion_soporte))
+            {
+                soporte.Descripcion_soporte = "N/A";
+            }
             if (ModelState.IsValid)
             {
                 if (archivo != null && archivo.ContentLength > 0)
@@ -164,7 +171,100 @@ namespace AssitADSOproyect.Controllers
             return View(soporte);
         }
 
+        class HeaderFooterEvent : PdfPageEventHelper
+        {
+            private readonly Image _logo;
 
+            public HeaderFooterEvent(string imagePath)
+            {
+                _logo = Image.GetInstance(imagePath);
+                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+            }
+
+            public override void OnEndPage(PdfWriter writer, Document document)
+            {
+                // Encabezado (imagen alineada a la izquierda)
+                _logo.SetAbsolutePosition(document.LeftMargin, document.PageSize.Height - document.TopMargin - _logo.ScaledHeight);
+                document.Add(_logo);
+
+                // Pie de página (texto centrado)
+                Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssistADSO. Todos los derechos reservados.", footerFont);
+                float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
+                float xPosition = (document.PageSize.Width - textWidth) / 2;
+
+                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, footerText, xPosition, document.BottomMargin, 0);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GenerarReportePDFSoportesAprendiz(int id)
+        {
+            try
+            {
+                string idUsuarioSesion = Session["Idusuario"].ToString();
+
+                var Soportesfiltrados = db.Soporte
+                                             .Where(r => r.Id_Aprendiz.ToString() == idUsuarioSesion);
+
+
+                var aprendiz = db.Usuario.Find(id); // Busca la ficha por su ID
+                string nombreAprendiz = aprendiz?.Nombre_usuario + aprendiz.Apellido_usuario; // Obtiene el código de la ficha
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte Justificaciones Asistencia del Aprendiz " + nombreAprendiz, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(6);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("ID", headerFont));
+                    table.AddCell(new Phrase("Asunto", headerFont));
+                    table.AddCell(new Phrase("Fecha Registro", headerFont));
+                    table.AddCell(new Phrase("Fecha de la Inasistencia", headerFont));
+                    table.AddCell(new Phrase("Ficha", headerFont));
+                    table.AddCell(new Phrase("Validación del Instructor", headerFont));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var Justificaciones in Soportesfiltrados)
+                    {
+                        table.AddCell(new Phrase(Justificaciones.Id_soporte.ToString()));
+                        table.AddCell(new Phrase(Justificaciones.Nombre_soporte.ToString()));
+                        table.AddCell(new Phrase(Justificaciones.Fecha_registro));
+                        table.AddCell(new Phrase(Justificaciones.Asistencia.Fecha_asistencia));
+                        table.AddCell(new Phrase(Justificaciones.Asistencia.Ficha.Codigo_ficha.ToString()));
+                        table.AddCell(new Phrase(Justificaciones.Validacion_Instructor.ToString()));
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "ReporteJustificacionesAprendiz" + nombreAprendiz + ".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message); // Registro
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
+            }
+        }
 
 
         // GET: JustificacionInasistencia/Edit/5

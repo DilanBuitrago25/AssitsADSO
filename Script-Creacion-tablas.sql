@@ -122,7 +122,7 @@ go
 create table Soporte(
 Id_soporte int identity (1000000,1) not null,
 Nombre_soporte varchar (100) not null,
-Descripcion_soporte varchar (500) not null,
+Descripcion_soporte varchar (500) ,
 Fecha_registro varchar(200) not null,
 Hora_registro varchar(200) not null,
 Id_Aprendiz int references Usuario(Id_usuario),

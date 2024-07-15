@@ -11,6 +11,7 @@ using ClaseDatos;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using static AssitADSOproyect.Controllers.LoginController;
+using System.Diagnostics;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -91,6 +92,70 @@ namespace AssitADSOproyect.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult GenerarReportePDFProgramasCompetencias(int id)
+        {
+            try
+            {
+                var competencias = db.Programa_formacion
+                .Where(pf => pf.Id_programa == id)
+                .SelectMany(pf => pf.Competencia)
+                .ToList();
+
+                var programa = db.Programa_formacion.Find(id); // Busca la ficha por su ID
+                string nombrePrograma = programa?.Nombre_programa; // Obtiene el código de la ficha
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte de Competencias relacionados con el programa " + nombrePrograma, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(4);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("id", headerFont));
+                    table.AddCell(new Phrase("Nombre", headerFont));
+                    table.AddCell(new Phrase("Tipo", headerFont));
+                    table.AddCell(new Phrase("Estado", headerFont));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var competenciaspro in competencias)
+                    {
+                        table.AddCell(new Phrase(competenciaspro.Id_competencia.ToString()));
+                        table.AddCell(new Phrase(competenciaspro.Nombre_competencia));
+                        table.AddCell(new Phrase(competenciaspro.tipo_competencia));
+                        table.AddCell(new Phrase(competenciaspro.Estado_Competencia.ToString()));
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "ReporteCompetenciasde" + nombrePrograma + ".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message); // Registro
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
+            }
+        }
+
         class HeaderFooterEvent : PdfPageEventHelper
         {
             private readonly Image _logo;
@@ -109,7 +174,7 @@ namespace AssitADSOproyect.Controllers
 
                 // Pie de página (texto centrado)
                 Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
-                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssisdsdsstADSO. Todos los derechos reservados.", footerFont);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssistADSO. Todos los derechos reservados.", footerFont);
                 float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
                 float xPosition = (document.PageSize.Width - textWidth) / 2;
 
@@ -217,11 +282,26 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Programas_Competencias_Asociar(int programaId, [Bind(Include = "Id_programa,Competencia")] Programa_formacion programa_formacion)
         {
+
+
             ViewBag.ProgramaId = programaId;
+            
+
+            var competenciasAsociados = db.Programa_formacion
+            .Where(c => c.Id_programa == programaId)
+            .SelectMany(c => c.Competencia) // Accede a los programas asociados a través de la propiedad de navegación
+            .Select(p => p.Id_competencia)
+            .ToList();
+
+            ViewBag.CompetenciasDisponibles = db.Competencia
+               .Where(p => !competenciasAsociados.Contains(p.Id_competencia))
+               .ToList();
+
             ViewBag.NombrePrograma = db.Programa_formacion.Find(programaId).Nombre_programa;
-            ViewBag.CompetenciasDisponibles = db.Competencia.ToList(); // Obtén todos los programas disponibles
+
             return View();
         }
+
 
 
         [HttpPost]

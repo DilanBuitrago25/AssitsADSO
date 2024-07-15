@@ -62,7 +62,7 @@ namespace AssitADSOproyect.Controllers
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                Document document = new Document(PageSize.A4, 50, 50, 80, 50);
+                Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                 PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
                 writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
@@ -127,7 +127,7 @@ namespace AssitADSOproyect.Controllers
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                Document document = new Document(PageSize.A4, 50, 50, 80, 50);
+                Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                 PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
                 writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
@@ -239,6 +239,77 @@ namespace AssitADSOproyect.Controllers
                     document.Close();
 
                     return File(memoryStream.ToArray(), "application/pdf", "ReporteAprendicesFicha" + codigoFicha + ".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message); // Registro
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GenerarReportePDFInstructor(int id)
+        {
+            try
+            {
+                var instructorId = db.Ficha_has_Usuario
+                .Where(fu => fu.Id_ficha == id && fu.TipoUsuario == "Instructor" || fu.TipoUsuario == "InstructorAdmin")
+                .Select(fu => fu.Usuario)
+                .ToList();
+
+                var ficha = db.Ficha.Find(id); // Busca la ficha por su ID
+                string codigoFicha = ficha?.Codigo_ficha.ToString(); // Obtiene el código de la ficha
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte de instructores de la Ficha " + codigoFicha, new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(7); 
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("Documento", headerFont));
+                    table.AddCell(new Phrase("Nombres", headerFont));
+                    table.AddCell(new Phrase("Apellidos", headerFont));
+                    table.AddCell(new Phrase("Correo", headerFont));
+                    table.AddCell(new Phrase("Teléfono", headerFont));
+                    table.AddCell(new Phrase("Tipo Instructor", headerFont));
+                    table.AddCell(new Phrase("Estado", headerFont));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var instructores in instructorId)
+                    {
+                        table.AddCell(new Phrase(instructores.Tipo_Documento_usuario.ToString() + instructores.Documento_usuario.ToString()));
+                        table.AddCell(new Phrase(instructores.Nombre_usuario));
+                        table.AddCell(new Phrase(instructores.Apellido_usuario));
+                        table.AddCell(new Phrase(instructores.Correo_usuario));
+                        table.AddCell(new Phrase(instructores.Telefono_usuario.ToString()));
+                        table.AddCell(new Phrase(instructores.Tipo_usuario));
+                        table.AddCell(new Phrase(instructores.Estado_Usuario.ToString()));
+
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "ReporteInstructoresFicha" + codigoFicha + ".pdf");
 
                 }
             }
