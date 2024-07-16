@@ -10,5 +10,7 @@ namespace ClaseDatos
     {
         public ClaseDatos.Usuario Usuario { get; set; }
         public bool Asistio_registro { get; set; }
+        public string fecha_registro { get; set; }
+        public string hora_registro { get; set; }
     }
 }

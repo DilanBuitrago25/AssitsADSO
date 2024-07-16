@@ -27,10 +27,45 @@ namespace AssitADSOproyect.Controllers
         // GET: JustificacionInasistencia
         public ActionResult Index()
         {
-            var soporte = db.Soporte.Include(s => s.Asistencia);
-            return View(soporte.ToList());
-            
+            int instructorId = (int)Session["Idusuario"];
+
+            var soportes = db.Soporte.Include(s => s.Asistencia)
+                                    .Where(s => s.Id_Instructor == instructorId && s.Validacion_Instructor == null);
+
+            return View(soportes.ToList());
+
+
         }
+
+        public ActionResult FiltrarSoportes(string filtro)
+{
+    int instructorId = (int)Session["Idusuario"];
+    var soportes = db.Soporte.Include(s => s.Asistencia).Where(s => s.Id_Instructor == instructorId);
+
+    switch (filtro)
+    {
+        case "BandejaDeEntrada":
+            break; // No se aplica ningún filtro adicional
+        case "NoLeidos":
+            soportes = soportes.Where(s => s.Validacion_Instructor == null);
+            break;
+        case "Leidos":
+            soportes = soportes.Where(s => s.Validacion_Instructor != null);
+            break;
+        case "Aceptados":
+            soportes = soportes.Where(s => s.Validacion_Instructor == true);
+            break;
+        case "Rechazados":
+            soportes = soportes.Where(s => s.Validacion_Instructor == false);
+            break;
+    }
+
+    return PartialView("_SoportePartial", soportes.ToList()); // Devuelve una vista parcial
+}
+
+
+
+
 
         [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult MisSoportes()
@@ -181,12 +216,16 @@ namespace AssitADSOproyect.Controllers
                 _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
             }
 
+            public override void OnOpenDocument(PdfWriter writer, Document document)
+            {
+                // Calcular la posición del logo para que no se superponga con el contenido
+                float logoY = document.PageSize.Height - document.TopMargin - _logo.ScaledHeight;
+                _logo.SetAbsolutePosition(document.LeftMargin, logoY);
+                document.Add(_logo); // Agregar el logo al inicio del documento
+            }
+
             public override void OnEndPage(PdfWriter writer, Document document)
             {
-                // Encabezado (imagen alineada a la izquierda)
-                _logo.SetAbsolutePosition(document.LeftMargin, document.PageSize.Height - document.TopMargin - _logo.ScaledHeight);
-                document.Add(_logo);
-
                 // Pie de página (texto centrado)
                 Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
                 Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssistADSO. Todos los derechos reservados.", footerFont);

@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-6 p-0">
                                 <ul class="nav nav-tabs border-tab" id="top-tab" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true"><i data-feather="target"></i>All</a></li>
+                                    <li class="nav-item"><a class="nav-link active" id="top-home-tab" data-bs-toggle="tab" href="#top-home" role="tab" aria-controls="top-home" aria-selected="true"><i data-feather="target"></i>Todos</a></li>
                                     <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="check-circle"></i>A Tiempo</a></li>
                                     <li class="nav-item"><a class="nav-link" id="contact-top-tab" data-bs-toggle="tab" href="#top-contact" role="tab" aria-controls="top-contact" aria-selected="false"><i data-feather="info"></i>Finalizado</a></li>
                                 </ul>
@@ -61,12 +61,12 @@
 
                                     <div class="col-md-4">
                                         <label for="estadoFiltro">Fichas:</label>
-                                        @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "form-control", onchange = "cargarCompetencias()" })
+                                        @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "js-example-basic-single col-sm-12 form-control", onchange = "cargarCompetencias()" })
                                         <br />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="estadoFiltro">Competencias:</label>
-                                        @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "form-control" })
+                                        @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "js-example-basic-single col-sm-12 form-control" })
 
                                         <br />
                                         <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
@@ -171,7 +171,7 @@
                                     const span = item.querySelector('.badge'); // Obtener el span de la asistencia
                                     const estado = span.textContent.trim();  // "A Tiempo" o "Finalizado"
 
-                                    if (filtro === "All" || estado === filtro) {
+                                    if (filtro === "Todos" || estado === filtro) {
                                         item.style.display = 'block'; // Mostrar el item
                                     } else {
                                         item.style.display = 'none'; // Ocultar el item

@@ -186,22 +186,25 @@ namespace AssitADSOproyect.Controllers
             {
                 var ficha = db.Ficha.Find(fichaId);
 
-                if (ficha == null)
-                {
-                    return HttpNotFound(); // O maneja el caso donde la ficha no existe
-                }
-
-                // 2. Obtener los usuarios "Aprendiz" y sus registros de asistencia
                 var aprendicesConAsistencia = db.Usuario
-                 .Where(u => u.Tipo_usuario == "Aprendiz" &&
-                             u.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == fichaId))
-                 .Select(u => new UsuarioConAsistenciaViewModel
-                 {
-                     Usuario = u,
-                     Asistio_registro = u.RegistroAsistencia
-                                          .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true) // Verifica si existe y es true
-                 })
-                 .ToList();
+                        .Where(u => u.Tipo_usuario == "Aprendiz" &&
+                                    u.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == fichaId))
+                        .Select(u => new UsuarioConAsistenciaViewModel
+                        {
+                            Usuario = u,
+                            Asistio_registro = u.RegistroAsistencia
+                                                .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true),
+                            // Obtener fecha y hora del primer registro que cumple la condición (puedes ajustar esto según tus necesidades)
+                            fecha_registro = u.RegistroAsistencia
+                                                .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
+                                                .Select(ra => ra.Fecha_registro)
+                                                .FirstOrDefault(),
+                            hora_registro = u.RegistroAsistencia
+                                                .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
+                                                .Select(ra => ra.Hora_registro)
+                                                .FirstOrDefault()
+                        })
+                        .ToList();
 
                 var Ficha = db.Ficha.Find(fichaId);
                 var Asistencia = db.Asistencia.Find(asistenciaId);
@@ -225,7 +228,7 @@ namespace AssitADSOproyect.Controllers
                     document.Add(Chunk.NEWLINE);
 
                     // Agregar contenido al PDF (tabla con datos de las fichas)
-                    PdfPTable table = new PdfPTable(4);
+                    PdfPTable table = new PdfPTable(6);
                     table.WidthPercentage = 100;
 
                     // Encabezados de la tabla
@@ -233,6 +236,8 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase("Documento", headerFont));
                     table.AddCell(new Phrase("Aprendiz", headerFont));
                     table.AddCell(new Phrase("Correo", headerFont));
+                    table.AddCell(new Phrase("Fecha Registro", headerFont));
+                    table.AddCell(new Phrase("Hora Registro", headerFont));
                     table.AddCell(new Phrase("Asistencia", headerFont));
 
                     // Datos de las fichas
@@ -242,6 +247,8 @@ namespace AssitADSOproyect.Controllers
                         table.AddCell(new Phrase(AsistenciaApre.Usuario.Tipo_Documento_usuario + AsistenciaApre.Usuario.Documento_usuario));
                         table.AddCell(new Phrase(AsistenciaApre.Usuario.Nombre_usuario + AsistenciaApre.Usuario.Apellido_usuario));
                         table.AddCell(new Phrase(AsistenciaApre.Usuario.Correo_usuario));
+                        table.AddCell(new Phrase(AsistenciaApre.fecha_registro));
+                        table.AddCell(new Phrase(AsistenciaApre.hora_registro));
                         table.AddCell(new Phrase(AsistenciaApre.Asistio_registro.ToString()));
                     }
 
@@ -269,15 +276,19 @@ namespace AssitADSOproyect.Controllers
                 _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
             }
 
+            public override void OnOpenDocument(PdfWriter writer, Document document)
+            {
+                // Calcular la posición del logo para que no se superponga con el contenido
+                float logoY = document.PageSize.Height - document.TopMargin - _logo.ScaledHeight;
+                _logo.SetAbsolutePosition(document.LeftMargin, logoY);
+                document.Add(_logo); // Agregar el logo al inicio del documento
+            }
+
             public override void OnEndPage(PdfWriter writer, Document document)
             {
-                // Encabezado (imagen alineada a la izquierda)
-                _logo.SetAbsolutePosition(document.LeftMargin, document.PageSize.Height - document.TopMargin - _logo.ScaledHeight);
-                document.Add(_logo);
-
                 // Pie de página (texto centrado)
                 Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
-                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssisdsdsstADSO. Todos los derechos reservados.", footerFont);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssistADSO. Todos los derechos reservados.", footerFont);
                 float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
                 float xPosition = (document.PageSize.Width - textWidth) / 2;
 
@@ -435,25 +446,28 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Asistencia_Aprendices(int fichaId, int asistenciaId)
         {
-           
-            var ficha = db.Ficha.Find(fichaId); 
 
-            if (ficha == null)
-            {
-                return HttpNotFound(); // O maneja el caso donde la ficha no existe
-            }
+            var ficha = db.Ficha.Find(fichaId);
 
-            // 2. Obtener los usuarios "Aprendiz" y sus registros de asistencia
             var aprendicesConAsistencia = db.Usuario
-             .Where(u => u.Tipo_usuario == "Aprendiz" &&
-                         u.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == fichaId))
-             .Select(u => new UsuarioConAsistenciaViewModel
-             {
-                 Usuario = u,
-                 Asistio_registro = u.RegistroAsistencia
-                                      .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true) // Verifica si existe y es true
-             })
-             .ToList();
+                    .Where(u => u.Tipo_usuario == "Aprendiz" &&
+                                u.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == fichaId))
+                    .Select(u => new UsuarioConAsistenciaViewModel
+                    {
+                        Usuario = u,
+                        Asistio_registro = u.RegistroAsistencia
+                                            .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true),
+                        // Obtener fecha y hora del primer registro que cumple la condición (puedes ajustar esto según tus necesidades)
+                        fecha_registro = u.RegistroAsistencia
+                                            .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
+                                            .Select(ra => ra.Fecha_registro)
+                                            .FirstOrDefault(),
+                        hora_registro = u.RegistroAsistencia
+                                            .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
+                                            .Select(ra => ra.Hora_registro)
+                                            .FirstOrDefault()
+                    })
+                    .ToList();
 
 
             // 3. Pasar los datos a la vista

@@ -63,10 +63,11 @@
                     <thead>
 
                         <tr>
-                            <th>Id</th>
+                            @*<th>Id</th>*@
                             <th>Documento</th>
                             <th>Nombre</th>
                             <th>Correo</th>
+                            <th>Fecha Registro</th>
                             <th>Estado Asistencia</th>
                         </tr>
 
@@ -75,9 +76,9 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.Usuario.Id_usuario)
-                                </td>
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Usuario.Tipo_Documento_usuario)
                                     @Html.DisplayFor(modelItem => item.Usuario.Documento_usuario)
@@ -90,6 +91,10 @@
                                     @Html.DisplayFor(modelItem => item.Usuario.Correo_usuario)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.fecha_registro)
+                                    @Html.DisplayFor(modelItem => item.hora_registro)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Asistio_registro)
                                 </td>
                             </tr>
@@ -97,10 +102,11 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Id</th>
+                            @*<th>Id</th>*@
                             <th>Documento</th>
                             <th>Nombre</th>
                             <th>Correo</th>
+                            <th>Fecha Registro</th>
                             <th>Estado Asistencia</th>
                         </tr>
                     </tfoot>

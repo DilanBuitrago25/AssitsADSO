@@ -114,18 +114,22 @@ namespace AssitADSOproyect.Controllers
             public HeaderFooterEvent(string imagePath)
             {
                 _logo = Image.GetInstance(imagePath);
-                _logo.ScaleToFit(80f, 50f); // Ajustar tamaño de la imagen
+                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+            }
+
+            public override void OnOpenDocument(PdfWriter writer, Document document)
+            {
+                // Calcular la posición del logo para que no se superponga con el contenido
+                float logoY = document.PageSize.Height - document.TopMargin - _logo.ScaledHeight;
+                _logo.SetAbsolutePosition(document.LeftMargin, logoY);
+                document.Add(_logo); // Agregar el logo al inicio del documento
             }
 
             public override void OnEndPage(PdfWriter writer, Document document)
             {
-                // Encabezado (imagen alineada a la izquierda)
-                _logo.SetAbsolutePosition(document.LeftMargin, document.PageSize.Height - document.TopMargin - _logo.ScaledHeight);
-                document.Add(_logo);
-
                 // Pie de página (texto centrado)
                 Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
-                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssisdsdsstADSO. Todos los derechos reservados.", footerFont);
+                Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssistADSO. Todos los derechos reservados.", footerFont);
                 float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
                 float xPosition = (document.PageSize.Width - textWidth) / 2;
 

@@ -76,9 +76,7 @@
                                 <td>@Html.DisplayFor(model => item.Asistio_registro)</td>
                                 <td>
                                     @Html.ActionLink("Detalles", "Details", new { id = item.Id_Registroasistencia })  |
-                                    @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value &&
-!((ClaseDatos.BDAssistsADSOv4Entities)ViewBag.db).Soporte.Any(s => s.Id_asistencia == item.Id_asistencia && s.Id_Aprendiz == item.Id_Aprendiz) &&
-item.Asistencia.Fecha_asistencia.AddDays(3) >= DateTime.Now) // Nueva condición de fecha
+                                    @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value &&!((ClaseDatos.BDAssistsADSOv4Entities)ViewBag.db).Soporte.Any(s => s.Id_asistencia == item.Id_asistencia && s.Id_Aprendiz == item.Id_Aprendiz) &&DateTime.ParseExact(item.Asistencia.Fecha_asistencia, "yyyy-MM-dd", null).AddDays(3) >= DateTime.Now)
                                     {
                                         @Html.ActionLink("Agregar Soporte", "Create", "JustificacionInasistencia", new { asistenciaId = item.Id_asistencia }, null)
                                     }
