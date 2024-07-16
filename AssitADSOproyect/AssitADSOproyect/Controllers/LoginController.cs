@@ -18,7 +18,7 @@ namespace AssitADSOproyect.Controllers
         {
             return View();
         }
-
+         
         // POST: Auth/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -30,6 +30,7 @@ namespace AssitADSOproyect.Controllers
             {
                 Session["Idusuario"] = usuario.Id_usuario; // Almacenar el ID en sesión
                 Session["TipoUsuario"] = usuario.Tipo_usuario;
+                Session["CorreoUsuario"] = usuario.Correo_usuario;
                 Session["NombreUsuario"] = usuario.Nombre_usuario + " " + usuario.Apellido_usuario;
                 ViewBag.TipoUsuario = usuario.Tipo_usuario;
 

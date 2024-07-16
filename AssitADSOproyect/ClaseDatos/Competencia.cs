@@ -20,12 +20,14 @@ namespace ClaseDatos
             this.Programa_formacion = new HashSet<Programa_formacion>();
             this.Asistencia = new HashSet<Asistencia>();
         }
-    
+
         public int Id_competencia { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el nombre de la competencia")]
         public string Nombre_competencia { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el tipo de la competencia")]
         public string tipo_competencia { get; set; }
         public Nullable<bool> Estado_Competencia { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Programa_formacion> Programa_formacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

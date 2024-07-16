@@ -549,7 +549,7 @@ namespace AssitADSOproyect.Controllers
                 var instructor = db.Usuario.Find(instructorId);
                 var ficha = db.Ficha.Find(idFicha);
 
-                if (instructor != null && instructor.Tipo_usuario == "Instructor" || instructor.Tipo_usuario == "InstructorAdmin" && ficha != null)
+                if (instructor != null && instructor.Tipo_usuario == "Instructor" && instructor.Tipo_usuario == "InstructorAdmin" && ficha != null)
                 {
                     // Verificar si el instructor ya está asociado a la ficha
                     if (!db.Ficha_has_Usuario.Any(fhu => fhu.Id_ficha == idFicha && fhu.Id_usuario == instructorId))

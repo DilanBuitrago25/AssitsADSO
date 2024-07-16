@@ -11,7 +11,8 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Programa_formacion
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +21,16 @@ namespace ClaseDatos
             this.Ficha = new HashSet<Ficha>();
             this.Competencia = new HashSet<Competencia>();
         }
-    
+
         public int Id_programa { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el nombre del programa")]
         public string Nombre_programa { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el tipo de programa")]
         public string Tipo_programa { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar la duración del programa")]
         public string Duracion_programa { get; set; }
         public Nullable<bool> Estado_Programa_formacion { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ficha> Ficha { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

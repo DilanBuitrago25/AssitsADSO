@@ -11,10 +11,12 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Soporte
     {
         public int Id_soporte { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el asunto del soporte")]
         public string Nombre_soporte { get; set; }
         public string Descripcion_soporte { get; set; }
         public string Fecha_registro { get; set; }
@@ -22,11 +24,12 @@ namespace ClaseDatos
         public Nullable<int> Id_Aprendiz { get; set; }
         public Nullable<int> Id_Instructor { get; set; }
         public Nullable<int> Id_asistencia { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el archivo que soportará la justificación")]
         public string Archivo_soporte { get; set; }
         public Nullable<bool> Estado_Soporte { get; set; }
         public Nullable<bool> Validacion_Instructor { get; set; }
         public string Nota_Instructor { get; set; }
-    
+
         public virtual Asistencia Asistencia { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Usuario Usuario1 { get; set; }
