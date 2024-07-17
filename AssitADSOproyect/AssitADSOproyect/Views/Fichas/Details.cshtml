@@ -84,7 +84,7 @@
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label class="form-label">Estado</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Estado_ficha)">
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@(Model.Estado_ficha ?? false ? "Activo" : "No Activo")">
                                             </div>
                                         </div>
                                     </div>
@@ -95,8 +95,8 @@
                     <div class="card-footer">
                         @if (@Session["TipoUsuario"].ToString() == "InstructorAdmin")
                         {
-                            <button class="btn btn-primary m-r-15" type="button" id="buttonedit">@Html.ActionLink("Edit", "Edit", new { id = Model.Id_ficha })</button>
-                            <button class="btn btn-light" type="button"><a href="@Url.Action("Index", "Fichas")">Cancelar</a></button>
+                            @*<button class="btn btn-primary m-r-15" type="button" id="buttonedit">@Html.ActionLink("Edit", "Edit", new { id = Model.Id_ficha })</button>*@
+                            <button class="btn btn-light" type="button"><a href="@Url.Action("Index", "Fichas")">Volver</a></button>
                         }
                         @if (@Session["TipoUsuario"].ToString() == "Instructor")
                         {

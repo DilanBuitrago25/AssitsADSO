@@ -42,8 +42,8 @@
                         <label for="estadoFiltro" class="me-2">Estado:</label>
                         <select class="form-select me-2" id="estadoFiltro" name="estadoFiltro">
                             <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
-                            <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
-                            <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+                            <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Asistencias</option>
+                            <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>Inasistencias</option>
                         </select>
                         <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
                     </div>
@@ -53,7 +53,7 @@
         <div class="card-body">
             
             <div class="table-responsive">
-                <table class="display" id="example-style-1">
+                <table id="example-style-2">
                     <thead>
 
                         <tr>
@@ -73,7 +73,9 @@
                                 <td>@Html.DisplayFor(model => item.Asistencia.Fecha_asistencia)</td>
                                 <td>@Html.DisplayFor(model => item.Fecha_registro)</td>
                                 <td>@Html.DisplayFor(model => item.Asistencia.Competencia.Nombre_competencia)</td>
-                                <td>@Html.DisplayFor(model => item.Asistio_registro)</td>
+                                <td>
+                                    @(item.Asistio_registro ?? false ? "Asistió" : "No asistió")
+                                </td>
                                 <td>
                                     @Html.ActionLink("Detalles", "Details", new { id = item.Id_Registroasistencia })  |
                                     @if (item.Asistio_registro.HasValue && !item.Asistio_registro.Value &&!((ClaseDatos.BDAssistsADSOv4Entities)ViewBag.db).Soporte.Any(s => s.Id_asistencia == item.Id_asistencia && s.Id_Aprendiz == item.Id_Aprendiz) &&DateTime.ParseExact(item.Asistencia.Fecha_asistencia, "yyyy-MM-dd", null).AddDays(3) >= DateTime.Now)

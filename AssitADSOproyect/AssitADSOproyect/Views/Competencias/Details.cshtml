@@ -16,24 +16,7 @@
                 </ol>
             </div>
             <div class="col-sm-6">
-                <!-- Bookmark Start-->
-                <div class="bookmark">
-                    <ul>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Tables"><i data-feather="inbox"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>
-                        <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                            <form class="form-inline search-form">
-                                <div class="form-group form-control-search">
-                                    <input type="text" placeholder="Search..">
-                                </div>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Bookmark Ends-->
+               
             </div>
         </div>
     </div>
@@ -81,7 +64,7 @@
                                         <div class="col">
                                             <div class="mb-3">
                                                 <label class="form-label">Estado</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Estado_Competencia)">
+                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@(Model.Estado_Competencia ?? false ? "Activo" : "No Activo")">
                                             </div>
                                         </div>
                                     </div>
@@ -90,8 +73,8 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-primary m-r-15" type="button" id="buttonedit">@Html.ActionLink("Edit", "Edit", new { id = Model.Id_competencia })</button>
-                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","Competencias")">Cancelar</a></button>
+                        @*<button class="btn btn-primary m-r-15" type="button" id="buttonedit">@Html.ActionLink("Edit", "Edit", new { id = Model.Id_competencia })</button>*@
+                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","Competencias")">Volver</a></button>
                     </div>
                 </div>
             </div>
@@ -99,53 +82,3 @@
     </div>
 }
 
-
-    @*@{
-        ViewBag.Title = "Details";
-    }
-
-    <h2>Details</h2>
-
-    <div>
-        <h4>Competencia</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.tipo_competencia)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.tipo_competencia)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Nombre_competencia)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Nombre_competencia)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Programa_formacion.Nombre_programa)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Programa_formacion.Nombre_programa)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Ficha.Jornada_ficha)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Ficha.Jornada_ficha)
-            </dd>
-
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id_competencia }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>-->*@
-    

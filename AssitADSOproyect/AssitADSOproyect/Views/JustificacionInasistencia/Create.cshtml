@@ -134,14 +134,19 @@
     });
 
     document.addEventListener('DOMContentLoaded', function () {
-        const form = document.getElementById("validacionarchivo"); 
-        const fileInput = document.getElementById("archivo"); 
+        const form = document.getElementById("validacionarchivo");
+        const fileInput = document.getElementById("archivo");
 
         form.addEventListener("submit", function (event) {
-            const archivo = fileInput.files[0];
-            if (archivo && !archivo.name.endsWith(".pdf")) {
-                alert("El archivo debe ser un PDF.");
-                event.preventDefault(); // Evita el envío si no es PDF
+            if (!fileInput.value) {
+                alert("Por favor, seleccione un archivo PDF.");
+                event.preventDefault();
+            } else {
+                const archivo = fileInput.files[0];
+                if (!archivo.name.endsWith(".pdf")) {
+                    alert("El archivo debe ser un PDF.");
+                    event.preventDefault();
+                }
             }
         });
     });
