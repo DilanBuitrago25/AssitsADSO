@@ -11,8 +11,7 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Ficha
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,25 +20,17 @@ namespace ClaseDatos
             this.Asistencia = new HashSet<Asistencia>();
             this.Ficha_has_Usuario = new HashSet<Ficha_has_Usuario>();
         }
-
+    
         public int Id_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor de ingresar el codigo de la ficha")]
         public int Codigo_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor de ingresar la jornada de la ficha")]
         public string Jornada_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor de ingresar la modalidad de la ficha")]
         public string Modalidad_ficha { get; set; }
-        [Required(ErrorMessage = "Por favor de ingresar el tipo de ficha")]
         public string tipo_ficha { get; set; }
-        [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Por favor de ingresar la fecha de inicio de la ficha o colocar la fecha correcta")]
         public string Fecha_inicio { get; set; }
-        [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Por favor de ingresar la fecha de fin de la ficha o colocar la fecha correcta")]
         public string Fecha_fin { get; set; }
         public Nullable<bool> Estado_ficha { get; set; }
         public Nullable<int> Id_programa { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asistencia> Asistencia { get; set; }
         public virtual Programa_formacion Programa_formacion { get; set; }

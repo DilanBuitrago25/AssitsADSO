@@ -87,7 +87,7 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: JustificacionInasistencia/Details/5
-        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Details(int? id)
         {
             if (id == null) 
@@ -99,6 +99,7 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.RutaArchivo = soporte.Archivo_soporte;
             return View(soporte);
         }
 

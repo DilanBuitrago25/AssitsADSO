@@ -6182,7 +6182,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50633</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://10.180.145.17:44376</IISUrl>
+          <IISUrl>http://localhost:44369</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

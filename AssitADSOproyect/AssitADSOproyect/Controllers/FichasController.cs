@@ -34,7 +34,7 @@ namespace AssitADSOproyect.Controllers
             return View(fichasFiltradas);
         }
 
-        [AutorizarTipoUsuario("InstructorAdmin")]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Fichas_Instructor(string estadoFiltro = "")
         {
             string idUsuario = Session["Idusuario"].ToString();

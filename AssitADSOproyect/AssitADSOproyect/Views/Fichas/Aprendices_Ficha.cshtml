@@ -42,7 +42,7 @@
                 <div class="col-sm-8 d-flex justify-content-end">
                     @if (@Session["TipoUsuario"].ToString() == "InstructorAdmin")
                     {
-                        <button class="btn btn-primary" onclick="window.location.href='@Url.Action("Asociar_Aprendiz_Ficha", "Fichas", new { id = ViewBag.FichaId })'">
+                        <button class="btn btn-primary" onclick="window.location.href='@Url.Action("Asociar_Aprendiz_Ficha", "Fichas", new { idFicha = ViewBag.FichaId })'">
                             Agregar Aprendiz
                         </button>
                     }
