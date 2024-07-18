@@ -31,7 +31,7 @@ namespace ClaseDatos
         public Nullable<bool> Estado_Asistencia { get; set; }
         public string QrCode { get; set; }
         public Nullable<int> Id_competencia { get; set; }
-    
+
         public virtual Ficha Ficha { get; set; }
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -113,9 +113,27 @@
                                                     @Html.ActionLink("Ver Listado Asistencias", "Asistencia_Aprendices", new { fichaId = item.Id_ficha, asistenciaId = item.Id_asistencia })
                                                     <div class="row details">
                                                         <div class="col-6"><span>Asistieron </span></div>
-                                                        <div class="col-6 font-primary">12 </div>
+                                                        <div class="col-6 font-primary">
+                                                            @{
+                                                                var totalAsistencias = 0;
+                                                                if (ViewBag.AsistenciasPorAsistencia.ContainsKey(item.Id_asistencia))
+                                                                {
+                                                                    totalAsistencias = ViewBag.AsistenciasPorAsistencia[item.Id_asistencia];
+                                                                }
+                                                                                                                }
+                                                                                                                @totalAsistencias
+                                                                                                            </div>
                                                         <div class="col-6"> <span>No Asistieron</span></div>
-                                                        <div class="col-6 font-primary">5</div>
+                                                        <div class="col-6 font-primary">
+                                                            @{
+                                                                var totalInAsistencias = 0;
+                                                                if (ViewBag.AsistenciasPorInAsistencia.ContainsKey(item.Id_asistencia))
+                                                                {
+                                                                    totalInAsistencias = ViewBag.AsistenciasPorInAsistencia[item.Id_asistencia];
+                                                                }
+                                                            }
+                                                            @totalInAsistencias
+                                                        </div>
                                                         <div class="col-6"> <span>Justificaron Inasistencia</span></div>
                                                         <div class="col-6 font-primary">7</div>
                                                     </div>

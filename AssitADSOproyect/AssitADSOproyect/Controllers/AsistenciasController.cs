@@ -15,12 +15,14 @@ using QRCoder;
 using static AssitADSOproyect.Controllers.LoginController;
 using System.Globalization;
 using System.Diagnostics;
+using System.Data.SqlClient;
 
 namespace AssitADSOproyect.Controllers
 {
     public class AsistenciasController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
+        string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         //GET: Asistencias
         public ActionResult Index(int? pagina,string fechaFiltro = "", int? fichaFiltro = null, int? competenciaFiltro = null)
@@ -101,8 +103,11 @@ namespace AssitADSOproyect.Controllers
                 .ToList();
 
 
-            
 
+            var asistenciasPorAsistencia = ContarAsistenciasPorAsistencia();
+            ViewBag.AsistenciasPorAsistencia = asistenciasPorAsistencia;
+            var asistenciasPorInAsistencia = ContarAsistenciasPorInAsistencia();
+            ViewBag.AsistenciasPorInAsistencia = asistenciasPorInAsistencia;
             ViewBag.PaginaActual = numeroPagina;
             ViewBag.TotalRegistros = db.Asistencia.Count();
 
@@ -295,6 +300,70 @@ namespace AssitADSOproyect.Controllers
                 ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, footerText, xPosition, document.BottomMargin, 0);
             }
         }
+
+        public Dictionary<int, int> ContarAsistenciasPorAsistencia()
+        {
+            Dictionary<int, int> asistenciasPorAsistencia = new Dictionary<int, int>();
+
+            using (SqlConnection connection = new SqlConnection(Conexion))
+            {
+                string query = @"
+                                SELECT ra.Id_asistencia, COUNT(*) AS TotalAsistencias
+                                FROM RegistroAsistencia ra
+                                INNER JOIN Usuario u ON ra.Id_aprendiz = u.Id_usuario
+                                WHERE u.Tipo_usuario = 'Aprendiz' AND ra.Asistio_registro = 1
+                                GROUP BY ra.Id_asistencia;
+                            ";
+
+                SqlCommand comando = new SqlCommand(query, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int idAsistencia = (int)reader["Id_asistencia"];
+                        int totalAsistencias = (int)reader["TotalAsistencias"];
+                        asistenciasPorAsistencia[idAsistencia] = totalAsistencias;
+                    }
+                }
+            }
+
+            return asistenciasPorAsistencia;
+        }
+
+        public Dictionary<int, int> ContarAsistenciasPorInAsistencia()
+        {
+            Dictionary<int, int> asistenciasPorInAsistencia = new Dictionary<int, int>();
+
+            using (SqlConnection connection = new SqlConnection(Conexion))
+            {
+                string query = @"
+                                SELECT ra.Id_asistencia, COUNT(*) AS TotalInAsistencias
+                                FROM RegistroAsistencia ra
+                                INNER JOIN Usuario u ON ra.Id_aprendiz = u.Id_usuario
+                                WHERE u.Tipo_usuario = 'Aprendiz' AND ra.Asistio_registro = 0
+                                GROUP BY ra.Id_asistencia;
+                            ";
+
+                SqlCommand comando = new SqlCommand(query, connection);
+                connection.Open();
+
+                using (SqlDataReader reader = comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int idAsistencia = (int)reader["Id_asistencia"];
+                        int totalInAsistencias = (int)reader["TotalInAsistencias"];
+                        asistenciasPorInAsistencia[idAsistencia] = totalInAsistencias;
+                    }
+                }
+            }
+
+            return asistenciasPorInAsistencia;
+        }
+
+
 
         // GET: Asistencias/Details/5
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
