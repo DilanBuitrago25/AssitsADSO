@@ -9,7 +9,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Gestionar Editar</h3>
+                <h3>Gestionar Programas</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
                     <li class="breadcrumb-item">Programa de formacion</li>
@@ -30,7 +30,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>Registrar Ficha</h5>
+                        <h5>Detalles Programa de Formación</h5>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -38,18 +38,11 @@
 
                                 @Html.AntiForgeryToken()
                                 <form>
+                                    
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
-                                                <label class="form-label">Tipo Competencia</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Id_programa)">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3">
-                                                <label class="form-label">Tipo Competencia</label>
+                                                <label class="form-label">Nombre Programa</label>
                                                 <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Nombre_programa)">
                                             </div>
                                         </div>
@@ -57,7 +50,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
-                                                <label class="form-label">Nombre</label>
+                                                <label class="form-label">Tipo</label>
                                                 <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Tipo_programa)">
                                             </div>
                                         </div>
@@ -65,7 +58,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
-                                                <label class="form-label">Codigo Ficha</label>
+                                                <label class="form-label">Duración</label>
                                                 <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Duracion_programa)">
                                             </div>
                                         </div>
@@ -73,7 +66,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
-                                                <label class="form-label">Codigo Ficha</label>
+                                                <label class="form-label">Estado</label>
                                                 <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@(Model.Estado_Programa_formacion ?? false ? "Activo" : "No Activo")">
                                             </div>
                                         </div>

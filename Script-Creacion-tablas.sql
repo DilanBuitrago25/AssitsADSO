@@ -3,11 +3,11 @@
 --Creación de las tablas
 go
 --Base de datos se modifico y se tiene que verificar que los datos impuestos en el modelo y en el controlador esten de la misma secuencia
-Create database BDAssistsADSOvFinal
+Create database BDAssistsADSO
 
 go
 
-use BDAssistsADSOvFinal
+use BDAssistsADSO
 
 go
 
