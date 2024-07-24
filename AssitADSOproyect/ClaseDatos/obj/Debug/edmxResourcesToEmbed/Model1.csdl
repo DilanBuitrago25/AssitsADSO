@@ -83,6 +83,8 @@
     <Property Name="Id_Aprendiz" Type="Int32" Nullable="true" />
     <NavigationProperty Name="Asistencia" Relationship="Self.FK__RegistroA__Id_as__52593CB8" FromRole="RegistroAsistencia" ToRole="Asistencia" />
     <NavigationProperty Name="Usuario" Relationship="Self.FK__RegistroA__Id_Ap__534D60F1" FromRole="RegistroAsistencia" ToRole="Usuario" />
+    <Property Name="anular_Asistencia" Type="Boolean" />
+    <Property Name="nota_anularAsistencia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Soporte">
     <Key>
@@ -90,7 +92,7 @@
     </Key>
     <Property Name="Id_soporte" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre_soporte" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Descripcion_soporte" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion_soporte" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="Fecha_registro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Hora_registro" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Id_Aprendiz" Type="Int32" />

@@ -1,0 +1,116 @@
+﻿@model ClaseDatos.RegistroAsistencia
+
+
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Gestionar Registro Asistencia</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Asistencia</li>
+                    <li class="breadcrumb-item">Registro Asistencia</li>
+                    <li class="breadcrumb-item active">Anular</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h5>Detalles del Registro de la Asistenciaz</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                
+                                @Html.AntiForgeryToken()
+                                <form>
+                                    @Html.HiddenFor(model => model.Id_Registroasistencia)
+
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Codigo Ficha</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Asistencia.Ficha.Codigo_ficha)">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Fecha de la Asistencia</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">A</span>
+                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Asistencia.Fecha_asistencia)">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Nombre(s)</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Usuario.Nombre_usuario) @Html.DisplayFor(model => model.Usuario.Apellido_usuario)  ">
+                                            @Html.HiddenFor(model => model.Id_Aprendiz)
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+                                        <label class="form-label">Fecha de Registro</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Fecha_registro)">
+                                            @Html.HiddenFor(model => model.Fecha_registro)
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 input-group-solid">
+                                        <label class="form-label">Hora de Registro</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Hora_registro)">
+                                            @Html.HiddenFor(model => model.Hora_registro)
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 m-form__group">
+
+                                        <label class="form-label">Correo</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.Usuario.Correo_usuario)">
+
+                                        </div>
+                                    </div>
+
+                                    @Html.HiddenFor(model => model.anular_Asistencia, new { Value = true })
+                                    @Html.HiddenFor(model => model.Asistio_registro, new { Value = false })
+                                    <h6>Anular Registro Asistencia</h6>
+                                    @Html.TextAreaFor(model => model.nota_anularAsistencia, new { @class = "form-control", @id = "exampleFormControlTextarea4", @rows = "3", placeholder = "Escribe Una Respuesta..." })
+                                    @Html.ValidationMessageFor(model => model.nota_anularAsistencia, "", new { @class = "text-danger" })
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary m-r-15" type="submit">Anular</button>
+                        <button class="btn btn-light" type="button"><a href="@Url.Action("Index","Asistencias")">Cancelar</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    // Elimina el atributo 'readonly' al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('@Html.IdFor(model => model.Id_Registroasistencia)').removeAttribute('readonly');
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(function (input) {
+            input.removeAttribute('readonly');
+        });
+    });
+</script>
+
+

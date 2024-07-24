@@ -65,6 +65,8 @@
     <EntitySetMapping Name="RegistroAsistencia">
       <EntityTypeMapping TypeName="BDAssistsADSOv4Model.RegistroAsistencia">
         <MappingFragment StoreEntitySet="RegistroAsistencia">
+          <ScalarProperty Name="nota_anularAsistencia" ColumnName="nota_anularAsistencia" />
+          <ScalarProperty Name="anular_Asistencia" ColumnName="anular_Asistencia" />
           <ScalarProperty Name="Id_Registroasistencia" ColumnName="Id_Registroasistencia" />
           <ScalarProperty Name="Fecha_registro" ColumnName="Fecha_registro" />
           <ScalarProperty Name="Hora_registro" ColumnName="Hora_registro" />

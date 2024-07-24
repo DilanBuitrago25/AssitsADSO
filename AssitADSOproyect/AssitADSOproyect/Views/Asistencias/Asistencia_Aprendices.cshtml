@@ -10,7 +10,7 @@
     <div class="page-header">
         <div class="row">
             <div class="col-sm-6">
-                <h3>Gestionar Aprendiz</h3>
+                <h3>Gestionar Asistencia Aprendices</h3>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
                     <li class="breadcrumb-item">Aprendiz</li>
@@ -77,8 +77,8 @@
                         {
                             <tr>
                                 @*<td>
-                                    @Html.DisplayFor(modelItem => item.Usuario.Id_usuario)
-                                </td>*@
+            @Html.DisplayFor(modelItem => item.Usuario.Id_usuario)
+        </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Usuario.Tipo_Documento_usuario)
                                     @Html.DisplayFor(modelItem => item.Usuario.Documento_usuario)
@@ -87,15 +87,19 @@
                                     @Html.DisplayFor(modelItem => item.Usuario.Nombre_usuario)
                                     @Html.DisplayFor(modelItem => item.Usuario.Apellido_usuario)
                                 </td>
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.Usuario.Correo_usuario)
-                                </td>
+                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.fecha_registro)
                                     @Html.DisplayFor(modelItem => item.hora_registro)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Asistio_registro)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Anular", "AnularAsistencia", new { id = item.Id_Registroasistencia , asistenciaId = @ViewBag.asistenciaId })
+
                                 </td>
                             </tr>
                         }

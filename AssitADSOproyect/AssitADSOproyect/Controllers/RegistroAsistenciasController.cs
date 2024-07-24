@@ -259,8 +259,8 @@ namespace AssitADSOproyect.Controllers
         }
 
         // GET: RegistroAsistencias/Edit/5
-        [AutorizarTipoUsuario("Aprendiz")]
-        public ActionResult Edit(int? id)
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        public ActionResult AnularAsistencia(int? id)
         {
             if (id == null)
             {
@@ -272,7 +272,10 @@ namespace AssitADSOproyect.Controllers
                 return HttpNotFound();
             }
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
-            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_Aprendiz);
+            ViewBag.Id_asistenciaa = new SelectList(db.Asistencia, "Id_asistencia", "Id_asistencia", registroAsistencia.Id_asistencia);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Id_ficha");
+            ViewBag.Nombre_Aprendiz = new SelectList(db.Usuario, "Id_usuario", "Nombre_usuario" + "Apellido_usuario", registroAsistencia.Id_Aprendiz);
+            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Nombre_usuario", registroAsistencia.Id_Aprendiz);
             return View(registroAsistencia);
         }
 
@@ -281,15 +284,17 @@ namespace AssitADSOproyect.Controllers
         // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_Registroasistencia,Fecha_registro,Hora_registro,Id_asistencia,Id_usuario")] RegistroAsistencia registroAsistencia)
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        public ActionResult AnularAsistencia([Bind(Include = "Id_Registroasistencia,Fecha_registro,Hora_registro,Asistio_registro,Id_asistencia,Id_Aprendiz,anular_Asistencia,nota_anularAsistencia")] RegistroAsistencia registroAsistencia)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(registroAsistencia).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Asistencias");
             }
             ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
+            ViewBag.Nombre_Aprendiz = new SelectList(db.Usuario, "Id_usuario", "Nombre_usuario" + "Apellido_usuario", registroAsistencia.Id_Aprendiz);
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_Aprendiz);
             return View(registroAsistencia);
         }

@@ -176,52 +176,52 @@
                 </div>
             </div>
         </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
-                        const asistenciaItems = document.querySelectorAll('.asistencia-item');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
+            const asistenciaItems = document.querySelectorAll('.asistencia-item');
 
-                        tabLinks.forEach(link => {
-                            link.addEventListener('click', function () {
-                                const filtro = this.textContent.trim(); // "All", "A Tiempo" o "Finalizado"
+            tabLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    const filtro = this.textContent.trim(); // "All", "A Tiempo" o "Finalizado"
 
-                                asistenciaItems.forEach(item => {
-                                    const span = item.querySelector('.badge'); // Obtener el span de la asistencia
-                                    const estado = span.textContent.trim();  // "A Tiempo" o "Finalizado"
+                    asistenciaItems.forEach(item => {
+                        const span = item.querySelector('.badge'); // Obtener el span de la asistencia
+                        const estado = span.textContent.trim();  // "A Tiempo" o "Finalizado"
 
-                                    if (filtro === "Todos" || estado === filtro) {
-                                        item.style.display = 'block'; // Mostrar el item
-                                    } else {
-                                        item.style.display = 'none'; // Ocultar el item
-                                    }
-                                });
-                            });
-                        });
+                        if (filtro === "Todos" || estado === filtro) {
+                            item.style.display = 'block'; // Mostrar el item
+                        } else {
+                            item.style.display = 'none'; // Ocultar el item
+                        }
                     });
+                });
+            });
+        });
 
-                     function cargarCompetencias() {
-                     var fichaId = $("#Id_ficha").val();
-                     $.ajax({
-                         url: '@Url.Action("ObtenerCompetenciasPorFicha", "Asistencias")', // Cambiar el controlador
-                         type: 'GET',
-                         data: { idFicha: fichaId },
-                         success: function (data) {
-                             var selectCompetencia = $("#Id_competencia");
-                             selectCompetencia.empty();
-                             $.each(data, function (index, competencia) {
-                                 selectCompetencia.append($('<option></option>').val(competencia.Value).text(competencia.Text));
-                             });
-                         }
-                     });
-                    }
-
-                    $(function () {
-                        $('#reportrange').daterangepicker({
-                            locale: {
-                                format: 'MM/DD/YYYY'
-                            }
-                        });
+            function cargarCompetencias() {
+            var fichaId = $("#Id_ficha").val();
+            $.ajax({
+                url: '@Url.Action("ObtenerCompetenciasPorFicha", "Asistencias")', // Cambiar el controlador
+                type: 'GET',
+                data: { idFicha: fichaId },
+                success: function (data) {
+                    var selectCompetencia = $("#Id_competencia");
+                    selectCompetencia.empty();
+                    $.each(data, function (index, competencia) {
+                        selectCompetencia.append($('<option></option>').val(competencia.Value).text(competencia.Text));
                     });
+                }
+            });
+        }
+
+        $(function () {
+            $('#reportrange').daterangepicker({
+                locale: {
+                    format: 'MM/DD/YYYY'
+                }
+            });
+        });
 
 
-                </script>
+    </script>

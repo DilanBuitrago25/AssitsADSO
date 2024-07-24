@@ -524,6 +524,7 @@ namespace AssitADSOproyect.Controllers
                     .Select(u => new UsuarioConAsistenciaViewModel
                     {
                         Usuario = u,
+                        
                         Asistio_registro = u.RegistroAsistencia
                                             .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true),
                         // Obtener fecha y hora del primer registro que cumple la condición (puedes ajustar esto según tus necesidades)
@@ -531,10 +532,15 @@ namespace AssitADSOproyect.Controllers
                                             .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
                                             .Select(ra => ra.Fecha_registro)
                                             .FirstOrDefault(),
+                        Id_Registroasistencia = u.RegistroAsistencia
+                                            .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
+                                            .Select(ra => ra.Id_Registroasistencia)
+                                            .FirstOrDefault(),
                         hora_registro = u.RegistroAsistencia
                                             .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
                                             .Select(ra => ra.Hora_registro)
                                             .FirstOrDefault()
+
                     })
                     .ToList();
 
@@ -546,6 +552,50 @@ namespace AssitADSOproyect.Controllers
             return View(aprendicesConAsistencia); // Pasamos la lista del ViewModel
         }
 
+        // GET: RegistroAsistencias/Edit/5
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        public ActionResult AnularAsistencia(int? id, int asistenciaId)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            RegistroAsistencia registroAsistencia = db.RegistroAsistencia.Find(id);
+            if (registroAsistencia == null)
+            {
+                return HttpNotFound();
+            }
+            //ViewBag.Id_asistenciaa = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
+            //ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Id_asistencia", registroAsistencia.Id_asistencia);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Id_ficha");
+            ViewBag.Nombre_Aprendiz = new SelectList(db.Usuario, "Id_usuario", "Nombre_usuario" + "Apellido_usuario", registroAsistencia.Id_Aprendiz);
+            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Nombre_usuario", registroAsistencia.Id_Aprendiz);
+            ViewBag.asistenciaId = asistenciaId;
+            return View(registroAsistencia);
+        }
+
+        // POST: RegistroAsistencias/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        public ActionResult AnularAsistencia([Bind(Include = "Id_Registroasistencia,Fecha_registro,Hora_registro,Asistio_registro,Id_asistencia,Id_Aprendiz,anular_Asistencia,nota_anularAsistencia")] RegistroAsistencia registroAsistencia)
+        {
+            if (string.IsNullOrWhiteSpace(registroAsistencia.nota_anularAsistencia))
+            {
+                registroAsistencia.nota_anularAsistencia = "N/A";
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(registroAsistencia).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Asistencias");
+            }
+            ViewBag.Nombre_Aprendiz = new SelectList(db.Usuario, "Id_usuario", "Nombre_usuario" + "Apellido_usuario", registroAsistencia.Id_Aprendiz);
+            ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Tipo_Documento_usuario", registroAsistencia.Id_Aprendiz);
+            return View(registroAsistencia);
+        }
 
         protected override void Dispose(bool disposing)
         {

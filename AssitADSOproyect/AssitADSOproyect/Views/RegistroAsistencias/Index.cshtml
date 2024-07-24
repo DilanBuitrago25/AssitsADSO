@@ -61,7 +61,7 @@
                             <th>Fecha Asistencia</th>
                             <th>Fecha Registro Asistencia</th>
                             <th>Competencia</th>
-                            <th>Asistió</th>
+                            <th>Estado</th>
                         </tr>
 
                     </thead>
@@ -74,7 +74,14 @@
                                 <td>@Html.DisplayFor(model => item.Fecha_registro)</td>
                                 <td>@Html.DisplayFor(model => item.Asistencia.Competencia.Nombre_competencia)</td>
                                 <td>
-                                    @(item.Asistio_registro ?? false ? "Asistió" : "No asistió")
+                                    @if (item.anular_Asistencia == false)
+                                    {
+                                        @(item.Asistio_registro ?? false ? "Asistió" : "No asistió")
+                                    }
+                                    @if (item.anular_Asistencia == true)
+                                    {
+                                        @(item.anular_Asistencia ?? false ? "Anulada" : "No asistió")
+                                    }
                                 </td>
                                 <td>
                                     @Html.ActionLink("Detalles", "Details", new { id = item.Id_Registroasistencia })  |

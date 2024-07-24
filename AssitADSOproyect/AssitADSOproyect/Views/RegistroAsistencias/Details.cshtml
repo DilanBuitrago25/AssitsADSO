@@ -65,16 +65,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="mb-3">
-                                                <label class="form-label">Estado de la Asistencia</label>
-                                                <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@(Model.Asistio_registro ?? false ? "Asistió" : "No asistió")">
+                                    @if (Model.anular_Asistencia == false)
+                                    {
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Estado de la Asistencia</label>
+                                                    <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@(Model.Asistio_registro ?? false ? "Asistió" : "No asistió")">
 
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
+                                    }
                                     <div class="row">
                                         <div class="col">
                                             <div class="mb-3">
@@ -91,7 +93,31 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                    @if (Model.anular_Asistencia == true)
+                                    {
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Estado de la Asistencia</label>
+                                                    <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@(Model.anular_Asistencia ?? false ? "Anulada" : "No asistió")">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        if (Model.nota_anularAsistencia != "N/A")
+                                        {
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Justificación Anulación</label>
+                                                        <input class="form-control" id="exampleInputPassword22" type="text" disabled="" placeholder="@Html.DisplayFor(model => model.nota_anularAsistencia)">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    }
+
+                                    </form>
                             </div>
                         </div>
                     </div>
