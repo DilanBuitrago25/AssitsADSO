@@ -1,0 +1,121 @@
+﻿@model IEnumerable<ClaseDatos.Asistencia>
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-10">
+                <h3>Gestionar Asistencias</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Asistencia</li>
+                    <li class="breadcrumb-item">General</li>
+                    <li class="breadcrumb-item active">Consultar</li>
+                    <li class="breadcrumb-item active">Tabla</li>
+                </ol>
+            </div>
+            <div class="col-sm-2">
+               
+                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Index", "Asistencias")'" id="BottomPdf">
+                    <i class="fa fa-th"></i>
+                    Asistencias propias
+                </button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12">
+    <div class="card">
+
+        <div class="card-header d-flex align-items-center">
+            <div class="col-sm-4">
+                <h5>Tabla de datos - Asistencias</h5>
+                <br />
+                @using (Html.BeginForm("Index", "Fichas", FormMethod.Get))
+                {
+                    <div class="d-flex align-items-center">
+                        <label for="estadoFiltro" class="me-2">Estado:</label>
+                        <select class="form-select me-2" id="estadoFiltro" name="estadoFiltro">
+                            <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
+                            <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Activo</option>
+                            <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>No Activo</option>
+                        </select>
+                        <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
+                    </div>
+                }
+            </div>
+            <div class="col-sm-8 d-flex justify-content-end">
+                @if (@Session["TipoUsuario"].ToString() == "InstructorAdmin")
+                {
+                    <button class="btn btn-light"><a href="@Url.Action("Create", "Fichas")">Crear</a></button>
+                }
+            </div>
+        </div>
+        <div class="card-body">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDF", "Fichas")'" id="BottomPdf">
+                Generar Reporte PDF
+            </button>
+
+            <div class="table-responsive">
+                <table class="display" id="example-style-1">
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha Asistencia</th>
+                            <th>Hora Fin</th>
+                            <th>Instructor</th>
+                            <th>Ficha</th>
+                            <th>Estado </th>
+                            <th> </th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Id_asistencia)</td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Fecha_asistencia)
+                                    @Html.DisplayFor(model => item.Hora_inicio_asistencia)
+                                </td>
+                                <td>@Html.DisplayFor(model => item.Hora_fin_asistencia)</td>
+                                <td>
+                                    @Html.DisplayFor(model => item.Usuario.Nombre_usuario)
+                                    @Html.DisplayFor(model => item.Usuario.Apellido_usuario)
+                                </td>
+                                <td>@Html.DisplayFor(model => item.Ficha.Codigo_ficha)</td>
+                                <td>
+                                    @{
+                                        var fechaFinAsistencia = DateTime.Parse(item.Fecha_asistencia + " " + item.Hora_fin_asistencia);
+                                    }
+                                    <span class="badge @(DateTime.Now > fechaFinAsistencia ? "badge-danger" : "badge-primary")">
+                                        @(DateTime.Now > fechaFinAsistencia ? "Finalizado" : "A Tiempo")
+                                    </span>
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.Id_asistencia }) |
+                                    @Html.ActionLink("Ver Listado Asistencias", "Asistencia_Aprendices", new { fichaId = item.Id_ficha, asistenciaId = item.Id_asistencia }) |
+                                    @Html.ActionLink("Instructores", "Instructores_Ficha", new { id = item.Id_ficha })
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha Asistencia</th>
+                            <th>Hora Fin</th>
+                            <th>Instructor</th>
+                            <th>Ficha</th>
+                            <th>Estado </th>
+                            <th> </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

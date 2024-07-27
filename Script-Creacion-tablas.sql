@@ -115,6 +115,8 @@ Hora_registro varchar(200)  ,
 Asistio_registro bit default (0),
 Id_asistencia int references Asistencia(Id_asistencia),
 Id_Aprendiz int references Usuario(Id_usuario),
+anular_Asistencia bit default(0),
+nota_anularAsistencia varchar (500)
 Primary Key (Id_Registroasistencia));
 
 go
@@ -134,3 +136,6 @@ Validacion_Instructor bit default (0),
 Nota_Instructor varchar(500),
 primary key (Id_soporte));
 
+alter table RegistroAsistencia add anular_Asistencia bit default(0)
+
+alter table RegistroAsistencia add nota_anularAsistencia varchar (500)

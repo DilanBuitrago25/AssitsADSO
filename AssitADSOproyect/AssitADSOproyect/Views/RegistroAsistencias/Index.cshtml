@@ -74,11 +74,11 @@
                                 <td>@Html.DisplayFor(model => item.Fecha_registro)</td>
                                 <td>@Html.DisplayFor(model => item.Asistencia.Competencia.Nombre_competencia)</td>
                                 <td>
-                                    @if (item.anular_Asistencia == false)
+                                    @if (item.anular_Asistencia != true)
                                     {
                                         @(item.Asistio_registro ?? false ? "Asistió" : "No asistió")
                                     }
-                                    @if (item.anular_Asistencia == true)
+                                    else
                                     {
                                         @(item.anular_Asistencia ?? false ? "Anulada" : "No asistió")
                                     }

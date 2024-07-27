@@ -13,6 +13,7 @@ using ClaseDatos;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using static AssitADSOproyect.Controllers.LoginController;
+using System.Globalization;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -94,6 +95,8 @@ namespace AssitADSOproyect.Controllers
             ViewBag.RegistrosSoportePorFicha = registrosSoportePorFicha;
             return View(fichasFiltradas);
         }
+
+
 
         public Dictionary<int, int> ContarAsistenciasPorFicha()
         {
@@ -197,6 +200,44 @@ namespace AssitADSOproyect.Controllers
             return View(asistencias);
         }
 
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        public ActionResult Asistencias_tabla(int? pagina, string fechaFiltro = "")
+        {
+            string idUsuarioSesion = Session["Idusuario"].ToString();
+
+            // Consulta base con Include para cargar relaciones necesarias
+            var query = db.Asistencia
+                .Include(a => a.Ficha)
+                .Include(a => a.Ficha.Programa_formacion)
+                .Include(a => a.Ficha.Programa_formacion.Competencia)
+                .Where(a => a.Id_Instructor.ToString() == idUsuarioSesion);
+
+            if (!string.IsNullOrEmpty(fechaFiltro))
+            {
+                var fechas = fechaFiltro.Split('-');
+                if (fechas.Length == 2)
+                {
+                    DateTime fechaInicioParsed, fechaFinParsed;
+                    if (DateTime.TryParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicioParsed) &&
+                        DateTime.TryParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinParsed))
+                    {
+                        // Realizar la conversión de fecha fuera de la consulta LINQ to Entities
+                        var asistenciasFiltradasLista = query.ToList(); // Convertir a lista para usar LINQ to Objects
+
+                        asistenciasFiltradasLista = asistenciasFiltradasLista.Where(a =>
+                            DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= fechaInicioParsed &&
+                            DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
+
+                        // Volver a asignar el resultado filtrado
+                        query = asistenciasFiltradasLista.AsQueryable();
+                    }
+                }
+            }
+
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", fichaFiltro);
+            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
+            return View(query);
+        }
 
         class HeaderFooterEvent : PdfPageEventHelper
         {

@@ -22,7 +22,7 @@ namespace AssitADSOproyect.Controllers
         // GET: Programa_formacion
         public ActionResult Index(string estadoFiltro = "")
         {
-            var ProgramasFiltrados = db.Programa_formacion.AsQueryable(); // Comienza con todas las competencias
+            var ProgramasFiltrados = db.Programa_formacion.AsQueryable(); 
 
             if (estadoFiltro == "true")
             {

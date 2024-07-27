@@ -15,7 +15,7 @@
 
         <div class="page-header">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-10">
                     <h3>Asistencias</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -24,10 +24,14 @@
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Asistencias_tabla", "Asistencias")'" id="BottomPdf">
+                        <i class="fa fa-table"></i>
+                            Asistencias generales
+                    </button>
                 </div>
             </div>
-        </div>
+        </div> 
 
 
         <div class="container-fluid">
@@ -61,12 +65,12 @@
 
                                     <div class="col-md-4">
                                         <label for="estadoFiltro">Fichas:</label>
-                                        @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "js-example-basic-single col-sm-12 form-control", onchange = "cargarCompetencias()" })
+                                        @*@Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "js-example-basic-single col-sm-12 form-control", onchange = "cargarCompetencias()" })*@
                                         <br />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="estadoFiltro">Competencias:</label>
-                                        @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "js-example-basic-single col-sm-12 form-control" })
+                                        @*   @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "js-example-basic-single col-sm-12 form-control" })*@
 
                                         <br />
                                         <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />

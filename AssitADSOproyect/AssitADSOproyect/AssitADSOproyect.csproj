@@ -6119,6 +6119,8 @@
     <Content Include="Views\Fichas\Fichas_Instructor.cshtml" />
     <Content Include="Views\RegistroAsistencias\AnularAsistencia.cshtml" />
     <Content Include="Views\Asistencias\AnularAsistencia.cshtml" />
+    <Content Include="Views\Asistencias\Asistencias_tabla.cshtml" />
+    <Content Include="Views\Instructor\Asistencias_tabla.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
