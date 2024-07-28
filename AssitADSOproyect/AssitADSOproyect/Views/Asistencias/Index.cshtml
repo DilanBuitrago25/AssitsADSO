@@ -129,14 +129,9 @@
                                                                                                             </div>
                                                         <div class="col-6"> <span>No Asistieron</span></div>
                                                         <div class="col-6 font-primary">
-                                                            @{
-                                                                var totalInAsistencias = 0;
-                                                                if (ViewBag.AsistenciasPorInAsistencia.ContainsKey(item.Id_asistencia))
-                                                                {
-                                                                    totalInAsistencias = ViewBag.AsistenciasPorInAsistencia[item.Id_asistencia];
-                                                                }
-                                                            }
-                                                            @totalInAsistencias
+                                                            @totalAsistencias = ViewBag.AsistenciasPorAsistencia?.ContainsKey(item.Id_asistencia) == true ?
+                                                            ViewBag.AsistenciasPorAsistencia[item.Id_asistencia] : 0;
+
                                                         </div>
                                                         <div class="col-6"> <span>Justificaron Inasistencia</span></div>
                                                         <div class="col-6 font-primary">7</div>

@@ -66,9 +66,9 @@
                             @*<th>Id</th>*@
                             <th>Documento</th>
                             <th>Nombre</th>
-                            <th>Correo</th>
                             <th>Fecha Registro</th>
                             <th>Estado Asistencia</th>
+                            <th>Acciones</th>
                         </tr>
 
                     </thead>
@@ -87,9 +87,6 @@
                                     @Html.DisplayFor(modelItem => item.Usuario.Nombre_usuario)
                                     @Html.DisplayFor(modelItem => item.Usuario.Apellido_usuario)
                                 </td>
-                                @*<td>
-                                    @Html.DisplayFor(modelItem => item.Usuario.Correo_usuario)
-                                </td>*@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.fecha_registro)
                                     @Html.DisplayFor(modelItem => item.hora_registro)
@@ -98,7 +95,7 @@
                                     @Html.DisplayFor(modelItem => item.Asistio_registro)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Anular", "AnularAsistencia", new { id = item.Id_Registroasistencia , asistenciaId = @ViewBag.asistenciaId })
+                                    @Html.ActionLink("Anular", "AnularAsistencia", new { idregistro = item.Id_Registroasistencia , asistenciaId = @ViewBag.asistenciaId })
 
                                 </td>
                             </tr>
@@ -109,9 +106,9 @@
                             @*<th>Id</th>*@
                             <th>Documento</th>
                             <th>Nombre</th>
-                            <th>Correo</th>
                             <th>Fecha Registro</th>
                             <th>Estado Asistencia</th>
+                            <th>Acciones</th>
                         </tr>
                     </tfoot>
                 </table>

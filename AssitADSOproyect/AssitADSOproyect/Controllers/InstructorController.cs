@@ -191,9 +191,13 @@ namespace AssitADSOproyect.Controllers
         {
             int instructorId = (int)Session["IdUsuario"];
 
+            // Filtrar asistencias por ficha e instructor
             var asistencias = db.Asistencia
-                .Where(a => a.Id_ficha == fichaId && a.Id_Instructor == instructorId) 
-                .ToList();
+                .Where(a => a.Id_ficha == fichaId && a.Id_Instructor == instructorId)
+                .ToList(); // Materializar la consulta para poder ordenar en memoria
+
+            // Ordenar las asistencias por fecha de forma descendente (más recientes primero)
+            asistencias = asistencias.OrderByDescending(a => a.Fecha_asistencia).ToList();
 
             ViewBag.fichaId = fichaId;
 
@@ -201,16 +205,17 @@ namespace AssitADSOproyect.Controllers
         }
 
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
-        public ActionResult Asistencias_tabla(int? pagina, string fechaFiltro = "")
+        public ActionResult Asistencias_tabla(int idFicha,int? pagina, string fechaFiltro = "")
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
-            // Consulta base con Include para cargar relaciones necesarias
+        
             var query = db.Asistencia
-                .Include(a => a.Ficha)
-                .Include(a => a.Ficha.Programa_formacion)
-                .Include(a => a.Ficha.Programa_formacion.Competencia)
-                .Where(a => a.Id_Instructor.ToString() == idUsuarioSesion);
+              .Where(a => a.Id_ficha == idFicha)
+              .OrderByDescending(a => a.Fecha_asistencia) 
+              .ToList();
+
+            ViewBag.IdFicha = idFicha;
 
             if (!string.IsNullOrEmpty(fechaFiltro))
             {
@@ -229,7 +234,7 @@ namespace AssitADSOproyect.Controllers
                             DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
 
                         // Volver a asignar el resultado filtrado
-                        query = asistenciasFiltradasLista.AsQueryable();
+                        //query = asistenciasFiltradasLista.AsQueryable();
                     }
                 }
             }
@@ -342,6 +347,79 @@ namespace AssitADSOproyect.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult GenerarReportePDFAsistenciaFichagenerales(int idFicha)
+        {
+            try
+            {
+                string idUsuarioSesion = Session["Idusuario"].ToString();
+
+               
+                var query = db.Asistencia
+                  .Where(a => a.Id_ficha == idFicha)
+                  .OrderByDescending(a => a.Fecha_asistencia) 
+                  .ToList();
+
+
+                var ficha = db.Ficha.Find(idFicha); // Busca la ficha por su ID
+                string codigoFicha = ficha?.Codigo_ficha.ToString(); // Obtiene el código de la ficha
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte Asistencias general de la Ficha " + codigoFicha, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(7);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("Id de Asistencia", headerFont));
+                    table.AddCell(new Phrase("Fecha"));
+                    table.AddCell(new Phrase("Hora Inicio"));
+                    table.AddCell(new Phrase("Hora Fin"));
+                    table.AddCell(new Phrase("Detalles Asistencia"));
+                    table.AddCell(new Phrase("Competencia"));
+                    table.AddCell(new Phrase("Estado Asistencia"));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var asistenciasFicha in query)
+                    {
+                        table.AddCell(new Phrase(asistenciasFicha.Id_asistencia.ToString()));
+                        table.AddCell(new Phrase(asistenciasFicha.Fecha_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Hora_inicio_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Hora_fin_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Detalles_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Competencia.Nombre_competencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Estado_Asistencia.ToString()));
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "ReporteAsistenciasgeneraldeFicha" + codigoFicha + ".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message);
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

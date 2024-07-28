@@ -13,6 +13,7 @@ using ClaseDatos;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using static AssitADSOproyect.Controllers.LoginController;
+using System.Globalization;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -200,6 +201,46 @@ namespace AssitADSOproyect.Controllers
             return View(asistencias);
         }
 
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
+        public ActionResult Asistencias_tabla(int idFicha, int? pagina, string fechaFiltro = "")
+        {
+            string idUsuarioSesion = Session["Idusuario"].ToString();
+
+            // Consulta base con Include para cargar relaciones necesarias
+            var query = db.Asistencia
+              .Where(a => a.Id_ficha == idFicha)
+              .OrderByDescending(a => a.Fecha_asistencia) // Reemplaza 'FechaRegistro' si es diferente
+              .ToList();
+
+            ViewBag.IdFicha = idFicha;
+
+            if (!string.IsNullOrEmpty(fechaFiltro))
+            {
+                var fechas = fechaFiltro.Split('-');
+                if (fechas.Length == 2)
+                {
+                    DateTime fechaInicioParsed, fechaFinParsed;
+                    if (DateTime.TryParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicioParsed) &&
+                        DateTime.TryParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinParsed))
+                    {
+                        // Realizar la conversión de fecha fuera de la consulta LINQ to Entities
+                        var asistenciasFiltradasLista = query.ToList(); // Convertir a lista para usar LINQ to Objects
+
+                        asistenciasFiltradasLista = asistenciasFiltradasLista.Where(a =>
+                            DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= fechaInicioParsed &&
+                            DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
+
+                        // Volver a asignar el resultado filtrado
+                        //query = asistenciasFiltradasLista.AsQueryable();
+                    }
+                }
+            }
+
+            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", fichaFiltro);
+            ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
+            return View(query);
+        }
+
         class HeaderFooterEvent : PdfPageEventHelper
         {
             private readonly Image _logo;
@@ -296,6 +337,80 @@ namespace AssitADSOproyect.Controllers
             catch (Exception ex)
             {
                 Debug.WriteLine("Error al generar el PDF: " + ex.Message); 
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GenerarReportePDFAsistenciaFichagenerales(int idFicha)
+        {
+            try
+            {
+                string idUsuarioSesion = Session["Idusuario"].ToString();
+
+                // Consulta base con Include para cargar relaciones necesarias
+                var query = db.Asistencia
+                  .Where(a => a.Id_ficha == idFicha)
+                  .OrderByDescending(a => a.Fecha_asistencia) // Reemplaza 'FechaRegistro' si es diferente
+                  .ToList();
+
+
+                var ficha = db.Ficha.Find(idFicha); // Busca la ficha por su ID
+                string codigoFicha = ficha?.Codigo_ficha.ToString(); // Obtiene el código de la ficha
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte Asistencias general de la Ficha " + codigoFicha, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(7);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("Id de Asistencia", headerFont));
+                    table.AddCell(new Phrase("Fecha"));
+                    table.AddCell(new Phrase("Hora Inicio"));
+                    table.AddCell(new Phrase("Hora Fin"));
+                    table.AddCell(new Phrase("Detalles Asistencia"));
+                    table.AddCell(new Phrase("Competencia"));
+                    table.AddCell(new Phrase("Estado Asistencia"));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var asistenciasFicha in query)
+                    {
+                        table.AddCell(new Phrase(asistenciasFicha.Id_asistencia.ToString()));
+                        table.AddCell(new Phrase(asistenciasFicha.Fecha_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Hora_inicio_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Hora_fin_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Detalles_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Competencia.Nombre_competencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Estado_Asistencia.ToString()));
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "ReporteAsistenciasgeneraldeFicha" + codigoFicha + ".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message);
                 return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
             }
         }

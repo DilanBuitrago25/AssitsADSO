@@ -96,7 +96,7 @@ namespace AssitADSOproyect.Controllers
             var fichasFiltradas = db.Ficha
                 .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
                 .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) // Filtrar por estado (opcional)
-                .Where(f => f.Ficha_has_Usuario.Any(fu => fu.Id_usuario == idUsuarioLoggeado && fu.TipoUsuario == "Aprendiz")) // Filtrar por relación con el usuario
+                .Where(f => f.Ficha_has_Usuario.Any(fu => fu.Id_usuario == idUsuarioLoggeado && fu.TipoUsuario == "Aprendiz"))
                 .ToList();
 
 

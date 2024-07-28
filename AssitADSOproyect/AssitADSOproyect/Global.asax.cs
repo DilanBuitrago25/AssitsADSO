@@ -28,7 +28,6 @@ namespace AssitADSOproyect
 
             if (httpEx != null && httpEx.GetHttpCode() == 401)
             {
-                // Lógica personalizada antes de redirigir (opcional)
                 Server.ClearError(); // Limpia el error para evitar la página de error genérica
                 Response.Redirect("~/Views/Home/Error401.cshtml");
             }

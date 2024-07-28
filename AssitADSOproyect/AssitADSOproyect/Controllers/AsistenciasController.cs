@@ -22,7 +22,7 @@ namespace AssitADSOproyect.Controllers
     public class AsistenciasController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSOreal;Integrated Security=True;trustservercertificate=True;";
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         //GET: Asistencias
         public ActionResult Index(int? pagina,string fechaFiltro = "", int? fichaFiltro = null, int? competenciaFiltro = null)
@@ -31,58 +31,62 @@ namespace AssitADSOproyect.Controllers
 
             // Consulta base con Include para cargar relaciones necesarias
             var query = db.Asistencia
-                .Include(a => a.Ficha)
-                .Include(a => a.Ficha.Programa_formacion)
-                .Include(a => a.Ficha.Programa_formacion.Competencia)
-                .Where(a => a.Id_Instructor.ToString() == idUsuarioSesion);
+            .Include(a => a.Ficha)
+            .Include(a => a.Ficha.Programa_formacion)
+            .Include(a => a.Ficha.Programa_formacion.Competencia)
+            .Where(a => a.Id_Instructor.ToString() == idUsuarioSesion)
+            .OrderByDescending(a => a.Fecha_asistencia) // Ordenar por fecha de forma descendente
+            .ToList();
 
-            if (!string.IsNullOrEmpty(fechaFiltro))
-            {
-                var fechas = fechaFiltro.Split('-');
-                if (fechas.Length == 2)
-                {
-                    DateTime fechaInicioParsed, fechaFinParsed;
+            query = query.OrderByDescending(a => a.Fecha_asistencia).ToList();
 
-                    // Paso clave: usar TryParseExact para el formato correcto MM/dd/yyyy
-                    if (DateTime.TryParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicioParsed) &&
-                        DateTime.TryParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinParsed))
-                    {
-                        // Aplicar el filtro de fecha directamente en la consulta LINQ to Entities
-                        query = query.Where(a => DbFunctions.TruncateTime(DateTime.Parse(a.Fecha_asistencia)) >= fechaInicioParsed.Date &&
-                        DbFunctions.TruncateTime(DateTime.Parse(a.Fecha_asistencia)) <= fechaFinParsed.Date);
+            //if (!string.IsNullOrEmpty(fechaFiltro))
+            //{
+            //    var fechas = fechaFiltro.Split('-');
+            //    if (fechas.Length == 2)
+            //    {
+            //        DateTime fechaInicioParsed, fechaFinParsed;
 
-                    }
-                }
-            }
-  
+            //        // Paso clave: usar TryParseExact para el formato correcto MM/dd/yyyy
+            //        if (DateTime.TryParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicioParsed) &&
+            //            DateTime.TryParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinParsed))
+            //        {
+            //            // Aplicar el filtro de fecha directamente en la consulta LINQ to Entities
+            //            query = query.Where(a => DbFunctions.TruncateTime(DateTime.Parse(a.Fecha_asistencia)) >= fechaInicioParsed.Date &&
+            //            DbFunctions.TruncateTime(DateTime.Parse(a.Fecha_asistencia)) <= fechaFinParsed.Date);
+
+            //        }
+            //    }
+            //}
+
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", fichaFiltro);
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
      
 
             ViewBag.fechaFiltro = fechaFiltro; // Para mantener el valor en el campo
 
-            int registrosPorPagina = 9;
-            int numeroPagina = (pagina ?? 1); // Si 'pagina' es nulo, usa la página 1
+            //int registrosPorPagina = 9;
+            //int numeroPagina = (pagina ?? 1); // Si 'pagina' es nulo, usa la página 1
 
-            var asistenciasFiltradasporusuario = db.Asistencia.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion &&
-                                                     f.Estado_Asistencia == true);
+            //var asistenciasFiltradasporusuario = db.Asistencia.Where(f => f.Id_Instructor.ToString() == idUsuarioSesion &&
+            //                                         f.Estado_Asistencia == true);
 
-            var asistenciasFiltradas = db.Asistencia
-                .OrderByDescending(a => a.Fecha_asistencia)
-                .Skip((numeroPagina - 1) * registrosPorPagina)
-                .Take(registrosPorPagina)
-                .ToList();
+            //var asistenciasFiltradas = db.Asistencia
+            //    .OrderByDescending(a => a.Fecha_asistencia)
+            //    .Skip((numeroPagina - 1) * registrosPorPagina)
+            //    .Take(registrosPorPagina)
+            //    .ToList();
 
 
 
             var asistenciasPorAsistencia = ContarAsistenciasPorAsistencia();
             ViewBag.AsistenciasPorAsistencia = asistenciasPorAsistencia;
-            var asistenciasPorInAsistencia = ContarAsistenciasPorInAsistencia();
-            ViewBag.AsistenciasPorInAsistencia = asistenciasPorInAsistencia;
-            ViewBag.PaginaActual = numeroPagina;
+            //var asistenciasPorInAsistencia = ContarAsistenciasPorInAsistencia();
+            //ViewBag.AsistenciasPorInAsistencia = asistenciasPorInAsistencia;
+            //ViewBag.PaginaActual = numeroPagina;
             ViewBag.TotalRegistros = db.Asistencia.Count();
 
-            return View(asistenciasFiltradasporusuario);
+            return View(query);
         }
 
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
@@ -90,12 +94,13 @@ namespace AssitADSOproyect.Controllers
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
-            // Consulta base con Include para cargar relaciones necesarias
+           
             var query = db.Asistencia
-                .Include(a => a.Ficha)
-                .Include(a => a.Ficha.Programa_formacion)
-                .Include(a => a.Ficha.Programa_formacion.Competencia)
-                .Where(a => a.Id_Instructor.ToString() == idUsuarioSesion);
+         .OrderByDescending(a => a.Fecha_asistencia) 
+         .ToList();
+
+            query = query.OrderByDescending(a => a.Fecha_asistencia).ToList();
+
 
             if (!string.IsNullOrEmpty(fechaFiltro))
             {
@@ -114,7 +119,7 @@ namespace AssitADSOproyect.Controllers
                             DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
 
                         // Volver a asignar el resultado filtrado
-                        query = asistenciasFiltradasLista.AsQueryable();
+                        //query = asistenciasFiltradasLista.AsQueryable();
                     }
                 }
             }
@@ -286,6 +291,80 @@ namespace AssitADSOproyect.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult GenerarReportePDFAsistenciagenerales()
+        {
+            try
+            {
+                string idUsuarioSesion = Session["Idusuario"].ToString();
+
+
+                var query = db.Asistencia
+             .OrderByDescending(a => a.Fecha_asistencia)
+             .ToList();
+
+                query = query.OrderByDescending(a => a.Fecha_asistencia).ToList();
+
+
+              
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
+                    PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+
+                    document.Open();
+
+                    // Título
+                    Paragraph titulo = new Paragraph("Reporte Asistencias general de la Ficha ", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
+                    titulo.Alignment = Element.ALIGN_CENTER;
+                    document.Add(titulo);
+
+                    document.Add(Chunk.NEWLINE);
+
+                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    PdfPTable table = new PdfPTable(7);
+                    table.WidthPercentage = 100;
+
+                    // Encabezados de la tabla
+                    Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                    table.AddCell(new Phrase("Id de Asistencia", headerFont));
+                    table.AddCell(new Phrase("Fecha"));
+                    table.AddCell(new Phrase("Hora Inicio"));
+                    table.AddCell(new Phrase("Hora Fin"));
+                    table.AddCell(new Phrase("Detalles Asistencia"));
+                    table.AddCell(new Phrase("Competencia"));
+                    table.AddCell(new Phrase("Estado Asistencia"));
+
+                    // Datos de las fichas
+                    Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+                    foreach (var asistenciasFicha in query)
+                    {
+                        table.AddCell(new Phrase(asistenciasFicha.Id_asistencia.ToString()));
+                        table.AddCell(new Phrase(asistenciasFicha.Fecha_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Hora_inicio_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Hora_fin_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Detalles_asistencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Competencia.Nombre_competencia));
+                        table.AddCell(new Phrase(asistenciasFicha.Estado_Asistencia.ToString()));
+                    }
+
+                    document.Add(table);
+                    document.Close();
+
+                    return File(memoryStream.ToArray(), "application/pdf", "ReporteAsistenciasgeneraldeFicha" + ".pdf");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message);
+                return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
+            }
+        }
+
         class HeaderFooterEvent : PdfPageEventHelper
         {
             private readonly Image _logo;
@@ -347,17 +426,17 @@ namespace AssitADSOproyect.Controllers
             return asistenciasPorAsistencia;
         }
 
-        public Dictionary<int, int> ContarAsistenciasPorInAsistencia()
+        public Dictionary<int, int> ContarAsistenciasPorAsistenciamenos()
         {
-            Dictionary<int, int> asistenciasPorInAsistencia = new Dictionary<int, int>();
+            Dictionary<int, int> asistenciasPorAsistenciamenos = new Dictionary<int, int>();
 
             using (SqlConnection connection = new SqlConnection(Conexion))
             {
                 string query = @"
-                                SELECT ra.Id_asistencia, COUNT(*) AS TotalInAsistencias
+                                SELECT ra.Id_asistencia, COUNT(*) AS TotalAsistencias
                                 FROM RegistroAsistencia ra
                                 INNER JOIN Usuario u ON ra.Id_aprendiz = u.Id_usuario
-                                WHERE u.Tipo_usuario = 'Aprendiz' AND ra.Asistio_registro = 0
+                                WHERE u.Tipo_usuario = 'Aprendiz' AND ra.Asistio_registro = 1
                                 GROUP BY ra.Id_asistencia;
                             ";
 
@@ -369,14 +448,58 @@ namespace AssitADSOproyect.Controllers
                     while (reader.Read())
                     {
                         int idAsistencia = (int)reader["Id_asistencia"];
-                        int totalInAsistencias = (int)reader["TotalInAsistencias"];
-                        asistenciasPorInAsistencia[idAsistencia] = totalInAsistencias;
+                        int totalAsistencias = (int)reader["TotalAsistencias"];
+                        asistenciasPorAsistenciamenos[idAsistencia] = totalAsistencias;
                     }
                 }
             }
+            var aprendicesPorFicha = db.Usuario
+           .Where(u => u.Tipo_usuario == "Aprendiz")
+           .GroupBy(u => u.Ficha_has_Usuario.FirstOrDefault().Id_ficha)
+           .ToDictionary(g => g.Key, g => g.Count());
 
-            return asistenciasPorInAsistencia;
+            // Combinar resultados y calcular la diferencia
+            foreach (var asistencia in asistenciasPorAsistenciamenos)
+            {
+                int fichaId = asistencia.Key; // Obtener el ID de la ficha de la asistencia
+                int totalAprendices = aprendicesPorFicha.ContainsKey(fichaId) ? aprendicesPorFicha[fichaId] : 0;
+                asistenciasPorAsistenciamenos[fichaId] = totalAprendices - asistencia.Value;
+            }
+
+            return asistenciasPorAsistenciamenos;
+
         }
+
+        //public Dictionary<int, int> ContarAsistenciasPorInAsistencia()
+        //{
+        //    Dictionary<int, int> asistenciasPorInAsistencia = new Dictionary<int, int>();
+
+        //    using (SqlConnection connection = new SqlConnection(Conexion))
+        //    {
+        //        string query = @"
+        //                        SELECT ra.Id_asistencia, COUNT(*) AS TotalInAsistencias
+        //                        FROM RegistroAsistencia ra
+        //                        INNER JOIN Usuario u ON ra.Id_aprendiz = u.Id_usuario
+        //                        WHERE u.Tipo_usuario = 'Aprendiz' AND ra.Asistio_registro = 0
+        //                        GROUP BY ra.Id_asistencia;
+        //                    ";
+
+        //        SqlCommand comando = new SqlCommand(query, connection);
+        //        connection.Open();
+
+        //        using (SqlDataReader reader = comando.ExecuteReader())
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                int idAsistencia = (int)reader["Id_asistencia"];
+        //                int totalInAsistencias = (int)reader["TotalInAsistencias"];
+        //                asistenciasPorInAsistencia[idAsistencia] = totalInAsistencias;
+        //            }
+        //        }
+        //    }
+
+        //    return asistenciasPorInAsistencia;
+        //}
 
 
 
@@ -569,13 +692,13 @@ namespace AssitADSOproyect.Controllers
 
         // GET: RegistroAsistencias/Edit/5
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
-        public ActionResult AnularAsistencia(int? id, int asistenciaId)
+        public ActionResult AnularAsistencia(int? idregistro, int asistenciaId)
         {
-            if (id == null)
+            if (idregistro == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RegistroAsistencia registroAsistencia = db.RegistroAsistencia.Find(id);
+            RegistroAsistencia registroAsistencia = db.RegistroAsistencia.Find(idregistro);
             if (registroAsistencia == null)
             {
                 return HttpNotFound();

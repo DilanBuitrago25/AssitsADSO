@@ -94,15 +94,11 @@
                                 <h6>@Html.DisplayFor(model => item.Programa_formacion.Nombre_programa)</h6>
                             </div>
                             <div class="card-footer row">
-                                <div class="col-4 col-sm-4">
+                                <div class="col-4 col-sm-6">
                                     <h6>Asistencias</h6>
                                     <h3 class="counter">@ViewBag.AsistenciasPorFicha[item.Id_ficha]</h3>
                                 </div>
-                                <div class="col-4 col-sm-4">
-                                    <h6>Inasistencias</h6>
-                                    <h3 class="counter">@ViewBag.RegistrosFaltantesPorFicha[item.Id_ficha]</h3>
-                                </div>
-                                <div class="col-4 col-sm-4">
+                                <div class="col-4 col-sm-6">
                                     <h6>Soportes</h6>
                                     <h3 class="counter">@ViewBag.RegistrosSoportePorFicha[item.Id_ficha]</h3>
                                 </div>

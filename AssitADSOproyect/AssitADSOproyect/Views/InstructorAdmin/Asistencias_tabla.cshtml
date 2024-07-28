@@ -15,7 +15,7 @@
             </div>
             <div class="col-sm-2">
 
-                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Asistencias_Ficha", "Instructor",new { fichaId = ViewBag.IdFicha })'" id="BottomPdf">
+                <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("Asistencias_Ficha", "InstructorAdmin",new { fichaId = ViewBag.IdFicha })'" id="BottomPdf">
                     <i class="fa fa-table"></i>
                     Asistencias generales
                 </button>
@@ -45,11 +45,11 @@
                 }
             </div>
             <div class="col-sm-8 d-flex justify-content-end">
-               
+
             </div>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDFAsistenciaFichagenerales", "Instructor")'" id="BottomPdf">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='@Url.Action("GenerarReportePDFAsistenciaFichagenerales", "InstructorAdmin")'" id="BottomPdf">
                 Generar Reporte PDF
             </button>
 
@@ -115,4 +115,5 @@
         </div>
     </div>
 </div>
+
 
