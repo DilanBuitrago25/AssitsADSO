@@ -82,8 +82,9 @@ namespace AssitADSOproyect.Controllers
 
             var asistenciasPorAsistencia = ContarAsistenciasPorAsistencia();
             ViewBag.AsistenciasPorAsistencia = asistenciasPorAsistencia;
-            var asistenciasPorInAsistencia = ContarInasistenciasPorAsistencia();
-            ViewBag.AsistenciasPorInAsistencia = asistenciasPorInAsistencia;
+            var inasistenciasPorAsistencia = ContarAprendicesInasistentesPorAsistencia();
+            ViewBag.InasistenciasPorAsistencia = inasistenciasPorAsistencia;
+
             ViewBag.PaginaActual = numeroPagina;
             ViewBag.TotalRegistros = query.Count();
 
@@ -427,59 +428,59 @@ namespace AssitADSOproyect.Controllers
             return asistenciasPorAsistencia;
         }
 
-        public Dictionary<int, int> ContarInasistenciasPorAsistencia()
+        public Dictionary<int, int> ContarAprendicesInasistentesPorAsistencia()
         {
-            Dictionary<int, int> asistenciasPorInAsistenciamenos = new Dictionary<int, int>();
+            Dictionary<int, int> inasistenciasPorAsistencia = new Dictionary<int, int>();
 
             using (SqlConnection connection = new SqlConnection(Conexion))
             {
-                // Consulta SQL para obtener los IDs de asistencia relevantes
-                string queryIdsAsistencia = @"
-            SELECT Id_asistencia
-            FROM Asistencia
-            WHERE Id_ficha = @fichaId; -- Filtrar por la ficha relevante (puedes ajustar esto según tus necesidades)
+                string query = @"
+            DECLARE @asistenciaId int;
+            SET @asistenciaId = @IdAsistencia;
+
+            SELECT COUNT(*) AS TotalInasistencias
+            FROM (
+                SELECT u.Id_usuario
+                FROM Usuario u
+                INNER JOIN Ficha_has_Usuario fhu ON u.Id_usuario = fhu.Id_usuario
+                INNER JOIN Asistencia a ON fhu.Id_ficha = a.Id_ficha
+                WHERE u.Tipo_usuario = 'Aprendiz' AND a.Id_asistencia = @asistenciaId
+                EXCEPT
+                SELECT ra.Id_aprendiz
+                FROM RegistroAsistencia ra
+                WHERE ra.Asistio_registro = 1 AND ra.Id_asistencia = @asistenciaId
+            ) AS Inasistentes;
         ";
 
-                SqlCommand comandoIdsAsistencia = new SqlCommand(queryIdsAsistencia, connection);
-                comandoIdsAsistencia.Parameters.AddWithValue("@fichaId", 100001); // Reemplaza con el ID de la ficha que deseas
-
+                SqlCommand comando = new SqlCommand(query, connection);
                 connection.Open();
 
                 List<int> idsAsistencia = new List<int>();
-                using (SqlDataReader reader = comandoIdsAsistencia.ExecuteReader())
+                using (SqlCommand cmdIds = new SqlCommand("SELECT Id_asistencia FROM Asistencia", connection))
+                using (SqlDataReader readerIds = cmdIds.ExecuteReader())
                 {
-                    while (reader.Read())
+                    while (readerIds.Read())
                     {
-                        idsAsistencia.Add((int)reader["Id_asistencia"]);
+                        idsAsistencia.Add((int)readerIds["Id_asistencia"]);
                     }
                 }
 
-                // Consulta SQL para calcular las inasistencias por cada asistencia
-                string queryInasistencias = @"
-            SELECT 
-                @asistenciaId AS Id_asistencia,
-                (SELECT COUNT(DISTINCT u.Id_usuario)
-                 FROM Usuario u
-                 INNER JOIN Ficha_has_Usuario fhu ON u.Id_usuario = fhu.Id_usuario
-                 INNER JOIN Asistencia a ON fhu.Id_ficha = a.Id_ficha
-                 WHERE u.Tipo_usuario = 'Aprendiz' AND a.Id_asistencia = @asistenciaId) - 
-                (SELECT COUNT(*)
-                 FROM RegistroAsistencia ra
-                 WHERE ra.Asistio_registro = 1 AND ra.Id_asistencia = @asistenciaId) AS TotalInAsistencias";
-
-                foreach (int asistenciaId in idsAsistencia)
+                foreach (int idAsistencia in idsAsistencia)
                 {
-                    SqlCommand comandoInasistencias = new SqlCommand(queryInasistencias, connection);
-                    comandoInasistencias.Parameters.AddWithValue("@asistenciaId", asistenciaId);
+                    comando.Parameters.Clear();
+                    comando.Parameters.AddWithValue("@IdAsistencia", idAsistencia);
 
-                   
-                        int totalInasistencias = (int)comandoInasistencias.ExecuteScalar();
-                    asistenciasPorInAsistenciamenos[asistenciaId] = totalInasistencias;
-                   
+                    using (SqlDataReader reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            inasistenciasPorAsistencia[idAsistencia] = (int)reader["TotalInasistencias"];
+                        }
+                    }
                 }
             }
 
-            return asistenciasPorInAsistenciamenos;
+            return inasistenciasPorAsistencia;
         }
 
 

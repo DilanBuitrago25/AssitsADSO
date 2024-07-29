@@ -123,46 +123,28 @@
             </div>
         </div>
     </div>
-
     <script>
-$(document).ready(function () {
-    function actualizarTabla(filtro) {
-        // Realizar la solicitud AJAX
-        $.ajax({
-            url: '@Url.Action("GetSoportesFiltrados", "JustificacionInasistencia")',
-            data: { filtro: filtro },
-            type: 'GET',
-            success: function (data) {
-                var tablaSoportes = $('#tabla-soportes');
-                tablaSoportes.empty(); // Limpiar la tabla
+    $(document).ready(function () {
+        $(".nav-link").click(function (e) {
+            e.preventDefault();
+            var estado = $(this).attr("id").replace("pills-", "").replace("-tab", "");
 
-                // Agregar los nuevos soportes a la tabla
-                $.each(data, function (index, item) {
-                    var soporteItem = $('<div class="media soporte-item" data-estado="' + item.Validacion_Instructor + '"></div>');
-                    // ... (código para construir el HTML de cada soporte)
-                    tablaSoportes.append(soporteItem);
-                });
-
-                // Aplicar el filtro visualmente (ocultar/mostrar elementos)
-                filtrarTabla(filtro);
-            }
+            $.ajax({
+                url: '@Url.Action("Index")',
+                data: { estado: estado },
+                type: 'GET',
+                success: function (data) {
+                    // Filtrar los elementos existentes en lugar de reemplazar todo el contenido
+                    $(".soporte-item").hide();
+                    for (var i = 0; i < data.length; i++) {
+                        var selector = '.soporte-item[data-estado="' + data[i].Validacion_Instructor + '"]';
+                        $(selector).show();
+                    }
+                }
+            });
         });
-    }
-
-    // Función para filtrar visualmente (sin cambios)
-    function filtrarTabla(filtro) {
-        // ... (El mismo código que antes)
-    }
-
-    // Manejar clics en los enlaces de filtro
-    $('.nav-link').on('click', function (e) {
-        e.preventDefault();
-        var filtro = $(this).text();
-        actualizarTabla(filtro);
-        $('.nav-link').removeClass('active');
-        $(this).addClass('active');
+    
+        $(".soporte-item[data-estado='null']").show();
     });
 
-    // No es necesario mostrar la bandeja de entrada por defecto, ya se hizo en el controlador
-});
     </script>
