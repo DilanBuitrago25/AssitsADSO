@@ -4,6 +4,46 @@
     ViewBag.Title = "Index";
 }
 
+<style>
+    /* Estilos generales para la paginación */
+    .paginacion {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .pagination {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-item {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    .page-link {
+        display: block;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    /* Estilo para la página activa */
+    .page-item.active .page-link {
+        background-color: #24695c; /* Color de fondo azul */
+        color: white;
+        border-color: #24695c;
+    }
+
+    /* Estilo para el hover */
+    .page-link:hover {
+        background-color: #f5f5f5; /* Color de fondo gris claro */
+    }
+</style>
 
 <br />
 <div class="page-header">
@@ -107,6 +147,16 @@
                     </div>
                 }
             </div>
+            <div class="paginacion">
+            <ul class="pagination">
+                @for (int i = 1; i <= Math.Ceiling((double)ViewBag.TotalRegistros / 6); i++)
+                {
+                    <li class="page-item @(i == ViewBag.PaginaActual ? "active" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { estadoFiltro = ViewBag.EstadoFiltro, pagina = i })">@i</a>
+                    </li>
+                }
+            </ul>
+        </div>
         </div>
     </div>
 </div>

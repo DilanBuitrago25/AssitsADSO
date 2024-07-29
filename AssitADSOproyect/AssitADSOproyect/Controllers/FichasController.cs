@@ -24,15 +24,22 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "")
         {
+            bool? estado = null; // Nullable bool to handle "Todos"
+
+            if (estadoFiltro == "true")
+                estado = true;
+            else if (estadoFiltro == "false")
+                estado = false;
+
             var fichasFiltradas = db.Ficha
-                .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
-                .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) // Filtrar por estado (opcional)
+                .Where(f => !estado.HasValue || f.Estado_ficha == estado)
                 .ToList();
 
             ViewBag.EstadoFiltro = estadoFiltro;
 
             return View(fichasFiltradas);
         }
+
 
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Fichas_Instructor(string estadoFiltro = "")

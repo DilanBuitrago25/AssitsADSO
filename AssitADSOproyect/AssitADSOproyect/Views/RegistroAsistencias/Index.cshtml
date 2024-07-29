@@ -43,7 +43,7 @@
                         <select class="form-select me-2" id="estadoFiltro" name="estadoFiltro">
                             <option value="" @(ViewBag.EstadoFiltro == "" ? "selected" : "")>Todos</option>
                             <option value="true" @(ViewBag.EstadoFiltro == "true" ? "selected" : "")>Asistencias</option>
-                            <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>Inasistencias</option>
+                            <option value="false" @(ViewBag.EstadoFiltro == "false" ? "selected" : "")>Inasistencias o Anuladas</option>
                         </select>
                         <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
                     </div>
@@ -53,15 +53,15 @@
         <div class="card-body">
             
             <div class="table-responsive">
-                <table id="example-style-2">
+                <table id="example-style-1">
                     <thead>
 
                         <tr>
                             <th>Codigo Ficha</th>
                             <th>Fecha Asistencia</th>
                             <th>Fecha Registro Asistencia</th>
-                            <th>Competencia</th>
                             <th>Estado</th>
+                            <th> </th>
                         </tr>
 
                     </thead>
@@ -72,7 +72,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.Asistencia.Ficha.Codigo_ficha)</td>
                                 <td>@Html.DisplayFor(model => item.Asistencia.Fecha_asistencia)</td>
                                 <td>@Html.DisplayFor(model => item.Fecha_registro)</td>
-                                <td>@Html.DisplayFor(model => item.Asistencia.Competencia.Nombre_competencia)</td>
+                               
                                 <td>
                                     @if (item.anular_Asistencia != true)
                                     {
@@ -100,8 +100,8 @@
                             <th>Codigo Ficha</th>
                             <th>Fecha Asistencia</th>
                             <th>Fecha Registro Asistencia</th>
-                            <th>Competencia</th>
-                            <th>Asistió</th>
+                            <th>Estado</th>
+                            <th> </th>
                         </tr>
                     </tfoot>
                 </table>

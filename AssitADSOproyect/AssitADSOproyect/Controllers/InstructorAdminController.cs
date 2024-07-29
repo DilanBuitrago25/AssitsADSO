@@ -23,7 +23,7 @@ namespace AssitADSOproyect.Controllers
         string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSOreal;Integrated Security=True;trustservercertificate=True;";
         // GET: Instructor
         [AutorizarTipoUsuario("InstructorAdmin")]
-        public ActionResult Index(string estadoFiltro = "")
+        public ActionResult Index(string estadoFiltro = "", int? pagina = 1)
         {
             int Total_Aprendices;
 
@@ -72,10 +72,23 @@ namespace AssitADSOproyect.Controllers
             }
             ViewBag.Total_Fichas = Total_Fichas;
 
-            var fichasFiltradas = db.Ficha
-                 .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
-                 .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) // Filtrar por estado (opcional)
-                 .ToList();
+            var consulta = db.Ficha
+            .Where(f => f.Estado_ficha == true)
+            .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro);
+
+            int registrosPorPagina = 6;
+            int numeroPagina = (pagina ?? 1);
+
+            var fichasFiltradas = consulta
+                .OrderBy(f => f.Codigo_ficha)
+                .Skip((numeroPagina - 1) * registrosPorPagina)
+                .Take(registrosPorPagina)
+                .ToList();
+
+            ViewBag.EstadoFiltro = estadoFiltro;
+            ViewBag.PaginaActual = numeroPagina;
+            ViewBag.TotalRegistros = consulta.Count();
+
 
             ViewBag.EstadoFiltro = estadoFiltro;
             var asistenciasPorFicha = ContarAsistenciasPorFicha();

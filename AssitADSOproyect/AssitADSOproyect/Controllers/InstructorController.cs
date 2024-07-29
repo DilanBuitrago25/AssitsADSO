@@ -23,7 +23,7 @@ namespace AssitADSOproyect.Controllers
         string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSOreal;Integrated Security=True;trustservercertificate=True;";
         // GET: Instructor
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
-        public ActionResult Index(string estadoFiltro = "")
+        public ActionResult Index(string estadoFiltro = "", int? pagina = 1)
         {
             int usuarioId = (int)Session["Idusuario"];
             int TotalFichas;
@@ -80,11 +80,24 @@ namespace AssitADSOproyect.Controllers
 
             var idUsuario = (int)Session["Idusuario"]; // Obtener el ID del usuario loggeado
 
-            var fichasFiltradas = db.Ficha
-                .Where(f => f.Estado_ficha == true) 
-                .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro)
-                .Where(f => f.Ficha_has_Usuario.Any(fu => fu.Id_usuario == idUsuario && (fu.TipoUsuario == "Instructor" || fu.TipoUsuario == "InstructorAdmin"))) 
+            var consulta = db.Ficha
+         .Where(f => f.Estado_ficha == true)
+         .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro)
+         .Where(f => f.Ficha_has_Usuario.Any(fu => fu.Id_usuario == idUsuario && (fu.TipoUsuario == "Instructor" || fu.TipoUsuario == "InstructorAdmin")));
+
+            int registrosPorPagina = 6; 
+            int numeroPagina = (pagina ?? 1);
+
+            var fichasFiltradas = consulta
+                .OrderBy(f => f.Codigo_ficha) // Ordena las fichas (puedes cambiar el criterio)
+                .Skip((numeroPagina - 1) * registrosPorPagina)
+                .Take(registrosPorPagina)
                 .ToList();
+
+            ViewBag.EstadoFiltro = estadoFiltro;
+            ViewBag.PaginaActual = numeroPagina;
+            ViewBag.TotalRegistros = consulta.Count();
+
 
             ViewBag.EstadoFiltro = estadoFiltro;
             var asistenciasPorFicha = ContarAsistenciasPorFicha();

@@ -25,43 +25,48 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendizs")]
         // GET: JustificacionInasistencia
+        // Acción Index para la carga inicial
         public ActionResult Index()
         {
             int instructorId = (int)Session["Idusuario"];
-
             var soportes = db.Soporte.Include(s => s.Asistencia)
-                                    .Where(s => s.Id_Instructor == instructorId && s.Validacion_Instructor == null);
-
+                             .Where(s => s.Id_Instructor == instructorId && s.Validacion_Instructor == null); // Bandeja de entrada por defecto
             return View(soportes.ToList());
-
-
         }
 
-        public ActionResult FiltrarSoportes(string filtro)
-{
-    int instructorId = (int)Session["Idusuario"];
-    var soportes = db.Soporte.Include(s => s.Asistencia).Where(s => s.Id_Instructor == instructorId);
+        // Acción para obtener datos filtrados mediante AJAX
+        public ActionResult GetSoportesFiltrados(string filtro)
+        {
+            int instructorId = (int)Session["Idusuario"];
+            var soportes = db.Soporte.Include(s => s.Asistencia);
 
-    switch (filtro)
-    {
-        case "BandejaDeEntrada":
-            break; // No se aplica ningún filtro adicional
-        case "NoLeidos":
-            soportes = soportes.Where(s => s.Validacion_Instructor == null);
-            break;
-        case "Leidos":
-            soportes = soportes.Where(s => s.Validacion_Instructor != null);
-            break;
-        case "Aceptados":
-            soportes = soportes.Where(s => s.Validacion_Instructor == true);
-            break;
-        case "Rechazados":
-            soportes = soportes.Where(s => s.Validacion_Instructor == false);
-            break;
-    }
+            switch (filtro)
+            {
+                case "Leídos":
+                    soportes = soportes.Where(s => s.Id_Instructor == instructorId && s.Validacion_Instructor != null);
+                    break;
+                case "Aceptados":
+                    soportes = soportes.Where(s => s.Id_Instructor == instructorId && s.Validacion_Instructor == true);
+                    break;
+                case "Rechazados":
+                    soportes = soportes.Where(s => s.Id_Instructor == instructorId && s.Validacion_Instructor == false);
+                    break;
+                    // No es necesario un caso para "Bandeja de entrada" ya que es el filtro por defecto en Index()
+            }
 
-    return PartialView("_SoportePartial", soportes.ToList()); // Devuelve una vista parcial
-}
+            var resultado = soportes.ToList().Select(s => new {
+                Id_soporte = s.Id_soporte,
+                Nombre_usuario = s.Usuario.Nombre_usuario,
+                Apellido_usuario = s.Usuario.Apellido_usuario,
+                Nombre_soporte = s.Nombre_soporte,
+                Hora_registro = s.Hora_registro,
+                Validacion_Instructor = s.Validacion_Instructor
+            });
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+
 
 
 

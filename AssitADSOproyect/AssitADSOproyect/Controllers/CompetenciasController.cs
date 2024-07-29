@@ -262,7 +262,7 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
-        public ActionResult Edit([Bind(Include = "Id_competencia,tipo_competencia,Numero_ficha,Id_programa,Nombre_competencia,Id_usuario,Estado_competencia")] Competencia competencia)
+        public ActionResult Edit([Bind(Include = "Id_competencia,tipo_competencia,Nombre_competencia,Estado_competencia")] Competencia competencia)
         {
             if (ModelState.IsValid)
             {

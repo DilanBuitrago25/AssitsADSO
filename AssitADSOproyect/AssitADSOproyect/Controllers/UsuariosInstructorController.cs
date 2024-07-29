@@ -22,16 +22,23 @@ namespace AssitADSOproyect.Controllers
         // GET: UsuariosInstructor
         public ActionResult Index(string estadoFiltro = "")
         {
+            bool? estado = null;
+
+            if (estadoFiltro == "true")
+                estado = true;
+            else if (estadoFiltro == "false")
+                estado = false;
+
             var InstructoresFiltrados = db.Usuario
-                .Where(u => (u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin") && u.Estado_Usuario == true)
+                .Where(u => (u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin")
+                            && (!estado.HasValue || u.Estado_Usuario == estado))
                 .ToList();
-
-
 
             ViewBag.EstadoFiltro = estadoFiltro;
 
             return View(InstructoresFiltrados);
         }
+
 
         public ActionResult GenerarReportePDF()
         {

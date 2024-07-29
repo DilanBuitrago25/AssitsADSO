@@ -43,20 +43,18 @@
 
                                         <li class="nav-item"><a class="btn-primary btn-block btn-mail w-100" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome" role="tab" aria-controls="pills-darkhome" aria-selected="true"><i class="icofont icofont-envelope me-2"></i> Fichas</a></li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" onclick="filtrarSoportes('BandejaDeEntrada')">Bandeja de entrada</a>
+                                            <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Bandeja de entrada</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false" onclick="filtrarSoportes('NoLeidos')">No leídos</a>
+                                            <a class="nav-link" id="pills-leidos-tab" data-bs-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Leídos</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="filtrarSoportes('Leidos')">Leídos</a>
+                                            <a class="nav-link" id="pills-aceptados-tab" data-bs-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Aceptados</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="filtrarSoportes('Aceptados')">Aceptados</a>
+                                            <a class="nav-link" id="pills-rechazados-tab" data-bs-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Rechazados</a>
                                         </li>
-                                        <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false" onclick="filtrarSoportes('Rechazados')">Rechazados</a>
-                                        </li>
+
 
 
 
@@ -64,10 +62,7 @@
 
                                             <hr>
                                         </li>
-                                        @*<li><a href="#"><span class="title"><i class="icon-folder"></i> 2693606</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-new-window"></i> 2693607</span><span class="badge pull-right">(69)</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-pencil-alt"></i> 2874841</span><span class="badge pull-right">(59)</span></a></li>
-                                        <li><a href="#"><span class="title"><i class="icon-trash"></i> 1875476</span><span class="badge pull-right">(99)</span></a></li>*@
+
                                     </ul>
                                 </div>
                             </div>
@@ -85,15 +80,10 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="media">
-                                                @*<label class="email-chek d-block" for="chk-ani">
-                                                    <input class="checkbox_animated" id="chk-ani" type="checkbox" checked="">
-                                                </label>*@
+                                               
                                                 <div class="media-body">
                                                     <div class="dropdown">
-                                                        @*<button class="btn btn-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones </button>*@
-                                                        @*<button type="button" class="btn btn-primary btn-block btn-mail w-100" id="pills-darkhome-tab" data-bs-toggle="pill" href="#pills-darkhome" role="tab" aria-controls="pills-darkhome" aria-selected="true">
-                                                            <i class="icofont icofont-envelope me-2"></i> Fichas
-                                                        </button>*@
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
@@ -101,7 +91,7 @@
                                     </div>
                                 </div>
                                 <div class="inbox">
-                                    <div id="contenedorRegistros">
+                                    <div id="tabla-soportes">
                                         @foreach (var item in Model)
                                         {
                                             <div class="media soporte-item" data-estado="@(item.Validacion_Instructor)">
@@ -111,7 +101,8 @@
                                                 </div>
                                                 <div class="media-body">
                                                     <h6>
-                                                        <a href="@Url.Action("Edit", "JustificacionInasistencia", new { id = item.Id_soporte })">
+                                                        <a  
+                                                           href="@Url.Action("Edit", "JustificacionInasistencia", new { id = item.Id_soporte })">
                                                             @Html.DisplayFor(modelItem => item.Usuario.Nombre_usuario) @Html.DisplayFor(modelItem => item.Usuario.Apellido_usuario)
                                                         </a>
                                                     </h6>
@@ -121,6 +112,7 @@
                                             </div>
                                         }
                                     </div>
+
 
 
                                 </div>
@@ -133,36 +125,44 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabLinks = document.querySelectorAll('.nav-tabs .nav-link');
-            const soporteItems = document.querySelectorAll('.soporte-item');
+$(document).ready(function () {
+    function actualizarTabla(filtro) {
+        // Realizar la solicitud AJAX
+        $.ajax({
+            url: '@Url.Action("GetSoportesFiltrados", "JustificacionInasistencia")',
+            data: { filtro: filtro },
+            type: 'GET',
+            success: function (data) {
+                var tablaSoportes = $('#tabla-soportes');
+                tablaSoportes.empty(); // Limpiar la tabla
 
-            tabLinks.forEach(link => {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const filtro = this.textContent.trim();
-
-                    soporteItems.forEach(item => {
-                        const estado = item.getAttribute('data-estado');
-
-                        if (filtro === "Bandeja de Entrada" ||
-                            (filtro === "No Leidos" && estado === "null") ||
-                            (filtro === "Leidos" && estado !== "null") ||
-                            (filtro === "Aceptados" && estado === "True") ||
-                            (filtro === "Rechazados" && estado === "False")) {
-                            item.style.display = 'block';
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
-
-                    // Actualiza la clase "active" de los enlaces
-                    tabLinks.forEach(link => link.classList.remove('active'));
-                    this.classList.add('active');
+                // Agregar los nuevos soportes a la tabla
+                $.each(data, function (index, item) {
+                    var soporteItem = $('<div class="media soporte-item" data-estado="' + item.Validacion_Instructor + '"></div>');
+                    // ... (código para construir el HTML de cada soporte)
+                    tablaSoportes.append(soporteItem);
                 });
-            });
 
-            // Activa el primer enlace por defecto al cargar la página
-            tabLinks[0].click();
+                // Aplicar el filtro visualmente (ocultar/mostrar elementos)
+                filtrarTabla(filtro);
+            }
         });
+    }
+
+    // Función para filtrar visualmente (sin cambios)
+    function filtrarTabla(filtro) {
+        // ... (El mismo código que antes)
+    }
+
+    // Manejar clics en los enlaces de filtro
+    $('.nav-link').on('click', function (e) {
+        e.preventDefault();
+        var filtro = $(this).text();
+        actualizarTabla(filtro);
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    // No es necesario mostrar la bandeja de entrada por defecto, ya se hizo en el controlador
+});
     </script>

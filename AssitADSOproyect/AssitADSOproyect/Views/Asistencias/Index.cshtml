@@ -9,6 +9,44 @@
         max-width: 100%; /* La imagen no superará el ancho del contenedor */
         height: auto; /* Mantiene la proporción de aspecto de la imagen */
     }
+    /* Estilos generales para la paginación */
+    .paginacion {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    .pagination {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-item {
+        display: inline-block;
+        margin: 0 5px;
+    }
+
+    .page-link {
+        display: block;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    /* Estilo para la página activa */
+    .page-item.active .page-link {
+        background-color: #24695c; /* Color de fondo azul */
+        color: white;
+        border-color: #24695c;
+    }
+
+    /* Estilo para el hover */
+    .page-link:hover {
+        background-color: #f5f5f5; /* Color de fondo gris claro */
+    }
 </style>
 
 <br />
@@ -65,12 +103,12 @@
 
                                     <div class="col-md-4">
                                         <label for="estadoFiltro">Fichas:</label>
-                                        @*@Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "js-example-basic-single col-sm-12 form-control", onchange = "cargarCompetencias()" })*@
+                                        @Html.DropDownList("Id_ficha", null, "Selecciona una ficha", new { @class = "js-example-basic-single col-sm-12 form-control", onchange = "cargarCompetencias()" })
                                         <br />
                                     </div>
                                     <div class="col-md-4">
                                         <label for="estadoFiltro">Competencias:</label>
-                                        @*   @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "js-example-basic-single col-sm-12 form-control" })*@
+                                           @Html.DropDownList("Id_competencia", null, "Selecciona una competencia", htmlAttributes: new { @class = "js-example-basic-single col-sm-12 form-control" })
 
                                         <br />
                                         <input class="btn btn-success btn-sm" type="submit" value="Filtrar" />
@@ -124,13 +162,19 @@
                                                                 {
                                                                     totalAsistencias = ViewBag.AsistenciasPorAsistencia[item.Id_asistencia];
                                                                 }
-                                                                                                                }
-                                                                                                                @totalAsistencias
-                                                                                                            </div>
+                                                            }
+                                                            @totalAsistencias
+                                                        </div>
                                                         <div class="col-6"> <span>No Asistieron</span></div>
                                                         <div class="col-6 font-primary">
-                                                            @totalAsistencias = ViewBag.AsistenciasPorAsistencia?.ContainsKey(item.Id_asistencia) == true ?
-                                                            ViewBag.AsistenciasPorAsistencia[item.Id_asistencia] : 0;
+                                                            @{
+                                                                var asistenciasPorInAsistencia = 0;
+                                                                if (ViewBag.AsistenciasPorInAsistencia.ContainsKey(item.Id_asistencia))
+                                                                {
+                                                                    totalAsistencias = ViewBag.AsistenciasPorInAsistencia[item.Id_asistencia];
+                                                                }
+                                                            }
+                                                            @asistenciasPorInAsistencia
 
                                                         </div>
                                                         <div class="col-6"> <span>Justificaron Inasistencia</span></div>
@@ -163,11 +207,16 @@
                                         }
                                     </div>
                                     <div class="paginacion">
-                                        @for (int i = 1; i <= Math.Ceiling((double)ViewBag.TotalRegistros / 10); i++)
-                                        {
-                                            <a href="@Url.Action("Index", new { pagina = i })" class="@(i == ViewBag.PaginaActual ? "active" : "")">@i</a>
-                                        }
+                                        <ul class="pagination">
+                                            @for (int i = 1; i <= Math.Ceiling((double)ViewBag.TotalRegistros / 9); i++)
+                                            {
+                                                <li class="page-item @(i == ViewBag.PaginaActual ? "active" : "")">
+                                                    <a class="page-link" href="@Url.Action("Index", new { pagina = i })">@i</a>
+                                                </li>
+                                            }
+                                        </ul>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

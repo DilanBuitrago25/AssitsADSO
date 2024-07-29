@@ -20,11 +20,20 @@ namespace AssitADSOproyect.Controllers
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
         [AutorizarTipoUsuario("InstructorAdmin")]
         // GET: UsuariosAprendiz
-        public ActionResult Index()
+        public ActionResult Index(string estadoFiltro = "")
         {
+            bool? estado = null; // Nullable bool for "Todos"
+
+            if (estadoFiltro == "true")
+                estado = true;
+            else if (estadoFiltro == "false")
+                estado = false;
+
             var AprendizFiltro = db.Usuario
-            .Where(u => u.Tipo_usuario == "Aprendiz" && u.Estado_Usuario == true)
-            .ToList();
+                .Where(u => u.Tipo_usuario == "Aprendiz" && (!estado.HasValue || u.Estado_Usuario == estado))
+                .ToList();
+
+            ViewBag.EstadoFiltro = estadoFiltro;
 
             return View(AprendizFiltro);
         }
