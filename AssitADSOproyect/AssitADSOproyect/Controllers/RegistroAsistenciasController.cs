@@ -234,6 +234,27 @@ namespace AssitADSOproyect.Controllers
                     }
                 }
 
+                var fichaAsistencia = db.Asistencia.Where(a => a.Id_asistencia == registroAsistencia.Id_asistencia)
+                                         .Select(a => a.Id_ficha)
+                                         .FirstOrDefault();
+
+                if (fichaAsistencia != null)
+                {
+                    bool usuarioRelacionadoAFicha = db.Ficha_has_Usuario.Any(fhu =>
+                        fhu.Id_usuario == registroAsistencia.Id_Aprendiz &&
+                        fhu.Id_ficha == fichaAsistencia
+                    );
+
+                    if (!usuarioRelacionadoAFicha)
+                    {
+                        ModelState.AddModelError("", "No estás relacionado a la ficha de la asistencia que intentas registrar.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "No se encontró la ficha asociada a la asistencia.");
+                }
+
                 if (ModelState.IsValid) // Verificar nuevamente después de las validaciones adicionales
                 {
                     db.RegistroAsistencia.Add(registroAsistencia);
