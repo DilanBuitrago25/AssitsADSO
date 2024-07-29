@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\controllers\\asistenciascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\controllers\\asistenciascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\asistencias\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\asistencias\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\controllers\\asistenciascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\controllers\\asistenciascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\justificacioninasistencia\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -98,7 +98,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 304,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -170,13 +170,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AsistenciasController.cs",
               "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\AsistenciasController.cs",
               "RelativeDocumentMoniker": "AssitADSOproyect\\Controllers\\AsistenciasController.cs",
               "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\AsistenciasController.cs",
               "RelativeToolTip": "AssitADSOproyect\\Controllers\\AsistenciasController.cs",
-              "ViewState": "AQIAAK8BAAAAAAAAAAAiwM4BAAAVAAAA",
+              "ViewState": "AQIAADQAAAAAAAAAAAAAAE4AAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-26T11:53:12.109Z",
               "IsPinned": true,
@@ -253,13 +253,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Asistencias\\Index.cshtml",
               "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Asistencias\\Index.cshtml",
               "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\Documentos\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Asistencias\\Index.cshtml",
               "RelativeToolTip": "AssitADSOproyect\\Views\\Asistencias\\Index.cshtml",
-              "ViewState": "AQIAAJIAAAAAAAAAAAAAAK8AAAA9AAAA",
+              "ViewState": "AQIAAJgAAAAAAAAAAAAAALIAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-07-16T05:52:36.342Z",
               "EditorCaption": ""

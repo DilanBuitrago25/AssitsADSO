@@ -178,7 +178,17 @@
 
                                                         </div>
                                                         <div class="col-6"> <span>Justificaron Inasistencia</span></div>
-                                                        <div class="col-6 font-primary">7</div>
+                                                        <div class="col-6 font-primary">
+                                                            @{
+                                                                var totalSoportes = 0;
+                                                                if (ViewBag.SoportesPorAsistencia.ContainsKey(item.Id_asistencia))
+                                                                {
+                                                                    totalSoportes = ViewBag.SoportesPorAsistencia[item.Id_asistencia];
+                                                                }
+                                                            }
+                                                            @totalSoportes
+
+                                                        </div>
                                                     </div>
                                                     <div class="customers"></div>
                                                 </div>

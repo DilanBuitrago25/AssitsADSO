@@ -84,6 +84,9 @@ namespace AssitADSOproyect.Controllers
             ViewBag.AsistenciasPorAsistencia = asistenciasPorAsistencia;
             var inasistenciasPorAsistencia = ContarAprendicesInasistentesPorAsistencia();
             ViewBag.InasistenciasPorAsistencia = inasistenciasPorAsistencia;
+            var soportesPorAsistencia = ContarSoportesPorAsistencia();
+            ViewBag.SoportesPorAsistencia = soportesPorAsistencia;
+
 
             ViewBag.PaginaActual = numeroPagina;
             ViewBag.TotalRegistros = query.Count();
@@ -485,41 +488,36 @@ namespace AssitADSOproyect.Controllers
 
 
 
-        //public int ContarInasistenciasPorAsistencia()
-        //{
-        //    int totalInasistencias = 0;
+        public Dictionary<int, int> ContarSoportesPorAsistencia()
+        {
+            Dictionary<int, int> soportesPorAsistencia = new Dictionary<int, int>();
 
-        //    using (SqlConnection connection = new SqlConnection(Conexion))
-        //    {
-        //        string query = @"
-        //    SELECT 
-        //        (SELECT COUNT(DISTINCT u.Id_usuario)
-        //         FROM Usuario u
-        //         INNER JOIN Ficha_has_Usuario fhu ON u.Id_usuario = fhu.Id_usuario
-        //         INNER JOIN Asistencia a ON fhu.Id_ficha = a.Id_ficha
-        //         WHERE u.Tipo_usuario = 'Aprendiz' AND a.Id_asistencia = @asistenciaId) - 
-        //        (SELECT COUNT(*)
-        //         FROM RegistroAsistencia ra
-        //         WHERE ra.Asistio_registro = 1 AND ra.Id_asistencia = @asistenciaId) AS TotalInAsistencias";
+            using (SqlConnection connection = new SqlConnection(Conexion))
+            {
+                string query = @"
+            SELECT a.Id_asistencia, COUNT(s.Id_soporte) AS TotalSoportes
+            FROM Asistencia a
+            LEFT JOIN Soporte s ON a.Id_asistencia = s.Id_asistencia -- Asumiendo esta relación
+            GROUP BY a.Id_asistencia;
+        ";
 
-        //        SqlCommand comando = new SqlCommand(query, connection);
-        //        connection.Open();
+                SqlCommand comando = new SqlCommand(query, connection);
+                connection.Open();
 
-        //        using (SqlDataReader reader = comando.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                int idAsistencia = (int)reader["Id_asistencia"];
-        //                int totalAsistencias = (int)reader["TotalAsistencias"];
-        //                asistenciasPorAsistencia[idAsistencia] = totalAsistencias;
-        //            }
-        //        }
+                using (SqlDataReader reader = comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int idAsistencia = (int)reader["Id_asistencia"];
+                        int totalSoportes = (int)reader["TotalSoportes"];
+                        soportesPorAsistencia[idAsistencia] = totalSoportes;
+                    }
+                }
+            }
 
+            return soportesPorAsistencia;
+        }
 
-        //    }
-
-        //    return totalInasistencias;
-        //}
 
 
 
