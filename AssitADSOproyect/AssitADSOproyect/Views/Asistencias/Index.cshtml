@@ -260,7 +260,7 @@
             function cargarCompetencias() {
             var fichaId = $("#Id_ficha").val();
             $.ajax({
-                url: '@Url.Action("ObtenerCompetenciasPorFicha", "Asistencias")', // Cambiar el controlador
+                url: '@Url.Action("ObtenerCompetenciasPorFicha", "Asistencias")', 
                 type: 'GET',
                 data: { idFicha: fichaId },
                 success: function (data) {

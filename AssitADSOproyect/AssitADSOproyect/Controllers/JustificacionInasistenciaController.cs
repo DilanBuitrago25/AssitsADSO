@@ -26,11 +26,10 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         // GET: JustificacionInasistencia
         // Acción Index para la carga inicial
-        public ActionResult Index(string estado = "bandeja")
+        public ActionResult Index(string estado = "")
         {
             int instructorId = (int)Session["Idusuario"];
-            var soportes = db.Soporte.Include(s => s.Asistencia)
-                                     .Where(s => s.Id_Instructor == instructorId); // Filtrar por instructor
+            var soportes = db.Soporte.Include(s => s.Asistencia).Where(s => s.Id_Instructor == instructorId); 
 
             switch (estado)
             {
@@ -47,7 +46,7 @@ namespace AssitADSOproyect.Controllers
                     soportes = soportes.Where(s => s.Validacion_Instructor == false);
                     break;
                 default:
-                    // Manejar casos no válidos (opcional)
+                    
                     break;
             }
 

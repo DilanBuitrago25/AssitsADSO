@@ -20,7 +20,7 @@ namespace AssitADSOproyect.Controllers
     public class InstructorAdminController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSOreal;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=CGNDFPCIPGOD601;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
         // GET: Instructor
         [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "", int? pagina = 1)
@@ -219,10 +219,10 @@ namespace AssitADSOproyect.Controllers
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
-            // Consulta base con Include para cargar relaciones necesarias
+     
             var query = db.Asistencia
               .Where(a => a.Id_ficha == idFicha)
-              .OrderByDescending(a => a.Fecha_asistencia) // Reemplaza 'FechaRegistro' si es diferente
+              .OrderByDescending(a => a.Fecha_asistencia) 
               .ToList();
 
             ViewBag.IdFicha = idFicha;
@@ -236,20 +236,18 @@ namespace AssitADSOproyect.Controllers
                     if (DateTime.TryParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicioParsed) &&
                         DateTime.TryParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinParsed))
                     {
-                        // Realizar la conversión de fecha fuera de la consulta LINQ to Entities
-                        var asistenciasFiltradasLista = query.ToList(); // Convertir a lista para usar LINQ to Objects
+                        
+                        var asistenciasFiltradasLista = query.ToList(); 
 
                         asistenciasFiltradasLista = asistenciasFiltradasLista.Where(a =>
                             DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= fechaInicioParsed &&
                             DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
 
-                        // Volver a asignar el resultado filtrado
-                        //query = asistenciasFiltradasLista.AsQueryable();
+                      
                     }
                 }
             }
 
-            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", fichaFiltro);
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
             return View(query);
         }
@@ -261,20 +259,20 @@ namespace AssitADSOproyect.Controllers
             public HeaderFooterEvent(string imagePath)
             {
                 _logo = Image.GetInstance(imagePath);
-                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+                _logo.ScaleToFit(100f, 50f);
             }
 
             public override void OnOpenDocument(PdfWriter writer, Document document)
             {
-                // Calcular la posición del logo para que no se superponga con el contenido
+        
                 float logoY = document.PageSize.Height - document.TopMargin - _logo.ScaledHeight;
                 _logo.SetAbsolutePosition(document.LeftMargin, logoY);
-                document.Add(_logo); // Agregar el logo al inicio del documento
+                document.Add(_logo); 
             }
 
             public override void OnEndPage(PdfWriter writer, Document document)
             {
-                // Pie de página (texto centrado)
+              
                 Font footerFont = FontFactory.GetFont(FontFactory.HELVETICA, 8);
                 Phrase footerText = new Phrase("Generado el " + DateTime.Now.ToString("yyyy-MM-dd HH:mm") + " © AssistADSO. Todos los derechos reservados.", footerFont);
                 float textWidth = footerFont.GetCalculatedBaseFont(false).GetWidthPoint(footerText.Content, footerFont.Size);
@@ -294,30 +292,30 @@ namespace AssitADSOproyect.Controllers
                .ToList();
 
 
-                var ficha = db.Ficha.Find(fichaId); // Busca la ficha por su ID
-                string codigoFicha = ficha?.Codigo_ficha.ToString(); // Obtiene el código de la ficha
+                var ficha = db.Ficha.Find(fichaId); 
+                string codigoFicha = ficha?.Codigo_ficha.ToString();
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                     PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
-                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); 
 
                     document.Open();
 
-                    // Título
+                   
                     Paragraph titulo = new Paragraph("Reporte Asistencias general de la Ficha " + codigoFicha, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
                     titulo.Alignment = Element.ALIGN_CENTER;
                     document.Add(titulo);
 
                     document.Add(Chunk.NEWLINE);
 
-                    // Agregar contenido al PDF (tabla con datos de las fichas)
+             
                     PdfPTable table = new PdfPTable(7);
                     table.WidthPercentage = 100;
 
-                    // Encabezados de la tabla
+                 
                     Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
                     table.AddCell(new Phrase("Id de Asistencia", headerFont));
                     table.AddCell(new Phrase("Fecha"));
@@ -327,7 +325,6 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase("Competencia"));
                     table.AddCell(new Phrase("Estado Asistencia"));
 
-                    // Datos de las fichas
                     Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
                     foreach (var asistenciasFicha in asistencias)
                     {
@@ -361,10 +358,10 @@ namespace AssitADSOproyect.Controllers
             {
                 string idUsuarioSesion = Session["Idusuario"].ToString();
 
-                // Consulta base con Include para cargar relaciones necesarias
+               
                 var query = db.Asistencia
                   .Where(a => a.Id_ficha == idFicha)
-                  .OrderByDescending(a => a.Fecha_asistencia) // Reemplaza 'FechaRegistro' si es diferente
+                  .OrderByDescending(a => a.Fecha_asistencia) 
                   .ToList();
 
 

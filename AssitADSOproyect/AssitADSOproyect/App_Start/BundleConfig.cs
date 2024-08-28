@@ -61,13 +61,11 @@ namespace AssitADSOproyect
                         "~/assets/js/datepicker/date-picker/datepicker.js",
                         "~/assets/js/datepicker/date-picker/datepicker.en.js",
                         "~/assets/js/datepicker/date-picker/datepicker.custom.js",
-                        
                         "~/assets/js/owlcarousel/owl.carousel.js",
                         "~/assets/js/general-widget.js",
                         "~/assets/js/height-equal.js",
                         "~/assets/js/tooltip-init.js",
                         "~/assets/js/script.js",
-                        
                         "~/assets/js/dropzone/dropzone.js",
                         "~/assets/js/dropzone/dropzone-script.js",
                         "~/assets/js/email-app.js",

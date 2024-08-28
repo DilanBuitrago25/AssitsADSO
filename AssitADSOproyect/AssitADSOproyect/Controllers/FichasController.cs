@@ -20,11 +20,11 @@ namespace AssitADSOproyect.Controllers
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
 
-        // GET: Fichas1
+   
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "")
         {
-            bool? estado = null; // Nullable bool to handle "Todos"
+            bool? estado = null; 
 
             if (estadoFiltro == "true")
                 estado = true;
@@ -63,31 +63,31 @@ namespace AssitADSOproyect.Controllers
         public ActionResult GenerarReportePDF(string estadoFiltro = "")
         {
             var fichas = db.Ficha
-                    .Where(f => f.Estado_ficha == true) // Filtrar por Estado_Ficha = true
-                    .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) // Filtrar por estado (opcional)
-                    .ToList(); // Obtén los datos de las fichas
+                    .Where(f => f.Estado_ficha == true) 
+                    .Where(f => estadoFiltro == "" || f.Estado_ficha.ToString() == estadoFiltro) 
+                    .ToList(); 
 
             using (MemoryStream memoryStream = new MemoryStream())
             {
                 Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                 PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
-                writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+                writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); 
 
                 document.Open();
 
-                // Título
+                
                 Paragraph titulo = new Paragraph("Reporte de Fichas", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
                 titulo.Alignment = Element.ALIGN_CENTER;
                 document.Add(titulo);
 
                 document.Add(Chunk.NEWLINE);
 
-                // Agregar contenido al PDF (tabla con datos de las fichas)
-                PdfPTable table = new PdfPTable(8); // 4 columnas (ajusta según tus campos)
+                
+                PdfPTable table = new PdfPTable(8); 
                 table.WidthPercentage = 100;
 
-                // Encabezados de la tabla
+            
                 Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
                 table.AddCell(new Phrase("Código Ficha", headerFont));
                 table.AddCell(new Phrase("Jornada Ficha"));
@@ -97,9 +97,9 @@ namespace AssitADSOproyect.Controllers
                 table.AddCell(new Phrase("Fecha Fin Ficha"));
                 table.AddCell(new Phrase("Programa de Formacion"));
                 table.AddCell(new Phrase("Estado Ficha"));
-                // ... (agrega más encabezados según tus campos)
+       
 
-                // Datos de las fichas
+      
                 Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
                 foreach (var ficha in fichas)
                 {
@@ -110,14 +110,14 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(ficha.Fecha_inicio));
                     table.AddCell(new Phrase(ficha.Fecha_fin));
                     table.AddCell(new Phrase(ficha.Programa_formacion.Nombre_programa));
-                    table.AddCell(new Phrase(ficha.Estado_ficha.ToString()));// Ajusta según tus relaciones
-                                                                                        // ... (agrega más datos de las fichas)
+                    table.AddCell(new Phrase(ficha.Estado_ficha.ToString()));
+                                                                                        
                 }
 
             document.Add(table);
             document.Close();
 
-            // Devolver el PDF como archivo descargable
+           
             return File(memoryStream.ToArray(), "application/pdf", "ReporteFichas.pdf");
             }
         }
@@ -137,7 +137,7 @@ namespace AssitADSOproyect.Controllers
                 Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                 PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
-                writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+                writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); 
 
                 document.Open();
 
@@ -148,11 +148,11 @@ namespace AssitADSOproyect.Controllers
 
                 document.Add(Chunk.NEWLINE);
 
-                // Agregar contenido al PDF (tabla con datos de las fichas)
-                PdfPTable table = new PdfPTable(8); // 4 columnas (ajusta según tus campos)
+              
+                PdfPTable table = new PdfPTable(8); 
                 table.WidthPercentage = 100;
 
-                // Encabezados de la tabla
+         
                 Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
                 table.AddCell(new Phrase("Código Ficha", headerFont));
                 table.AddCell(new Phrase("Jornada Ficha"));
@@ -162,9 +162,9 @@ namespace AssitADSOproyect.Controllers
                 table.AddCell(new Phrase("Fecha Fin Ficha"));
                 table.AddCell(new Phrase("Programa de Formacion"));
                 table.AddCell(new Phrase("Estado Ficha"));
-                // ... (agrega más encabezados según tus campos)
+              
 
-                // Datos de las fichas
+          
                 Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
                 foreach (var ficha in fichas)
                 {
@@ -175,8 +175,8 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase(ficha.Fecha_inicio));
                     table.AddCell(new Phrase(ficha.Fecha_fin));
                     table.AddCell(new Phrase(ficha.Programa_formacion.Nombre_programa));
-                    table.AddCell(new Phrase(ficha.Estado_ficha.ToString()));// Ajusta según tus relaciones
-                                                                             // ... (agrega más datos de las fichas)
+                    table.AddCell(new Phrase(ficha.Estado_ficha.ToString()));
+                                                                             
                 }
 
                 document.Add(table);
@@ -502,7 +502,7 @@ namespace AssitADSOproyect.Controllers
                 if (!int.TryParse(Request.Form["aprendizId"], out aprendizId)) 
                 {
                     ModelState.AddModelError("", "Error al seleccionar el aprendiz.");
-                    return View(); // O redirige a otra acción si lo prefieres
+                    return View(); 
                 }
 
                 var aprendiz = db.Usuario.Find(aprendizId);
@@ -583,7 +583,7 @@ namespace AssitADSOproyect.Controllers
                 }
             }
 
-            // Si hay errores de validación, volver a mostrar el formulario con los datos previos
+  
             ViewBag.Instructores = db.Usuario.Where(u => u.Tipo_usuario == "Instructor" || u.Tipo_usuario == "InstructorAdmin").ToList();
             ViewBag.FichaId = idFicha;
             return RedirectToAction("Instructores_Ficha", new { id = idFicha });

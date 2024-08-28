@@ -23,7 +23,7 @@ namespace AssitADSOproyect.Controllers
     public class AsistenciasController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSOreal;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=CGNDFPCIPGOD601;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         //GET: Asistencias
         public ActionResult Index(int? pagina,string fechaFiltro = "", int? fichaFiltro = null, int? Id_ficha = null, int? Id_competencia = null)
@@ -46,16 +46,15 @@ namespace AssitADSOproyect.Controllers
                 DateTime fechaMin = DateTime.ParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
                 DateTime fechaMax = DateTime.ParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture);
 
-                // Aplicar el filtro en la consulta query
                 query = query.Where(a => DateTime.Parse(a.Fecha_asistencia) >= fechaMin && DateTime.Parse(a.Fecha_asistencia) <= fechaMax).ToList();
             }
 
-            if (Id_ficha != null && Id_ficha > 0) // Filtrar por ficha si se seleccionó una
+            if (Id_ficha != null && Id_ficha > 0) 
             {
                 query = query.Where(a => a.Id_ficha == Id_ficha).ToList();
             }
 
-            if (Id_competencia != null && Id_competencia > 0) // Filtrar por competencia si se seleccionó una
+            if (Id_competencia != null && Id_competencia > 0) 
             {
                 query = query.Where(a => a.Id_competencia == Id_competencia).ToList();
             }
@@ -116,22 +115,21 @@ namespace AssitADSOproyect.Controllers
                     if (DateTime.TryParseExact(fechas[0].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaInicioParsed) &&
                         DateTime.TryParseExact(fechas[1].Trim(), "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaFinParsed))
                     {
-                        // Realizar la conversión de fecha fuera de la consulta LINQ to Entities
-                        var asistenciasFiltradasLista = query.ToList(); // Convertir a lista para usar LINQ to Objects
+
+                        var asistenciasFiltradasLista = query.ToList(); 
 
                         asistenciasFiltradasLista = asistenciasFiltradasLista.Where(a =>
                             DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) >= fechaInicioParsed &&
                             DateTime.ParseExact(a.Fecha_asistencia, "yyyy-MM-dd", CultureInfo.InvariantCulture) <= fechaFinParsed).ToList();
 
-                        // Volver a asignar el resultado filtrado
-                        //query = asistenciasFiltradasLista.AsQueryable();
+                      
                     }
                 }
             }
 
        
 
-            //ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", fichaFiltro);
+         
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
 
          
@@ -147,7 +145,7 @@ namespace AssitADSOproyect.Controllers
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();
 
-            // Consulta base con Include para cargar relaciones necesarias
+
             var asistencias = db.Asistencia
                 .Include(a => a.Ficha)
                 .Include(a => a.Ficha.Programa_formacion)
@@ -174,7 +172,7 @@ namespace AssitADSOproyect.Controllers
                 PdfPTable table = new PdfPTable(8);
                 table.WidthPercentage = 100;
 
-                // Encabezados de la tabla
+
                 Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
                 table.AddCell(new Phrase("Id de Asistencia", headerFont));
                 table.AddCell(new Phrase("Fecha"));
@@ -224,7 +222,7 @@ namespace AssitADSOproyect.Controllers
                             Usuario = u,
                             Asistio_registro = u.RegistroAsistencia
                                                 .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true),
-                            // Obtener fecha y hora del primer registro que cumple la condición (puedes ajustar esto según tus necesidades)
+                          
                             fecha_registro = u.RegistroAsistencia
                                                 .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
                                                 .Select(ra => ra.Fecha_registro)
@@ -246,22 +244,22 @@ namespace AssitADSOproyect.Controllers
                     Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                     PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
-                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); 
 
                     document.Open();
 
-                    // Título
+                
                     Paragraph titulo = new Paragraph("Reporte de Asistencia del "+ fechaAsistencia + " de la ficha " + codigoFicha, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
                     titulo.Alignment = Element.ALIGN_CENTER;
                     document.Add(titulo);
 
                     document.Add(Chunk.NEWLINE);
 
-                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                    
                     PdfPTable table = new PdfPTable(6);
                     table.WidthPercentage = 100;
 
-                    // Encabezados de la tabla
+                   
                     Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
                     table.AddCell(new Phrase("Documento", headerFont));
                     table.AddCell(new Phrase("Aprendiz", headerFont));
@@ -270,7 +268,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase("Hora Registro", headerFont));
                     table.AddCell(new Phrase("Asistencia", headerFont));
 
-                    // Datos de las fichas
+                 
                     Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
                     foreach (var AsistenciaApre in aprendicesConAsistencia)
                     {
@@ -291,7 +289,7 @@ namespace AssitADSOproyect.Controllers
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error al generar el PDF: " + ex.Message); // Registro
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message);
                 return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
             }
         }
@@ -318,22 +316,22 @@ namespace AssitADSOproyect.Controllers
                     Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                     PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
-                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); 
 
                     document.Open();
 
-                    // Título
+                    
                     Paragraph titulo = new Paragraph("Reporte Asistencias general de la Ficha ", new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
                     titulo.Alignment = Element.ALIGN_CENTER;
                     document.Add(titulo);
 
                     document.Add(Chunk.NEWLINE);
 
-                    // Agregar contenido al PDF (tabla con datos de las fichas)
+                 
                     PdfPTable table = new PdfPTable(7);
                     table.WidthPercentage = 100;
 
-                    // Encabezados de la tabla
+              
                     Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
                     table.AddCell(new Phrase("Id de Asistencia", headerFont));
                     table.AddCell(new Phrase("Fecha"));
@@ -343,7 +341,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase("Competencia"));
                     table.AddCell(new Phrase("Estado Asistencia"));
 
-                    // Datos de las fichas
+             
                     Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
                     foreach (var asistenciasFicha in query)
                     {
@@ -377,15 +375,15 @@ namespace AssitADSOproyect.Controllers
             public HeaderFooterEvent(string imagePath)
             {
                 _logo = Image.GetInstance(imagePath);
-                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+                _logo.ScaleToFit(100f, 50f); 
             }
 
             public override void OnOpenDocument(PdfWriter writer, Document document)
             {
-                // Calcular la posición del logo para que no se superponga con el contenido
+
                 float logoY = document.PageSize.Height - document.TopMargin - _logo.ScaledHeight;
                 _logo.SetAbsolutePosition(document.LeftMargin, logoY);
-                document.Add(_logo); // Agregar el logo al inicio del documento
+                document.Add(_logo); 
             }
 
             public override void OnEndPage(PdfWriter writer, Document document)
@@ -555,14 +553,12 @@ namespace AssitADSOproyect.Controllers
         }
 
 
-        // GET: Asistencias/Create
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Create()
         {
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario");
 
-            // Cargar competencias de la primera ficha (ajusta la lógica si es necesario)
             var primeraFicha = db.Ficha.FirstOrDefault();
 
             if (primeraFicha != null && primeraFicha.Id_programa != null)
@@ -577,7 +573,7 @@ namespace AssitADSOproyect.Controllers
             }
             else
             {
-                ViewBag.Id_competencia = new SelectList(new List<object>(), "Value", "Text"); // Lista vacía si no hay competencias
+                ViewBag.Id_competencia = new SelectList(new List<object>(), "Value", "Text"); 
             }
 
             return View();
@@ -600,9 +596,9 @@ namespace AssitADSOproyect.Controllers
             if (ModelState.IsValid)
             {
                 db.Asistencia.Add(asistencia);
-                db.SaveChanges(); // Guardar la asistencia para obtener el Id_asistencia generado
+                db.SaveChanges();
 
-                // Generar el código QR después de guardar la asistencia
+
                 var createRegistroUrl = Url.Action("Create", "RegistroAsistencias", new { id_Asistencia = asistencia.Id_asistencia }, Request.Url.Scheme);
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(createRegistroUrl, QRCodeGenerator.ECCLevel.Q);
@@ -614,19 +610,19 @@ namespace AssitADSOproyect.Controllers
                     bitmap.Save(qrCodePath, ImageFormat.Png);
                 }
 
-                asistencia.QrCode = $"~/QRCodes/{asistencia.Id_asistencia}.png"; // Asignar la ruta del QR
-                db.SaveChanges(); // Guardar la actualización de la asistencia
+                asistencia.QrCode = $"~/QRCodes/{asistencia.Id_asistencia}.png"; 
+                db.SaveChanges(); 
 
                 return RedirectToAction("Index");
             }
 
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_Instructor);
-            //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
+
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
 
             
 
-            //return View("Confirmacion", asistencia);
+ 
 
             return View(asistencia);
         }
@@ -645,7 +641,6 @@ namespace AssitADSOproyect.Controllers
                 return HttpNotFound();
             }
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_Instructor);
-            //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);
         }
@@ -665,7 +660,6 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_Instructor  );
-            //ViewBag.Id_competencia = new SelectList(db.Competencia, "Id_competencia", "Nombre_competencia", asistencia.Id_competencia);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);
         }
@@ -685,7 +679,7 @@ namespace AssitADSOproyect.Controllers
                         
                         Asistio_registro = u.RegistroAsistencia
                                             .Any(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true),
-                        // Obtener fecha y hora del primer registro que cumple la condición (puedes ajustar esto según tus necesidades)
+                       
                         fecha_registro = u.RegistroAsistencia
                                             .Where(ra => ra.Id_asistencia == asistenciaId && ra.Asistio_registro == true)
                                             .Select(ra => ra.Fecha_registro)
@@ -703,11 +697,11 @@ namespace AssitADSOproyect.Controllers
                     .ToList();
 
 
-            // 3. Pasar los datos a la vista
+
             ViewBag.Ficha = ficha;
             ViewBag.asistenciaId = asistenciaId;
             ViewBag.fichaId = fichaId;
-            return View(aprendicesConAsistencia); // Pasamos la lista del ViewModel
+            return View(aprendicesConAsistencia); 
         }
 
         // GET: RegistroAsistencias/Edit/5
@@ -723,8 +717,7 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.Id_asistenciaa = new SelectList(db.Asistencia, "Id_asistencia", "Fecha_inicio_asistencia", registroAsistencia.Id_asistencia);
-            //ViewBag.Id_asistencia = new SelectList(db.Asistencia, "Id_asistencia", "Id_asistencia", registroAsistencia.Id_asistencia);
+     
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Id_ficha");
             ViewBag.Nombre_Aprendiz = new SelectList(db.Usuario, "Id_usuario", "Nombre_usuario" + "Apellido_usuario", registroAsistencia.Id_Aprendiz);
             ViewBag.Id_usuario = new SelectList(db.Usuario, "Id_usuario", "Nombre_usuario", registroAsistencia.Id_Aprendiz);

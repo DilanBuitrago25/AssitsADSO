@@ -22,7 +22,7 @@ namespace AssitADSOproyect.Controllers
         // GET: Competencias
         public ActionResult Index(string estadoFiltro = "")
         {
-            var CompetenciasFiltradas = db.Competencia.AsQueryable(); // Comienza con todas las competencias
+            var CompetenciasFiltradas = db.Competencia.AsQueryable(); 
 
             if (estadoFiltro == "true")
             {
@@ -97,15 +97,15 @@ namespace AssitADSOproyect.Controllers
             public HeaderFooterEvent(string imagePath)
             {
                 _logo = Image.GetInstance(imagePath);
-                _logo.ScaleToFit(100f, 50f); // Ajustar tamaño de la imagen
+                _logo.ScaleToFit(100f, 50f); 
             }
 
             public override void OnOpenDocument(PdfWriter writer, Document document)
             {
-                // Calcular la posición del logo para que no se superponga con el contenido
+
                 float logoY = document.PageSize.Height - document.TopMargin - _logo.ScaledHeight;
                 _logo.SetAbsolutePosition(document.LeftMargin, logoY);
-                document.Add(_logo); // Agregar el logo al inicio del documento
+                document.Add(_logo); 
             }
 
             public override void OnEndPage(PdfWriter writer, Document document)
@@ -127,33 +127,33 @@ namespace AssitADSOproyect.Controllers
             {
                 var programas = db.Competencia
                 .Where(c => c.Id_competencia == id)
-                .SelectMany(c => c.Programa_formacion) // Accedemos a los programas a través de la colección de navegación
+                .SelectMany(c => c.Programa_formacion) 
                 .ToList();
 
-                var competencia = db.Competencia.Find(id); // Busca la ficha por su ID
-                string nombreCompetencia = competencia?.Nombre_competencia; // Obtiene el código de la ficha
+                var competencia = db.Competencia.Find(id); 
+                string nombreCompetencia = competencia?.Nombre_competencia; 
 
                 using (MemoryStream memoryStream = new MemoryStream())
                 {
                     Document document = new Document(PageSize.A4.Rotate(), 50, 50, 50, 35);
                     PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
 
-                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); // Pasar la ruta de la imagen
+                    writer.PageEvent = new HeaderFooterEvent(Server.MapPath("~/assets/images/Logo-remove.png")); 
 
                     document.Open();
 
-                    // Título
+                 
                     Paragraph titulo = new Paragraph("Reporte de Programas relacionados con la competencia " + nombreCompetencia, new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD));
                     titulo.Alignment = Element.ALIGN_CENTER;
                     document.Add(titulo);
 
                     document.Add(Chunk.NEWLINE);
 
-                    // Agregar contenido al PDF (tabla con datos de las fichas)
+
                     PdfPTable table = new PdfPTable(5);
                     table.WidthPercentage = 100;
 
-                    // Encabezados de la tabla
+   
                     Font headerFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
                     table.AddCell(new Phrase("id", headerFont));
                     table.AddCell(new Phrase("Nombre", headerFont));
@@ -161,7 +161,7 @@ namespace AssitADSOproyect.Controllers
                     table.AddCell(new Phrase("Duracion", headerFont));
                     table.AddCell(new Phrase("Estado", headerFont));
 
-                    // Datos de las fichas
+
                     Font cellFont = FontFactory.GetFont(FontFactory.HELVETICA, 10);
                     foreach (var programascom in programas)
                     {
@@ -181,14 +181,14 @@ namespace AssitADSOproyect.Controllers
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("Error al generar el PDF: " + ex.Message); // Registro
+                Debug.WriteLine("Error al generar el PDF: " + ex.Message); 
                 return new HttpStatusCodeResult(500, "Error interno del servidor al generar el PDF.");
             }
         }
 
 
 
-        // GET: Competencias/Details/5
+
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Details(int? id)
         {
@@ -204,16 +204,13 @@ namespace AssitADSOproyect.Controllers
             return View(competencia);
         }
 
-        // GET: Competencias/Create
+   
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Competencias/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
@@ -221,7 +218,7 @@ namespace AssitADSOproyect.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Verificar si ya existe un programa con el mismo nombre
+              
                 bool existeCompetencia = db.Competencia.Any(c => c.Nombre_competencia == competencia.Nombre_competencia);
 
                 if (existeCompetencia)
@@ -252,13 +249,11 @@ namespace AssitADSOproyect.Controllers
                 return HttpNotFound();
             }
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Programa_formacion);
-            //ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Programa_formacion);
+            
             return View(competencia);
         }
 
-        // POST: Competencias/Edit/5
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
-        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin")]
@@ -271,7 +266,7 @@ namespace AssitADSOproyect.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa", competencia.Programa_formacion);
-            //ViewBag.Numero_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", competencia.Id_ficha);
+          
             return View(competencia);
         }
 
@@ -279,10 +274,10 @@ namespace AssitADSOproyect.Controllers
         {
             var programas = db.Competencia
                 .Where(c => c.Id_competencia == id)
-                .SelectMany(c => c.Programa_formacion) // Accedemos a los programas a través de la colección de navegación
+                .SelectMany(c => c.Programa_formacion) 
                 .ToList();
 
-            ViewBag.NombreCompetencia = db.Competencia.Find(id)?.Nombre_competencia; // Obtenemos el nombre de la competencia para mostrar en la vista
+            ViewBag.NombreCompetencia = db.Competencia.Find(id)?.Nombre_competencia; 
             ViewBag.CompetenciaId = id;
             return View(programas);
         }
@@ -291,14 +286,14 @@ namespace AssitADSOproyect.Controllers
         {
             ViewBag.CompetenciaId = competenciaId;
 
-            // Obtener los programas ya asociados a la competencia
+ 
             var programasAsociados = db.Competencia
             .Where(c => c.Id_competencia == competenciaId)
-            .SelectMany(c => c.Programa_formacion) // Accede a los programas asociados a través de la propiedad de navegación
+            .SelectMany(c => c.Programa_formacion) 
             .Select(p => p.Id_programa)
             .ToList();
 
-            // Obtener todos los programas y excluir los ya asociados
+          
             ViewBag.ProgramasDisponibles = db.Programa_formacion
                 .Where(p => !programasAsociados.Contains(p.Id_programa))
                 .ToList();
@@ -323,11 +318,8 @@ namespace AssitADSOproyect.Controllers
                     db.SaveChanges();
                 }
             }
-            else
-            {
-                // Manejar el caso en que la competencia o el programa no existen
-            }
-            ViewBag.NombreCompetencia = db.Competencia.Find(competenciaId)?.Nombre_competencia; // Obtenemos el nombre de la competencia para mostrar en la vista
+           
+            ViewBag.NombreCompetencia = db.Competencia.Find(competenciaId)?.Nombre_competencia; 
             ViewBag.CompetenciaId = competenciaId;
             return RedirectToAction("CompetenciaProgramas", new { id = competenciaId });
         }

@@ -16,7 +16,7 @@ namespace AssitADSOproyect.Controllers
     public class AprendizsController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=Buitrago;Initial Catalog=BDAssistsADSOreal;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=CGNDFPCIPGOD601;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
         // GET: Aprendizs
         [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult Index(string estadoFiltro = "", int? pagina = 1)
@@ -67,7 +67,7 @@ namespace AssitADSOproyect.Controllers
                 ";
 
                 SqlCommand comando = new SqlCommand(query, connection);
-                comando.Parameters.AddWithValue("@UsuarioId", usuarioId); // Agrega el parámetro
+                comando.Parameters.AddWithValue("@UsuarioId", usuarioId); 
                 connection.Open();
                 Total_Asistencias = (int)comando.ExecuteScalar();
             }
@@ -85,13 +85,13 @@ namespace AssitADSOproyect.Controllers
                 ";
 
                 SqlCommand comando = new SqlCommand(query, connection);
-                comando.Parameters.AddWithValue("@UsuarioId", usuarioId); // Agrega el parámetro
+                comando.Parameters.AddWithValue("@UsuarioId", usuarioId); 
                 connection.Open();
                 Total_Inasistencias = (int)comando.ExecuteScalar();
             }
             ViewBag.Total_Inasistencias = Total_Inasistencias;
 
-            var idUsuario = (int)Session["Idusuario"]; // Obtener el ID del usuario loggeado
+            var idUsuario = (int)Session["Idusuario"]; 
 
             var consulta = db.Ficha
                .Where(f => f.Estado_ficha == true)
@@ -211,20 +211,7 @@ namespace AssitADSOproyect.Controllers
             return registrosSoportePorFicha;
         }
 
-        //// GET: Aprendizs/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Usuario usuario = db.Usuario.Find(id);
-        //    if (usuario == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(usuario);
-        //}
+      
 
        
 
