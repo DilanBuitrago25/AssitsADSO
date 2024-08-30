@@ -12,6 +12,8 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 using static AssitADSOproyect.Controllers.LoginController;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -247,6 +249,14 @@ namespace AssitADSOproyect.Controllers
                 // Si no hay errores, guardar el usuario
                 if (ModelState.IsValid)
                 {
+                    using (var sha256 = SHA256.Create())
+                    {
+                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
+
+                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+
+                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+                    }
                     db.Usuario.Add(usuario);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -279,7 +289,7 @@ namespace AssitADSOproyect.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Tipo_usuario,Tipo_instructor,Id_ficha,Estado_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
+        public ActionResult Edit([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Tipo_usuario,Tipo_instructor,Id_ficha,Estado_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
         {
             if (ModelState.IsValid)
             {
@@ -328,6 +338,7 @@ namespace AssitADSOproyect.Controllers
             ViewBag.Apellido_Aprendiz = db.Usuario.Find(idAprendiz)?.Apellido_usuario;
             return View();
         }
+
 
         [HttpPost]
         public ActionResult Asociar_Ficha_Aprendiz(int idAprendiz, int fichaId)
@@ -388,6 +399,49 @@ namespace AssitADSOproyect.Controllers
             return RedirectToAction("Fichas_Aprendiz", new { id = idAprendiz });
         }
 
+        public ActionResult GenerarNuevaContrasena(int idUsuario)
+        {
+            // Obtener el usuario de la base de datos
+            var usuario = db.Usuario.Find(idUsuario);
+
+            if (usuario == null)
+            {
+                return HttpNotFound(); // O manejar el caso de usuario no encontrado de otra forma
+            }
+
+            // Generar una nueva contraseña aleatoria (puedes personalizar la longitud y complejidad)
+            string nuevaContrasena = GenerarContrasenaAleatoria(10); // Ajusta la longitud según tus necesidades
+
+            // Aplicar el mismo algoritmo de hashing que usas al crear usuarios
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] passwordBytes = Encoding.UTF8.GetBytes(nuevaContrasena);
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            }
+
+            // Guardar los cambios en la base de datos
+            db.Entry(usuario).State = EntityState.Modified;
+            db.SaveChanges();
+
+            // Pasar la nueva contraseña (en texto plano) a la vista parcial
+            return PartialView("_MostrarNuevaContrasena", nuevaContrasena);
+        }
+
+        // Método auxiliar para generar contraseñas aleatorias
+        private string GenerarContrasenaAleatoria(int longitud)
+        {
+            const string caracteresValidos = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_-+=[{]};:>|./?";
+            var random = new Random();
+            var contrasena = new char[longitud];
+
+            for (int i = 0; i < longitud; i++)
+            {
+                contrasena[i] = caracteresValidos[random.Next(caracteresValidos.Length)];
+            }
+
+            return new string(contrasena);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

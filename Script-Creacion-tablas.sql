@@ -44,7 +44,7 @@ Nombre_usuario varchar (100) not null,
 Apellido_usuario varchar (100),
 Telefono_usuario numeric (18, 0),
 Correo_usuario varchar (100) not null,
-Contrasena_usuario varchar (100) not null,
+Contrasena_usuario varchar (1000) not null,
 Tipo_usuario Varchar (100)not null,
 Estado_Usuario bit default (1),
 primary key (Id_usuario));
@@ -65,8 +65,10 @@ CREATE TABLE Ficha_has_Usuario (
 go
 
 Insert into Usuario (Tipo_Documento_usuario, Nombre_usuario, Apellido_usuario, Correo_usuario, Contrasena_usuario, Tipo_usuario, Estado_Usuario) values
-('C.C', 'User', 'Admin', 'admin@soy.sena.edu.co', 'admin123', 'InstructorAdmin', 1);
+('C.C', 'User', 'Admin', 'admin@soy.sena.edu.co', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'InstructorAdmin', 1);
 
+
+--la contraseña es admin123
 
 go
 

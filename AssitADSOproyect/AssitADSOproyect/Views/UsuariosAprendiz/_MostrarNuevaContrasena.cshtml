@@ -1,0 +1,44 @@
+﻿@model string
+
+@Styles.Render("~/Content/assets")
+
+
+<br />
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Generación de Contraseña</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index","Instructor")">Home</a></li>
+                    <li class="breadcrumb-item">Gestionar Aprendiz</li>
+                    <li class="breadcrumb-item">@ViewBag.Nombre_Aprendiz @ViewBag.Apellido_Aprendiz</li>
+                    <li class="breadcrumb-item active">Generar Nueva Contraseña</li>
+                </ol>
+            </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Nueva Contraseña</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>La nueva contraseña para el usuario es: <strong>@Model</strong></p>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-light" type="button">
+                <a href="@Url.Action("Index","UsuariosAprendiz")">Cancelar</a>
+            </button>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/assets")

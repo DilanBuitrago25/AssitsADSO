@@ -640,6 +640,22 @@ namespace AssitADSOproyect.Controllers
             {
                 return HttpNotFound();
             }
+            var primeraFicha = db.Ficha.FirstOrDefault();
+
+            if (primeraFicha != null && primeraFicha.Id_programa != null)
+            {
+                var competencias = db.Programa_formacion
+                    .Where(pf => pf.Id_programa == primeraFicha.Id_programa)
+                    .SelectMany(pf => pf.Competencia)
+                    .Select(c => new { Value = c.Id_competencia, Text = c.Nombre_competencia })
+                    .ToList();
+
+                ViewBag.Id_competencia = new SelectList(competencias, "Value", "Text");
+            }
+            else
+            {
+                ViewBag.Id_competencia = new SelectList(new List<object>(), "Value", "Text");
+            }
             ViewBag.Id_Instructor = new SelectList(db.Usuario, "Id_usuario", "Documento_usuario", asistencia.Id_Instructor);
             ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha", asistencia.Id_ficha);
             return View(asistencia);

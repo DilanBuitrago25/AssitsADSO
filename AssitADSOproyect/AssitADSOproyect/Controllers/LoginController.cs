@@ -7,6 +7,8 @@ using System.Web.Security;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -24,6 +26,13 @@ namespace AssitADSOproyect.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(string correo, string contrasena)
         {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] passwordBytes = Encoding.UTF8.GetBytes(contrasena);
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                contrasena = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            }
+
             var usuario = db.Usuario.FirstOrDefault(u => u.Correo_usuario == correo && u.Contrasena_usuario == contrasena);
 
             if (usuario != null)
@@ -100,10 +109,25 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
-        public ActionResult EditarPerfil([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Tipo_usuario,Tipo_instructor,Id_ficha,Estado_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
+        public ActionResult EditarPerfil([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Tipo_usuario,Tipo_instructor,Id_ficha,Estado_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
         {
             if (ModelState.IsValid)
             {
+
+                var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
+
+                // Verificar si la contraseña ha sido modificada
+                if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
+                {
+                    // Si la contraseña ha sido modificada, aplicar el cifrado
+                    using (var sha256 = SHA256.Create())
+                    {
+                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
+                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+                    }
+                }
+
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
 
