@@ -67,7 +67,6 @@ go
 Insert into Usuario (Tipo_Documento_usuario, Nombre_usuario, Apellido_usuario, Correo_usuario, Contrasena_usuario, Tipo_usuario, Estado_Usuario) values
 ('C.C', 'User', 'Admin', 'admin@soy.sena.edu.co', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'InstructorAdmin', 1);
 
-
 --la contraseña es admin123
 
 go
@@ -138,6 +137,3 @@ Validacion_Instructor bit default (0),
 Nota_Instructor varchar(500),
 primary key (Id_soporte));
 
-alter table RegistroAsistencia add anular_Asistencia bit default(0)
-
-alter table RegistroAsistencia add nota_anularAsistencia varchar (500)

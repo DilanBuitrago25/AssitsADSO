@@ -173,5 +173,52 @@ namespace AssitADSOproyect.Controllers
                 filterContext.Result = new RedirectResult(url);
             }
         }
+
+        public ActionResult CambiarContrasena()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CambiarContrasena([Bind(Include = "Contrasena_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
+
+                // Verificar si la contraseña ha sido modificada
+                if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
+                {
+                    // Si la contraseña ha sido modificada, aplicar el cifrado
+                    using (var sha256 = SHA256.Create())
+                    {
+                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
+                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+                    }
+                }
+
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+
+                if (usuario.Tipo_usuario == "Aprendiz")
+                {
+                    return RedirectToAction("Index", "Aprendizs"); 
+                }
+                else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
+                {
+                    return RedirectToAction("Index", "Instructor"); 
+                }
+                else
+                {
+                    return RedirectToAction("Index"); 
+                }
+            }
+
+            return View(usuario);
+        }
+
+
     }
 }

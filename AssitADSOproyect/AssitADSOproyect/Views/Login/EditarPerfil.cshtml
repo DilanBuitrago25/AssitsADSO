@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
 
-                                    
+
                                     @Html.HiddenFor(model => model.Tipo_usuario, new { Value = @Session["TipoUsuario"].ToString() })
                                     @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })
                                     @Html.HiddenFor(model => model.Estado_Usuario, new { Value = true })
@@ -112,7 +112,14 @@
                         {
                             <button class="btn btn-light" type="button"><a href="@Url.Action("Index", "Aprendizs")">Cancelar</a></button>
                         }
+
+                        <div class="text-end">
+                            <button class="btn btn-danger" type="button" >
+                                <a href="@Url.Action("CambiarContrasena", "Login")" style="color: white;">Cambiar Contraseña</a>
+                            </button>
+                        </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

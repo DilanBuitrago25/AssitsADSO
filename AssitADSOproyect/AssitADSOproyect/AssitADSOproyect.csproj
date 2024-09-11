@@ -6121,6 +6121,7 @@
     <Content Include="Views\InstructorAdmin\Asistencias_tabla.cshtml" />
     <Content Include="Views\UsuariosAprendiz\_MostrarNuevaContrasena.cshtml" />
     <Content Include="Views\UsuariosInstructor\_MostrarNuevaContrasena.cshtml" />
+    <Content Include="Views\Login\CambiarContrasena.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
