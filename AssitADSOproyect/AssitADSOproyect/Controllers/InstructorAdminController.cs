@@ -20,7 +20,7 @@ namespace AssitADSOproyect.Controllers
     public class InstructorAdminController : Controller
     {
         private BDAssistsADSOv4Entities db = new BDAssistsADSOv4Entities();
-        string Conexion = "Data Source=CGNDFPCIPGOD601;Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
+        string Conexion = "Data Source=(local);Initial Catalog=BDAssistsADSO;Integrated Security=True;trustservercertificate=True;";
         // GET: Instructor
         [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Index(string estadoFiltro = "", int? pagina = 1)

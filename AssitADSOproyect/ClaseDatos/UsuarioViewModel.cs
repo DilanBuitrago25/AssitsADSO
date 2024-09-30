@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,5 +32,12 @@ namespace ClaseDatos
     {
         public RegistroAsistencia RegistroAsistencia { get; set; }
         public bool TieneSoporte { get; set; }
+    }
+
+    public class CambiarContrasenaViewModel
+    {
+        public int Id_usuario { get; set; }
+        public string Contrasena_usuario { get; set; }
+        public string ConfirmarContrasena { get; set; }
     }
 }

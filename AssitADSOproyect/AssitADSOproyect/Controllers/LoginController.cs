@@ -176,48 +176,113 @@ namespace AssitADSOproyect.Controllers
 
         public ActionResult CambiarContrasena()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult CambiarContrasena([Bind(Include = "Contrasena_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
-        {
-            if (ModelState.IsValid)
-            {
-
-                var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
-
-                // Verificar si la contraseña ha sido modificada
-                if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
-                {
-                    // Si la contraseña ha sido modificada, aplicar el cifrado
-                    using (var sha256 = SHA256.Create())
-                    {
-                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
-                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
-                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-                    }
-                }
-
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
-
-                if (usuario.Tipo_usuario == "Aprendiz")
-                {
-                    return RedirectToAction("Index", "Aprendizs"); 
-                }
-                else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
-                {
-                    return RedirectToAction("Index", "Instructor"); 
-                }
-                else
-                {
-                    return RedirectToAction("Index"); 
-                }
-            }
+            var usuarioId = (int)Session["Idusuario"];
+            var usuario = db.Usuario.Find(usuarioId);
 
             return View(usuario);
         }
+
+        //[HttpPost]
+        //public ActionResult CambiarContrasena(Usuario usuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        // Obtener el usuario original de la base de datos
+        //        var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
+
+        //        // Validar que las contraseñas coincidan y cumplan con los requisitos
+        //        if (usuario.Contrasena_usuario != usuario.ConfirmarContrasena)
+        //        {
+        //            ModelState.AddModelError("ConfirmarContrasena", "Las contraseñas no coinciden.");
+        //            return View(usuario);
+        //        }
+
+        //        // Validación de complejidad de la contraseña (ejemplo básico)
+        //        if (usuario.Contrasena_usuario.Length < 8 ||
+        //            !usuario.Contrasena_usuario.Any(char.IsUpper) ||
+        //            !usuario.Contrasena_usuario.Any(char.IsLower) ||
+        //            !usuario.Contrasena_usuario.Any(char.IsDigit))
+        //        {
+        //            ModelState.AddModelError("Contrasena_usuario", "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
+        //            return View(usuario);
+        //        }
+
+        //        // Encriptar la contraseña
+        //        using (var sha256 = SHA256.Create())
+        //        {
+        //            byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
+        //            byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+        //            usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+        //        }
+
+        //        // Actualizar el usuario en la base de datos
+        //        usuarioOriginal.Contrasena_usuario = usuario.Contrasena_usuario; // Actualizar el usuario original
+        //        db.Entry(usuarioOriginal).State = EntityState.Modified;
+        //        db.SaveChanges();
+
+        //        if (usuario.Tipo_usuario == "Aprendiz")
+        //        {
+        //            return RedirectToAction("Index", "Aprendizs");
+        //        }
+        //        else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
+        //        {
+        //            return RedirectToAction("Index", "Instructor");
+        //        }
+        //        else
+        //        {
+        //            return RedirectToAction("Index");
+        //        }
+        //    }
+
+        //    return View(usuario);
+        //}
+
+        //[HttpPost]
+        //public ActionResult CambiarContrasena(Usuario usuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
+
+        //        if (usuario.Contrasena_usuario != usuario.ConfirmarContrasena)
+        //        {
+        //            ModelState.AddModelError("ConfirmarContrasena", "Las contraseñas no coinciden.");
+        //            return View(usuario);
+        //        }
+
+        //        // Verificar si la contraseña ha sido modificada
+        //        if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
+        //        {
+        //            // Si la contraseña ha sido modificada, aplicar el cifrado
+        //            using (var sha256 = SHA256.Create())
+        //            {
+        //                byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
+        //                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+        //                usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+        //            }
+        //        }
+
+        //        db.Entry(usuario).State = EntityState.Modified;
+        //        db.SaveChanges();
+
+        //        if (usuario.Tipo_usuario == "Aprendiz")
+        //        {
+        //            return RedirectToAction("Index", "Aprendizs"); 
+        //        }
+        //        else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
+        //        {
+        //            return RedirectToAction("Index", "Instructor"); 
+        //        }
+        //        else
+        //        {
+        //            return RedirectToAction("Index"); 
+        //        }
+        //    }
+
+        //    return View(usuario);
+        //}
+
 
 
     }

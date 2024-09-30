@@ -14,6 +14,8 @@ using static AssitADSOproyect.Controllers.LoginController;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
+using System.Net;
+using System.Net.Mail;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -424,7 +426,23 @@ namespace AssitADSOproyect.Controllers
             db.Entry(usuario).State = EntityState.Modified;
             db.SaveChanges();
 
-            // Pasar la nueva contraseña (en texto plano) a la vista parcial
+            var message = new MailMessage();
+            message.From = new MailAddress("adsoassist@gmail.com"); // Reemplaza con tu cuenta de Gmail
+            message.To.Add(usuario.Correo_usuario);
+            message.Subject = "Nueva contraseña";
+            message.Body = $"Tu nueva contraseña para el ingreso al aplicativo web ASSIST ADSO es: {nuevaContrasena}";
+
+            // Configurar el cliente SMTP
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                Credentials = new NetworkCredential("adsoassist@gmail.com", "efgg tfjo nmln dzqr"),
+                EnableSsl = true
+            };
+
+                client.Send(message);
+
+
+            
             return PartialView("_MostrarNuevaContrasena", nuevaContrasena);
         }
 
@@ -442,6 +460,32 @@ namespace AssitADSOproyect.Controllers
 
             return new string(contrasena);
         }
+
+        [HttpPost]
+        public ActionResult instructorRegister([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Tipo_usuario,Tipo_instructor,Id_ficha,Estado_usuario")] Usuario usuario)
+        {
+
+            var consultaUsuario = db.Usuario.Where(p => p.Documento_usuario == usuario.Documento_usuario).ToList();
+
+            if (consultaUsuario.Count() == 0)
+            {
+
+                db.Usuario.Add(usuario);
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return Json(new { code = 200 });
+                }
+
+
+            }
+            return Json(new { code = 500 });
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
