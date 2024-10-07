@@ -20,7 +20,50 @@ namespace AssitADSOproyect.Controllers
         {
             return View();
         }
-         
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
+        public ActionResult CambiarContrasena([Bind(Include = "Id_usuario,Contrasena_usuario")] Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
+
+                // Verificar si la contraseña ha sido modificada
+                if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
+                {
+                    // Si la contraseña ha sido modificada, aplicar el cifrado
+                    using (var sha256 = SHA256.Create())
+                    {
+                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
+                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+                    }
+                }
+
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+
+                if (usuario.Tipo_usuario == "Aprendiz")
+                {
+                    return RedirectToAction("Index", "Aprendizs"); // Redirigir al controlador Aprendizs
+                }
+                else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
+                {
+                    return RedirectToAction("Index", "Instructor"); // Redirigir al controlador Instructors
+                }
+                else
+                {
+                    // Manejar otros tipos de usuario si es necesario
+                    return RedirectToAction("Index"); // Redirigir al índice actual por defecto
+                }
+            }
+
+            return View(usuario);
+        }
+
         // POST: Auth/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -72,15 +115,8 @@ namespace AssitADSOproyect.Controllers
                 ViewData["Mensaje"] = "Usuario no Activo";
             }
 
-            
-
-
             ModelState.AddModelError("", "Credenciales inválidas.");
             return View();
-
-
-
-
         }
 
         // GET: Auth/Logout
@@ -90,6 +126,7 @@ namespace AssitADSOproyect.Controllers
             return RedirectToAction("Index");
         }
 
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
         public ActionResult EditarPerfil()
         {
             if (Session["Idusuario"] != null)
@@ -109,25 +146,10 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
-        public ActionResult EditarPerfil([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Tipo_usuario,Tipo_instructor,Id_ficha,Estado_usuario")] Usuario usuario, Ficha_has_Usuario ficha_Has_Usuario)
+        public ActionResult EditarPerfil([Bind(Include = "Id_usuario,Tipo_Documento_usuario,Documento_usuario,Nombre_usuario,Apellido_usuario,Telefono_usuario,Correo_usuario,Contrasena_usuario,Tipo_usuario,Estado_usuario")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-
-                var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
-
-                // Verificar si la contraseña ha sido modificada
-                if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
-                {
-                    // Si la contraseña ha sido modificada, aplicar el cifrado
-                    using (var sha256 = SHA256.Create())
-                    {
-                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
-                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
-                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-                    }
-                }
-
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
 
@@ -176,114 +198,62 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
         public ActionResult CambiarContrasena()
         {
-            var usuarioId = (int)Session["Idusuario"];
-            var usuario = db.Usuario.Find(usuarioId);
+            if (Session["Idusuario"] != null)
+            {
+                int usuarioId = (int)Session["Idusuario"];
+                var usuario = db.Usuario.Find(usuarioId);
+
+                if (usuario != null)
+                {
+                    return View(usuario);
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
+        public ActionResult CambiarContrasena([Bind(Include = "Id_usuario,Contrasena_usuario")] Usuario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
+
+                // Verificar si la contraseña ha sido modificada
+                if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
+                {
+                    // Si la contraseña ha sido modificada, aplicar el cifrado
+                    using (var sha256 = SHA256.Create())
+                    {
+                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
+                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+                    }
+                }
+
+                db.Entry(usuario).State = EntityState.Modified;
+                db.SaveChanges();
+
+                if (usuario.Tipo_usuario == "Aprendiz")
+                {
+                    return RedirectToAction("Index", "Aprendizs"); // Redirigir al controlador Aprendizs
+                }
+                else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
+                {
+                    return RedirectToAction("Index", "Instructor"); // Redirigir al controlador Instructors
+                }
+                else
+                {
+                    // Manejar otros tipos de usuario si es necesario
+                    return RedirectToAction("Index"); // Redirigir al índice actual por defecto
+                }
+            }
 
             return View(usuario);
         }
-
-        //[HttpPost]
-        //public ActionResult CambiarContrasena(Usuario usuario)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        // Obtener el usuario original de la base de datos
-        //        var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
-
-        //        // Validar que las contraseñas coincidan y cumplan con los requisitos
-        //        if (usuario.Contrasena_usuario != usuario.ConfirmarContrasena)
-        //        {
-        //            ModelState.AddModelError("ConfirmarContrasena", "Las contraseñas no coinciden.");
-        //            return View(usuario);
-        //        }
-
-        //        // Validación de complejidad de la contraseña (ejemplo básico)
-        //        if (usuario.Contrasena_usuario.Length < 8 ||
-        //            !usuario.Contrasena_usuario.Any(char.IsUpper) ||
-        //            !usuario.Contrasena_usuario.Any(char.IsLower) ||
-        //            !usuario.Contrasena_usuario.Any(char.IsDigit))
-        //        {
-        //            ModelState.AddModelError("Contrasena_usuario", "La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número.");
-        //            return View(usuario);
-        //        }
-
-        //        // Encriptar la contraseña
-        //        using (var sha256 = SHA256.Create())
-        //        {
-        //            byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
-        //            byte[] hashBytes = sha256.ComputeHash(passwordBytes);
-        //            usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-        //        }
-
-        //        // Actualizar el usuario en la base de datos
-        //        usuarioOriginal.Contrasena_usuario = usuario.Contrasena_usuario; // Actualizar el usuario original
-        //        db.Entry(usuarioOriginal).State = EntityState.Modified;
-        //        db.SaveChanges();
-
-        //        if (usuario.Tipo_usuario == "Aprendiz")
-        //        {
-        //            return RedirectToAction("Index", "Aprendizs");
-        //        }
-        //        else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
-        //        {
-        //            return RedirectToAction("Index", "Instructor");
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-
-        //    return View(usuario);
-        //}
-
-        //[HttpPost]
-        //public ActionResult CambiarContrasena(Usuario usuario)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
-
-        //        if (usuario.Contrasena_usuario != usuario.ConfirmarContrasena)
-        //        {
-        //            ModelState.AddModelError("ConfirmarContrasena", "Las contraseñas no coinciden.");
-        //            return View(usuario);
-        //        }
-
-        //        // Verificar si la contraseña ha sido modificada
-        //        if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
-        //        {
-        //            // Si la contraseña ha sido modificada, aplicar el cifrado
-        //            using (var sha256 = SHA256.Create())
-        //            {
-        //                byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
-        //                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
-        //                usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-        //            }
-        //        }
-
-        //        db.Entry(usuario).State = EntityState.Modified;
-        //        db.SaveChanges();
-
-        //        if (usuario.Tipo_usuario == "Aprendiz")
-        //        {
-        //            return RedirectToAction("Index", "Aprendizs"); 
-        //        }
-        //        else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
-        //        {
-        //            return RedirectToAction("Index", "Instructor"); 
-        //        }
-        //        else
-        //        {
-        //            return RedirectToAction("Index"); 
-        //        }
-        //    }
-
-        //    return View(usuario);
-        //}
-
-
 
     }
 }

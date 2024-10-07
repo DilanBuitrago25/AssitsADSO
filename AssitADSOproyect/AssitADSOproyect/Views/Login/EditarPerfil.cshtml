@@ -94,6 +94,7 @@
                                     @Html.HiddenFor(model => model.Tipo_usuario, new { Value = @Session["TipoUsuario"].ToString() })
                                     @Html.HiddenFor(model => model.Id_usuario, new { Value = @Session["Idusuario"].ToString() })
                                     @Html.HiddenFor(model => model.Estado_Usuario, new { Value = true })
+                                    @Html.HiddenFor(model => model.Contrasena_usuario)
                                 </form>
                             </div>
                         </div>
