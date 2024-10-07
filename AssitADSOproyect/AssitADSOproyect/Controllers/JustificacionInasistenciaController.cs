@@ -225,7 +225,9 @@ namespace AssitADSOproyect.Controllers
             }
         }
 
+
         [HttpPost]
+        [AutorizarTipoUsuario("Aprendiz")]
         public ActionResult GenerarReportePDFSoportesAprendiz(int id)
         {
             try
