@@ -43,7 +43,7 @@ namespace AssitADSOproyect.Controllers
         }
 
 
-
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
         public ActionResult GenerarReportePDF()
         {
             string idUsuarioSesion = Session["Idusuario"].ToString();

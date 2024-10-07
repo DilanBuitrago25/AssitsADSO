@@ -173,7 +173,7 @@ namespace AssitADSOproyect.Controllers
                 filterContext.Result = new RedirectResult(url);
             }
         }
-
+        [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
         public ActionResult CambiarContrasena()
         {
             var usuarioId = (int)Session["Idusuario"];

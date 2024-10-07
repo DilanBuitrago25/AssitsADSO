@@ -6,84 +6,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0060fe">
+    <meta name="language" content="en">
+    <link rel="shortcut icon" href="../assets/images/theme/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/bundle.min.css">
     <link rel="stylesheet" href="../assets/css/fonts.min.css">
     <link rel="stylesheet" href="../assets/css/stylelogin.css">
     <link rel="stylesheet" href="../assets/css/templates.css">
     <link rel="stylesheet" href="../assets/css/pages/login.css">
+
     <title>Sign in - Assist ADSO</title>
 </head>
 <body class="position-relative login-page light-theme" id="login-page">
 
- 
+  
     <div class="preloader" id="preloader">
         <div class="content d-flex align-items-center justify-content-center">
             <div class="spinner"></div>
         </div>
     </div>
 
-    <div class="se-i">
  
+    <div class="se-i">
+        
         <form class="user-form" method="post" id="loginForm">
-          
+      
             <a href="@Url.Action("Index", "Home")" class="logo">
                 <img data-src="../assets/images/Logo-remove.png" class="lazy lt-img img-fluid" alt="HostX">
+                <img data-src="../assets/images/theme/logo-d.png" class="lazy dt-img img-fluid" alt="HostX">
             </a>
-          
+      
             <h1 class="title-1"><img data-src="../assets/images/pages/user/waving-hand.png" class="lazy img-fluid" alt="Icon">Bienvenido!<br></h1>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-               
+      
                 <label class="form-label" for="Correo_usuario">
-                 
+                   
                     <input class="form-input" type="email" name="correo" id="correo" placeholder="Correo Electronico" required>
                   
                     <span class="state"></span>
                 </label>
-               
+              
                 <label class="form-label" for="Contrasena_usuario">
-             
+                    
                     <input class="form-input" type="password" name="contrasena" id="contrasena" placeholder="Contraseña" required>
-                   
+                    
                     <span class="state"></span>
                 </label>
               
                 <div class="text-right">
-                   
+                 
                 </div>
+          
                 <div class="buttons mt-2">
                     <button type="submit" class="btn btn-sm btn-fill-success shadow-off text-uppercase w-100">Iniciar Sesión</button>
-                        @if (ViewData["Mensaje"] != null)
-                        {
-                            <p>@ViewData["Mensaje"]</p>
-                        }
+                    @if (ViewData["Mensaje"] != null)
+                    {
+                        <p>@ViewData["Mensaje"]</p>
+                    }
                 </div>
 
             }
 
 
         </form>
-        
+
     </div>
-    
 
-        <script src="../assets/js/jquery-3.3.1.min.js"></script>
-     
-        <script src="../assets/js/jquery.lazy.min.js"></script>
-    
-        <script src="../assets/js/jQuery.cookies.js"></script>
-    
-        <script src="../assets/js/jquery.validate.min.js"></script>
-       
-        <script src="../assets/js/templates.js"></script>
-    
-        <script src="../assets/js/forms.js"></script>
-   
-        <script src="../assets/js/scriptlogin.js"></script>
-    </body>
+
+    <script src="../assets/js/jquery-3.3.1.min.js"></script>
+    <script src="../assets/js/jquery.lazy.min.js"></script>
+    <script src="../assets/js/jQuery.cookies.js"></script>
+    <script src="../assets/js/jquery.validate.min.js"></script>
+    <script src="../assets/js/templates.js"></script>
+    <script src="../assets/js/forms.js"></script>
+    <script src="../assets/js/scriptlogin.js"></script>
+</body>
 </html>
-
 
