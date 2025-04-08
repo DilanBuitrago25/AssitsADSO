@@ -21,48 +21,48 @@ namespace AssitADSOproyect.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
-        public ActionResult CambiarContrasena([Bind(Include = "Id_usuario,Contrasena_usuario")] Usuario usuario)
-        {
-            if (ModelState.IsValid)
-            {
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
+        //public ActionResult CambiarContrasena([Bind(Include = "Id_usuario,Contrasena_usuario")] Usuario usuario)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
 
-                var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
+        //        var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
 
-                // Verificar si la contraseña ha sido modificada
-                if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
-                {
-                    // Si la contraseña ha sido modificada, aplicar el cifrado
-                    using (var sha256 = SHA256.Create())
-                    {
-                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
-                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
-                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-                    }
-                }
+        //        // Verificar si la contraseña ha sido modificada
+        //        if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
+        //        {
+        //            // Si la contraseña ha sido modificada, aplicar el cifrado
+        //            using (var sha256 = SHA256.Create())
+        //            {
+        //                byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
+        //                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+        //                usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+        //            }
+        //        }
 
-                db.Entry(usuario).State = EntityState.Modified;
-                db.SaveChanges();
+        //        db.Entry(usuario).State = EntityState.Modified;
+        //        db.SaveChanges();
 
-                if (usuario.Tipo_usuario == "Aprendiz")
-                {
-                    return RedirectToAction("Index", "Aprendizs"); // Redirigir al controlador Aprendizs
-                }
-                else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
-                {
-                    return RedirectToAction("Index", "Instructor"); // Redirigir al controlador Instructors
-                }
-                else
-                {
-                    // Manejar otros tipos de usuario si es necesario
-                    return RedirectToAction("Index"); // Redirigir al índice actual por defecto
-                }
-            }
+        //        if (usuario.Tipo_usuario == "Aprendiz")
+        //        {
+        //            return RedirectToAction("Index", "Aprendizs"); // Redirigir al controlador Aprendizs
+        //        }
+        //        else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
+        //        {
+        //            return RedirectToAction("Index", "Instructor"); // Redirigir al controlador Instructors
+        //        }
+        //        else
+        //        {
+        //            // Manejar otros tipos de usuario si es necesario
+        //            return RedirectToAction("Index"); // Redirigir al índice actual por defecto
+        //        }
+        //    }
 
-            return View(usuario);
-        }
+        //    return View(usuario);
+        //}
 
         // POST: Auth/Login
         [HttpPost]
@@ -211,7 +211,7 @@ namespace AssitADSOproyect.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
-        public ActionResult CambiarContrasenados(CambiarContrasenaViewModel model)
+        public ActionResult CambiarContrasena(CambiarContrasenaViewModel model)
         {
             if (!ModelState.IsValid)
             {

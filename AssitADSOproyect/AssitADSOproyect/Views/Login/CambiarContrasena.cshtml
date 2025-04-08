@@ -34,51 +34,52 @@
             <div class="row m-0">
                 <div class="col-12 p-0">
                     <div class="login-card">
-                        <form class="theme-form login-form">
+                        @using (Html.BeginForm("CambiarContrasena", "Login", FormMethod.Post, new { @class = "theme-form login-form" }))
+                        {
+                            @*<form class="theme-form login-form">*@
                             <h4>Cambiar contraseña</h4>
-                            @using (Html.BeginForm("CambiarContrasenados", "Login", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
 
-                                <div class="form-group">
-                                    <label>Ingresa tu antigua contraseña</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="icon-lock"></i></span>
-                                        @*<input class="form-control" type="password" name="login[password]" required="" placeholder="*********">*@
-                                        @Html.PasswordFor(m => m.Contrasena_actual, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.Contrasena_actual, "", new { @class = "text-danger" })
-                                        <div class="show-hide"><span class="show">                         </span></div>
-                                    </div>
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                <label>Ingresa tu antigua contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                    @*<input class="form-control" type="password" name="login[password]" required="" placeholder="*********">*@
+                                    @Html.PasswordFor(m => m.Contrasena_actual, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Contrasena_actual, "", new { @class = "text-danger" })
+                                    <div class="show-hide"><span class="show">                         </span></div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Ingresa tu nueva contraseña</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="icon-lock"></i></span>
-                                        @*<input class="form-control" type="password" name="login[password]" required="" placeholder="*********">*@
-                                        @Html.PasswordFor(m => m.Contrasena_nueva, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.Contrasena_nueva, "", new { @class = "text-danger" })
-                                        <div class="show-hide"><span class="show">                         </span></div>
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Ingresa tu nueva contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                    @*<input class="form-control" type="password" name="login[password]" required="" placeholder="*********">*@
+                                    @Html.PasswordFor(m => m.Contrasena_nueva, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Contrasena_nueva, "", new { @class = "text-danger" })
+                                    <div class="show-hide"><span class="show">                         </span></div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Vuelve a ingresar tu nueva contraseña</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text"><i class="icon-lock"></i></span>
-                                        @*<input class="form-control" type="password" name="login[password]" required="" placeholder="*********">*@
-                                        @Html.PasswordFor(m => m.Contrasena_confirmar, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.Contrasena_confirmar, "", new { @class = "text-danger" })
-                                        <div class="show-hide"><span class="show">                         </span></div>
-                                    </div>
-                                    @if (ViewBag.Message != null)
-                                    {
-                                        <div class="alert alert-info">@ViewBag.MensajeCorrecto</div>
-                                    }
-                                </div><div class="form-group">
-                                    @*<button class="btn btn-primary" type="submit">Listo                          </button>*@
-                                    <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                            </div>
+                            <div class="form-group">
+                                <label>Vuelve a ingresar tu nueva contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                                    @*<input class="form-control" type="password" name="login[password]" required="" placeholder="*********">*@
+                                    @Html.PasswordFor(m => m.Contrasena_confirmar, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Contrasena_confirmar, "", new { @class = "text-danger" })
+                                    <div class="show-hide"><span class="show">                         </span></div>
                                 </div>
-                            }
-                            </form>
+                                @if (ViewBag.Message != null)
+                                {
+                                    <div class="alert alert-info">@ViewBag.Message</div>
+                                }
+                            </div><div class="form-group">
+                                @*<button class="btn btn-primary" type="submit">Listo                          </button>*@
+                                <button type="submit" class="btn btn-primary">Cambiar Contraseña</button>
+                            </div>
+                        }
+                        @*</form>*@
                     </div>
                 </div>
             </div>
