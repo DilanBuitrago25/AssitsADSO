@@ -26,7 +26,7 @@ namespace AssitADSOproyect.Controllers
         // GET: UsuariosAprendiz
         public ActionResult Index(string estadoFiltro = "")
         {
-            bool? estado = null; // Nullable bool for "Todos"
+            bool? estado = null; 
 
             if (estadoFiltro == "true")
                 estado = true;
@@ -247,7 +247,7 @@ namespace AssitADSOproyect.Controllers
                 {
                     ModelState.AddModelError("Correo_usuario", "Ya existe un usuario con este correo electrónico.");
                 }
-
+                                                                                 
                 // Si no hay errores, guardar el usuario
                 if (ModelState.IsValid)
                 {

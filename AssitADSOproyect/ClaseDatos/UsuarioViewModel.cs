@@ -36,8 +36,17 @@ namespace ClaseDatos
 
     public class CambiarContrasenaViewModel
     {
-        public int Id_usuario { get; set; }
-        public string Contrasena_usuario { get; set; }
-        public string ConfirmarContrasena { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string Contrasena_actual { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Contrasena_nueva { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("Contrasena_nueva", ErrorMessage = "La nueva contraseña y su confirmación no coinciden.")]
+        public string Contrasena_confirmar { get; set; }
     }
 }

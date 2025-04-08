@@ -195,64 +195,80 @@ namespace AssitADSOproyect.Controllers
                 filterContext.Result = new RedirectResult(url);
             }
         }
+
+        [HttpGet]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
         public ActionResult CambiarContrasena()
         {
-            if (Session["Idusuario"] != null)
+            if (Session["Idusuario"] == null)
             {
-                int usuarioId = (int)Session["Idusuario"];
-                var usuario = db.Usuario.Find(usuarioId);
-
-                if (usuario != null)
-                {
-                    return View(usuario);
-                }
+                return RedirectToAction("Error401", "Home"); // o como tengas tu login
             }
 
-            return RedirectToAction("Index");
+            return View(new CambiarContrasenaViewModel());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AutorizarTipoUsuario("Instructor", "InstructorAdmin", "Aprendiz")]
-        public ActionResult CambiarContrasena([Bind(Include = "Id_usuario,Contrasena_usuario")] Usuario usuario)
+        public ActionResult CambiarContrasenados(CambiarContrasenaViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+                return View(model);
+            }
 
-                var usuarioOriginal = db.Usuario.Find(usuario.Id_usuario);
+            if (Session["Idusuario"] == null)
+            {
+                return RedirectToAction("Error401", "Home");
+            }
 
-                // Verificar si la contraseña ha sido modificada
-                if (usuario.Contrasena_usuario != usuarioOriginal.Contrasena_usuario)
+            int idUsuario = (int)Session["Idusuario"];
+            var usuario = db.Usuario.Find(idUsuario);
+
+            if (usuario == null)
+            {
+                ViewBag.Message = "Usuario no encontrado.";
+                return View(model);
+            }
+
+            using (var sha256 = SHA256.Create())
+            {
+                // Validar contraseña actual
+                string oldPasswordHash = BitConverter.ToString(
+                    sha256.ComputeHash(Encoding.UTF8.GetBytes(model.Contrasena_actual))
+                ).Replace("-", "").ToLower();
+
+                if (usuario.Contrasena_usuario != oldPasswordHash)
                 {
-                    // Si la contraseña ha sido modificada, aplicar el cifrado
-                    using (var sha256 = SHA256.Create())
-                    {
-                        byte[] passwordBytes = Encoding.UTF8.GetBytes(usuario.Contrasena_usuario);
-                        byte[] hashBytes = sha256.ComputeHash(passwordBytes);
-                        usuario.Contrasena_usuario = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
-                    }
+                    ModelState.AddModelError("Contrasena_actual", "La contraseña actual es incorrecta.");
+                    return View(model);
                 }
 
+                // Validar que no sea igual a la anterior (opcional)
+                string newPasswordHash = BitConverter.ToString(
+                    sha256.ComputeHash(Encoding.UTF8.GetBytes(model.Contrasena_nueva))
+                ).Replace("-", "").ToLower();
+
+                if (oldPasswordHash == newPasswordHash)
+                {
+                    ModelState.AddModelError("Contrasena_nueva", "La nueva contraseña no puede ser igual a la actual.");
+                    return View(model);
+                }
+
+                // Guardar nueva contraseña
+                usuario.Contrasena_usuario = newPasswordHash;
                 db.Entry(usuario).State = EntityState.Modified;
                 db.SaveChanges();
 
-                if (usuario.Tipo_usuario == "Aprendiz")
-                {
-                    return RedirectToAction("Index", "Aprendizs"); // Redirigir al controlador Aprendizs
-                }
-                else if (usuario.Tipo_usuario == "Instructor" || usuario.Tipo_usuario == "InstructorAdmin")
-                {
-                    return RedirectToAction("Index", "Instructor"); // Redirigir al controlador Instructors
-                }
-                else
-                {
-                    // Manejar otros tipos de usuario si es necesario
-                    return RedirectToAction("Index"); // Redirigir al índice actual por defecto
-                }
+                
+
             }
 
-            return View(usuario);
+            Session.Clear();
+            Session.Abandon();
+
+            return RedirectToAction("Index", "Login");
         }
 
     }
