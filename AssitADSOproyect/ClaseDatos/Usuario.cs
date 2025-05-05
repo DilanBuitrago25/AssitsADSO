@@ -11,7 +11,8 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,10 +28,13 @@ namespace ClaseDatos
         public int Id_usuario { get; set; }
         public string Tipo_Documento_usuario { get; set; }
         public Nullable<int> Documento_usuario { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el nombre del usuario")]
         public string Nombre_usuario { get; set; }
         public string Apellido_usuario { get; set; }
         public Nullable<decimal> Telefono_usuario { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el correo del usuario")]
         public string Correo_usuario { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar la contraseña del usuario")]
         public string Contrasena_usuario { get; set; }
         public string Tipo_usuario { get; set; }
         public Nullable<bool> Estado_Usuario { get; set; }

@@ -458,3 +458,9 @@ C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\b
 C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\System.Text.Encoding.CodePages.xml
 C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\obj\Debug\AssitADS.2F5E17C5.Up2Date
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ExcelDataReader.DataSet.dll
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ExcelDataReader.dll
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ExcelDataReader.pdb
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ExcelDataReader.xml
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ExcelDataReader.DataSet.pdb
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\AssitADSOproyect\bin\ExcelDataReader.DataSet.xml

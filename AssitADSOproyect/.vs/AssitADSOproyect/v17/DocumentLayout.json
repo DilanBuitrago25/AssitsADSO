@@ -3,16 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\assitadsoproyect\\views\\login\\cambiarcontrasena.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\login\\cambiarcontrasena.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\clasedatos\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|solutionrelative:clasedatos\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\clasedatos\\soporte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|solutionrelative:clasedatos\\soporte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\clasedatos\\programa_formacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|solutionrelative:clasedatos\\programa_formacion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\clasedatos\\ficha.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|solutionrelative:clasedatos\\ficha.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\clasedatos\\competencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|solutionrelative:clasedatos\\competencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\clasedatos\\asistencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|solutionrelative:clasedatos\\asistencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\assitadsoproyect\\controllers\\usuariosaprendizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\controllers\\usuariosaprendizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\usuariosaprendiz\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\usuariosaprendiz\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\fichas\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\fichas\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\asistencias\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\asistencias\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|c:\\users\\seykena\\documents\\github\\assitsadso\\assitadsoproyect\\assitadsoproyect\\controllers\\usuariosinstructorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\controllers\\asistenciascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\controllers\\asistenciascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\controllers\\usuariosinstructorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\controllers\\usuariosinstructorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\login\\cambiarcontrasena.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\login\\cambiarcontrasena.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\login\\editarperfil.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -23,10 +71,6 @@
       "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\home\\error401.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\controllers\\asistenciascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\controllers\\asistenciascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\clasedatos\\usuarioviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|solutionrelative:clasedatos\\usuarioviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -35,16 +79,8 @@
       "RelativeMoniker": "D:0:0:{32014679-1AE5-4E64-A5F5-A1135974234B}|ClaseDatos\\ClaseDatos.csproj|solutionrelative:clasedatos\\usuarioconasistenciaviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\controllers\\usuariosaprendizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\controllers\\usuariosaprendizcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\login\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\assitadsoproyect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{F8BEEFFD-129F-4553-8B81-90172C67697E}|AssitADSOproyect\\AssitADSOproyect.csproj|solutionrelative:assitadsoproyect\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,8 +90,113 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\UsuariosAprendiz\\Create.cshtml",
+              "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\UsuariosAprendiz\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\UsuariosAprendiz\\Create.cshtml",
+              "RelativeToolTip": "AssitADSOproyect\\Views\\UsuariosAprendiz\\Create.cshtml",
+              "ViewState": "AgIAAHAAAAAAAAAAAAAowHoAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-05T13:58:04.322Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UsuariosAprendizController.cs",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\UsuariosAprendizController.cs",
+              "RelativeDocumentMoniker": "AssitADSOproyect\\Controllers\\UsuariosAprendizController.cs",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\UsuariosAprendizController.cs",
+              "RelativeToolTip": "AssitADSOproyect\\Controllers\\UsuariosAprendizController.cs",
+              "ViewState": "AgIAABQCAAAAAAAAAAAiwC8CAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-30T19:37:56.748Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Usuario.cs",
+              "RelativeDocumentMoniker": "ClaseDatos\\Usuario.cs",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Usuario.cs",
+              "RelativeToolTip": "ClaseDatos\\Usuario.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAcwCAAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T15:36:17.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Soporte.cs",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Soporte.cs",
+              "RelativeDocumentMoniker": "ClaseDatos\\Soporte.cs",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Soporte.cs",
+              "RelativeToolTip": "ClaseDatos\\Soporte.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T15:35:59.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Programa_formacion.cs",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Programa_formacion.cs",
+              "RelativeDocumentMoniker": "ClaseDatos\\Programa_formacion.cs",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Programa_formacion.cs",
+              "RelativeToolTip": "ClaseDatos\\Programa_formacion.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T15:35:41.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Ficha.cs",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Ficha.cs",
+              "RelativeDocumentMoniker": "ClaseDatos\\Ficha.cs",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Ficha.cs",
+              "RelativeToolTip": "ClaseDatos\\Ficha.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAABRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T15:35:07.197Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Competencia.cs",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Competencia.cs",
+              "RelativeDocumentMoniker": "ClaseDatos\\Competencia.cs",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Competencia.cs",
+              "RelativeToolTip": "ClaseDatos\\Competencia.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T15:34:49.721Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Asistencia.cs",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Asistencia.cs",
+              "RelativeDocumentMoniker": "ClaseDatos\\Asistencia.cs",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\Asistencia.cs",
+              "RelativeToolTip": "ClaseDatos\\Asistencia.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAgwCIAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T15:34:05.229Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -85,51 +226,56 @@
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Asistencias\\Index.cshtml",
+              "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Asistencias\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Asistencias\\Index.cshtml",
+              "RelativeToolTip": "AssitADSOproyect\\Views\\Asistencias\\Index.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAGkAAAB1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-05T14:57:42.464Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Fichas\\Create.cshtml",
+              "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Fichas\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Fichas\\Create.cshtml",
+              "RelativeToolTip": "AssitADSOproyect\\Views\\Fichas\\Create.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAGAAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-05T14:54:07.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
               "Title": "UsuariosInstructorController.cs",
               "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\UsuariosInstructorController.cs",
               "RelativeDocumentMoniker": "AssitADSOproyect\\Controllers\\UsuariosInstructorController.cs",
               "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\UsuariosInstructorController.cs",
               "RelativeToolTip": "AssitADSOproyect\\Controllers\\UsuariosInstructorController.cs",
-              "ViewState": "AgIAABsBAAAAAAAAAAAWwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACYBAAAAAAAAAAAjwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-08T16:27:46.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-08T16:27:46.79Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "AssitADSOproyect\\Controllers\\LoginController.cs",
               "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\LoginController.cs",
               "RelativeToolTip": "AssitADSOproyect\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAAM8AAAAAAAAAAAAIwAYBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAKMAAAAAAAAAAAAcwLEAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-06T14:37:39.992Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-06T14:37:39.992Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CambiarContrasena.cshtml",
-              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Login\\CambiarContrasena.cshtml",
-              "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Login\\CambiarContrasena.cshtml",
-              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Login\\CambiarContrasena.cshtml",
-              "RelativeToolTip": "AssitADSOproyect\\Views\\Login\\CambiarContrasena.cshtml",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADIAAAB0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-06T14:36:00.479Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 16,
               "Title": "Error401.cshtml",
               "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Home\\Error401.cshtml",
               "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Home\\Error401.cshtml",
@@ -141,7 +287,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "AssitADSOproyect\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAAMAAABHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-08T13:32:38.547Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "EditarPerfil.cshtml",
               "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Login\\EditarPerfil.cshtml",
               "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Login\\EditarPerfil.cshtml",
@@ -149,12 +311,11 @@
               "RelativeToolTip": "AssitADSOproyect\\Views\\Login\\EditarPerfil.cshtml",
               "ViewState": "AgIAADUAAAAAAAAAAAAuwFgAAACJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-30T20:53:13.915Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-30T20:53:13.915Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 17,
               "Title": "UsuarioViewModel.cs",
               "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\UsuarioViewModel.cs",
               "RelativeDocumentMoniker": "ClaseDatos\\UsuarioViewModel.cs",
@@ -166,19 +327,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "AsistenciasController.cs",
               "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\AsistenciasController.cs",
               "RelativeDocumentMoniker": "AssitADSOproyect\\Controllers\\AsistenciasController.cs",
               "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\AsistenciasController.cs",
               "RelativeToolTip": "AssitADSOproyect\\Controllers\\AsistenciasController.cs",
-              "ViewState": "AgIAAKwCAAAAAAAAAAAvwNACAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAEwDUAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-29T17:36:13.654Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
+              "Title": "CambiarContrasena.cshtml",
+              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Login\\CambiarContrasena.cshtml",
+              "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Login\\CambiarContrasena.cshtml",
+              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Login\\CambiarContrasena.cshtml",
+              "RelativeToolTip": "AssitADSOproyect\\Views\\Login\\CambiarContrasena.cshtml",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAADIAAAB0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-06T14:36:00.479Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Login\\Index.cshtml",
               "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Login\\Index.cshtml",
@@ -190,19 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UsuariosAprendizController.cs",
-              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\UsuariosAprendizController.cs",
-              "RelativeDocumentMoniker": "AssitADSOproyect\\Controllers\\UsuariosAprendizController.cs",
-              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Controllers\\UsuariosAprendizController.cs",
-              "RelativeToolTip": "AssitADSOproyect\\Controllers\\UsuariosAprendizController.cs",
-              "ViewState": "AgIAAOwAAAAAAAAAAAAiwP4AAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T19:37:56.748Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 18,
               "Title": "UsuarioConAsistenciaViewModel.cs",
               "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\ClaseDatos\\UsuarioConAsistenciaViewModel.cs",
               "RelativeDocumentMoniker": "ClaseDatos\\UsuarioConAsistenciaViewModel.cs",
@@ -211,18 +372,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-09T22:05:00.933Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "AssitADSOproyect\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Seykena\\Documents\\GitHub\\AssitsADSO\\AssitADSOproyect\\AssitADSOproyect\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "AssitADSOproyect\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-08T13:32:38.547Z"
             }
           ]
         }

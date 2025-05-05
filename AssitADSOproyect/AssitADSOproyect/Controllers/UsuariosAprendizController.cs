@@ -16,6 +16,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Net;
 using System.Net.Mail;
+using ExcelDataReader;
 
 namespace AssitADSOproyect.Controllers
 {
@@ -219,7 +220,8 @@ namespace AssitADSOproyect.Controllers
         [AutorizarTipoUsuario("InstructorAdmin")]
         public ActionResult Create()
         {
-            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha","Codigo_ficha" /*"Jornada_ficha"*/);
+            ViewBag.Id_ficha = new SelectList(db.Ficha, "Id_ficha", "Codigo_ficha");
+            ViewBag.Id_programa = new SelectList(db.Programa_formacion, "Id_programa", "Nombre_programa");
             return View();
         }
 
@@ -485,6 +487,80 @@ namespace AssitADSOproyect.Controllers
             }
             return Json(new { code = 500 });
         }
+
+        [HttpPost]
+        public ActionResult CargarAprendices(HttpPostedFileBase archivoExcel, int Id_ficha)
+        {
+            if (archivoExcel == null || archivoExcel.ContentLength == 0)
+            {
+                ModelState.AddModelError("", "Debe subir un archivo Excel válido.");
+                return View();
+            }
+
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance); // Para ExcelDataReader
+
+            using (var stream = archivoExcel.InputStream)
+            using (var reader = ExcelDataReader.ExcelReaderFactory.CreateReader(stream))
+            {
+                var result = reader.AsDataSet(new ExcelDataReader.ExcelDataSetConfiguration()
+                {
+                    ConfigureDataTable = (_) => new ExcelDataReader.ExcelDataTableConfiguration()
+                    {
+                        UseHeaderRow = false // No usar la fila como encabezado
+                    }
+                });
+
+                var tabla = result.Tables[0]; // Primera hoja
+
+                for (int i = 5; i < tabla.Rows.Count; i++) // Desde fila 6
+                {
+                    var fila = tabla.Rows[i];
+
+                    string tipoDocumento = fila[0]?.ToString().Trim();
+                    string documentoStr = fila[1]?.ToString().Trim();
+                    string nombre = fila[2]?.ToString().Trim();
+                    string apellidos = fila[3]?.ToString().Trim();
+                    string celularStr = fila[4]?.ToString().Trim();
+                    string correo = fila[5]?.ToString().Trim();
+                    string estadoTexto = fila[6]?.ToString().Trim();
+
+                    int documento;
+                    long telefono;
+
+                    var usuario = new Usuario
+                    {
+                        Tipo_Documento_usuario = string.IsNullOrWhiteSpace(tipoDocumento) ? null : tipoDocumento,
+                        Documento_usuario = int.TryParse(documentoStr, out documento) ? documento : (int?)null,
+                        Nombre_usuario = string.IsNullOrWhiteSpace(nombre) ? "N/A" : nombre,
+                        Apellido_usuario = string.IsNullOrWhiteSpace(apellidos) ? null : apellidos,
+                        Telefono_usuario = long.TryParse(celularStr, out telefono) ? telefono : 0,
+                        Correo_usuario = string.IsNullOrWhiteSpace(correo) ? null : correo,
+                        Contrasena_usuario = "ce4c443254644ee7ec9e82c4f113f21c9a1237bc683204aaf143551c3ad8435e",
+                        Tipo_usuario = "Aprendiz",
+                        Estado_Usuario = estadoTexto?.ToUpper() == "EN FORMACION"
+                    };
+
+                    // Guardar usuario
+                    db.Usuario.Add(usuario);
+                    db.SaveChanges();
+
+                    // Relación con Ficha
+                    var relacion = new Ficha_has_Usuario
+                    {
+                        Id_ficha = Id_ficha,
+                        Id_usuario = usuario.Id_usuario,
+                        TipoUsuario = "Aprendiz"
+                    };
+
+                    db.Ficha_has_Usuario.Add(relacion);
+                    db.SaveChanges();
+                }
+
+                ViewBag.Mensaje = "Aprendices cargados correctamente.";
+                return RedirectToAction("Index"); // o la vista actual
+            }
+        }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -11,7 +11,8 @@ namespace ClaseDatos
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Ficha
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,9 +23,13 @@ namespace ClaseDatos
         }
     
         public int Id_ficha { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el codigo de la ficha")]
         public int Codigo_ficha { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar la jornada de la ficha")]
         public string Jornada_ficha { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar la modalidad de la ficha")]
         public string Modalidad_ficha { get; set; }
+        [Required(ErrorMessage = "Por favor de ingresar el tipo de ficha")]
         public string tipo_ficha { get; set; }
         public string Fecha_inicio { get; set; }
         public string Fecha_fin { get; set; }

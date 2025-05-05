@@ -215,3 +215,9 @@ C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Deb
 C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.csproj.Up2Date
 C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.dll
 C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\obj\Debug\ClaseDatos.pdb
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ExcelDataReader.DataSet.dll
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ExcelDataReader.dll
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ExcelDataReader.pdb
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ExcelDataReader.xml
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ExcelDataReader.DataSet.pdb
+C:\Users\Seykena\Documents\GitHub\AssitsADSO\AssitADSOproyect\ClaseDatos\bin\Debug\ExcelDataReader.DataSet.xml
